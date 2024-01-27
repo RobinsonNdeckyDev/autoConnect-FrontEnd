@@ -1,0 +1,78 @@
+.blogsContain h3 a{
+    text-decoration: none;
+    color: #0F42A8;
+}
+
+.headerBlog{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerBlog button{
+    background-color: #0F42A8;
+    color: white;
+}
+
+/* .search {
+    border: 1px solid red;
+    width: 25%;
+    position: relative;
+    right: 0 !important;
+    left: 75%;
+} */
+
+.search .searchIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0F42A8;
+    padding: 0 15px;
+}
+
+.search .searchIcon i {
+    color: white;
+    font-size: 18px;
+}
+
+.card{
+    border-bottom: 15px solid #0F42A8;
+}
+
+.cardImg img{
+    border-radius: 20px !important;
+}
+
+.cardbody{
+    background-color: #0F42A8;
+    color: white;
+    padding: 8px 15px;
+    position: relative;
+    bottom: 22px;
+}
+
+.cardbody .cardtexte{
+    text-align: justify;
+    font-weight: lighter;
+}
+
+.cardbody .btnCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardbody .btnCard button{
+    background-color: black;
+    padding: 8px 20px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.pagine ul {
+    border: none !important;
+}
+
+.pagine ul li {
+    border: none !important;
+}

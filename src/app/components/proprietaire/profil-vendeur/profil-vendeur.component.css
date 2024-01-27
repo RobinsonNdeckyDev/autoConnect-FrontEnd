@@ -1,0 +1,35 @@
+.profilContain h3 a{
+    text-decoration: none;
+    color: #0F42A8;
+}
+
+.profilhead h3{
+    color: #0F42A8;
+}
+
+hr{
+    background-color: #0F42A8;
+    border: 0;
+    height: 2px;
+}
+
+.updateBtn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.updateBtn button{
+    background-color: #0F42A8;
+    color: white;
+    font-weight: bold;
+    padding: 5px 30px;
+}
+
+.profilBody .profilInfos img{
+    border-radius: 25px;
+    margin-top: 15px;
+}
+
+.profilBody h3{
+    color: #0F42A8;
+}

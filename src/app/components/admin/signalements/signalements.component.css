@@ -1,0 +1,33 @@
+.signalementContain a{
+    color: #0F42A8;
+    text-decoration: none;
+}
+
+.card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-head .nomCar {
+    color: #0F42A8;
+}
+
+.card-head img {
+    background-color: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.card-body button {
+    background-color: #0F42A8;
+    width: 100%;
+    margin-top: 15px;
+    padding: 0;
+    color: white;
+}
+
+.card-body img{
+    height: 200px;
+}

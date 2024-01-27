@@ -1,0 +1,34 @@
+.main-content {
+    height: 100vh;
+}
+
+.sidebar {
+    height: 91.8vh;
+    background-color: #0F42A8;
+    /* overflow-y: scroll; */
+}
+
+.contenu {
+    height: 91.8vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.navbar {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: black;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: rgb(247, 16, 16);
+        height: 100%;
+        z-index: 1;
+    }
+}

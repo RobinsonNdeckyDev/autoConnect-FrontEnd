@@ -1,0 +1,52 @@
+.categoriesContain h3 a{
+    text-decoration: none;
+    color: #0F42A8;
+}
+
+.trait{
+    width: 100px;
+    border: 2px solid #0F42A8;
+    margin: 0 auto;
+}
+
+.card{
+    border-bottom: 10px solid #0F42A8;
+}
+
+.listeCtg{
+    height: 75vh !important;
+}
+
+.card .titreAdd{
+    color: #0F42A8;
+}
+
+.table .thead tr td {
+    text-align: center;
+}
+
+.table .tbody tr {
+    align-items: center;
+}
+
+table .titreTab th {
+    color: #0F42A8 !important;
+}
+
+table .detailIcon i {
+    color: #0F42A8;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+table .detailIcon img{
+    width: 20px;
+    height: 18px;
+}
+
+
+.boutonAdd button{
+    background-color: black;
+    width: 35%;
+    color: white;
+}

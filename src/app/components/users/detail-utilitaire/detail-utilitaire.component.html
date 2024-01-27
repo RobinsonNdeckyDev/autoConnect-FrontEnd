@@ -1,0 +1,543 @@
+<app-navbar></app-navbar>
+
+<section class="banDetailVoiture mt-5"></section>
+
+<section class="detailAnnonce container-fluid p-0">
+    <h2 class="text-center my-4">Detail de l'annonce</h2>
+    <div class="trait my-3"></div>
+
+    <div class="bandeAnnonce mt-5 mb-5 container-fluid mb-4 py-3">
+        <div class="banContain container">
+            <span class="nom">Nueba Yamaha YZF-R3</span>
+            <span class="prix">3.000.000 Fcfa</span>
+        </div>
+    </div>
+
+    <div class="annonceInfos container my-3">
+        <div class="row">
+            <div class="col-12 col-md-6" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800"
+                [attr.data-aos-delay]="1200">
+                <div class="contentLf mx-4 mb-4">
+                    <div class="imgVehicule mx-3 mb-4">
+                        <img src="/assets/images/utilitairesCars/ut4-removebg-preview.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="blockImg mx-4 mb-4">
+                        <img src="/assets/images/utilitairesCars/ut4-removebg-preview.png" class="img-fluid" alt="">
+                        <img src="/assets/images/utilitairesCars/ut4-removebg-preview.png" class="img-fluid" alt="">
+                        <img src="/assets/images/utilitairesCars/ut4-removebg-preview.png" class="img-fluid" alt="">
+                        <img src="/assets/images/utilitairesCars/ut4-removebg-preview.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="p-2 alert mx-3">
+                        <span class="date">Publiée le 03/01/2024</span>
+                        <button class="btn fw-bold" data-bs-toggle="modal" data-bs-target="#annonceSignal">Signaler l'annonce</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6" [attr.data-aos]="'fade-down'" [attr.data-aos-duration]="800"
+                [attr.data-aos-delay]="1200">
+                <div class="contentLr card mx-4 shadow rounded-4 border-0">
+                    <img src="/assets/images/profil/profil3.jpg" alt="" class="img-fluid my-4 border-2 imgProp">
+                    <h3 class="nomProp fw-bold text-center my-3">Aliou Ndoye</h3>
+                    <div class="infosProp mt-3">
+                        <div class="location mb-3">
+                            <span class="icon"><i class="fa-solid fa-location-dot"></i></span><span
+                                class="text">Dakar</span>
+                        </div>
+                        <div class="phone mb-3">
+                            <span class="icon"><i class="fa-solid fa-phone"></i></span><span class="text">+221 77 777 77
+                                77</span>
+                        </div>
+                        <div class="email mb-3">
+                            <span class="icon"><i class="fa-solid fa-envelope"></i></span><span
+                                class="text">alioundoye@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="sociauxProp mt-3 px-3 py-2 shadow rounded-4 mb-4">
+                        <span class="iconSProp"><i class="fa-brands fa-whatsapp"></i></span>
+                        <span class="iconSProp"><i class="fa-brands fa-facebook-f"></i></span>
+                        <span class="iconSProp"><i class="fa-solid fa-paper-plane"></i></span>
+                        <span class="iconSProp"><i class="fa-solid fa-share-nodes"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="textInfos mt-4 container">
+        <div class="prst mb-4">
+            <h3 class="fw-bold mb-3 titreInfo">Présentation du véhicule</h3>
+            <p class="presentation">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eum illo laboriosam tenetur
+                asperiores
+                laudantium
+                aliquam voluptas labore. Similique laborum eos earum laboriosam eveniet chggh. Illum eveniet ipsum ex
+                incidunt tenetur
+                possimus assumenda animi aperiam voluptas excepturi, et atque aut harum nemo mollitia. Culpa harum
+                laboriosam quod
+                error
+                veniam quo dolor nam inventore magnam quae. Sequi provident, officia incidunt voluptatibus at aliquid!
+                Nam
+                accusantium
+                architecto recusandae nisi ad asperiores veritatis ullam tenetur expedita corrupti saepe laboriosam sed
+                velit
+                soluta,
+                nostrum non, qui illum! Iste iusto ducimus non totam voluptatem. Culpa, magni libero. Eaque laudantium
+                est eligendi
+                explicabo fugit voluptatum porro laboriosam.
+            </p>
+        </div>
+
+        <div class="caracteristique">
+            <h3 class="fw-bold mb-4 titreInfo">Caractéristiques du véhicule</h3>
+
+            <div class="d-flex align-items-start mb-5 ctsVehicule">
+                <div class="nav flex-column nav-pills me-3 w-50" id="v-pills-tab" role="tablist"
+                    aria-orientation="vertical">
+                    <button class="nav-link active mb-3 shadow text-start" id="v-pills-home-tab" data-bs-toggle="pill"
+                        data-bs-target="#moteur" type="button" role="tab" aria-controls="moteur"
+                        aria-selected="true"><img src="/assets/images/iconCtsCar/Motor.png" alt="">Moteur</button>
+                    <button class="nav-link shadow mb-3 text-start" id="v-pills-profile-tab" data-bs-toggle="pill"
+                        data-bs-target="#kilometrage" type="button" role="tab" aria-controls="kilometrage"
+                        aria-selected="false"><img src="/assets/images/iconCtsCar/Dash.png" alt="">Kilométrage</button>
+                    <button class="nav-link shadow mb-3 text-start" id="v-pills-disabled-tab" data-bs-toggle="pill"
+                        data-bs-target="#transmission" type="button" role="tab" aria-controls="transmission"
+                        aria-selected="false"><img src="/assets/images/iconCtsCar/Transm.png" alt="">Transmission</button>
+                    <button class="nav-link shadow mb-3 text-start" id="v-pills-messages-tab" data-bs-toggle="pill"
+                        data-bs-target="#annee" type="button" role="tab" aria-controls="annee"
+                        aria-selected="false"><img src="/assets/images/iconCtsCar/Calend.png" alt="">Année</button>
+                    <button class="nav-link shadow mb-3 text-start" id="v-pills-settings-tab" data-bs-toggle="pill"
+                        data-bs-target="#climatisation" type="button" role="tab" aria-controls="climatisation"
+                        aria-selected="false"><img src="/assets/images/iconCtsCar/Clim.png" alt="">Climatisation</button>
+                    <button class="nav-link shadow mb-3 text-start" id="v-pills-settings-tab" data-bs-toggle="pill"
+                        data-bs-target="#carburant" type="button" role="tab" aria-controls="carburant"
+                        aria-selected="false"><img src="/assets/images/iconCtsCar/Fuel.png" alt="">Carburant</button>
+                    <button class="nav-link shadow mb-3 text-start" id="v-pills-settings-tab" data-bs-toggle="pill"
+                        data-bs-target="#carosserie" type="button" role="tab" aria-controls="carosserie"
+                        aria-selected="false"><img src="/assets/images/iconCtsCar/Carosse.png" alt="">Carosserie</button>
+                </div>
+                <div class="card p-4 mx-4 shadow">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="moteur" role="tabpanel" aria-labelledby="moteur-tab"
+                            tabindex="0">
+                            <p class="textCont">
+                                <span class="fw-bold">Moteur</span> <br>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni cupiditate dolore,
+                                quaerat quas vel, dolor
+                                veritatis
+                                autem voluptatibus aliquid, corporis similique! Voluptatem atque minus autem velit
+                                dolorum eos natus quasi fuga
+                                quod,
+                                quidem, perspiciatis maxime deleniti corrupti, eaque excepturi deserunt iste id. Hic
+                                mollitia ipsam debitis
+                                possimus,
+                                minus ullam facilis.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="kilometrage" role="tabpanel" aria-labelledby="kilometrage-tab"
+                            tabindex="0">
+                            <p class="textCont">
+                                <span class="fw-bold">Kilométrage</span> <br>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni cupiditate dolore,
+                                quaerat quas vel, dolor
+                                veritatis
+                                autem voluptatibus aliquid, corporis similique! Voluptatem atque minus autem velit
+                                dolorum eos natus quasi fuga
+                                quod,
+                                quidem, perspiciatis maxime deleniti corrupti, eaque excepturi deserunt iste id. Hic
+                                mollitia ipsam debitis
+                                possimus,
+                                minus ullam facilis.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="transmission" role="tabpanel" aria-labelledby="transmission-tab"
+                            tabindex="0">
+                            <p class="textCont">
+                                <span class="fw-bold">Moteur</span> <br>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni cupiditate dolore,
+                                quaerat quas vel, dolor
+                                veritatis
+                                autem voluptatibus aliquid, corporis similique! Voluptatem atque minus autem velit
+                                dolorum eos natus quasi fuga
+                                quod,
+                                quidem, perspiciatis maxime deleniti corrupti, eaque excepturi deserunt iste id. Hic
+                                mollitia ipsam debitis
+                                possimus,
+                                minus ullam facilis.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="annee" role="tabpanel" aria-labelledby="annee-tab" tabindex="0">
+                            <p class="textCont">
+                                <span class="fw-bold">Annee</span> <br>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni cupiditate dolore,
+                                quaerat quas vel, dolor
+                                veritatis
+                                autem voluptatibus aliquid, corporis similique! Voluptatem atque minus autem velit
+                                dolorum eos natus quasi fuga
+                                quod,
+                                quidem, perspiciatis maxime deleniti corrupti, eaque excepturi deserunt iste id. Hic
+                                mollitia ipsam debitis
+                                possimus,
+                                minus ullam facilis.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="climatisation" role="tabpanel"
+                            aria-labelledby="climatisation-tab" tabindex="0">
+                            <p class="textCont">
+                                <span class="fw-bold">Climatisation</span> <br>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni cupiditate dolore,
+                                quaerat quas vel, dolor
+                                veritatis
+                                autem voluptatibus aliquid, corporis similique! Voluptatem atque minus autem velit
+                                dolorum eos natus quasi fuga
+                                quod,
+                                quidem, perspiciatis maxime deleniti corrupti, eaque excepturi deserunt iste id. Hic
+                                mollitia ipsam debitis
+                                possimus,
+                                minus ullam facilis.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="carburant" role="tabpanel" aria-labelledby="carburant-tab"
+                            tabindex="0">
+                            <p class="textCont">
+                                <span class="fw-bold">Carburant</span> <br>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni cupiditate dolore,
+                                quaerat quas vel, dolor
+                                veritatis
+                                autem voluptatibus aliquid, corporis similique! Voluptatem atque minus autem velit
+                                dolorum eos natus quasi fuga
+                                quod,
+                                quidem, perspiciatis maxime deleniti corrupti, eaque excepturi deserunt iste id. Hic
+                                mollitia ipsam debitis
+                                possimus,
+                                minus ullam facilis.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="carosserie" role="tabpanel" aria-labelledby="carosserie-tab"
+                            tabindex="0">
+                            <p class="textCont">
+                                <span class="fw-bold">Carosserie</span> <br>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni cupiditate dolore,
+                                quaerat quas vel, dolor
+                                veritatis
+                                autem voluptatibus aliquid, corporis similique! Voluptatem atque minus autem velit
+                                dolorum eos natus quasi fuga
+                                quod,
+                                quidem, perspiciatis maxime deleniti corrupti, eaque excepturi deserunt iste id. Hic
+                                mollitia ipsam debitis
+                                possimus,
+                                minus ullam facilis.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="comments py-4 mt-4 mb-4 container-fluid">
+        <div class="commentsContain container">
+            <h3 class="fw-bold mb-0">Avis</h3>
+            <hr class="mb-3">
+
+            <div class="row mt-4">
+                <div class="col-12 col-md-8 p-2">
+                    <div class="avis">
+                        <div class="headC">
+                            <div class="headL">
+                                <img src="/assets/images/profil/profil2.jpg" alt="" class="avisImg img-fluid">
+                                <span class="nomC">Malick Sarr</span>
+                            </div>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="bodyC">
+                            <p class="textC">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nemo dolorem voluptate
+                                dicta officia dolore
+                                natus
+                                ducimus sapiente corrupti magnam amet odio reprehenderit ullam autem at nesciunt
+                                accusantium dolorum tempora
+                                soluta,
+                                impedit nobis maiores. Voluptate voluptas non ratione magni accusamus?
+                            </p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="avis">
+                        <div class="headC">
+                            <div class="headL">
+                                <img src="/assets/images/profil/profil2.jpg" alt="" class="avisImg img-fluid">
+                                <span class="nomC">Malick Sarr</span>
+                            </div>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="bodyC">
+                            <p class="textC">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nemo dolorem voluptate
+                                dicta officia dolore
+                                natus
+                                ducimus sapiente corrupti magnam amet odio reprehenderit ullam autem at nesciunt
+                                accusantium dolorum tempora
+                                soluta,
+                                impedit nobis maiores. Voluptate voluptas non ratione magni accusamus?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 px-5">
+                    <div class=" comtRighr pt-5">
+                        <img src="/assets/images/utilitairesCars/ut4-removebg-preview.png" alt="" class="img-fluid mb-4">
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#formComment">Poster un commentaire</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alerte d-flex justify-content-center align-content-center my-5">
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#prudence">Attention: Soyez prudent</button>
+    </div>
+
+    <div class="carsContainer container">
+        <h2 class="text-center my-4">Annonces similaires</h2>
+        <div class="trait mb-4"></div>
+
+
+        <div class="carteAnnonces mb-5 container mt-3">
+            <div class="row cartes m-0 g-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800"
+                [attr.data-aos-delay]="500">
+
+                <div class="col-12 col-md-4">
+                    <div class="card shadow">
+                        <div class="cardImg mx-3">
+                            <img src="/assets/images/utilitairesCars/camion.png" class="img-fluid" alt="">
+                        </div>
+                        <div class="cardTitle mx-3">
+                            <span class="nom">Version Acura Sport</span>
+                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
+                                    alt=""></span>
+                        </div>
+                        <div class="cardTrait mb-3 mt-2"></div>
+                        <div class="cardDetails mx-3">
+                            <div class="left">
+                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
+                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
+                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
+                            </div>
+                            <div class="Right">
+                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
+                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
+                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
+                            </div>
+                        </div>
+                        <div class="cardTrait"></div>
+                        <div class="cardButton mx-3 my-3">
+                            <button class="btn"><a href="" routerLink="/detailVoiture">Consulter l'annonce</a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card shadow">
+                        <div class="cardImg mx-3">
+                            <img src="/assets/images/utilitairesCars/bus.png" class="img-fluid" alt="">
+                        </div>
+                        <div class="cardTitle mx-3">
+                            <span class="nom">Version Acura Sport</span>
+                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
+                                    alt=""></span>
+                        </div>
+                        <div class="cardTrait mb-3 mt-2"></div>
+                        <div class="cardDetails mx-3">
+                            <div class="left">
+                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
+                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
+                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
+                            </div>
+                            <div class="Right">
+                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
+                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
+                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
+                            </div>
+                        </div>
+                        <div class="cardTrait"></div>
+                        <div class="cardButton mx-3 my-3">
+                            <button class="btn"><a href="">Consulter l'annonce</a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card shadow">
+                        <div class="cardImg mx-3">
+                            <img src="/assets/images/utilitairesCars/tricycle.png" class="img-fluid" alt="">
+                        </div>
+                        <div class="cardTitle mx-3">
+                            <span class="nom">Version Acura Sport</span>
+                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
+                                    alt=""></span>
+                        </div>
+                        <div class="cardTrait mb-3 mt-2"></div>
+                        <div class="cardDetails mx-3">
+                            <div class="left">
+                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
+                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
+                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
+                            </div>
+                            <div class="Right">
+                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
+                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
+                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
+                            </div>
+                        </div>
+                        <div class="cardTrait"></div>
+                        <div class="cardButton mx-3 my-3">
+                            <button class="btn"><a href="">Consulter l'annonce</a></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="bannerEnd" [attr.data-aos]="'zoom-in'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="1200">
+    </div>
+</section>
+
+<app-footer></app-footer>
+
+
+
+<!-- Modal Alert signalement-->
+<div class="modal fade rounded-4" id="annonceSignal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body alertSignal m-4">
+                <img src="/assets/images/alertIcon/error.png" class="img-fluid mb-4" alt="">
+                <h4 class="text-center mb-4">Attention</h4>
+                <p class="text-center my-3">Voulez-vous vraiment signaler cette annonce ?</p>
+                <div class="btns d-flex justify-content-between my-3 mx-4">
+                    <button class="btn btnYes" data-bs-toggle="modal" data-bs-target="#formSignal">Oui</button>
+                    <button class="btn btnNo" data-bs-dismiss="modal">Non</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal signalement-->
+
+
+<!-- Modal Form signalement-->
+<div class="modal fade" id="formSignal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header shadow">
+                <h1 class="modal-title fs-4" id="exampleModalLabel">Signaler cette annonce</h1>
+                <button type="button" class="btn" data-bs-dismiss="modal"><i
+                        class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+
+            <div class="modal-body">
+                <form action="">
+                    <div class="mb-3">
+                        <label for="nomvehicule" class="form-label">Nom du véhicule</label>
+                        <input type="text" class="form-control" name="nomVehicule" id="nomVehicule">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nomvehicule" class="form-label">Motif du signalement</label>
+                        <textarea name="nomVehicule" id="nomVehicule" class="form-control"></textarea>
+                    </div>
+
+                    <div class="btnsForm d-flex justify-content-center align-content-center">
+                        <button class="btn mx-3 btnSignal">Signaler</button>
+                        <button class="btn mx-3 btnOff" data-bs-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal signalement-->
+
+
+<!-- Modal Form commentaire-->
+<div class="modal fade" id="formComment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header shadow">
+                <h1 class="modal-title fs-4" id="exampleModalLabel">Laisser un commentaire</h1>
+                <button type="button" class="btn" data-bs-dismiss="modal"><i
+                        class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+
+            <div class="modal-body">
+                <form action="">
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Donner une note</label>
+                        <input type="text" class="form-control" name="notes" id="notes">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="commentaire" class="form-label">Votre commentaire</label>
+                        <textarea name="commentaire" id="commentaire" class="form-control"></textarea>
+                    </div>
+
+                    <div class="btnsForm d-flex justify-content-center align-content-center">
+                        <button class="btn mx-3 btnSignal">Commenter</button>
+                        <button class="btn mx-3 btnOff" data-bs-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal commentaire-->
+
+
+
+<!-- Modal prudence-->
+<div class="modal fade" id="prudence" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header shadow">
+                <h1 class="modal-title fs-4" id="exampleModalLabel">Conseils de sécurité</h1>
+                <button type="button" class="btn" data-bs-dismiss="modal"><i
+                        class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="prudenceContain d-flex justify-content-center align-content-center flex-column">
+                    <h3 class="text-center my-3">Soyez prudent</h3>
+
+                    <p class="textPrudence my-4 ">
+                        Ne pas envoyer de paiements sans avoir verifié le produit.
+                        <br>
+                        Ne pas envoyer d'argent par des moyens de transfert d'argent,
+                        par virement bancaire ou par n'importe quels autre moyens.
+                        <br>
+                        Donner rdv au vendeur dans un lieu public à une heure de passage.
+                    </p>
+
+                    <button class="btn btnprudence my-3" data-bs-dismiss="modal">Ok</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal prudence-->

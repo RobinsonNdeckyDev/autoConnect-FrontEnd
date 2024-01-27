@@ -1,0 +1,63 @@
+<div class="categoriesContain mx-4">
+    <h3 class="my-3"><a href="" routerLink="/categories">Catégories /</a></h3>
+
+    <div class="row mt-3">
+        <div class="col-12 col-md-7 p-3 ">
+            <div class="card listeCtg px-4 shadow">
+                <h4 class="text-center my-4 fw-bold">Liste des catégories</h4>
+                <div class="trait"></div>
+                <table class="table mt-4 mb-5">
+                    <thead class="">
+                        <tr class="titreTab fw-light text-start">
+                            <th scope="col">Catégories</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fs-6 text-start">
+                            <td scope="col">Voitures</td>
+                            <td scope="col" class="detailIcon">
+                                <span class="mx-2"><img src="/assets/images/iconSvg/edit.png" alt=""></span>
+                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                            </td>
+                        </tr>
+                
+                        <tr class="fs-6 text-start">
+                            <td scope="col">Motos</td>
+                            <td scope="col" class="detailIcon">
+                                <span class="mx-2"><img src="/assets/images/iconSvg/edit.png" alt=""></span>
+                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                            </td>
+                        </tr>
+
+                        <tr class="fs-6 text-start">
+                            <td scope="col">Utilitaires</td>
+                            <td scope="col" class="detailIcon">
+                                <span class="mx-2"><img src="/assets/images/iconSvg/edit.png" alt=""></span>
+                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                            </td>
+                        </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-12 col-md-5 p-3">
+            <div class="card px-4 shadow">
+                <h4 class="text-center my-4 fw-bold titreAdd">Ajouter une catégorie</h4>
+                <div class="trait"></div>
+
+                <form action="" class="fromADDCategorie my-4">
+                    <div class="my-4">
+                        <label for="categorie" class="form-label">Nom de la catégorie</label>
+                        <input type="text" class="form-control" name="categorie" id="categorie" placeholder="Catégorie">
+                    </div>
+
+                    <div class="boutonAdd mt-4 d-flex justify-content-center align-content-center">
+                        <button class="btn">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

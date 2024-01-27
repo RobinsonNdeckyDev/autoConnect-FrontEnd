@@ -1,0 +1,63 @@
+.navTitle a {
+    color: #0F42A8;
+    text-decoration: none;
+}
+
+.search {
+    /* border: 1px solid red; */
+    width: 25%;
+    position: relative;
+    right: 0 !important;
+    left: 75%;
+}
+
+.search .searchIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0F42A8;
+    padding: 0 15px;
+}
+
+.search .searchIcon i {
+    color: white;
+    font-size: 18px;
+}
+
+.pagine ul {
+    border: none !important;
+}
+
+.pagine ul li {
+    border: none !important;
+}
+
+.card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-head .nomCar {
+    color: #0F42A8;
+}
+
+.card-head img {
+    background-color: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.card-body button {
+    background-color: #0F42A8;
+    width: 100%;
+    margin-top: 15px;
+    padding: 0;
+    color: white;
+}
+
+.card-body button a{
+    color: white;
+    text-decoration: none;
+}

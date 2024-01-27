@@ -1,0 +1,156 @@
+<div class="row row1 mt-4 g-4">
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow">
+            <div class="cardImg">
+                <img src="../../../../assets/images/imgCard.png" class="img-fluid" alt="">
+            </div>
+            <div class="cardLogo s">
+                <span class="text-light">
+                    <img src="../../../../assets/images/iconMoto.png" alt="">
+                </span>
+            </div>
+            <div class="cardBody d-flex justify-content-between">
+                <span>
+                    Motos
+                </span>
+                <span>
+                    44
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow">
+            <div class="cardImg">
+                <img src="../../../../assets/images/imgCard.png" class="img-fluid" alt="">
+            </div>
+            <div class="cardLogo shadow">
+                <span class="text-light">
+                    <img src="../../../../assets/images/iconVoiture.png" alt="">
+                </span>
+            </div>
+            <div class="cardBody d-flex justify-content-between">
+                <span>
+                    Voiture
+                </span>
+                <span>
+                    20
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 border-0 col-md-4">
+        <div class="card shadow">
+            <div class="cardImg">
+                <img src="../../../../assets/images/imgCard.png" class="img-fluid" alt="">
+            </div>
+            <div class="cardLogo shadow">
+                <span class="text-light">
+                    <img src="../../../../assets/images/iconUtilitaire.png" alt="">
+                </span>
+            </div>
+            <div class="cardBody d-flex justify-content-between">
+                <span>
+                    Utilitaire
+                </span>
+                <span>
+                    10
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row2 mt-2 g-4">
+    <div class="col-12 col-md-8">
+        <div class="card tableCard p-2 shadow border-0">
+            <p class="mb-2 px-2 mt-2 fs-4 text">Liste des propriétaires</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="azert">
+                        <tr class="titreTab fw-light text-center">
+                            <th scope="col" >Image</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Téléphone</th>
+                            <th scope="col">Adresse</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fs-6 text-center">
+                            <td scope="col"><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
+                            <td scope="col">Saliou</td>
+                            <td scope="col">Mbengue</td>
+                            <td scope="col">salioumbengue@gmail.com</td>
+                            <td scope="col">77 777 77 77</td>
+                            <td scope="col">Dakar</td>
+                            <td scope="col" class="detailIcon">
+                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
+                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                            </td>
+                        </tr>
+                
+                        <tr class="fs-6 text-center">
+                            <td scope="col"><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
+                            <td scope="col">Saliou</td>
+                            <td scope="col">Mbengue</td>
+                            <td scope="col">salioumbengue@gmail.com</td>
+                            <td scope="col">77 777 77 77</td>
+                            <td scope="col">Dakar</td>
+                            <td scope="col" class="detailIcon">
+                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
+                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                            </td>
+                        </tr>
+                
+                        <tr class="fs-6 text-center">
+                            <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
+                            <td>Saliou</td>
+                            <td>Mbengue</td>
+                            <td>salioumbengue@gmail.com</td>
+                            <td>77 777 77 77</td>
+                            <td>Dakar</td>
+                            <td scope="col" class="detailIcon">
+                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
+                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                            </td>
+                        </tr>
+                
+                        <tr class="fs-6 text-center">
+                            <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
+                            <td>Saliou</td>
+                            <td>Mbengue</td>
+                            <td>salioumbengue@gmail.com</td>
+                            <td>77 777 77 77</td>
+                            <td>Dakar</td>
+                            <td scope="col" class="detailIcon">
+                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
+                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                            </td>
+                        </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="d-flex justify-content-end mt-2 mb-2">
+                <button class="btn text-light w-25">Voir plus</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="card cardStatistique shadow">
+            <div class="cardImgStat">
+                <img src="../../../../assets/images/imgCard.png" class="img-fluid" alt="">
+            </div>
+            <div class="cardBodyStaT py-3">
+                <h2 class="text-center mb-3">Statistique</h2>
+                <canvas id="MonChart">{{ chart }}</canvas>
+            </div>
+        </div>
+    </div>
+</div>
