@@ -5,11 +5,12 @@ import { MainVendeurComponent } from './main-vendeur/main-vendeur.component';
 import { AnnoncesVendeursComponent } from './annonces-vendeurs/annonces-vendeurs.component';
 import { ProfilVendeurComponent } from './profil-vendeur/profil-vendeur.component';
 import { DetailAnnoncePropComponent } from './detail-annonce-prop/detail-annonce-prop.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 
 const routes: Routes = [
   {
-    path: '', component: MainVendeurComponent, children: [
+    path: '', component: MainVendeurComponent, canActivate: [AuthGuard], children: [
       { path: 'proprietaire', component: AnnoncesVendeursComponent },
       {
         path: 'mes_annonces',

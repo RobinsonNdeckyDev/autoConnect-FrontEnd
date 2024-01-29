@@ -8,7 +8,7 @@
         <hr>
         <div class="profilBody">
 
-            <form action="">
+            <form action="" (ngSubmit)="updatevendeurDetails()" *ngIf="isEditMode" novalidate>
                 <div class="profilInfos row">
                     <div class="profilImg col-12 col-md-5">
                         <img src="/assets/images/profil/profil1.jpg" alt="" class="img-fluid">

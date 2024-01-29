@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Proprietaire } from 'src/app/models/proprietaire';
 import { AuthenticationService } from 'src/app/services/authentification.service';
 // import { InscriptionService } from 'src/app/services/inscription.service';
 import Swal from 'sweetalert2';
@@ -10,18 +11,18 @@ import Swal from 'sweetalert2';
   styleUrls: ['./vendeur-subscribe.component.css'],
 })
 export class VendeurSubscribeComponent {
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService, private route: Router) {}
 
   nom: string = '';
   prenom: string = '';
   email: string = '';
   password: string = '';
-  passwordConfirm: string = '';
+  confirmation: string = '';
   telephone: string = '';
   adresse: string = '';
   description: string = '';
-  photoProfile: string = '';
-  role: string = '';
+  image: string = '';
+  role: string = 'vendeur';
 
 
   emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
@@ -29,6 +30,15 @@ export class VendeurSubscribeComponent {
   
   inscription() {
     if (this.validateForm()) {
+      if (this.password !== this.confirmation) {
+        this.alertMessage(
+          'error',
+          'Attention',
+          'Les mots de passe ne correspondent pas!'
+        );
+        return;
+      }
+
       this.registerUser();
     }
   }
@@ -79,14 +89,14 @@ export class VendeurSubscribeComponent {
         'Le mot de passe doit être supérieur ou égal à 8 caractères!'
       );
       return false;
-    } else if (this.passwordConfirm == '') {
+    } else if (this.confirmation == '') {
       this.alertMessage(
         'error',
         'Attention',
         'Merci de confirmer votre mot de passe!'
       );
       return false;
-    } else if (this.passwordConfirm !== this.password) {
+    } else if (this.confirmation !== this.password) {
       this.alertMessage(
         'error',
         'Attention',
@@ -100,7 +110,7 @@ export class VendeurSubscribeComponent {
         'Merci de renseigner votre numéro de téléphone!'
       );
       return false;
-    } else if (this.photoProfile == '') {
+    } else if (this.image == '') {
       this.alertMessage(
         'error',
         'Attention',
@@ -119,37 +129,42 @@ export class VendeurSubscribeComponent {
   }
 
   registerUser() {
-    this.authService
-      .register(
-        this.nom,
-        this.prenom,
-        this.email,
-        this.adresse,
-        this.password,
-        this.passwordConfirm,
-        this.telephone,
-        this.photoProfile,
-        this.description,
-        this.role
-      )
-      .subscribe(
-        (response) => {
-          console.log(response);
-          this.alertMessage(
-            'success',
-            'Bravo',
-            'Vous vous êtes inscrit avec succès!'
-          );
-        },
-        (error) => {
-          console.error(error);
-          this.alertMessage(
-            'error',
-            'Attention',
-            'Inscription refusée. Veuillez réessayer.'
-          );
-        }
-      );
+    // Créez une instance de Proprietaire avec les données d'inscription
+    const nouveauProprietaire = new Proprietaire(
+      this.nom,
+      this.prenom,
+      this.email,
+      this.telephone,
+      this.adresse,
+      this.password,
+      this.confirmation,
+      this.description,
+      this.image,
+      this.role
+    );
+
+    
+    this.authService.registerproprietaire(nouveauProprietaire).subscribe(
+      (response) => {
+        console.log(response);
+
+        this.route.navigate(['/login']);
+
+        this.alertMessage(
+          'success',
+          'Bravo',
+          'Vous vous êtes inscrit avec succès!'
+        );
+      },
+      (error) => {
+        console.error(error);
+        this.alertMessage(
+          'error',
+          'Attention',
+          'Inscription refusée. Veuillez réessayer.'
+        );
+      }
+    );
   }
 
 
@@ -158,11 +173,11 @@ export class VendeurSubscribeComponent {
     this.email = '';
     this.prenom = '';
     this.password = '';
-    this.passwordConfirm = '';
+    this.confirmation = '';
     this.adresse = '';
     this.telephone = '';
     this.description = '';
-    this.photoProfile = '';
+    this.image = '';
   }
 
   alertMessage(icon: any, title: any, text: any) {

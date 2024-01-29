@@ -1,4 +1,72 @@
 <div class="vendeurContain py-4 px-4">
+    <h3 class="navTitle"><a href="" routerLink="proprietaires" class="my-3">Utilisateurs / Propriétaires</a></h3>
+
+    <div class="row .row2 mt-4 shadow">
+        <div class="col-12 ">
+            <div class="tableCard p-2 border-0">
+                <div class="search my-3 d-flex justify-content-end align-content-center">
+                    <input type="search" class="form-control border-1 rounded-end-0" name="search"
+                        placeholder="faite une recherche..." (input)="filterAcheteurs()" [(ngModel)]="searchTerm">
+                    <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table mb-3">
+                        <thead class="">
+                            <tr class="titreTab fw-light text-center">
+                                <th scope="col">image</th>
+                                <th scope="col">prenom</th>
+                                <th scope="col">nom</th>
+                                <th scope="col">email</th>
+                                <th scope="col">telephone</th>
+                                <th scope="col">adresse</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class=" text-center" *ngFor="let acheteur of filteredAcheteurs">
+                                <td scope="col">{{ acheteur.image }}</td>
+                                <td scope="col">{{ acheteur.prenom }}</td>
+                                <td scope="col">{{ acheteur.nom }}</td>
+                                <td scope="col">{{ acheteur.email }}</td>
+                                <td scope="col">{{ acheteur.telephone }}</td>
+                                <td scope="col">{{ acheteur.adresse }}</td>
+                                <td scope="col" class="detailIcon">
+                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
+                                    <!-- (click)="voirDetails(acheteur)" -->
+                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <nav class="pagine mt-3 mb-3 p-0 d-flex justify-content-end">
+                    <ul class="pagination m-0 ">
+                        <li class="page-item">
+                            <a class="page-link"><i class="fa-solid fa-angles-left"></i></a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" [ngClass]="{ disabled: currentPage === 1 }">1</a></li>
+                        <li class="page-item" aria-current="page">
+                            <a class="page-link">2</a>
+                        </li>
+                        <li class="page-item"><a class="page-link">3</a></li>
+                        <li class="page-item"><a class="page-link">4</a></li>
+                        <li class="page-item"><a class="page-link">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link"><i class="fa-solid fa-angles-right"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="vendeurContain py-4 px-4">
     <h3 class="navTitle"><a href="" routerLink="proprietaires" class="my-3">Utilisateurs / Acheteurs</a></h3>
 
     <div class="row .row2 mt-4 shadow">
@@ -125,4 +193,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

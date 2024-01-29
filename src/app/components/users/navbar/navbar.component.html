@@ -28,9 +28,8 @@
                         <a class="nav-link" routerLinkActive="activeLink" routerLink="/contact">Contact</a>
                     </li>
                 </ul>
-
-                <button class="btn connexion"><a class="text-decoration-none text-light" routerLink="/login">Se connecter</a></button>
-                <app-logout-user></app-logout-user>
+                <app-login-user *ngIf="!isLoggedIn()"></app-login-user>
+                <app-logout-user *ngIf="isLoggedIn()"></app-logout-user>
                 
             </div>
 

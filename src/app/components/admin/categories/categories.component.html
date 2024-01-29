@@ -14,24 +14,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="fs-6 text-start">
-                            <td scope="col">Voitures</td>
-                            <td scope="col" class="detailIcon">
-                                <span class="mx-2"><img src="/assets/images/iconSvg/edit.png" alt=""></span>
-                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                            </td>
-                        </tr>
-                
-                        <tr class="fs-6 text-start">
-                            <td scope="col">Motos</td>
-                            <td scope="col" class="detailIcon">
-                                <span class="mx-2"><img src="/assets/images/iconSvg/edit.png" alt=""></span>
-                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                            </td>
-                        </tr>
-
-                        <tr class="fs-6 text-start">
-                            <td scope="col">Utilitaires</td>
+                        <tr class="fs-6 text-start" *ngFor="let categorie of categories">
+                            <td scope="col"> {{categorie.nom}} </td>
                             <td scope="col" class="detailIcon">
                                 <span class="mx-2"><img src="/assets/images/iconSvg/edit.png" alt=""></span>
                                 <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
@@ -47,14 +31,14 @@
                 <h4 class="text-center my-4 fw-bold titreAdd">Ajouter une catégorie</h4>
                 <div class="trait"></div>
 
-                <form action="" class="fromADDCategorie my-4">
+                <form action="" class="fromADDCategorie my-4" (ngSubmit)="onSubmit()">
                     <div class="my-4">
                         <label for="categorie" class="form-label">Nom de la catégorie</label>
-                        <input type="text" class="form-control" name="categorie" id="categorie" placeholder="Catégorie">
+                        <input type="text" class="form-control" name="categorie" id="categorie" placeholder="Catégorie" [(ngModel)]="categorie">
                     </div>
 
                     <div class="boutonAdd mt-4 d-flex justify-content-center align-content-center">
-                        <button class="btn">Ajouter</button>
+                        <button class="btn" type="submit">Ajouter</button>
                     </div>
                 </form>
             </div>

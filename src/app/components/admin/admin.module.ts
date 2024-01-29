@@ -12,7 +12,7 @@ import { AnnoncesComponent } from './annonces/annonces.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { DetailAnnonceComponent } from './detail-annonce/detail-annonce.component';
-import { DetailVendeurComponent } from './detail-vendeur/detail-vendeur.component';
+// import { DetailVendeurComponent } from './detail-vendeur/detail-vendeur.component';
 import { DetailAcheteurComponent } from './detail-acheteur/detail-acheteur.component';
 import { AccueilAdminComponent } from './accueil-admin/accueil-admin.component';
 import { MainAdminComponent } from './main-admin/main-admin.component';
@@ -25,6 +25,12 @@ import { DtsVoitureComponent } from './dts-voiture/dts-voiture.component';
 import { DtsMotoComponent } from './dts-moto/dts-moto.component';
 import { DtsUtilitaireComponent } from './dts-utilitaire/dts-utilitaire.component';
 import { LogoutAdminComponent } from './logout-admin/logout-admin.component';
+import { TableTestComponent } from './table-test/table-test.component';
+import { DataTablesModule } from 'angular-datatables';
+import { DetailProprietaireComponent } from './detail-proprietaire/detail-proprietaire.component';
+import { ListeUsersService } from 'src/app/services/liste-users.service';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -41,7 +47,7 @@ import { LogoutAdminComponent } from './logout-admin/logout-admin.component';
     CategoriesComponent,
     ContactsComponent,
     DetailAnnonceComponent,
-    DetailVendeurComponent,
+    // DetailVendeurComponent,
     DetailAcheteurComponent,
     AccueilAdminComponent,
     MainAdminComponent,
@@ -53,11 +59,11 @@ import { LogoutAdminComponent } from './logout-admin/logout-admin.component';
     DtsMotoComponent,
     DtsUtilitaireComponent,
     LogoutAdminComponent,
+    TableTestComponent,
+    DetailProprietaireComponent,
+    DetailProprietaireComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    AdminRoutingModule
-  ]
+  imports: [CommonModule, RouterModule, AdminRoutingModule, DataTablesModule, FormsModule],
+  providers: [ListeUsersService],
 })
-export class AdminModule { }
+export class AdminModule {}

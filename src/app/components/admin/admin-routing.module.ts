@@ -20,42 +20,64 @@ import { UtilitairesComponent } from './utilitaires/utilitaires.component';
 import { DtsVoitureComponent } from './dts-voiture/dts-voiture.component';
 import { DtsMotoComponent } from './dts-moto/dts-moto.component';
 import { DtsUtilitaireComponent } from './dts-utilitaire/dts-utilitaire.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
+import { DetailProprietaireComponent } from './detail-proprietaire/detail-proprietaire.component';
+// import { DetailVendeurComponent } from './detail-vendeur/detail-vendeur.component';
 
 const routes: Routes = [
-  { path: '', component: MainAdminComponent, children: 
-    [
-      { path: 'Accueil_Admin', component: AccueilAdminComponent},
-      { path: 'utilisateurs', component: UtilisateursComponent},
-      { path: 'annonces', children: [
-        { path: '', component: AnnoncesComponent},
-        { path: 'voitures', children: [
-          { path: '', component: VoituresComponent},
-          { path: 'dtsVoiture', component: DtsVoitureComponent}
-        ]},
-        { path: 'motos', children: [
-          { path: '', component: MotosComponent},
-          { path: 'dtsmoto', component: DtsMotoComponent}
-        ]},
-        { path: 'utilitaires', children: [
-          { path: '', component: UtilitairesComponent},
-          { path: 'dtsUtilitaire', component: DtsUtilitaireComponent}
-        ]}
-      ]},
-      { path: 'blogs', component: BlogsComponent},
-      { path: 'categories', component: CategoriesComponent},
-      { path: 'contacts', component: ContactsComponent},
-      { path: 'newsletters', component: NewslettersComponent},
-      { path: 'utilisateurs/vendeurs', component: VendeursComponent},
-      { path: 'utilisateurs/acheteurs', component: AcheteursComponent},
-      { path: 'detail annonce', component: DetailAnnonceComponent},
-      { path: 'signalements', component: SignalementsComponent},
-      { path: 'proprietaires', component: VendeursComponent},
-      { path: 'acheteurs', component: AcheteursComponent},
-      { path:'', redirectTo: 'Accueil_Admin', pathMatch: 'full'}
-
-    ]
-  }
-]
+  {
+    path: '',
+    component: MainAdminComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'Accueil_Admin', component: AccueilAdminComponent },
+      { path: 'utilisateurs', component: UtilisateursComponent },
+      {
+        path: 'detailProprietaire/:id',
+        component: DetailProprietaireComponent,
+      },
+      // { path: 'detailVendeur/:id', component: DetailVendeurComponent},
+      {
+        path: 'annonces',
+        children: [
+          { path: '', component: AnnoncesComponent },
+          {
+            path: 'voitures',
+            children: [
+              { path: '', component: VoituresComponent },
+              { path: 'dtsVoiture', component: DtsVoitureComponent },
+            ],
+          },
+          {
+            path: 'motos',
+            children: [
+              { path: '', component: MotosComponent },
+              { path: 'dtsmoto', component: DtsMotoComponent },
+            ],
+          },
+          {
+            path: 'utilitaires',
+            children: [
+              { path: '', component: UtilitairesComponent },
+              { path: 'dtsUtilitaire', component: DtsUtilitaireComponent },
+            ],
+          },
+        ],
+      },
+      { path: 'blogs', component: BlogsComponent },
+      { path: 'categories', component: CategoriesComponent },
+      { path: 'contacts', component: ContactsComponent },
+      { path: 'newsletters', component: NewslettersComponent },
+      { path: 'utilisateurs/vendeurs', component: VendeursComponent },
+      { path: 'utilisateurs/acheteurs', component: AcheteursComponent },
+      { path: 'detail annonce', component: DetailAnnonceComponent },
+      { path: 'signalements', component: SignalementsComponent },
+      { path: 'proprietaires', component: VendeursComponent },
+      { path: 'acheteurs', component: AcheteursComponent },
+      { path: '', redirectTo: 'Accueil_Admin', pathMatch: 'full' },
+    ],
+  },
+];
 
 @NgModule({
   declarations: [],

@@ -15,33 +15,41 @@ export class LogoutProprietaireComponent {
   ) {}
 
   logout(): void {
-    this.authService.logout().subscribe(
-      () => {
-        console.log('Déconnexion réussie');
-        // Rediriger ou effectuer d'autres actions après la déconnexion
-        this.route.navigate(['/login']);
-        this.alertMessage(
-          'success',
-          'réussie',
-          'Vous vous etes déconnecté avec succés'
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir vous déconnecter ?',
+      text: 'Vous ne pourrez pas revenir en arrière !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, me déconnecter',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.authService.logout().subscribe(
+          (response) => {
+            console.log(response);
+            console.log('Déconnexion réussie');
+            // Rediriger ou effectuer d'autres actions après la déconnexion
+            this.route.navigate(['/login']);
+            this.alertMessage(
+              'success',
+              'réussie',
+              'Vous vous etes déconnecté avec succés'
+            );
+          },
+          (error) => {
+            console.error('Erreur lors de la déconnexion :', error);
+            this.alertMessage(
+              'error',
+              'Error',
+              'Erreur lors de la déconnexion'
+            );
+          }
         );
-      },
-      (error) => {
-        console.error('Erreur lors de la déconnexion :', error);
-        this.alertMessage('error', 'Error', 'Erreur lors de la déconnexion');
       }
-    );
+    });
   }
 
-  // logout(): void {
-  //   // this.authService.logout();
-  //   this.route.navigate(['/login']);
-  //   this.alertMessage(
-  //     'success',
-  //     'réussie',
-  //     'Vous vous etes déconnecté avec succés'
-  //   );
-  // }
 
   // alert message
   alertMessage(icon: any, title: any, text: any) {

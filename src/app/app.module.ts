@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { Router, RouterModule } from '@angular/router';
 import { ROUTES, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { VendeurSubscribeComponent } from './components/auth/vendeur-subscribe/vendeur-subscribe.component';
@@ -10,7 +9,6 @@ import { AcheteurSubscribeComponent } from './components/auth/acheteur-subscribe
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-
 
 
 @NgModule({

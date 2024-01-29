@@ -18,9 +18,11 @@ import { DetailUtilitaireComponent } from './detail-utilitaire/detail-utilitaire
 import { DetailsBlogComponent } from './details-blog/details-blog.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { AnnoncesVendeursComponent } from '../proprietaire/annonces-vendeurs/annonces-vendeurs.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: MainUserComponent, children: 
+  { path: '', component: MainUserComponent,  children: 
+  // canActivate: [AuthGuard],
       [
           { path:'', redirectTo: 'accueil', pathMatch: 'full'},
           { path: 'accueil', component: AccueilComponent},

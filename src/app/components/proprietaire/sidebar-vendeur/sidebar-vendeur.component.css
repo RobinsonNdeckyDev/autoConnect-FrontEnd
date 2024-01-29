@@ -94,3 +94,8 @@
 .annoncesIcon i {
     margin-left: 20% !important;
 }
+
+.iconDisconnect{
+    color: white !important;
+    margin-right: 15px;
+}

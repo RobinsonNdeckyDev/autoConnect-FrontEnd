@@ -1,3 +1,34 @@
+<!-- buyer-list.component.html -->
+
+<!-- <div class="container">
+    <h2>Liste des acheteurs</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let proprietaire of proprietaires">
+                <td>{{ proprietaire.nom }}</td>
+                <td>{{ proprietaire.email }}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+
+
+
+
+
+
+
+
+
 <div class="vendeurContain py-4 px-4">
     <h3 class="navTitle"><a href="" routerLink="proprietaires" class="my-3">Utilisateurs / Propriétaires</a></h3>
     
@@ -5,97 +36,33 @@
         <div class="col-12 ">
             <div class="tableCard p-2 border-0">
                 <div class="search my-3 d-flex justify-content-end align-content-center">
-                    <input type="search" class="form-control border-1 rounded-end-0" name="search" placeholder="faite une recherche...">
+                    <input type="search" class="form-control border-1 rounded-end-0" name="search" placeholder="faite une recherche..." (input)="filtrerProprietaires()" [(ngModel)]="recherche">
                     <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
                 </div>
                 <div class="table-responsive">
                     <table class="table mb-3">
                         <thead class="">
                             <tr class="titreTab fw-light text-center">
-                                <th scope="col">Image</th>
-                                <th scope="col">Prénom</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Téléphone</th>
-                                <th scope="col">Adresse</th>
+                                <th scope="col">image</th>
+                                <th scope="col">prenom</th>
+                                <th scope="col">nom</th>
+                                <th scope="col">email</th>
+                                <th scope="col">telephone</th>
+                                <th scope="col">adresse</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="fs-6 text-center">
-                                <td scope="col"><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td scope="col">Saliou</td>
-                                <td scope="col">Mbengue</td>
-                                <td scope="col">salioumbengue@gmail.com</td>
-                                <td scope="col">77 777 77 77</td>
-                                <td scope="col">Dakar</td>
+                            <tr class=" text-center" *ngFor="let proprietaire of proprietairesFiltres">
+                                <td scope="col">{{ proprietaire.image }}</td>
+                                <td scope="col">{{ proprietaire.prenom }}</td>
+                                <td scope="col">{{ proprietaire.nom }}</td>
+                                <td scope="col">{{ proprietaire.email }}</td>
+                                <td scope="col">{{ proprietaire.telephone }}</td>
+                                <td scope="col">{{ proprietaire.adresse }}</td>
                                 <td scope="col" class="detailIcon">
                                     <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-    
-                            <tr class="fs-6 text-center">
-                                <td scope="col"><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td scope="col">Saliou</td>
-                                <td scope="col">Mbengue</td>
-                                <td scope="col">salioumbengue@gmail.com</td>
-                                <td scope="col">77 777 77 77</td>
-                                <td scope="col">Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-    
-                            <tr class="fs-6 text-center">
-                                <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td>Saliou</td>
-                                <td>Mbengue</td>
-                                <td>salioumbengue@gmail.com</td>
-                                <td>77 777 77 77</td>
-                                <td>Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-    
-                            <tr class="fs-6 text-center">
-                                <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td>Saliou</td>
-                                <td>Mbengue</td>
-                                <td>salioumbengue@gmail.com</td>
-                                <td>77 777 77 77</td>
-                                <td>Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-center">
-                                <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td>Saliou</td>
-                                <td>Mbengue</td>
-                                <td>salioumbengue@gmail.com</td>
-                                <td>77 777 77 77</td>
-                                <td>Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-center">
-                                <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td>Saliou</td>
-                                <td>Mbengue</td>
-                                <td>salioumbengue@gmail.com</td>
-                                <td>77 777 77 77</td>
-                                <td>Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
+                                    <!-- (click)="voirDetails(proprietaire)" -->
                                     <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
                                 </td>
                             </tr>

@@ -20,6 +20,7 @@
                 </ul>
             </div>
         </li>
+        
         <li class="collapsed" routerLinkActive="activeLink">
             <a class="btn-toggle annoncesIcon"  data-bs-toggle="collapse" data-bs-target="#annonces" aria-expanded="false"
                 routerLink="annonces/voitures">
@@ -59,9 +60,10 @@
         </a>
     </div>
 
-    <p class="disconnect">
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <a href="" routerLink="/admin">Déconnexion</a>
-    </p>
+    <div class="disconnect d-flex justify-content-start align-content-center mb-4">
+        <i class="fa-solid fs-4 fa-right-from-bracket "></i>
+        <app-logout-admin class="text-light"></app-logout-admin>
+        <!-- <a href="" routerLink="/admin">Déconnexion</a> -->
+    </div>
  
 </div>

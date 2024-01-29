@@ -1,56 +1,59 @@
-<div class="container login h-100 ">
-    <div class="connect my-sm-5 ">
-        <div class="loginContain row m-0 shadow">
-            <div class="col-12 col-md-6 formulaire py-3">
-                <div class="px-3">
+<div class="container login">
+    <div class="connect">
+        <div class="loginContain row shadow">
+            <div class="col-12 col-md-7 m-0 py-3 formulaire">
+                <div class="py-4 px-3">
                     <a href="" class="my-3"><img src="/assets/images/auth/logo-removebg-preview.png" alt="" class="imgFluid"></a>
                     <h2 class="mb-3 text-center">Inscrivez-vous</h2>
-                    <form action="" class="">
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="mb-3 inputs">
-                                    <label for="prenom" class="form-label">Prénom</label>
-                                    <input type="text" name="prenom" id="prenom" class="form-control"  [(ngModel)]="prenom">
-                                </div>
-                                
-                                <div class="mb-3 inputs">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control" [(ngModel)]="email">
-                                </div>
-                                
-                                <div class="mb-3 inputs">
-                                    <label for="adresse" class="form-label">Adresse</label>
-                                    <input type="text" name="adresse" id="adresse" class="form-control" [(ngModel)]="adresse">
-                                </div>
-                            </div>
 
-                            <div class="col-12 col-md-6">
-                                <div class="mb-3 inputs">
-                                    <label for="nom" class="form-label">Nom</label>
-                                    <input type="text" name="nom" id="nom" class="form-control" [(ngModel)]="nom">
-                                </div>
+                    <form class="row" action="">
+                        <div class="col-12 col-md-4">
+                            <div class="mb-3 inputs">
+                                <label for="prenom" class="form-label">Prénom</label>
+                                <input type="text" name="prenom" id="prenom" class="form-control" [(ngModel)]="prenom">
+                            </div>
                             
-                                <div class="mb-3 inputs">
-                                    <label for="password" class="form-label">Mot de passe</label>
-                                    <input type="password" name="password" id="password" class="form-control" [(ngModel)]="password">
-                                </div>
+                            <div class="mb-3 inputs">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" [(ngModel)]="email">
+                            </div>
                             
-                                <div class="mb-3 inputs">
-                                    <label for="passwordConfirm" class="form-label">Confirmer mot de passe</label>
-                                    <input type="password" name="passwordConfirm" id="passwordConfirm" class="form-control" [(ngModel)]="passwordConfirm">
-                                </div>
+                            <div class="mb-3 inputs">
+                                <label for="adresse" class="form-label">Adresse</label>
+                                <input type="text" name="adresse" id="adresse" class="form-control" [(ngModel)]="adresse">
                             </div>
                         </div>
+                        <div class="col-12 col-md-4">
+                            <div class="mb-3 inputs">
+                                <label for="nom" class="form-label">Nom</label>
+                                <input type="text" name="nom" id="nom" class="form-control" [(ngModel)]="nom">
+                            </div>
+                            
+                            <div class="mb-3 inputs">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" name="password" id="password" class="form-control" [(ngModel)]="password">
+                            </div>
 
-
-                        <div class="mb-3 inputs">
-                            <label for="telephone" class="form-label">Téléphone</label>
-                            <input type="telephone" name="telephone" id="telephone" class="form-control" [(ngModel)]="telephone">
+                            <div class="mb-3 inputs">
+                                <label for="telephone" class="form-label">Téléphone</label>
+                                <input type="telephone" name="telephone" id="telephone" class="form-control" [(ngModel)]="telephone">
+                            </div>
+                            
                         </div>
+                        <div class="col-12 col-md-4">
+                            <div class="mb-3 inputs">
+                                <label for="image" class="form-label">Photo de profil</label>
+                                <input type="text" name="image" id="image" class="form-control" [(ngModel)]="image">
+                            </div>
 
-                        <div class="mb-3 inputs">
-                            <label for="profilPhoto" class="form-label">Photo de profil</label>
-                            <input type="text" name="profilPhoto" id="profilPhoto" class="form-control" [(ngModel)]="photoProfile">
+                            <div class="mb-3 inputs">
+                                <label for="confirmation" class="form-label">Confirmer mot de passe</label>
+                                <input type="password" name="confirmation" id="confirmation" class="form-control" [(ngModel)]="confirmation">
+                            </div>
+                            
+                            <input type="hidden" value="vendeur" name="role" />
+
+                            
                         </div>
 
                         <div class="mb-3 inputs">
@@ -58,16 +61,15 @@
                             <textarea name="description" id="description" class="form-control" [(ngModel)]="description"></textarea>
                         </div>
 
-                        <input type="hidden" value="vendeur" name="role" />
-
                         <div class="bouton mt-4">
                             <button class="btn w-50" (click)="inscription()">S'inscrire</button>
                         </div>
 
                     </form>
+                    
                 </div>
             </div>
-            <div class="col-12 col-md-6 p-0">
+            <div class="col-12 col-md-5 p-0">
                 <img src="/assets/images/auth/profilConnect2.png" class="img-fluid profilImg w-100 h-100" alt="tets">
             </div>
         </div>

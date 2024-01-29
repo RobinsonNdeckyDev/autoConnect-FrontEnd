@@ -21,6 +21,7 @@ import { DetailMotoComponent } from './detail-moto/detail-moto.component';
 import { DetailsBlogComponent } from './details-blog/details-blog.component';
 import { FormsModule } from '@angular/forms';
 import { LogoutUserComponent } from './logout-user/logout-user.component';
+import { LoginUserComponent } from './login-user/login-user.component';
 
 
 
@@ -45,6 +46,7 @@ import { LogoutUserComponent } from './logout-user/logout-user.component';
     DetailMotoComponent,
     DetailsBlogComponent,
     LogoutUserComponent,
+    LoginUserComponent,
   ],
   imports: [
     CommonModule,
