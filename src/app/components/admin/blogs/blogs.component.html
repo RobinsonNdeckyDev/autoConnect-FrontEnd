@@ -3,7 +3,7 @@
 
     <div class="cartesBlogs mt-3 shadow px-4 py-4">
         <div class="headerBlog">
-            <button class="btnAddBlog btn">Ajouter un blog</button>
+            <button class="btnAddBlog btn" data-bs-toggle="modal" data-bs-target="#ajoutBlog">Ajouter un blog</button>
             <span class="search d-flex justify-content-center align-content-center">
                 <input type="search" class="form-control border-1 rounded-end-0" name="search" placeholder="faite une recherche...">
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -11,56 +11,19 @@
         </div>
 
         <div class="row mt-3">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-5" *ngFor="let blog of Blogs">
                 <div class="card p-2 shadow">
                     <div class="cardImg">
-                        <img src="/assets/images/blogs/blg1.png" class="img-fluid  w-100" alt="">
+                        <img src="{{blog.image}}" class="img-fluid  w-100" alt="">
                     </div>
                     <div class="cardbody mx-3 rounded-4">
-                        <h5 class="cardtitle mb-3 mt-2 text-center">L'avenir de la vente de véhicule</h5>
+                        <h5 class="cardtitle mb-3 mt-2 text-center"> {{blog.titre}} </h5>
                         <p class="cardtexte mb-4">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                            Sunt, quis non sit excepturi libero blanditiis. Aperiam quos
-                            accusantium sequi itaque.
+                            {{blog.description}}
                         </p>
                         <div class="btnCard">
-                            <button class="btn">Voir detail</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="card p-2 shadow">
-                    <div class="cardImg">
-                        <img src="/assets/images/blogs/Blg2.png" class="img-fluid  w-100" alt="">
-                    </div>
-                    <div class="cardbody mx-3 rounded-4">
-                        <h5 class="cardtitle mb-3 mt-2 text-center">L'avenir de la vente de véhicule</h5>
-                        <p class="cardtexte mb-4">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Sunt, quis non sit excepturi libero blanditiis. Aperiam quos
-                            accusantium sequi itaque.
-                        </p>
-                        <div class="btnCard">
-                            <button class="btn">Voir detail</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="card p-2 shadow">
-                    <div class="cardImg">
-                        <img src="/assets/images/blogs/Blg4.png" class="img-fluid  w-100" alt="">
-                    </div>
-                    <div class="cardbody mx-3 rounded-4">
-                        <h5 class="cardtitle mb-3 mt-2 text-center">L'avenir de la vente de véhicule</h5>
-                        <p class="cardtexte mb-4">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Sunt, quis non sit excepturi libero blanditiis. Aperiam quos
-                            accusantium sequi itaque.
-                        </p>
-                        <div class="btnCard">
-                            <button class="btn">Voir detail</button>
+                            <button class="btn" (click)="openBlogDetailsModal(blog)" data-bs-toggle="modal" data-bs-target="#detailBlog">Voir detail</button>
+                            <button class="btn btn-primary" (click)="openEditBlogModal(blog)" data-bs-toggle="modal" data-bs-target="#modifierBlog">Modifier</button>
                         </div>
                     </div>
                 </div>
@@ -84,5 +47,115 @@
                 </li>
             </ul>
         </nav>
+    </div>
+</div>
+
+
+
+<!-- Modal ajout blog -->
+<div class="modal fade" id="ajoutBlog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ajoutBlogLabel">Ajouter un blog</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <form action="" (ngSubmit)="addBlog()">
+                <div class="mb-3">
+                    <label for="titre" class="form-label">Titre du blog</label>
+                    <input type="text" class="form-control" name="titre" id="titre" [(ngModel)]="titre">
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image du blog</label>
+                    <input type="text" class="form-control" name="image" id="image" [(ngModel)]="image">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description du blog</label>
+                    <input type="text" class="form-control" name="description" id="description" [(ngModel)]="description">
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </div>
+
+               </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- Modal Bootstrap pour afficher les détails du blog -->
+<div class="modal fade" id="detailBlog" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailBlogLabel">Détails du Blog</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="blogContain">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="">
+                                <img src="{{selectedBlog?.image}}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 detailContain">
+                            <div class="">
+                                <h5 class="text-center mb-5">{{ selectedBlog?.titre }}</h5>
+                                <p class="mb-4">{{ selectedBlog?.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal Bootstrap pour modifier le blog -->
+<div *ngIf="selectedBlog" id="modifierBlog" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBlogLabel">Modifier le Blog</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (submit)="editBlog()">
+                    <div class="mb-3">
+                        <label for="editTitle" class="form-label">Titre</label>
+                        <input type="text" class="form-control" id="editTitle" name="titre" [(ngModel)]="selectedBlog.titre" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="editImage" class="form-label">Image</label>
+                        <input type="text" class="form-control" id="editImage" name="image" [(ngModel)]="selectedBlog.image"
+                            name="editImage">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="editDescription" name="description" [(ngModel)]="selectedBlog.description"
+                            name="editDescription"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" >Modifier</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

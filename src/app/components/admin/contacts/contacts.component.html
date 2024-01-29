@@ -20,37 +20,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="fs-6 text-center">
-                            <td scope="col">Saliou Mbengue</td>
-                            <td scope="col">salioumbengue@gmail.com</td>
+                        <tr class="fs-6 text-center" *ngFor="let message of messages">
+                            <td scope="col"> {{message.nomComplet}} </td>
+                            <td scope="col"> {{message.email}} </td>
                             <td scope="col">
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Tempora laudantium nemo pariatur.
+                                    {{message.message}}
                                 </p>
                             </td>
                             <td scope="col" class="detailIcon">
-                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                                <span class="mx-2"><i class="fa-solid fa-eye" data-bs-toggle="modal" data-bs-target="#detailMessage" (click)="openModal(message)"></i></span>
+                                <span class="mx-2"><i class="bi bi-x-square-fill" (click)="deleteMessage(message)"></i></span>
                             </td>
                         </tr>
             
-                        <tr class="fs-6 text-center">
-                            <td scope="col">Saliou Mbengue</td>
-                            <td scope="col">salioumbengue@gmail.com</td>
-                            <td scope="col">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Tempora laudantium nemo pariatur.
-                                </p>
-                            </td>
-                            <td scope="col" class="detailIcon">
-                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                            </td>
-                        </tr>
-            
-                        <tr class="fs-6 text-center">
+                        <!-- <tr class="fs-6 text-center">
                             <td scope="col">Saliou Mbengue</td>
                             <td scope="col">salioumbengue@gmail.com</td>
                             <td scope="col">
@@ -95,6 +79,21 @@
                             </td>
                         </tr>
             
+                        <tr class="fs-6 text-center">
+                            <td scope="col">Saliou Mbengue</td>
+                            <td scope="col">salioumbengue@gmail.com</td>
+                            <td scope="col">
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Tempora laudantium nemo pariatur.
+                                </p>
+                            </td>
+                            <td scope="col" class="detailIcon">
+                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
+                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                            </td>
+                        </tr>
+             -->
                     </tbody>
                 </table>
             </div>
@@ -116,6 +115,26 @@
                     </li>
                 </ul>
             </nav>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal pour afficher le contenu du message -->
+<div class="modal fade" id="detailMessage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Message Detail</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>{{ selectedMessage?.message }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
