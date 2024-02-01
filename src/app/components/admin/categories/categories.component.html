@@ -17,7 +17,11 @@
                         <tr class="fs-6 text-start" *ngFor="let categorie of categories">
                             <td scope="col"> {{categorie.nom}} </td>
                             <td scope="col" class="detailIcon">
-                                <span class="mx-2"><img src="/assets/images/iconSvg/edit.png" alt=""></span>
+                                <span class="mx-2"><img src="/assets/images/iconSvg/edit.png" alt="" 
+                                    (click)="prepareEdit(categorie.id)" 
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modifierCategorie">
+                                </span>
                                 <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
                             </td>
                         </tr>
@@ -31,16 +35,51 @@
                 <h4 class="text-center my-4 fw-bold titreAdd">Ajouter une catégorie</h4>
                 <div class="trait"></div>
 
-                <form action="" class="fromADDCategorie my-4" (ngSubmit)="onSubmit()">
+                <form action="" class="fromADDCategorie my-4" (ngSubmit)="addCategorie()">
                     <div class="my-4">
                         <label for="categorie" class="form-label">Nom de la catégorie</label>
-                        <input type="text" class="form-control" name="categorie" id="categorie" placeholder="Catégorie" [(ngModel)]="categorie">
+                        <input type="text" class="form-control" name="nom" id="categorie" placeholder="Catégorie" [(ngModel)]="nom">
                     </div>
 
                     <div class="boutonAdd mt-4 d-flex justify-content-center align-content-center">
                         <button class="btn" type="submit">Ajouter</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal modifier Categorie -->
+
+<div id="modifierCategorie" class="modal fade" tabindex="-1" *ngIf="categorieToEdit">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCategorieLabel">Modifier la categorie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (submit)="editCategorie()">
+                    <div class="mb-3">
+                        <label for="editTitle" class="form-label">Titre</label>
+                        <input type="text" class="form-control" id="editTitle" name="titre"
+                            [(ngModel)]="categorieToEdit.nom">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+                </form>
+
             </div>
         </div>
     </div>

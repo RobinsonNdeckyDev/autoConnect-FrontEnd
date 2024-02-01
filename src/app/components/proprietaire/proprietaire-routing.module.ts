@@ -6,12 +6,16 @@ import { AnnoncesVendeursComponent } from './annonces-vendeurs/annonces-vendeurs
 import { ProfilVendeurComponent } from './profil-vendeur/profil-vendeur.component';
 import { DetailAnnoncePropComponent } from './detail-annonce-prop/detail-annonce-prop.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { PublierAnnonceComponent } from './publier-annonce/publier-annonce.component';
 
 
 const routes: Routes = [
   {
-    path: '', component: MainVendeurComponent, canActivate: [AuthGuard], children: [
-      { path: 'proprietaire', component: AnnoncesVendeursComponent },
+    path: '',
+    component: MainVendeurComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'proprietaire', component: PublierAnnonceComponent },
       {
         path: 'mes_annonces',
         children: [
@@ -20,6 +24,7 @@ const routes: Routes = [
         ],
       },
       { path: 'mon_profil', component: ProfilVendeurComponent },
+      { path: 'publierAnnonce', component: PublierAnnonceComponent },
       { path: '', redirectTo: 'mes_annonces', pathMatch: 'full' },
     ],
   },

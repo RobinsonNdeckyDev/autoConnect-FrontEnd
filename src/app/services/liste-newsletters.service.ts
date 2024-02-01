@@ -5,43 +5,30 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ListeContactsService {
+export class ListeNewslettersService {
   private apiUrl = 'http://127.0.0.1:8000/api'; // URL de votre API
 
   constructor(private http: HttpClient) {}
 
-  // Liste messages
-  getMessages(): Observable<any[]> {
+  // Liste blogs
+  getNewsletters(): Observable<any[]> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');
     if (token) {
       headers = headers.set('Authorization', 'Bearer ' + token);
     }
-    return this.http.get<any[]>(`${this.apiUrl}/messages`);
+    return this.http.get<any[]>(`${this.apiUrl}/newsLetters`);
   }
 
   // Supprimer un abonné
-  deleteMessage(messageId: number): Observable<any> {
+  deleteNewsletter(newsId: number): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');
     if (token) {
       headers = headers.set('Authorization', 'Bearer ' + token);
     }
-    return this.http.delete<any>(`${this.apiUrl}/messageDestroy${messageId}`, {
+    return this.http.delete<any>(`${this.apiUrl}/newsLetterDestroy${newsId}`, {
       headers: headers,
     });
   }
-
-  // Ajout message
-  addMessage(newMessage: any): Observable<any[]> {
-    let headers = new HttpHeaders();
-    const token = localStorage.getItem('token');
-    if (token) {
-      headers = headers.set('Authorization', 'Bearer ' + token);
-    }
-    return this.http.post<any[]>(`${this.apiUrl}/messageStore`, newMessage, {
-      headers: headers,
-    });
-  }
-  
 }

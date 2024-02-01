@@ -64,6 +64,7 @@ const routes: Routes = [
           },
         ],
       },
+      { path: 'annonces/voitures/detail/:id', component: DtsVoitureComponent },
       { path: 'blogs', component: BlogsComponent },
       { path: 'categories', component: CategoriesComponent },
       { path: 'contacts', component: ContactsComponent },

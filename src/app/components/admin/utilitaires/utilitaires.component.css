@@ -5,10 +5,37 @@
 
 .search {
     /* border: 1px solid red; */
-    width: 25%;
+    /* width: 25%;
     position: relative;
     right: 0 !important;
-    left: 75%;
+    left: 75%; */
+}
+
+.iconhand {
+    color: #0F42A8;
+    font-size: 18px;
+    margin-right: 15px;
+}
+
+.annoncesHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.annoncesHead button {
+    color: #0F42A8;
+    font-weight: 600;
+    padding: 5px 20px;
+    border: 1px solid #0F42A8;
+}
+
+.annoncesHead button:hover {
+    background-color: #0F42A8;
+    color: white;
+    border: none;
+    position: relative;
+    bottom: 2px;
 }
 
 .search .searchIcon {

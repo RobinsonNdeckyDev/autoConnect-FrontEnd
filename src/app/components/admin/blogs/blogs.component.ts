@@ -11,12 +11,18 @@ import Swal from 'sweetalert2';
 })
 export class BlogsComponent {
   titre: string = '';
-  image: string = '';
+  image!: File;
   description: string = '';
-  selectedBlog: any;// Variable pour stocker le blog sélectionné
-  blogDisplayMdf: any;
+  selectedBlog: any; // Variable pour stocker le blog sélectionné
+  blogToEdit: any;
+  filteredBlogs: any[] = []; // Tableau pour stocker les blogs filtrés
+  searchTerm: string = ''; // Propriété pour stocker le terme de recherche
+  files: any[] = [];
 
   Blogs: any[] = [];
+
+
+  
 
   constructor(
     private listeBlogs: ListeBlogsService,
@@ -36,6 +42,7 @@ export class BlogsComponent {
 
         // Maintenant, vous pouvez accéder à l'array categorie
         this.Blogs = response.blocs;
+        this.filterBlogs();
       },
       (error) => {
         console.error(
@@ -43,6 +50,13 @@ export class BlogsComponent {
           error
         );
       }
+    );
+  }
+
+  // Méthode pour filtrer les blogs en fonction du terme de recherche
+  filterBlogs(): void {
+    this.filteredBlogs = this.Blogs.filter((blog) =>
+      blog.titre.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
@@ -55,13 +69,6 @@ export class BlogsComponent {
         'Merci de renseigner le titre du blog'
       );
       return; // Empêche la soumission si le champ est vide
-    } else if (this.image == '') {
-      this.alertMessage(
-        'error',
-        'Oops',
-        "mMerci de renseigner l'image du blog"
-      );
-      return;
     } else if (this.description == '') {
       this.alertMessage(
         'error',
@@ -70,21 +77,31 @@ export class BlogsComponent {
       );
       return;
     } else {
-      const newBlog = {
-        titre: this.titre,
-        image: this.image,
-        description: this.description,
-      };
+      // const newBlog = {
+      //   titre: this.titre,
+      //   image: this.image,
+      //   description: this.description,
+      // };
+
+      let newBlog = new FormData();
+      newBlog.append('titre', this.titre);
+      newBlog.append('image', this.image as Blob);
+      newBlog.append('description', this.description);
+      
 
       this.listeBlogs.addblog(newBlog).subscribe(
         (response) => {
-          console.log(response);
+          // /Insérer le nouveau blog au début de la liste des blogs
+          this.Blogs.unshift(response);
           console.log('blog ajouté avec succès.');
           this.alertMessage('success', 'Cool', 'blog ajouté avec succés');
+          // Rafraîchir la liste des blogs après l'ajout
+          this.getBlogs();
           // Réinitialiser le champ après l'ajout
           this.viderChamps();
         },
         (error) => {
+          this.alertMessage('error', 'Oops', 'Erreur lors de l\'ajout du blog');
           console.error(
             "Une erreur s'est produite lors de l'ajout du blog: ",
             error
@@ -99,18 +116,22 @@ export class BlogsComponent {
     this.selectedBlog = blog; // Stocke le blog sélectionné
   }
 
-
-  // Modifier blog
-  openEditBlogModal(blog: any): void {
-    this.selectedBlog = { ...blog }; // Copie du blog sélectionné pour éviter de modifier le blog original directement
+  // Méthode pour préparer l'édition du blog sélectionné
+  prepareEdit(blog: any) {
+    // Copier les données du blog sélectionné dans blogToEdit
+    this.blogToEdit = { ...blog };
   }
 
-  editBlog(): void {
-    // Appel à la méthode de service pour modifier le blog
-    this.listeBlogs.modifierBlog(this.selectedBlog).subscribe(
+  // Méthode pour éditer le blog
+  editBlog() {
+    // Appeler la méthode de votre service pour modifier le blog
+    this.listeBlogs.modifierBlog(this.blogToEdit.id, this.blogToEdit).subscribe(
       (response) => {
         console.log(response);
         console.log('Blog modifié avec succès.');
+        this.alertMessage('success', 'Cool', 'Blog modifié avec succès.');
+        // Réinitialiser les champs après la modification
+        this.viderChamps();
       },
       (error) => {
         console.error(
@@ -121,9 +142,44 @@ export class BlogsComponent {
     );
   }
 
+  // Supprimmer blog
+  supprimerBlog(blogId: number): void {
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir supprimer ce blog ?',
+      text: 'Vous allez supprimer ce blog !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, supprimer',
+    }).then((result) => {
+      this.listeBlogs.deleteBlog(blogId).subscribe(
+        () => {
+          console.log('Le blog a été supprimé avec succès.');
+          // Réaliser d'autres actions après la suppression si nécessaire
+          this.alertMessage('success', 'réussie', 'Blog supprimer avec succés');
+
+          this.getBlogs();
+        },
+        (error) => {
+          console.error(
+            "Une erreur s'est produite lors de la suppression du blog :",
+            error
+          );
+          this.alertMessage(
+            'error',
+            'Oops',
+            'Erreur lors de la suppression du blog'
+          );
+          // Gérer l'erreur de suppression du blog
+        }
+      );
+    });
+  }
+
   viderChamps() {
     this.titre = '';
-    this.image = '';
+    // this.image = '';
     this.description = '';
   }
 
@@ -134,5 +190,11 @@ export class BlogsComponent {
       title: title,
       text: text,
     });
+  }
+
+  onFileChange(event: any) {
+    // this.files = event.target.files[0];
+    console.warn(event.target.files[0]);
+    this.image = event.target.files[0] as File;
   }
 }

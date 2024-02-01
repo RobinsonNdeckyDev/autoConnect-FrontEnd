@@ -3,6 +3,12 @@
     color: #0F42A8;
 }
 
+.bodyBlog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .headerBlog{
     display: flex;
     justify-content: space-between;
@@ -36,11 +42,12 @@
 }
 
 .card{
-    border-bottom: 15px solid #0F42A8;
+    border-bottom: 8px solid #0F42A8;
 }
 
 .cardImg img{
     border-radius: 20px !important;
+    border: 1px solid red;
 }
 
 .cardbody{
@@ -48,7 +55,7 @@
     color: white;
     padding: 8px 15px;
     position: relative;
-    bottom: 22px;
+    bottom: 0px;
 }
 
 .cardbody .cardtexte{

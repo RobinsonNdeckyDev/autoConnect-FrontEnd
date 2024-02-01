@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Categorie } from '../models/categorie';
 
 @Injectable({
   providedIn: 'root',
@@ -20,26 +21,14 @@ export class ListeBlogsService {
     return this.http.get<any[]>(`${this.apiUrl}/blocs`);
   }
 
-  // Supprimer un blog
-  deleteBlog(blogId: number): Observable<void> {
-    let headers = new HttpHeaders();
-    const token = localStorage.getItem('token');
-    if (token) {
-      headers = headers.set('Authorization', 'Bearer ' + token);
-    }
-    return this.http.delete<void>(`${this.apiUrl}/blocDestroy/${blogId}`, {
-      headers,
-    });
-  }
-
   // Ajout blog
-  addblog(newMessage: any): Observable<any[]> {
+  addblog(newBlog: any): Observable<any[]> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');
     if (token) {
       headers = headers.set('Authorization', 'Bearer ' + token);
     }
-    return this.http.post<any[]>(`${this.apiUrl}/blocStore`, newMessage, {
+    return this.http.post<any[]>(`${this.apiUrl}/blocStore`, newBlog, {
       headers: headers,
     });
   }
@@ -57,29 +46,21 @@ export class ListeBlogsService {
     });
   }
 
-  // modification blog
   // Méthode pour modifier un blog
-  modifierBlog(blog: any): Observable<any> {
+  modifierBlog(id: number, newData: Categorie): Observable<any> {
+    const url = `${this.apiUrl}/categorieUpdate${id}`; // Utilisation de l'ID fourni dans l'URL
+    return this.http.patch(url, newData);
+  }
+
+  // Supprimer un blog
+  deleteBlog(blogId: number): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');
     if (token) {
       headers = headers.set('Authorization', 'Bearer ' + token);
     }
-
-    return this.http.patch<any>(`${this.apiUrl}/blocUpdate/${blog.id}`, blog, {
+    return this.http.delete<any>(`${this.apiUrl}/blocDestroy${blogId}`, {
       headers: headers,
     });
   }
-
-  // modifierBlog(blog: any): Observable<any> {
-  //   let headers = new HttpHeaders();
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     headers = headers.set('Authorization', 'Bearer ' + token);
-  //   }
-
-  //   return this.http.patch<any>(`${this.apiUrl}/blocUpdate/${blog.id}`, blog, {
-  //     headers: headers,
-  //   });
-  // }
 }

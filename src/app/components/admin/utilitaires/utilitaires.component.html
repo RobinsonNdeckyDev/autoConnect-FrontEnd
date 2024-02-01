@@ -1,11 +1,17 @@
 <div class="voituresContain mx-3 my-3">
     <h3 class="navTitle mb-3"><a href="" routerLink="voitures">Annonces / Utilitaires</a></h3>
 
-    <div class="cars shadow py-3 px-4 rounded-4">
-        <div class="search my-3 d-flex justify-content-end align-content-center">
-            <input type="search" class="form-control border-1 rounded-end-0" name="search"
-                placeholder="faite une recherche...">
-            <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
+    <div class="cars shadow py-3 px-4 rounded-4" *ngIf="annonces">
+        <p class="text-dark"><i class="fa-regular fa-hand-point-right iconhand"></i>Liste annonces Inactives</p>
+        <div class="d-flex annoncesHead">
+            <div>
+                <button class="btn btn-active" (click)="afficherAnnonces()">Voir liste des annonces Actives</button>
+            </div>
+            <div class="search my-3 d-flex justify-content-end align-content-center">
+                <input type="search" class="form-control border-1 rounded-end-0" name="search"
+                    placeholder="faite une recherche...">
+                <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
+            </div>
         </div>
 
         <div class="row mb-3 mt-4">
@@ -119,6 +125,151 @@
         </div>
 
 
+        <nav class="pagine mt-4 mb-2 p-0 d-flex justify-content-end">
+            <ul class="pagination m-0 ">
+                <li class="page-item">
+                    <a class="page-link"><i class="fa-solid fa-angles-left"></i></a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item" aria-current="page">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#"><i class="fa-solid fa-angles-right"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+
+    <div class="cars shadow py-3 px-4 rounded-4" *ngIf="!annonces">
+        <p class="text-dark"><i class="fa-regular fa-hand-point-right iconhand"></i>Liste annonces actives</p>
+        <div class="d-flex annoncesHead">
+            <div>
+                <button class="btn btn-active" (click)="afficherAnnonces()">Voir liste des annonces inactives</button>
+            </div>
+            <div class="search my-3 d-flex justify-content-end align-content-center">
+                <input type="search" class="form-control border-1 rounded-end-0" name="search"
+                    placeholder="faite une recherche...">
+                <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
+            </div>
+        </div>
+    
+        <div class="row mb-3 mt-4">
+            <div class="col-12 col-md-3">
+                <div class="card rounded-3">
+                    <div class="card-head mx-3 mt-3">
+                        <span class="nomCar">Version Accura Sport</span>
+                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                    </div>
+    
+                    <div class="card-body">
+                        <img src="../../../../assets/images/utilitairesCars/ut2.webp" alt="" class="img-fluid">
+                        <button class="btn"><a routerLink="dtsUtilitaire">voir détail</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card rounded-3">
+                    <div class="card-head mx-3 mt-3">
+                        <span class="nomCar">Version Accura Sport</span>
+                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                    </div>
+    
+                    <div class="card-body">
+                        <img src="../../../../assets/images/utilitairesCars/ut2.webp" alt="" class="img-fluid">
+                        <button class="btn"><a routerLink="dtsUtilitaire">voir détail</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card rounded-3">
+                    <div class="card-head mx-3 mt-3">
+                        <span class="nomCar">Version Accura Sport</span>
+                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                    </div>
+    
+                    <div class="card-body">
+                        <img src="../../../../assets/images/utilitairesCars/ut2.webp" alt="" class="img-fluid">
+                        <button class="btn"><a routerLink="dtsUtilitaire">voir détail</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card rounded-3">
+                    <div class="card-head mx-3 mt-3">
+                        <span class="nomCar">Version Accura Sport</span>
+                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                    </div>
+    
+                    <div class="card-body">
+                        <img src="../../../../assets/images/utilitairesCars/ut2.webp" alt="" class="img-fluid">
+                        <button class="btn"><a routerLink="dtsUtilitaire">voir détail</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row mb-3">
+            <div class="col-12 col-md-3">
+                <div class="card rounded-3">
+                    <div class="card-head mx-3 mt-3">
+                        <span class="nomCar">Version Accura Sport</span>
+                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                    </div>
+    
+                    <div class="card-body">
+                        <img src="../../../../assets/images/utilitairesCars/ut2.webp" alt="" class="img-fluid">
+                        <button class="btn"><a routerLink="dtsUtilitaire">voir détail</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card rounded-3">
+                    <div class="card-head mx-3 mt-3">
+                        <span class="nomCar">Version Accura Sport</span>
+                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                    </div>
+    
+                    <div class="card-body">
+                        <img src="../../../../assets/images/utilitairesCars/ut2.webp" alt="" class="img-fluid">
+                        <button class="btn"><a routerLink="dtsUtilitaire">voir détail</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card rounded-3">
+                    <div class="card-head mx-3 mt-3">
+                        <span class="nomCar">Version Accura Sport</span>
+                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                    </div>
+    
+                    <div class="card-body">
+                        <img src="../../../../assets/images/utilitairesCars/ut2.webp" alt="" class="img-fluid">
+                        <button class="btn"><a routerLink="dtsUtilitaire">voir détail</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card rounded-3">
+                    <div class="card-head mx-3 mt-3">
+                        <span class="nomCar">Version Accura Sport</span>
+                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                    </div>
+    
+                    <div class="card-body">
+                        <img src="../../../../assets/images/utilitairesCars/ut2.webp" alt="" class="img-fluid">
+                        <button class="btn"><a routerLink="dtsUtilitaire">voir détail</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
         <nav class="pagine mt-4 mb-2 p-0 d-flex justify-content-end">
             <ul class="pagination m-0 ">
                 <li class="page-item">

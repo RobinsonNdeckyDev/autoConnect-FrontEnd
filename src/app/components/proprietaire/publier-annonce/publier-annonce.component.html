@@ -1,0 +1,163 @@
+<div class="publishAnnonce my-4">
+
+    <div class="bannerPublish">
+    </div>
+    <div class="publishAnnonceContain">
+        <h2 class="text-center mt-5 mb-5">Vous voulez vendre votre véhicule, <span>Publier une annonce !</span></h2>
+        <p class="mt-5 mb-3 text-center">Renseigner le formulaire ci-dessous</p>
+        <div class="trait mb-5"></div>
+
+        <div class="formPublish mx-2 shadow p-4 mb-3 rounded-4">
+            <form action="" (submit)="addAnnonce()">
+                <div class="infosAnnonces">
+
+                    
+                    <!-- caractéristiques -->
+                    <h5 class="my-3">Caracteristiques du véhicule</h5>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="moteur" class="form-label">Moteur</label>
+                                <input type="text" class="form-control" name="moteur" id="moteur" placeholder="moteur et description" [(ngModel)]="moteur">
+                            </div>
+                            <div class="mb-3">
+                                <label for="annee" class="form-label">Année</label>
+                                <input type="number" class="form-control" name="annee" id="annee" placeholder="année" [(ngModel)]="annee">
+                            </div>
+                            <div class="mb-3">
+                                <label for="prix" class="form-label">Prix</label>
+                                <input type="number" class="form-control" name="prix" id="prix" placeholder="prix" [(ngModel)]="prix">
+                            </div>
+                            <div class="mb-3">
+                                <label for="clim" class="form-label">Climatisation</label>
+                                <select class="form-select" id="clim" name="clim" aria-label="Default select example"  [(ngModel)]="climatisation">
+                                    <option selected value="Oui">Oui</option>
+                                    <option value="Non">Non</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="marque" class="form-label">Marque</label>
+                                <input type="text" class="form-control" name="marque" id="marque" placeholder="marque du voiture" [(ngModel)]="marque">
+                            </div>
+                            <div class="mb-3">
+                                <label for="couleur" class="form-label">Couleur</label>
+                                <input type="text" class="form-control" name="couleur" id="couleur"
+                                    placeholder="couleur de la voiture" [(ngModel)]="couleur">
+                            </div>
+                            <div class="mb-3">
+                                <label for="imagePrincipal" class="form-label">Image principal du véhicule</label>
+                                <input (change)="onFileChange($event)" class="form-control" type="file" id="imagePrincipal" name="imagePrincipal" accept="imagePrincipal/*" required>
+                                <!-- <input type="file" class="form-control" id="imagePrincipal" name="imagePrincipal"> -->
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="kilometrage" class="form-label">Kilométrage</label>
+                                <input type="text" class="form-control" name="kilometrage" id="kilometrage" placeholder="Nombre de kilométre parcouru" [(ngModel)]="kilometrage">
+                            </div>
+                            <div class="mb-3">
+                                <label for="carburant" class="form-label">Carburant</label>
+                                <select class="form-select" id="carburant" name="carburant" aria-label="Default select example" [(ngModel)]="carburant">
+                                    <option selected value= "Dielsel">Diesel</option>
+                                    <option value= "Essence">Essence</option>
+                                    <option value= "Electrique">Electrique</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="transmission" class="form-label">Transmission</label>
+                                <input type="text" class="form-control" name="transmission" id="transmission"
+                                    placeholder="Description sur la transmission du véhicule" [(ngModel)]="transmission">
+                            </div>
+                            <div class="mb-3">
+                                <label for="nbrePlace" class="form-label">Nombre de place</label>
+                                <input type="number" class="form-control" name="carburant" id="carburant" placeholder="0" [(ngModel)]="nbrePlace">
+                            </div>
+                            <div class="mb-3">
+                                <label for="localisation" class="form-label">Localisation</label>
+                                <input type="text" class="form-control" name="localisation" id="localisation"
+                                    placeholder="Rufisque" [(ngModel)]="localisation">
+                            </div>
+                            <div class="mb-3">
+                                <label for="categorie_id" class="form-label">Categorie du véhicule</label>
+                                <select class="form-select" id="categorie_id" name="categorie_id" aria-label="Default select example" [(ngModel)]="categorie_id" >
+                                    <option selected value= 1>Voiture</option>
+                                    <option value= 2>Moto</option>
+                                    <option value= 3>Utilitaire</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="carosserie" class="form-label">Carosserie</label>
+                                <input type="text" class="form-control" name="carosserie" id="carosserie" placeholder="Carosserie du véhicule"
+                                    [(ngModel)]="carosserie">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-5">
+
+                    <!-- caractéristiques -->
+                    <h5 class="my-3">Présntation du véhicule</h5>
+                    <div class="mb-3">
+                        <label for="nomVehicule" class="form-label">Nom du véhicule</label>
+                        <input type="text" class="form-control" id="nomVehicule" name="nomVehicule" placeholder="nom complet du véhicule" [(ngModel)]="nom">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descriptionVehicule" class="form-label">descripton du véhicule</label>
+                        <textarea class="form-control" id="descriptionVehicule" name="descriptionVehicule" placeholder="Donner une description et l'etat complet du véhicule" [(ngModel)]="description"></textarea>
+                    </div>
+
+                    <hr class="my-5">
+
+                    <input type="hidden" value="refuser" name="etat" [(ngModel)]="etat">
+
+                    <!-- caractéristiques -->
+                    <h5 class="my-3">Images secondaires du véhicule</h5>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="image1" class="form-label">Image 1</label>
+                                <input (change)="imgSecondaires($event)" type="file" class="form-control" id="image1" name="image1[]"
+                                    accept="image1/*" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image2" class="form-label">Image 2</label>
+                                <input (change)="imgSecondaires($event)" type="file" class="form-control" id="image2" name="image2[]"
+                                    accept="image2/*" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="image3" class="form-label">Image 3</label>
+                                <input (change)="imgSecondaires($event)" type="file" class="form-control" id="image3" name="image3[]"
+                                    accept="image3/*" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image4" class="form-label">Image 4</label>
+                                <input (change)="imgSecondaires($event)" type="file" class="form-control" id="image4" name="image4[]"
+                                    accept="image4/*" required>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- <div class="mb-5">
+                        <label for="photoVehicule" class="form-label">Image 1</label>
+                        <input (change)="imgSecondaires($event)" type="file" class="form-control" id="photoVehicule" name="photoVehicule[]" accept="photoVehicule/*">
+                    </div> -->
+                </div>
+
+                <hr class="my-5">
+
+                <div class="mb-5 d-flex justify-content-center align-content-center">
+                    <button class="btn w-50 btnPublier" type="submit">Publier mon vehicule</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="bannerContent mb-2 mt-4 shadow">
+        <h5 class="text-center text-light shadow">Vendez votre véhicule de manière simple et rapide</h5>
+    </div>
+
+</div>

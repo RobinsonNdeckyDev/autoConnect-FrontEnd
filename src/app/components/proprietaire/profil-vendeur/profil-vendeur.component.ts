@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentification.service';
+import { ProfilProprietaireService } from 'src/app/services/profil-proprietaire.service';
 
 @Component({
   selector: 'app-profil-vendeur',
   templateUrl: './profil-vendeur.component.html',
   styleUrls: ['./profil-vendeur.component.css'],
 })
-export class ProfilVendeurComponent implements OnInit {
+export class ProfilVendeurComponent {
+  proprietaireId: string = "";
+  proprietaire: any = {};
 
   vendeurData: any = {
     nom: '',
@@ -17,64 +20,94 @@ export class ProfilVendeurComponent implements OnInit {
     description: '',
     imgProfil: '',
   };
-  isEditMode: boolean = false;
+  // isEditMode: boolean = false;
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private proprietaireService: ProfilProprietaireService) {}
 
-  ngOnInit(): void {
-    const vendeurId = this.getLoggedInUserId();
-    this.getvendeurDetails(vendeurId);
-  }
+  // ngOnInit(): void {
+  //   this.route.paramMap.subscribe((params) => {
+  //     this.proprietaireId = params.get('id');
+  //     this.proprietaireService
+  //       .getProprietaireDetails(this.proprietaireId)
+  //       .subscribe((data) => {
+  //         this.proprietaire = data; // Pré-remplir les données récupérées
+  //       });
+  //   });
+  // }
 
-  getvendeurDetails(vendeurId: number) {
-    this.authService.getvendeurDetails(vendeurId).subscribe(
-      (data) => {
-        this.vendeurData = data;
-      },
-      (error) => {
-        console.error(
-          "Erreur lors de la récupération des informations de l'vendeur:",
-          error
-        );
-      }
-    );
-  }
-
-  updatevendeurDetails() {
-    const vendeurId = this.vendeurData.id;
-    this.authService
-      .updatevendeurDetails(vendeurId, this.vendeurData)
-      .subscribe(
-        (response) => {
-          console.log(
-            "Informations de l'vendeur mises à jour avec succès:",
-            response
-          );
-          this.isEditMode = false;
-        },
-        (error) => {
-          console.error(
-            "Erreur lors de la mise à jour des informations de l'vendeur:",
-            error
-          );
-        }
-      );
-  }
-
-  toggleEditMode() {
-    this.isEditMode = !this.isEditMode;
-  }
-
-  // Méthode fictive pour récupérer l'ID de l'utilisateur connecté
-  getLoggedInUserId(): number {
-    // Implémentez la logique pour récupérer l'ID de l'utilisateur connecté
-    // à partir du token JWT ou d'autres moyens appropriés
-    return 1; // Par exemple, retourne l'ID 1 pour le test
-  }
+  // onSubmit() {
+  //   this.proprietaireService
+  //     .modifierProprietaire(this.proprietaireId, this.proprietaire)
+  //     .subscribe(
+  //       (response) => {
+  //         console.log(response);
+  //         // Gérer le succès de la modification
+  //       },
+  //       (error) => {
+  //         // Gérer les erreurs
+  //       }
+  //     );
+  // }
 }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+// getvendeurDetails(vendeurId: number) {
+  //   this.authService.getvendeurDetails(vendeurId).subscribe(
+  //     (data) => {
+  //       this.vendeurData = data;
+  //     },
+  //     (error) => {
+  //       console.error(
+  //         "Erreur lors de la récupération des informations de l'vendeur:",
+  //         error
+  //       );
+  //     }
+  //   );
+  // }
+
+  // updatevendeurDetails() {
+  //   const vendeurId = this.vendeurData.id;
+  //   this.authService
+  //     .updatevendeurDetails(vendeurId, this.vendeurData)
+  //     .subscribe(
+  //       (response) => {
+  //         console.log(
+  //           "Informations de l'vendeur mises à jour avec succès:",
+  //           response
+  //         );
+  //         // this.isEditMode = false;
+  //       },
+  //       (error) => {
+  //         console.error(
+  //           "Erreur lors de la mise à jour des informations de l'vendeur:",
+  //           error
+  //         );
+  //       }
+  //     );
+  // }
+
+  // // toggleEditMode() {
+  // //   this.isEditMode = !this.isEditMode;
+  // // }
+
+  // // Méthode fictive pour récupérer l'ID de l'utilisateur connecté
+  // getLoggedInUserId(): number {
+  //   // Implémentez la logique pour récupérer l'ID de l'utilisateur connecté
+  //   // à partir du token JWT ou d'autres moyens appropriés
+  //   return 1; // Par exemple, retourne l'ID 1 pour le test
+  // }
 
 
 

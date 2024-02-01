@@ -15,45 +15,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="fs-6 text-start">
-                                <td scope="col">salioumbengue@gmail.com</td>
+                            <tr class="fs-6 text-start" *ngFor="let news of newsletters">
+                                <td scope="col"> {{news.email}} </td>
                                 <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-start">
-                                <td scope="col">salioumbengue@gmail.com</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-start">
-                                <td scope="col">salioumbengue@gmail.com</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-start">
-                                <td scope="col">salioumbengue@gmail.com</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-start">
-                                <td scope="col">salioumbengue@gmail.com</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-start">
-                                <td scope="col">salioumbengue@gmail.com</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
+                                    <span class="mx-2"><i class="bi bi-x-square-fill" (click)="supprimerBlog(news.id)"></i></span>
                                 </td>
                             </tr>
 

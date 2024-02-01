@@ -19,14 +19,41 @@ export class ListeCategoriesService {
     return this.http.get<any[]>(`${this.apiUrl}/categories`);
   }
 
-  addCategory(newCategorie: any): Observable<any[]> {
+  // Ajout blog
+  addCategorie(newCategorie: any): Observable<any[]> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');
     if (token) {
       headers = headers.set('Authorization', 'Bearer ' + token);
     }
-    return this.http.post<any[]>(`${this.apiUrl}/categorieStore`, newCategorie, {
-      headers: headers,
-    });
+    return this.http.post<any[]>(
+      `${this.apiUrl}/categorieStore`,
+      newCategorie,
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  
+  // Méthode pour modifier un blog
+  modifierCategorie(id: number, newData: any): Observable<any> {
+    const url = `${this.apiUrl}/categorieUpdate${id}`; // Utilisation de l'ID fourni dans l'URL
+    return this.http.patch(url, newData);
+  }
+
+  // Supprimer un blog
+  deleteCategorie(categorieId: number): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    return this.http.delete<any>(
+      `${this.apiUrl}/cateegorieDestroy${categorieId}`,
+      {
+        headers: headers,
+      }
+    );
   }
 }
