@@ -14,6 +14,17 @@ export class ListeVoituresService {
   getAnnonces(id: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/annoncesParCategorie${id}`);
   }
-  
 
+  // Méthode pour récupérer les détails d'un blog
+  getAnnonceDetails(annonceId: string): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+
+    return this.http.get<any>(`${this.apiUrl}/annonceShow${annonceId}`, {
+      headers: headers,
+    });
+  }
 }

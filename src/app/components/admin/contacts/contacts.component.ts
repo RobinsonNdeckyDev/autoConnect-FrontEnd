@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./contacts.component.css'],
 })
 export class ContactsComponent {
+  dtOptions: DataTables.Settings = {};
   messages: any[] = [];
   selectedMessage: any; // Pour stocker le message sélectionné
   isModalOpen: boolean = false; // Variable pour contrôler l'ouverture du modal
@@ -22,6 +23,26 @@ export class ContactsComponent {
 
   ngOnInit(): void {
     this.getContacts();
+
+    // dtoptions
+    this.dtOptions = {
+      searching: true,
+      lengthChange: false,
+      paging: true,
+      pageLength: 6,
+      pagingType: 'simple_numbers',
+      info: false,
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json',
+
+        paginate: {
+          first: '<<', // Personnalise le texte de la flèche pour la première page
+          previous: '<', // Personnalise le texte de la flèche pour la page précédente
+          next: '>', // Personnalise le texte de la flèche pour la page suivante
+          last: '>>', // Personnalise le texte de la flèche pour la dernière page
+        },
+      },
+    };
   }
 
   // Liste des contacts
@@ -45,7 +66,18 @@ export class ContactsComponent {
   // Supprimmer un abonné
   supprimerMessage(messageId: number): void {
 
-    this.listeContacts.deleteMessage(messageId).subscribe(
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir supprimer ce contact?',
+      text: 'Vous allez supprimer ce contact!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, supprimer',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, supprimer"
+        this.listeContacts.deleteMessage(messageId).subscribe(
       () => {
         console.log('le message a été supprimé avec succès.');
         // Réaliser d'autres actions après la suppression si nécessaire
@@ -66,43 +98,12 @@ export class ContactsComponent {
         // Gérer l'erreur de suppression du message
       }
     );
-
-
-    // Swal.fire({
-    //   title: 'Êtes-vous sûr de vouloir supprimer ce blog ?',
-    //   text: 'Vous allez supprimer ce blog !',
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#0F42A8',
-    //   cancelButtonColor: 'black',
-    //   confirmButtonText: 'Oui, supprimer',
-    // }).then((result) => {
-    //   this.listeContacts.deleteMessage(messageId).subscribe(
-    //     () => {
-    //       console.log("le message a été supprimé avec succès.");
-    //       // Réaliser d'autres actions après la suppression si nécessaire
-    //       this.alertMessage(
-    //         'success',
-    //         'réussie',
-    //         'Message supprimé avec succés'
-    //       );
-
-    //       this.getContacts();
-    //     },
-    //     (error) => {
-    //       console.error(
-    //         "Une erreur s'est produite lors de la suppression du message :",
-    //         error
-    //       );
-    //       this.alertMessage(
-    //         'error',
-    //         'Oops',
-    //         "Erreur lors de la suppression du message"
-    //       );
-    //       // Gérer l'erreur de suppression du message
-    //     }
-    //   );
-    // });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log('La suppression du contact a été annulée.');
+        this.alertMessage('info', 'Annulée', 'Suppression du contact annulée');
+      }
+    });
   
   }
 

@@ -11,7 +11,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./vendeur-subscribe.component.css'],
 })
 export class VendeurSubscribeComponent {
-  constructor(private authService: AuthenticationService, private route: Router) {}
+  constructor(
+    private authService: AuthenticationService,
+    private route: Router
+  ) {}
 
   nom: string = '';
   prenom: string = '';
@@ -21,13 +24,11 @@ export class VendeurSubscribeComponent {
   telephone: string = '';
   adresse: string = '';
   description: string = '';
-  image: string = '';
+  image!: File;
   role: string = 'vendeur';
-
 
   emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
 
-  
   inscription() {
     if (this.validateForm()) {
       if (this.password !== this.confirmation) {
@@ -110,13 +111,6 @@ export class VendeurSubscribeComponent {
         'Merci de renseigner votre numéro de téléphone!'
       );
       return false;
-    } else if (this.image == '') {
-      this.alertMessage(
-        'error',
-        'Attention',
-        'Merci de renseigner votre photo de profil!'
-      );
-      return false;
     } else if (this.description == '') {
       this.alertMessage(
         'error',
@@ -130,21 +124,23 @@ export class VendeurSubscribeComponent {
 
   registerUser() {
     // Créez une instance de Proprietaire avec les données d'inscription
-    const nouveauProprietaire = new Proprietaire(
-      this.nom,
-      this.prenom,
-      this.email,
-      this.telephone,
-      this.adresse,
-      this.password,
-      this.confirmation,
-      this.description,
-      this.image,
-      this.role
-    );
 
-    
-    this.authService.registerproprietaire(nouveauProprietaire).subscribe(
+    let newProprietaire: Proprietaire = {
+      nom: this.nom,
+      prenom: this.prenom,
+      email: this.email,
+      password: this.password,
+      confirmation: this.confirmation,
+      telephone: this.telephone,
+      adresse: this.adresse,
+      description: this.description,
+      image: this.image as File,
+      role: this.role,
+    }
+
+    console.log(newProprietaire);
+
+    this.authService.registerproprietaire(newProprietaire).subscribe(
       (response) => {
         console.log(response);
 
@@ -167,7 +163,6 @@ export class VendeurSubscribeComponent {
     );
   }
 
-
   cleanForm() {
     this.nom = '';
     this.email = '';
@@ -177,7 +172,7 @@ export class VendeurSubscribeComponent {
     this.adresse = '';
     this.telephone = '';
     this.description = '';
-    this.image = '';
+    // this.image = '';
   }
 
   alertMessage(icon: any, title: any, text: any) {
@@ -186,5 +181,11 @@ export class VendeurSubscribeComponent {
       title: title,
       text: text,
     });
+  }
+
+  // File img1
+  profilAdd(event: any) {
+    this.image = event.target.files[0] as File;
+    console.warn(event.target.files[0]);
   }
 }

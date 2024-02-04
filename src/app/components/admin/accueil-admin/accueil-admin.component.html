@@ -14,7 +14,7 @@
                     Motos
                 </span>
                 <span>
-                    44
+                    {{nbreMotos}}
                 </span>
             </div>
         </div>
@@ -35,7 +35,7 @@
                     Voiture
                 </span>
                 <span>
-                    20
+                    {{nbreVoitures}}
                 </span>
             </div>
         </div>
@@ -56,7 +56,7 @@
                     Utilitaire
                 </span>
                 <span>
-                    10
+                    {{nbreUtilitaires}}
                 </span>
             </div>
         </div>
@@ -65,81 +65,28 @@
 
 <div class="row row2 mt-2 g-4">
     <div class="col-12 col-md-8">
-        <div class="card tableCard p-2 shadow border-0">
+        <div class="card tableCard p-2 shadow border-0 px-3">
             <p class="mb-2 px-2 mt-2 fs-4 text">Liste des propriétaires</p>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead class="azert">
-                        <tr class="titreTab fw-light text-center">
-                            <th scope="col" >Image</th>
-                            <th scope="col">Prénom</th>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Téléphone</th>
-                            <th scope="col">Adresse</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="fs-6 text-center">
-                            <td scope="col"><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                            <td scope="col">Saliou</td>
-                            <td scope="col">Mbengue</td>
-                            <td scope="col">salioumbengue@gmail.com</td>
-                            <td scope="col">77 777 77 77</td>
-                            <td scope="col">Dakar</td>
-                            <td scope="col" class="detailIcon">
-                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                            </td>
-                        </tr>
-                
-                        <tr class="fs-6 text-center">
-                            <td scope="col"><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                            <td scope="col">Saliou</td>
-                            <td scope="col">Mbengue</td>
-                            <td scope="col">salioumbengue@gmail.com</td>
-                            <td scope="col">77 777 77 77</td>
-                            <td scope="col">Dakar</td>
-                            <td scope="col" class="detailIcon">
-                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                            </td>
-                        </tr>
-                
-                        <tr class="fs-6 text-center">
-                            <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                            <td>Saliou</td>
-                            <td>Mbengue</td>
-                            <td>salioumbengue@gmail.com</td>
-                            <td>77 777 77 77</td>
-                            <td>Dakar</td>
-                            <td scope="col" class="detailIcon">
-                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                            </td>
-                        </tr>
-                
-                        <tr class="fs-6 text-center">
-                            <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                            <td>Saliou</td>
-                            <td>Mbengue</td>
-                            <td>salioumbengue@gmail.com</td>
-                            <td>77 777 77 77</td>
-                            <td>Dakar</td>
-                            <td scope="col" class="detailIcon">
-                                <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                            </td>
-                        </tr>
-                
-                    </tbody>
-                </table>
-            </div>
 
-            <div class="d-flex justify-content-end mt-2 mb-2">
-                <button class="btn text-light w-25">Voir plus</button>
-            </div>
+
+            <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="proprietaires">
+                <thead>
+                    <tr class="titleHead">
+                        <th scope="col">Image</th>
+                        <th scope="col">Nom complet</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Téléphone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" *ngFor="let proprietaire of proprietaires">
+                        <td>{{ proprietaire.image }}</td>
+                        <td>{{ proprietaire.prenom }} {{ proprietaire.nom }}</td>
+                        <td>{{ proprietaire.email }}</td>
+                        <td>{{ proprietaire.telephone }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="col-12 col-md-4">
@@ -153,8 +100,4 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="mt-5">
-    <app-table-test></app-table-test>
 </div>

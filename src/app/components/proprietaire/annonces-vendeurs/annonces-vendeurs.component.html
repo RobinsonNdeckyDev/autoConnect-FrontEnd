@@ -107,55 +107,19 @@
         <!-- <button class="btnAddAnnonce btn">publier une annonce</button> -->
     
         <div class="row mb-3 mt-4">
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
+            <div class="col-12 col-md-3 g-3" *ngFor="let anonce of validesAnnonces">
+                <div class="card rounded-3">
                     <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                        <p class="nomCar"> {{anonce?.nom}} </p>
+                        <img src="" class="img-fluid" alt="">
                     </div>
-    
+            
                     <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="detailAnnonce">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="../../../../assets/images/cars/car-06.jpg" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="detailAnnonce">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="../../../../assets/images/cars/slider-thum-01.jpg" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="detailAnnonce">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="detailAnnonce">Voir détail</a></button>
+                        <img src="http://127.0.0.1:8000/images/{{anonce?.image}}" alt="" class="img-fluid">
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <!-- (click)="afficherDetailAnnonce(anonce)" -->
+                            Voir détail
+                        </button>
                     </div>
                 </div>
             </div>

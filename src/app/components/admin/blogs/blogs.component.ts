@@ -13,16 +13,19 @@ export class BlogsComponent {
   titre: string = '';
   image!: File;
   description: string = '';
-  selectedBlog: any; // Variable pour stocker le blog sélectionné
+
+  // Variable pour stocker le blog sélectionné
+  selectedBlog: any;
   blogToEdit: any;
-  filteredBlogs: any[] = []; // Tableau pour stocker les blogs filtrés
-  searchTerm: string = ''; // Propriété pour stocker le terme de recherche
+
+  // Tableau pour stocker les blogs filtrés
+  filteredBlogs: any[] = [];
+
+  // Propriété pour stocker le terme de recherche
+  searchTerm: string = '';
   files: any[] = [];
 
   Blogs: any[] = [];
-
-
-  
 
   constructor(
     private listeBlogs: ListeBlogsService,
@@ -77,17 +80,10 @@ export class BlogsComponent {
       );
       return;
     } else {
-      // const newBlog = {
-      //   titre: this.titre,
-      //   image: this.image,
-      //   description: this.description,
-      // };
-
       let newBlog = new FormData();
       newBlog.append('titre', this.titre);
       newBlog.append('image', this.image as Blob);
       newBlog.append('description', this.description);
-      
 
       this.listeBlogs.addblog(newBlog).subscribe(
         (response) => {
@@ -101,7 +97,7 @@ export class BlogsComponent {
           this.viderChamps();
         },
         (error) => {
-          this.alertMessage('error', 'Oops', 'Erreur lors de l\'ajout du blog');
+          this.alertMessage('error', 'Oops', "Erreur lors de l'ajout du blog");
           console.error(
             "Une erreur s'est produite lors de l'ajout du blog: ",
             error
@@ -132,6 +128,7 @@ export class BlogsComponent {
         this.alertMessage('success', 'Cool', 'Blog modifié avec succès.');
         // Réinitialiser les champs après la modification
         this.viderChamps();
+        this.getBlogs();
       },
       (error) => {
         console.error(
@@ -142,7 +139,7 @@ export class BlogsComponent {
     );
   }
 
-  // Supprimmer blog
+  // Supprimer blog
   supprimerBlog(blogId: number): void {
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir supprimer ce blog ?',
@@ -153,27 +150,36 @@ export class BlogsComponent {
       cancelButtonColor: 'black',
       confirmButtonText: 'Oui, supprimer',
     }).then((result) => {
-      this.listeBlogs.deleteBlog(blogId).subscribe(
-        () => {
-          console.log('Le blog a été supprimé avec succès.');
-          // Réaliser d'autres actions après la suppression si nécessaire
-          this.alertMessage('success', 'réussie', 'Blog supprimer avec succés');
-
-          this.getBlogs();
-        },
-        (error) => {
-          console.error(
-            "Une erreur s'est produite lors de la suppression du blog :",
-            error
-          );
-          this.alertMessage(
-            'error',
-            'Oops',
-            'Erreur lors de la suppression du blog'
-          );
-          // Gérer l'erreur de suppression du blog
-        }
-      );
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, supprimer"
+        this.listeBlogs.deleteBlog(blogId).subscribe(
+          () => {
+            console.log('Le blog a été supprimé avec succès.');
+            this.alertMessage(
+              'success',
+              'réussie',
+              'Blog supprimé avec succès'
+            );
+            this.getBlogs();
+          },
+          (error) => {
+            console.error(
+              "Une erreur s'est produite lors de la suppression du blog :",
+              error
+            );
+            this.alertMessage(
+              'error',
+              'Oops',
+              'Erreur lors de la suppression du blog'
+            );
+            // Gérer l'erreur de suppression du blog
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log('La suppression du blog a été annulée.');
+        this.alertMessage('info', 'Annulée', 'Suppression du blog annulée');
+      }
     });
   }
 

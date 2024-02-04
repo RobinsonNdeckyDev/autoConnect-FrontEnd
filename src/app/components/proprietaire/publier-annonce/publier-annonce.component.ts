@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { error } from 'jquery';
+import { Annonce } from 'src/app/models/annonce';
 // import { ActivatedRoute } from '@angular/router';
 import { PublierAnnonceService } from 'src/app/services/publier-annonce.service';
 import Swal from 'sweetalert2';
@@ -12,7 +15,7 @@ import Swal from 'sweetalert2';
 export class PublierAnnonceComponent {
   constructor(
     private publierAnnonce: PublierAnnonceService,
-    private http: HttpClient
+    private route: ActivatedRoute
   ) {}
 
   // Attributs
@@ -38,10 +41,21 @@ export class PublierAnnonceComponent {
   image3!: File;
   image4!: File;
 
-  // images!: File[];
+  // Utilisateur connecté
+  
 
   // Ajout d'une annonce
   addAnnonce() {
+
+    let userInfoConnected = localStorage.getItem('currentUser');
+    if (userInfoConnected !== null) {
+      userInfoConnected = JSON.parse(userInfoConnected);
+      console.log(userInfoConnected);
+    } else {
+      console.log("'currentUser' n'est pas défini dans le localStorage");
+    }
+
+
     if (this.nom == '') {
       this.alertMessage(
         'error',
@@ -126,29 +140,73 @@ export class PublierAnnonceComponent {
       );
       return;
     } else {
-      let newAnnonce = new FormData();
-      // let image = new FormData();
-      newAnnonce.append('nom', this.nom);
-      newAnnonce.append('marque', this.marque);
-      newAnnonce.append('couleur', this.couleur);
-      newAnnonce.append('image', this.image as Blob);
-      newAnnonce.append('prix', `${this.prix}`);
-      newAnnonce.append('description', this.description);
-      newAnnonce.append('nbrePlace', `${this.nbrePlace}`);
-      newAnnonce.append('localisation', this.localisation);
-      newAnnonce.append('moteur', this.moteur);
-      newAnnonce.append('annee', `${this.annee}`);
-      newAnnonce.append('carburant', this.carburant);
-      newAnnonce.append('carosserie', this.carosserie);
-      newAnnonce.append('kilometrage', this.kilometrage);
-      newAnnonce.append('transmission', this.transmission);
-      newAnnonce.append('climatisation', this.climatisation);
-      newAnnonce.append('categorie_id', `${this.categorie_id}`);
-      newAnnonce.append('image1', this.image as Blob);
-      newAnnonce.append('image2', this.image as Blob);
-      newAnnonce.append('image3', this.image as Blob);
-      newAnnonce.append('image4', this.image as Blob);
 
+      let nouvelleAnnonce: Annonce = {
+        nom: this.nom,
+        marque: this.marque,
+        couleur: this.couleur,
+        image: this.image as File,
+        prix: this.prix,
+        description: this.description,
+        nbrePlace: this.nbrePlace,
+        localisation: this.localisation,
+        moteur: this.moteur,
+        annee: this.annee,
+        carburant: this.carburant,
+        carosserie: this.carosserie,
+        kilometrage: this.kilometrage,
+        transmission: this.transmission,
+        climatisation: this.climatisation,
+        categorie_id: this.categorie_id,
+        image1: this.image1 as File,
+        image2: this.image2 as File,
+        image3: this.image3 as File,
+        image4: this.image4 as File,
+        commentaires: [],
+        signalements: [],
+      };
+
+      let formData = new FormData();
+      Object.entries(nouvelleAnnonce).forEach(([key, value]) => {
+        // Utilisez "as Blob" pour forcer TypeScript à reconnaître les valeurs comme des blobs
+        formData.append(key, value as Blob);
+      });
+
+      // envoi de l'annonce
+      this.publierAnnonce.addAnnonce(formData).subscribe(
+        (response: any) => {
+          console.log(response);
+          console.log('Annonce créee avec succés');
+          this.alertMessage('success', 'Super', 'Annonce ajouté avec succés');
+          console.log(response);
+        },
+        (error) => {
+          console.log("Oops l'annonce n'a pas été créee");
+        }
+      );
+
+      // let newAnnonce = new FormData();
+      // // let image = new FormData();
+      // newAnnonce.append('nom', this.nom);
+      // newAnnonce.append('marque', this.marque);
+      // newAnnonce.append('couleur', this.couleur);
+      // newAnnonce.append('image', this.image as Blob);
+      // newAnnonce.append('prix', `${this.prix}`);
+      // newAnnonce.append('description', this.description);
+      // newAnnonce.append('nbrePlace', `${this.nbrePlace}`);
+      // newAnnonce.append('localisation', this.localisation);
+      // newAnnonce.append('moteur', this.moteur);
+      // newAnnonce.append('annee', `${this.annee}`);
+      // newAnnonce.append('carburant', this.carburant);
+      // newAnnonce.append('carosserie', this.carosserie);
+      // newAnnonce.append('kilometrage', this.kilometrage);
+      // newAnnonce.append('transmission', this.transmission);
+      // newAnnonce.append('climatisation', this.climatisation);
+      // newAnnonce.append('categorie_id', `${this.categorie_id}`);
+      // newAnnonce.append('image1', this.image1 as Blob);
+      // newAnnonce.append('image2', this.image2 as Blob);
+      // newAnnonce.append('image3', this.image3 as Blob);
+      // newAnnonce.append('image4', this.image4 as Blob);
 
       //  let imagesFormData = new FormData();
       //  if (this.images && this.images.length > 0) {
@@ -157,55 +215,54 @@ export class PublierAnnonceComponent {
       //    }
       //  }
 
-      console.log("Contenu de newAnnonce avant l'envoi :", newAnnonce);
-      this.publierAnnonce.addAnnonce(newAnnonce).subscribe(
-        (response: any) => {
-          this.alertMessage('success', 'Super', 'Annonce ajouté avec succés');
-          console.log(response);
-          this.viderChamps();
+      // console.log("Contenu de newAnnonce avant l'envoi :", newAnnonce);
+      // this.publierAnnonce.addAnnonce(newAnnonce).subscribe(
+      //   (response: any) => {
+      //     this.alertMessage('success', 'Super', 'Annonce ajouté avec succés');
+      //     console.log(response);
+      //     this.viderChamps();
 
-          // Récupérer l'ID de l'annonce depuis la réponse
-          // const annonceId = response.id;
-          // console.log(annonceId);
-          // Assurez-vous que votre backend renvoie l'ID correctement
-          // Envoyer l'ID de l'annonce avec les images
-          // imagesFormData.append('annonce_id', annonceId);
+      //     // Récupérer l'ID de l'annonce depuis la réponse
+      //     // const annonceId = response.id;
+      //     // console.log(annonceId);
+      //     // Assurez-vous que votre backend renvoie l'ID correctement
+      //     // Envoyer l'ID de l'annonce avec les images
+      //     // imagesFormData.append('annonce_id', annonceId);
 
-          // Envoi des images au backend
-          // this.publierAnnonce.addAnnonce(imagesFormData).subscribe(
-          //   (response) => {
-          //     // Gestion de la réponse
-          //     this.alertMessage('success', 'Cool', 'Image ajouté avec succés');
-          //   },
-          //   (error) => {
-          //     // Gestion de l'erreur
-          //     this.alertMessage(
-          //       'error',
-          //       'Oops',
-          //       "Erreur lors de l'ajout de des images"
-          //     );
-          //   }
-          // );
+      //     // Envoi des images au backend
+      //     // this.publierAnnonce.addAnnonce(imagesFormData).subscribe(
+      //     //   (response) => {
+      //     //     // Gestion de la réponse
+      //     //     this.alertMessage('success', 'Cool', 'Image ajouté avec succés');
+      //     //   },
+      //     //   (error) => {
+      //     //     // Gestion de l'erreur
+      //     //     this.alertMessage(
+      //     //       'error',
+      //     //       'Oops',
+      //     //       "Erreur lors de l'ajout de des images"
+      //     //     );
+      //     //   }
+      //     // );
 
-          // console.log(newAnnonce);
-          //   console.log(response);
-          //   console.log('Annonce ajouté avec succès.');
-          //   this.alertMessage('success', 'Cool', 'Ann ajouté avec succés');
-          //   console.log('Contenu de newAnnonce envoyé au serveur :', newAnnonce);
-        
-        },
-        (error) => {
-          this.alertMessage(
-            'error',
-            'Oops',
-            "Erreur lors de l'ajout de l'annonce"
-          );
-          console.error(
-            "Une erreur s'est produite lors de l'ajout de l'annonce: ",
-            error
-          );
-        }
-      );
+      //     // console.log(newAnnonce);
+      //     //   console.log(response);
+      //     //   console.log('Annonce ajouté avec succès.');
+      //     //   this.alertMessage('success', 'Cool', 'Ann ajouté avec succés');
+      //     //   console.log('Contenu de newAnnonce envoyé au serveur :', newAnnonce);
+      //   },
+      //   (error) => {
+      //     this.alertMessage(
+      //       'error',
+      //       'Oops',
+      //       "Erreur lors de l'ajout de l'annonce"
+      //     );
+      //     console.error(
+      //       "Une erreur s'est produite lors de l'ajout de l'annonce: ",
+      //       error
+      //     );
+      //   }
+      // );
     }
   }
 
@@ -243,19 +300,28 @@ export class PublierAnnonceComponent {
     this.image = event.target.files[0] as File;
   }
 
-  // File img secondaire
-  imgSecondaires(event: any) {
-    const files = event.target.files;
-    if (files) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        // Faites quelque chose avec chaque fichier, par exemple l'afficher
-        // console.log('Nom du fichier:', file.name);
-        // console.log('Taille du fichier:', file.size);
-        // console.log('Type de fichier:', file.type);
-        // Vous pouvez également stocker les fichiers dans un tableau ou les ajouter à votre objet FormData selon vos besoins
-      }
-    }
+  // File img1
+  img1(event: any) {
+    this.image1 = event.target.files[0] as File;
+    console.warn(event.target.files[0]);
+  }
+
+  // File img1
+  img2(event: any) {
+    this.image2 = event.target.files[0] as File;
+    console.warn(event.target.files[0]);
+  }
+
+  // File img1
+  img3(event: any) {
+    this.image3 = event.target.files[0] as File;
+    console.warn(event.target.files[0]);
+  }
+
+  // File img1
+  img4(event: any) {
+    this.image4 = event.target.files[0] as File;
+    console.warn(event.target.files[0]);
   }
 }
 

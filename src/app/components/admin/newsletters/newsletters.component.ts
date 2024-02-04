@@ -8,12 +8,33 @@ import Swal from 'sweetalert2';
   styleUrls: ['./newsletters.component.css'],
 })
 export class NewslettersComponent {
+  dtOptions: DataTables.Settings = {};
   newsletters: any[] = [];
 
   constructor(private listeNews: ListeNewslettersService) {}
 
   ngOnInit(): void {
     this.getNewsletters();
+
+    // dtOptions
+    this.dtOptions = {
+      searching: true,
+      lengthChange: false,
+      paging: true,
+      pageLength: 6,
+      pagingType: 'simple_numbers',
+      info: false,
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json',
+
+        paginate: {
+          first: '<<', // Personnalise le texte de la flèche pour la première page
+          previous: '<', // Personnalise le texte de la flèche pour la page précédente
+          next: '>', // Personnalise le texte de la flèche pour la page suivante
+          last: '>>', // Personnalise le texte de la flèche pour la dernière page
+        },
+      },
+    };
   }
 
   // Liste des Blogs
@@ -36,21 +57,28 @@ export class NewslettersComponent {
   }
 
   // Supprimmer un abonné
-  supprimerBlog(newsId: number): void {
+  subscriberDelete(newsId: number): void {
     Swal.fire({
-      title: 'Êtes-vous sûr de vouloir supprimer ce blog ?',
-      text: 'Vous allez supprimer ce blog !',
+      title: 'Êtes-vous sûr de vouloir supprimer cet abonné ?',
+      text: 'Vous allez supprimer cet abonné !',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#0F42A8',
       cancelButtonColor: 'black',
       confirmButtonText: 'Oui, supprimer',
     }).then((result) => {
-      this.listeNews.deleteNewsletter(newsId).subscribe(
+
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, supprimer"
+        this.listeNews.deleteNewsletter(newsId).subscribe(
         () => {
-          console.log('L\'abonné a été supprimé avec succès.');
+          console.log("L'abonné a été supprimé avec succès.");
           // Réaliser d'autres actions après la suppression si nécessaire
-          this.alertMessage('success', 'réussie', 'Abonné supprimé avec succés');
+          this.alertMessage(
+            'success',
+            'réussie',
+            'Abonné supprimé avec succés'
+          );
 
           this.getNewsletters();
         },
@@ -62,14 +90,18 @@ export class NewslettersComponent {
           this.alertMessage(
             'error',
             'Oops',
-            'Erreur lors de la suppression de l\'abonné'
+            "Erreur lors de la suppression de l'abonné"
           );
           // Gérer l'erreur de suppression de l'abonné
         }
       );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log('La suppression de l\'abonné a été annulée.');
+        this.alertMessage('info', 'Annulée', 'Suppression de l\'abonné annulée');
+      }
     });
   }
-
 
   // Vider champ
   viderChamps() {

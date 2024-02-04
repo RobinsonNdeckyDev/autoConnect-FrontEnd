@@ -50,7 +50,7 @@ export class ListeCategoriesService {
       headers = headers.set('Authorization', 'Bearer ' + token);
     }
     return this.http.delete<any>(
-      `${this.apiUrl}/cateegorieDestroy${categorieId}`,
+      `${this.apiUrl}/categorieDestroy${categorieId}`,
       {
         headers: headers,
       }

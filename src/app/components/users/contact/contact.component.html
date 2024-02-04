@@ -40,24 +40,24 @@
             <div class="col-12 col-md-7 p-5 form">
                 <div class=" formContain">
                     <h3 class="text-center mb-3">Contactez-nous</h3>
-                    <form action="">
+                    <form action="" (ngSubmit)="newContact()">
                         <div class="mb-3">
                             <label for="NomComplet">Nom complet</label>
-                            <input type="text" class="form-control" name="Nomcomplet" id="NomComplet">
+                            <input type="text" class="form-control" name="Nomcomplet" id="NomComplet" [(ngModel)]="nomComplet">
                         </div>
             
                         <div class="mb-3">
                             <label for="Email">Email</label>
-                            <input type="email" class="form-control" name="Email" id="Email">
+                            <input type="email" class="form-control" name="Email" id="Email" [(ngModel)]="email">
                         </div>
             
                         <div class="mb-3">
                             <label for="Message">Message</label>
-                            <textarea name="Message" id="Message" class="form-control"></textarea>
+                            <textarea name="message" id="Message" class="form-control" [(ngModel)]="message"></textarea>
                         </div>
 
                         <div class="bouton d-flex justify-content-center align-content-center">
-                            <button class="btn w-25">
+                            <button class="btn w-25" type="submit">
                                 Envoyer
                             </button>
                         </div>

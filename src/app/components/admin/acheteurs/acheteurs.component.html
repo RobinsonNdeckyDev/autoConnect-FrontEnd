@@ -3,194 +3,76 @@
 
     <div class="row .row2 mt-4 shadow">
         <div class="col-12 ">
-            <div class="tableCard p-2 border-0">
-                <div class="search my-3 d-flex justify-content-end align-content-center">
-                    <input type="search" class="form-control border-1 rounded-end-0" name="search"
-                        placeholder="faite une recherche..." (input)="filterAcheteurs()" [(ngModel)]="searchTerm">
-                    <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
-                </div>
-                <div class="table-responsive">
-                    <table class="table mb-3">
-                        <thead class="">
-                            <tr class="titreTab fw-light text-center">
-                                <th scope="col">image</th>
-                                <th scope="col">prenom</th>
-                                <th scope="col">nom</th>
-                                <th scope="col">email</th>
-                                <th scope="col">telephone</th>
-                                <th scope="col">adresse</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class=" text-center" *ngFor="let acheteur of filteredAcheteurs">
-                                <td scope="col">{{ acheteur.image }}</td>
-                                <td scope="col">{{ acheteur.prenom }}</td>
-                                <td scope="col">{{ acheteur.nom }}</td>
-                                <td scope="col">{{ acheteur.email }}</td>
-                                <td scope="col">{{ acheteur.telephone }}</td>
-                                <td scope="col">{{ acheteur.adresse }}</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <!-- (click)="voirDetails(acheteur)" -->
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
-                <nav class="pagine mt-3 mb-3 p-0 d-flex justify-content-end">
-                    <ul class="pagination m-0 ">
-                        <li class="page-item">
-                            <a class="page-link"><i class="fa-solid fa-angles-left"></i></a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" [ngClass]="{ disabled: currentPage === 1 }">1</a></li>
-                        <li class="page-item" aria-current="page">
-                            <a class="page-link">2</a>
-                        </li>
-                        <li class="page-item"><a class="page-link">3</a></li>
-                        <li class="page-item"><a class="page-link">4</a></li>
-                        <li class="page-item"><a class="page-link">5</a></li>
-                        <li class="page-item">
-                            <a class="page-link"><i class="fa-solid fa-angles-right"></i></a>
-                        </li>
-                    </ul>
-                </nav>
-
+            <div class="tableCard py-4 border-0 ">
+                <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="acheteurs.length > 0">
+                    <thead>
+                        <tr class="text-center titleHead">
+                            <th scope="col">image</th>
+                            <th scope="col">prenom</th>
+                            <th scope="col">nom</th>
+                            <th scope="col">email</th>
+                            <th scope="col">telephone</th>
+                            <th scope="col">adresse</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center" *ngFor="let acheteur of acheteurs">
+                            <td scope="col">{{ acheteur.image }}</td>
+                            <td scope="col">{{ acheteur.prenom }}</td>
+                            <td scope="col">{{ acheteur.nom }}</td>
+                            <td scope="col">{{ acheteur.email }}</td>
+                            <td scope="col">{{ acheteur.telephone }}</td>
+                            <td scope="col">{{ acheteur.adresse }}</td>
+                            <td scope="col">
+                                <span class="mx-2"><i class="fa-solid fa-eye iconDetail" data-bs-toggle="modal"
+                                        data-bs-target="#detailAcheteur" (click)="openAcheteurDetails(acheteur)"></i>
+                                </span>
+                                <span class="mx-2"><i class="bi bi-x-square-fill iconDetail"
+                                        (click)="supprimerAcheteur(acheteur)"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
 
+<!-- Modal Bootstrap pour afficher les détails de l'acheteur -->
+<div class="modal fade" id="detailAcheteur" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header shadow">
+                <h5 class="modal-title" id="detailBlogLabel">Détails de l'acheteur</h5>
+                <span class="btnClose " data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></span>
+            </div>
+            <div class="modal-body">
+                <div class="userContain">
+                    <div class="">
+                        <h4 class="text-center my-3">{{ selectedAcheteur?.prenom }} {{selectedAcheteur?.nom}}
+                        </h4>
 
-<!-- <div class="vendeurContain py-4 px-4">
-    <h3 class="navTitle"><a href="" routerLink="proprietaires" class="my-3">Utilisateurs / Acheteurs</a></h3>
+                        <hr class="my-3">
+                        <h5>Infos</h5>
+                        <hr class="my-3">
+                        <p class="">{{ selectedAcheteur?.email }}</p>
+                        <p class="">{{ selectedAcheteur?.telephone }}</p>
+                        <p class="">{{ selectedAcheteur?.adresse }}</p>
+                        <p class="">Créer le {{ selectedAcheteur?.updated_at | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+                        <hr class="my-3">
+                        <h5>Description</h5>
+                        <hr class="my-3">
+                        <p class="mb-4">{{ selectedAcheteur?.description }}</p>
+                    </div>
 
-    <div class="row .row2 mt-4 shadow">
-        <div class="col-12 ">
-            <div class="tableCard p-2 border-0">
-                <div class="search my-3 d-flex justify-content-end align-content-center">
-                    <input type="search" class="form-control border-1 rounded-end-0" name="search"
-                        placeholder="faite une recherche...">
-                    <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btnUserClose" data-bs-dismiss="modal">Fermer</button>
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table mb-3">
-                        <thead class="">
-                            <tr class="titreTab fw-light text-center">
-                                <th scope="col">Image</th>
-                                <th scope="col">Prénom</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Téléphone</th>
-                                <th scope="col">Adresse</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="fs-6 text-center">
-                                <td scope="col"><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td scope="col">Saliou</td>
-                                <td scope="col">Mbengue</td>
-                                <td scope="col">salioumbengue@gmail.com</td>
-                                <td scope="col">77 777 77 77</td>
-                                <td scope="col">Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-center">
-                                <td scope="col"><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td scope="col">Saliou</td>
-                                <td scope="col">Mbengue</td>
-                                <td scope="col">salioumbengue@gmail.com</td>
-                                <td scope="col">77 777 77 77</td>
-                                <td scope="col">Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-center">
-                                <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td>Saliou</td>
-                                <td>Mbengue</td>
-                                <td>salioumbengue@gmail.com</td>
-                                <td>77 777 77 77</td>
-                                <td>Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-center">
-                                <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td>Saliou</td>
-                                <td>Mbengue</td>
-                                <td>salioumbengue@gmail.com</td>
-                                <td>77 777 77 77</td>
-                                <td>Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-center">
-                                <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td>Saliou</td>
-                                <td>Mbengue</td>
-                                <td>salioumbengue@gmail.com</td>
-                                <td>77 777 77 77</td>
-                                <td>Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                            <tr class="fs-6 text-center">
-                                <td><img src="../../../../assets/images/profil/profil3.jpg" alt=""></td>
-                                <td>Saliou</td>
-                                <td>Mbengue</td>
-                                <td>salioumbengue@gmail.com</td>
-                                <td>77 777 77 77</td>
-                                <td>Dakar</td>
-                                <td scope="col" class="detailIcon">
-                                    <span class="mx-2"><i class="fa-solid fa-eye"></i></span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill"></i></span>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
-                <nav class="pagine mt-3 mb-3 p-0 d-flex justify-content-end">
-                    <ul class="pagination m-0 ">
-                        <li class="page-item">
-                            <a class="page-link"><i class="fa-solid fa-angles-left"></i></a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item" aria-current="page">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#"><i class="fa-solid fa-angles-right"></i></a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </div>
     </div>
-</div> -->
+</div>

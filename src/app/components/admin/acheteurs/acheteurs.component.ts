@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ListeUsersService } from 'src/app/services/liste-users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-acheteurs',
@@ -9,9 +10,14 @@ import { ListeUsersService } from 'src/app/services/liste-users.service';
   styleUrls: ['./acheteurs.component.css'],
 })
 export class AcheteursComponent {
+  dtOptions: DataTables.Settings = {};
   acheteurs: any[] = [];
   filteredAcheteurs: any[] = [];
   searchTerm: string = '';
+
+  // Variable pour stocker le acheteur sélectionné
+  selectedAcheteur: any;
+  acheteurToEdit: any;
 
   currentPage: number = 1;
   pageSize: number = 10;
@@ -24,6 +30,25 @@ export class AcheteursComponent {
 
   ngOnInit(): void {
     this.getAcheteurs();
+
+    this.dtOptions = {
+      searching: true,
+      lengthChange: false,
+      paging: true,
+      pageLength: 6,
+      pagingType: 'simple_numbers',
+      info: false,
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json',
+
+        paginate: {
+          first: '<<', // Personnalise le texte de la flèche pour la première page
+          previous: '<', // Personnalise le texte de la flèche pour la page précédente
+          next: '>', // Personnalise le texte de la flèche pour la page suivante
+          last: '>>', // Personnalise le texte de la flèche pour la dernière page
+        },
+      },
+    };
   }
 
   getAcheteurs(): void {
@@ -47,24 +72,74 @@ export class AcheteursComponent {
     );
   }
 
-  // Voir detail d'un proprietaire
-  voirDetails(acheteur: any): void {
-    // Redirige vers le composant de détail avec l'ID du propriétaire
-    this.route.navigate(['/admin/acheteurs', acheteur.id]);
+  // stoker le acheteur sélectionné
+  // Detail du blog
+  openAcheteurDetails(acheteur: any): void {
+    // Stocke le acheteur sélectionné
+    this.selectedAcheteur = acheteur;
+    console.log(this.selectedAcheteur);
   }
 
-  // filtre
-  filterAcheteurs() {
-    this.filteredAcheteurs = this.acheteurs.filter(
-      (acheteur) =>
-        acheteur.nom.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        acheteur.prenom.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        acheteur.email.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+  // Méthode pour préparer l'édition du blog sélectionné
+  prepareEdit(acheteur: any) {
+    // Copier les données du blog sélectionné dans blogToEdit
+    this.acheteurToEdit = { ...acheteur };
   }
 
-  onPageChange(pageNumber: number) {
-    this.currentPage = pageNumber;
-    this.getAcheteurs();
+  // Supprimer acheteur
+  supprimerAcheteur(acheteurId: number): void {
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir supprimer ce acheteur ?',
+      text: 'Vous allez supprimer ce acheteur !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, supprimer',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, supprimer"
+        this.listeUsers.deleteUser(acheteurId).subscribe(
+          () => {
+            console.log('Acheteur supprimé avec succès.');
+            this.alertMessage(
+              'success',
+              'réussie',
+              'acheteur supprimé avec succès'
+            );
+            this.getAcheteurs();
+          },
+          (error) => {
+            console.error(
+              "Une erreur s'est produite lors de la suppression de l'acheteur :",
+              error
+            );
+            this.alertMessage(
+              'error',
+              'Oops',
+              'Erreur lors de la suppression ce acheteur'
+            );
+            // Gérer l'erreur de suppression ce acheteur
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log("La suppression de l'acheteur a été annulée.");
+        this.alertMessage(
+          'info',
+          'Annulée',
+          "Suppression de l'acheteur annulée"
+        );
+      }
+    });
+  }
+
+  // Alert message
+  alertMessage(icon: any, title: any, text: any) {
+    Swal.fire({
+      icon: icon,
+      title: title,
+      text: text,
+    });
   }
 }

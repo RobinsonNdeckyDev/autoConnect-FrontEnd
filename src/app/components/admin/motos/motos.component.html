@@ -14,115 +14,21 @@
         </div>
 
         <div class="row mb-3 mt-4">
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
+            <div class="col-12 col-md-4 g-3" *ngFor="let moto of annoncesMotosFiltreesInactives">
+                <div class="card rounded-3">
                     <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                        <p class="nomCar"> {{moto?.nom}} </p>
+                        <img src="" class="img-fluid" alt="">
                     </div>
-
+            
                     <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                       <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                       <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                       <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
+                        <img src="http://127.0.0.1:8000/images/{{moto?.image1}}" alt="" class="img-fluid">
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            (click)="afficherDetailAnnonce(moto)">Voir détail</button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row mb-3">
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                       <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                       <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                       <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                       <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
         <nav class="pagine mt-4 mb-2 p-0 d-flex justify-content-end">
             <ul class="pagination m-0 ">
@@ -160,116 +66,22 @@
         </div>
     
         <div class="row mb-3 mt-4">
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
+            <div class="col-12 col-md-4 g-3" *ngFor="let moto of annoncesMotosFiltreesActives">
+                <div class="card rounded-3">
                     <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
+                        <p class="nomCar"> {{moto.nom}} </p>
+                        <img src="" class="img-fluid" alt="">
                     </div>
-    
+            
                     <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
+                        <img src="http://127.0.0.1:8000/images/{{moto.image1}}" alt="" class="img-fluid">
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            (click)="afficherDetailAnnonce(moto)">Voir détail</button>
                     </div>
                 </div>
             </div>
         </div>
-    
-        <div class="row mb-3">
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="../../../../assets/images/motos/mt1.avif" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsmoto">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-    
+
         <nav class="pagine mt-4 mb-2 p-0 d-flex justify-content-end">
             <ul class="pagination m-0 ">
                 <li class="page-item">
@@ -289,3 +101,118 @@
         </nav>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+<!--Modal detail voiture -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header shadow">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Detail de l'annonce</h1>
+                <span type="button" class="btnCloseModal" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></span>
+            </div>
+            <div class="modal-body">
+                <div class="profil mt-4 rounded-4 py-3 px-4">
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-7">
+                            <div class="contentL d-flex">
+                                <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image1}}" alt=""
+                                    class="img-fluid w-25">
+                                <span> {{annonceSelectionnee?.nom}} </span>
+                            </div>
+                            <div class="text-detail">
+                                <p>
+                                    {{annonceSelectionnee?.description}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-5" *ngIf="infoProprietaire">
+                            <div class="contentR">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <img src="/assets/images/profil/profil1.jpg" class="img-fluid rounded-4" alt="">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <p class="infos"> {{infoProprietaire.nom}} {{infoProprietaire.prenom}} </p>
+                                        <p class="infos"> {{infoProprietaire.role}} </p>
+                                        <p class="infos"> {{infoProprietaire.adresse}} </p>
+                                        <!-- <p class="infos"> {{infoProprietaire.email}} </p> -->
+                                    </div>
+                                </div>
+                                <div class="iconsprop mt-3">
+                                    <span><a href="https://wa.me/{{infoProprietaire.telephone}}"><i
+                                                class="fa-brands fa-whatsapp"></i></a></span>
+                                    <!-- (click)="getWhatsapp()" -->
+                                    <span><i class="fa-brands fa-facebook-f"></i></span>
+                                    <span><a href="mailto:{{infoProprietaire.email}}"><i
+                                                class="fa-solid fa-envelope"></i></a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="mt-4">
+                    <div class="imagesSecondaires">
+                        <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image1}}" class="shadow" alt="">
+                        <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image2}}" class="shadow" alt="">
+                        <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image3}}" class="shadow" alt="">
+                        <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image4}}" class="shadow" alt="">
+                    </div>
+
+                    <hr>
+                    <div class="middleDetail mb-3">
+                        <span>Caractéristique du véhicule</span>
+                    </div>
+                    <hr>
+
+                    <div class="contentDetail">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="infosV">
+                                    <p class="libelle">Moteur:</p>
+                                    <p class="value"> {{annonceSelectionnee?.moteur}} </p>
+                                </div>
+                                <div class="infosV">
+                                    <p class="libelle">Kilométrage:</p>
+                                    <p class="value"> {{annonceSelectionnee?.kilometrage}} Km</p>
+                                </div>
+                                <div class="infosV">
+                                    <p class="libelle">Année:</p>
+                                    <p class="value"> {{annonceSelectionnee?.annee}} </p>
+                                </div>
+                                <div class="infosV">
+                                    <p class="libelle">Carburant:</p>
+                                    <p class="value"> {{annonceSelectionnee?.carburant}} </p>
+                                </div>
+                                <div class="infosV">
+                                    <p class="libelle">Prix:</p>
+                                    <p class="value"> {{annonceSelectionnee?.prix}} Fcfa</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 positionR">
+                                <div class="boutons">
+                                    <button *ngIf="annonceSelectionnee?.etat=== 'refuser'" class="btnBlue btn"
+                                        (click)="updateAnnonceStateActive('accepter')">Activer</button>
+                                    <button *ngIf="annonceSelectionnee?.etat === 'accepter'" class="btnDesactiver btn"
+                                        (click)="updateAnnonceStateInactive('refuser')">Désactiver</button>
+                                    <button class="btnBlack btn" data-bs-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal detail voiture -->

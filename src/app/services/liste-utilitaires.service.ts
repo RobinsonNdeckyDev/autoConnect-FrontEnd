@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ListeUtilitairesService {
-
   private apiUrl = 'http://127.0.0.1:8000/api'; // URL de votre API
 
   constructor(private http: HttpClient) {}
@@ -15,5 +14,6 @@ export class ListeUtilitairesService {
   getAnnonces(id: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/annoncesParCategorie${id}`);
   }
+
   
 }

@@ -73,9 +73,9 @@
 <div class="modal fade" id="ajoutBlog" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="ajoutBlogLabel">Ajouter un blog</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header shadow">
+                <h1 class="modal-title fs-5" >Ajouter un blog</h1>
+                <span type="button" class="btnCloseModal" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></span>
             </div>
             <div class="modal-body">
                <form action="" (ngSubmit)="addBlog()">
@@ -87,7 +87,7 @@
                 <div class="mb-3">
                     <label for="image" class="form-label">Image du blog</label>
                     <!-- <input type="text" class="form-control" name="image" id="image" [(ngModel)]="image"> -->
-                    <input (change)="onFileChange($event)" type="file" id="image" name="image" accept="image/*">
+                    <input (change)="onFileChange($event)" class="form-control" type="file" id="image" name="image" accept="image/*">
                 </div>
 
                 <div class="mb-3">
@@ -96,8 +96,8 @@
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Ajouter</button>
+                    <button type="submit" class="btn btnAddBlog">Ajouter</button>
+                    <button type="button" class="btn btnFermer" data-bs-dismiss="modal">Fermer</button>
                 </div>
 
                </form>
@@ -117,9 +117,9 @@
 <div class="modal fade" id="detailBlog" tabindex="-1">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header shadow">
                 <h5 class="modal-title" id="detailBlogLabel">Détails du Blog</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <span type="button" class="btnCloseModal" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></span>
             </div>
             <div class="modal-body">
                 <div class="blogContain">
@@ -131,12 +131,16 @@
                         </div>
                         <div class="col-12 col-md-6 detailContain">
                             <div class="">
-                                <h5 class="text-center mb-5">{{ selectedBlog?.titre }}</h5>
-                                <p class="mb-4">{{ selectedBlog?.description }}</p>
+                                <h5 class="text-center mb-4">{{ selectedBlog?.titre }}</h5>
+                                <p class="mb-3">{{ selectedBlog?.description }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="modal-footer d-flex justify-content-end shadow">
+                <button type="button" class="btn btnFermer" data-bs-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
@@ -151,9 +155,9 @@
 <div id="modifierBlog" class="modal fade" tabindex="-1" *ngIf="blogToEdit">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header shadow">
                 <h5 class="modal-title" id="editBlogLabel">Modifier le Blog</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <span type="button" class="btnCloseModal" data-bs-dismiss="modal" ><i class="fa-solid fa-circle-xmark"></i></span>
             </div>
             <div class="modal-body">
                 <form (submit)="editBlog()">
@@ -163,16 +167,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="editImage" class="form-label">Image</label>
-                        <input type="text" class="form-control" id="editImage" name="image" [(ngModel)]="blogToEdit.image">
+                        <input type="file" class="form-control" id="editImage" name="image" [(ngModel)]="blogToEdit.image">
                     </div>
                     <div class="mb-3">
                         <label for="editDescription" class="form-label">Description</label>
                         <textarea class="form-control" id="editDescription" name="description"
                             [(ngModel)]="blogToEdit.description"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Modifier</button>
                 </form>
-
+            </div>
+            <div class="modal-footer d-flex justify-content-center shadow">
+                <button type="submit" class="btn btnFermer" data-bs-dismiss="modal">Modifier</button>
             </div>
         </div>
     </div>

@@ -20,6 +20,18 @@ export class ListeNewslettersService {
     return this.http.get<any[]>(`${this.apiUrl}/newsLetters`);
   }
 
+  // abonnement newsletter
+  addNewSubscribeNews(subscriber: any): Observable<any[]> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    return this.http.post<any[]>(`${this.apiUrl}/newsLetterStore`, subscriber, {
+      headers: headers,
+    });
+  }
+
   // Supprimer un abonné
   deleteNewsletter(newsId: number): Observable<any> {
     let headers = new HttpHeaders();

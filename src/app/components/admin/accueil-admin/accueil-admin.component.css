@@ -3,6 +3,11 @@
     border-radius: 20px;
 }
 
+.titleHead th {
+    color: #0F42A8;
+    text-align: center;
+}
+
 .cardLogo{
     border: 1px solid #0F42A8;
     background-color: white;
@@ -74,4 +79,15 @@
 .row2 .tableCard button{
     background-color: black;
     font-weight: bold;
+}
+
+
+.horizontal-border {
+    border-collapse: collapse;
+}
+
+.horizontal-border th,
+.horizontal-border td {
+    border-bottom: 1px solid #dddddd;
+    /* Couleur de la bordure */
 }

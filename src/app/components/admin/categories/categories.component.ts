@@ -11,12 +11,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
+  dtOptions: DataTables.Settings = {};
   categories: any[] = [];
   nom: string = '';
-  categorieToEdit: Categorie = {
-    id: 0,
-    nom: ''
-  };
+
+  // categorie selectionnée
+  categorieSelected: any;
+  categorieToEdit: any;
 
   constructor(
     private listeCategories: ListeCategoriesService,
@@ -26,6 +27,26 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
+
+    // dtoptions
+    this.dtOptions = {
+      searching: true,
+      lengthChange: false,
+      paging: true,
+      pageLength: 5,
+      pagingType: 'simple_numbers',
+      info: false,
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json',
+
+        paginate: {
+          first: '<<', // Personnalise le texte de la flèche pour la première page
+          previous: '<', // Personnalise le texte de la flèche pour la page précédente
+          next: '>', // Personnalise le texte de la flèche pour la page suivante
+          last: '>>', // Personnalise le texte de la flèche pour la dernière page
+        },
+      },
+    };
   }
 
   // Liste Categories
@@ -81,7 +102,7 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  // Méthode pour préparer l'édition du categorie sélectionné
+  // Méthode pour préparer l'édition du blog sélectionné
   prepareEdit(categorie: any) {
     // Copier les données du categorie sélectionné dans blogToEdit
     this.categorieToEdit = { ...categorie };
@@ -89,22 +110,94 @@ export class CategoriesComponent implements OnInit {
 
   // Méthode pour éditer le blog
   editCategorie() {
-    // Appeler la méthode de votre service pour modifier le blog
-    this.listeCategories.modifierCategorie(this.categorieToEdit.id, this.categorieToEdit).subscribe(
-      (response) => {
-        console.log(response);
-        console.log('Catégorie modifié avec succès.');
-        this.alertMessage('success', 'Cool', 'Catégorie modifié avec succès.');
-        // Réinitialiser les champs après la modification
-        this.viderChamps();
-      },
-      (error) => {
-        console.error(
-          "Une erreur s'est produite lors de la modification du blog: ",
-          error
+
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir cette categorie ?',
+      text: 'Vous allez cette categorie !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, modifier',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, modifier"
+        // Appeler la méthode de votre service pour modifier le blog
+        this.listeCategories
+          .modifierCategorie(this.categorieToEdit.id, this.categorieToEdit)
+          .subscribe(
+            (response) => {
+              console.log(response);
+              console.log('Categorie modifiée avec succès.');
+              this.alertMessage(
+                'success',
+                'Cool',
+                'Categorie modifiée avec succès.'
+              );
+              // Réinitialiser les champs après la modification
+              this.viderChamps();
+              this.getCategories();
+            },
+            (error) => {
+              console.error(
+                "Une erreur s'est produite lors de la modification du blog: ",
+                error
+              );
+            }
+          );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log('La modification de la catégorie a été annulée.');
+        this.alertMessage('info', 'Annulée', 'Modification de la catégorie annulée');
+      }
+    });
+
+  }
+
+
+  // Méthode pour éditer le blog
+  deleteCategorie(categorieId: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir supprimer ce blog ?',
+      text: 'Vous allez supprimer ce blog !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, supprimer',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, supprimer"
+        // Appeler la méthode de votre service pour supprimer une categorie
+        this.listeCategories.deleteCategorie(categorieId).subscribe(
+          (response) => {
+            console.log(response);
+            console.log('Catégorie supprimée avec succès.');
+            this.alertMessage(
+              'success',
+              'Cool',
+              'Catégorie supprimée avec succès.'
+            );
+
+            this.getCategories();
+          },
+          (error) => {
+            console.error(
+              "Une erreur s'est produite lors de la suppression de la catégorie: ",
+              error
+            );
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log('La suppression de la catégorie a été annulée.');
+        this.alertMessage(
+          'info',
+          'Annulée',
+          'Suppression dde la catégorie annulée'
         );
       }
-    );
+    });
   }
 
   // Vider champs
