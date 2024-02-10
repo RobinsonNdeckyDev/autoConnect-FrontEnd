@@ -12,274 +12,103 @@
                 
                 <p class="vhls"><img src="/assets/images/vehicules/pointCar.png" class="" alt=""><a class="text-decoration-none" routerLink="voitures">Annonces de vente de voitures</a></p>
                 
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-4" *ngFor="let voiture of listeVoitures">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
-                            <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
+                            <img src="http://127.0.0.1:8000/images/{{voiture?.image1}}" class="img-fluid w-100 imgPrinc" alt="">
                         </div>
                         <div class="cardTitle mx-3">
-                            <span class="nom">Version Acura Sport</span>
+                            <span class="nom"> {{voiture.nom}} </span>
                             <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
                                     alt=""></span>
                         </div>
                         <div class="cardTrait mb-3 mt-2"></div>
                         <div class="cardDetails mx-3">
                             <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
+                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt=""> {{voiture.moteur}} </p>
+                                <p><img src="/assets/images/iconSvg/calendar.png" alt=""> {{voiture.annee}} </p>
                             </div>
                             <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
+                                <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{voiture.kilometrage}} </p>
+                                <p><img src="/assets/images/iconSvg/fuel.png" alt=""> {{voiture.carburant}} </p>
                             </div>
                         </div>
+                        <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt=""> {{voiture.prix}} Fcfa</p>
                         <div class="cardTrait"></div>
                         <div class="cardButton mx-3 my-3">
-                            <button class="btn"><a routerLink="/vehicules/voitures/detailVoiture">Consulter l'annonce</a></button>
+                            <button class="btn" (click)="redirectToDetailsVoiture(voiture.id)"><a>Consulter l'annonce</a></button>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
-                    <div class="card shadow">
-                        <div class="cardImg mx-3">
-                            <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
-                        </div>
-                        <div class="cardTitle mx-3">
-                            <span class="nom">Version Acura Sport</span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid" alt=""></span>
-                        </div>
-                        <div class="cardTrait mb-3 mt-2"></div>
-                        <div class="cardDetails mx-3">
-                            <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
-                            </div>
-                            <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
-                            </div>
-                        </div>
-                        <div class="cardTrait"></div>
-                        <div class="cardButton mx-3 my-3">
-                            <button class="btn"><a routerLink="/vehicules/voitures/detailVoiture">Consulter l'annonce</a></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="card shadow">
-                        <div class="cardImg mx-3">
-                            <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
-                        </div>
-                        <div class="cardTitle mx-3">
-                            <span class="nom">Version Acura Sport</span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid" alt=""></span>
-                        </div>
-                        <div class="cardTrait mb-3 mt-2"></div>
-                        <div class="cardDetails mx-3">
-                            <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
-                            </div>
-                            <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
-                            </div>
-                        </div>
-                        <div class="cardTrait"></div>
-                        <div class="cardButton mx-3 my-3">
-                            <button class="btn"><a routerLink="/vehicules/voitures/detailVoiture">Consulter l'annonce</a></button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <div class="row cartes mt-2 g-4">
                 
                 <p class="vhls"><img src="/assets/images/vehicules/pointCar.png" class="" alt=""><a class="text-decoration-none" routerLink="motos">Annonces de vente de motos</a></p>
                 
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-4" *ngFor="let moto of listemotos">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
-                            <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
+                            <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt="">
                         </div>
                         <div class="cardTitle mx-3">
-                            <span class="nom">Version Acura Sport</span>
+                            <span class="nom"> {{moto.nom}}</span>
                             <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid" alt=""></span>
                         </div>
                         <div class="cardTrait mb-3 mt-2"></div>
                         <div class="cardDetails mx-3">
                             <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
+                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt=""> {{moto.moteur}}</p>
+                                <p><img src="/assets/images/iconSvg/calendar.png" alt=""> {{moto.annee}}</p>
+                                <!-- <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p> -->
                             </div>
                             <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
+                                <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{moto.kilometrage}} KM</p>
+                                <p><img src="/assets/images/iconSvg/fuel.png" alt=""> {{moto.carburant}}</p>
                             </div>
                         </div>
+                        <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt=""> {{moto.prix}} Fcfa</p>
                         <div class="cardTrait"></div>
                         <div class="cardButton mx-3 my-3">
-                            <button class="btn"><a routerLink="/vehicules/motos/detailMoto">Consulter l'annonce</a></button>
+                            <button class="btn"><a routerLink="/vehicules/motos/detailMoto" (click)="redirectToDetailsMoto(moto.id)">Consulter l'annonce</a></button>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
-                    <div class="card shadow">
-                        <div class="cardImg mx-3">
-                            <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
-                        </div>
-                        <div class="cardTitle mx-3">
-                            <span class="nom">Version Acura Sport</span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid" alt=""></span>
-                        </div>
-                        <div class="cardTrait mb-3 mt-2"></div>
-                        <div class="cardDetails mx-3">
-                            <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
-                            </div>
-                            <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
-                            </div>
-                        </div>
-                        <div class="cardTrait"></div>
-                        <div class="cardButton mx-3 my-3">
-                            <button class="btn"><a routerLink="/vehicules/motos/detailMoto">Consulter l'annonce</a></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="card shadow">
-                        <div class="cardImg mx-3">
-                            <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
-                        </div>
-                        <div class="cardTitle mx-3">
-                            <span class="nom">Version Acura Sport</span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid" alt=""></span>
-                        </div>
-                        <div class="cardTrait mb-3 mt-2"></div>
-                        <div class="cardDetails mx-3">
-                            <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
-                            </div>
-                            <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
-                            </div>
-                        </div>
-                        <div class="cardTrait"></div>
-                        <div class="cardButton mx-3 my-3">
-                            <button class="btn"><a routerLink="/vehicules/motos/detailMoto">Consulter l'annonce</a></button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <div class="row cartes mt-2 g-4">
     
                 <p class="vhls"><img src="/assets/images/vehicules/pointCar.png" class="" alt=""><a class="text-decoration-none" routerLink="utilitaires">Annonces de vent de véhicules utilitaires</a></p>
             
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-4" *ngFor="let utilitaire of listeUtilitaires">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
-                            <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
+                            <img src="http://127.0.0.1:8000/images/{{utilitaire.image1}}" class="img-fluid imgPrinc w-100" alt="">
                         </div>
                         <div class="cardTitle mx-3">
-                            <span class="nom">Version Acura Sport</span>
+                            <span class="nom"> {{utilitaire.nom}} </span>
                             <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid" alt=""></span>
                         </div>
                         <div class="cardTrait mb-3 mt-2"></div>
                         <div class="cardDetails mx-3">
                             <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
+                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt=""> {{utilitaire.moteur}}</p>
+                                <p><img src="/assets/images/iconSvg/calendar.png" alt=""> {{utilitaire.annee}}</p>
+                                <!-- <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p> -->
                             </div>
                             <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
+                                <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{utilitaire.kilometrage}} KM</p>
+                                <p><img src="/assets/images/iconSvg/fuel.png" alt=""> {{utilitaire.carburant}}</p>
                             </div>
                         </div>
+                        <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt=""> {{utilitaire.prix}} Fcfa</p>
                         <div class="cardTrait"></div>
                         <div class="cardButton mx-3 my-3">
-                            <button class="btn"><a routerLink="/vehicules/utilitaires/detailUtilitaire">Consulter l'annonce</a></button>
+                            <button class="btn"><a routerLink="/vehicules/utilitaires/detailUtilitaire" (click)="redirectToDetailsUtilitaire(utilitaire.id)">Consulter l'annonce</a></button>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
-                    <div class="card shadow">
-                        <div class="cardImg mx-3">
-                            <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
-                        </div>
-                        <div class="cardTitle mx-3">
-                            <span class="nom">Version Acura Sport</span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid" alt=""></span>
-                        </div>
-                        <div class="cardTrait mb-3 mt-2"></div>
-                        <div class="cardDetails mx-3">
-                            <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
-                            </div>
-                            <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
-                            </div>
-                        </div>
-                        <div class="cardTrait"></div>
-                        <div class="cardButton mx-3 my-3">
-                            <button class="btn"><a routerLink="/vehicules/utilitaires/detailUtilitaire">Consulter l'annonce</a></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="card shadow">
-                        <div class="cardImg mx-3">
-                            <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
-                        </div>
-                        <div class="cardTitle mx-3">
-                            <span class="nom">Version Acura Sport</span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid" alt=""></span>
-                        </div>
-                        <div class="cardTrait mb-3 mt-2"></div>
-                        <div class="cardDetails mx-3">
-                            <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                                <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
-                            </div>
-                            <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                                <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
-                            </div>
-                        </div>
-                        <div class="cardTrait"></div>
-                        <div class="cardButton mx-3 my-3">
-                            <button class="btn"><a routerLink="/vehicules/utilitaires/detailUtilitaire">Consulter l'annonce</a></button>
-                        </div>
-                    </div>
-                </div>
-            
+
             </div>
         </div>
     </div>

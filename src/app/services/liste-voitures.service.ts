@@ -15,7 +15,7 @@ export class ListeVoituresService {
     return this.http.get<any[]>(`${this.apiUrl}/annoncesParCategorie${id}`);
   }
 
-  // Méthode pour récupérer les détails d'un blog
+  // Méthode pour récupérer les détails d'une annonce
   getAnnonceDetails(annonceId: string): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');
@@ -23,8 +23,35 @@ export class ListeVoituresService {
       headers = headers.set('Authorization', 'Bearer ' + token);
     }
 
-    return this.http.get<any>(`${this.apiUrl}/annonceShow${annonceId}`, {
+    return this.http.get<any>(`${this.apiUrl}/annonceDetail${annonceId}`, {
       headers: headers,
     });
   }
+
+  // Méthode pour avoir les donnees sur une voiture
+  infoVoiture(idVoiture: number): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+
+    return this.http.get<any>(`${this.apiUrl}/annonceDetail${idVoiture}`, {
+      headers: headers,
+    });
+  }
+
+  // supprimer une annonce
+  deleteAnnonce(annonceId: number): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+
+    return this.http.delete<any>(`${this.apiUrl}/annonceDestroyAdmin${annonceId}`, {
+      headers: headers,
+    });
+  }
+
 }

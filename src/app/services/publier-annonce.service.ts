@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Annonce } from '../models/annonce';
 
 @Injectable({
   providedIn: 'root',
@@ -43,5 +44,22 @@ export class PublierAnnonceService {
   // Annonces proprietaire invalides
   getAnnonceInvalideProp(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/annonceInvalides`);
+  }
+
+  // Annonces Mises en avant
+  getAnnonceMisesEnAvant(): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}/annoncesMisesEnAvantParCategorie`
+    );
+  }
+
+  // Annonces Userproprietaire valides
+  getAnnonceUserValide(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/annonceUserValides`);
+  }
+
+  // Annonces Userproprietaire invalides
+  getAnnonceUserInvalide(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/annonceUserInvalides`);
   }
 }

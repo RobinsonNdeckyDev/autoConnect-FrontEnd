@@ -3,6 +3,11 @@
     text-decoration: none;
 }
 
+.imgAnnonce {
+    height: 220px;
+    width: 100%;
+}
+
 .modal-header h1,
 h5 {
     color: #0F42A8;
@@ -229,7 +234,7 @@ hr {
     /* border: 2px solid red; */
     display: flex;
     justify-content: space-between;
-    margin-left: 40%;
+    margin-left: 20%;
     position: relative;
     top: 80%;
 }

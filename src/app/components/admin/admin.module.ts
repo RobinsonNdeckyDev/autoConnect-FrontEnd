@@ -30,6 +30,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { DetailProprietaireComponent } from './detail-proprietaire/detail-proprietaire.component';
 import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { FormsModule } from '@angular/forms';
+import { CommentairesComponent } from './commentaires/commentaires.component';
+import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 
 
 
@@ -62,6 +64,8 @@ import { FormsModule } from '@angular/forms';
     TableTestComponent,
     DetailProprietaireComponent,
     DetailProprietaireComponent,
+    CommentairesComponent,
+    ProfilAdminComponent,
   ],
   imports: [CommonModule, RouterModule, AdminRoutingModule, DataTablesModule, FormsModule],
   providers: [ListeUsersService],

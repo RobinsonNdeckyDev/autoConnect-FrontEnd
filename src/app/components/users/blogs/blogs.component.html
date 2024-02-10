@@ -10,26 +10,23 @@
         <div class="trait mb-4"></div>
 
         <div class="row mt-5 cardBlogs" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500">
-            <div class="col-12 col-md-4 p-3">
+            <div class="col-12 col-md-4 p-3" *ngFor="let blog of blogs">
                 <div class="card px-3 shadow">
                     <div class="cardImg mt-3">
-                        <img src="/assets/images/blogs/b1.png" class="img-fluid shadow rounded-4" alt="">
+                        <img src="http://127.0.0.1:8000/images/{{blog.image}}" class="img-fluid shadow rounded-4" alt="">
                     </div>
                     <div class="card cardBody p-3 mx-3">
                         <div class="cardTitle">
-                            <h4 class="text-center">L'avenir de la vente de véhicules</h4>
+                            <h4 class="text-center"> {{blog.titre}} </h4>
                         </div>
                         <div class="cardDetail">
                             <p class="textBlog">
-                                Alors que la technologie continue de progresser à un rythme rapide,
-                                le secteur de la vente de voitures est sur le point de connaître un changement
-                                transformateur.
-                                L’avenir de la vente de voitures promet.
+                               {{blog.description}}
                             </p>
                         </div>
         
-                        <button class="btn mt-2">
-                            <a routerLink="detailsBlog">En savoir plus</a>
+                        <button class="btn mt-2" (click)="redirectToDetails(blog.id)">
+                            <a>En savoir plus</a>
                         </button>
                     </div>
                 </div>

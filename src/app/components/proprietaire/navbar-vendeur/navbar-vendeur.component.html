@@ -22,8 +22,8 @@
         <!-- Example single danger button -->
         <div class="dropdown-center m-0 p-0">
             <button type="button" class="btn m-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="../../../../assets/images/profil/profil2.jpg" class="" alt="">
-                Propriétaire
+                <img src="http://127.0.0.1:8000/images/{{userConnected?.image}}" class="" alt="">
+                {{userConnected.prenom}}
             </button>
             <ul class="dropdown-menu mt-3">
                 <li><a class="dropdown-item" href="#" routerLink="mon_profil">Mon profil</a></li>

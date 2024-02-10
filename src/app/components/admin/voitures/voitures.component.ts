@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { error } from 'jquery';
 import { AuthenticationService } from 'src/app/services/authentification.service';
 import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { ListeVoituresService } from 'src/app/services/liste-voitures.service';
@@ -37,6 +38,9 @@ export class VoituresComponent {
 
     // initialisation de la liste des proprietaires
     this.listeProprietaire();
+
+    // propInfo
+    // this.propInfo();
   }
 
   // Liste des voitures
@@ -99,7 +103,14 @@ export class VoituresComponent {
     // On récupère le propriètaire de l'annonce
     console.log(this.annonceSelectionnee.user_id);
 
-    // On recherche le propriétaire qui a les infos de user_id
+    this.propInfo();
+
+  }
+
+
+
+  propInfo(){
+    // / On recherche le propriétaire qui a les infos de user_id
     this.infoProprietaire = this.tabUsers.find(
       (user: any) => user.id === this.annonceSelectionnee.user_id
     );
@@ -107,7 +118,7 @@ export class VoituresComponent {
       'Informations du proprietaire à qui appartient cette annonce ',
       this.infoProprietaire
     );
-    console.log(this.infoProprietaire.nom);
+    console.log(this.infoProprietaire);
   }
 
   idUserwhatsap: any;
@@ -181,6 +192,58 @@ export class VoituresComponent {
         this.alertMessage('info', 'Annulée', "Désctivation de l'annonce annulée");
       }
     });
+  }
+
+  // supprimer Annonce
+  detetedAnnonce(annonceId: number){
+
+     Swal.fire({
+       title: 'Êtes-vous sûr de vouloir supprimer cette annonce ?',
+       text: 'Vous allez supprimer cette annonce !',
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: '#0F42A8',
+       cancelButtonColor: 'black',
+       confirmButtonText: 'Oui, supprimer',
+     }).then((result) => {
+       if (result.isConfirmed) {
+         // Si l'utilisateur clique sur "Oui, d"sactiver"
+         this.listeVoitureService.deleteAnnonce(annonceId).subscribe(
+           (response) => {
+              console.log(response);
+              this.alertMessage(
+                'success',
+                'Super',
+                'Annonce supprimée avec succés'
+              );
+              this.listesAnnonces();
+           },
+           (error) => {
+             console.log(error);
+           }
+         );
+       } else if (result.dismiss === Swal.DismissReason.cancel) {
+         // Si l'utilisateur clique sur "Annuler"
+         console.log("La suppression de l'annonce a été annulée.");
+         this.alertMessage(
+           'info',
+           'Annulée',
+           "Suppression de l'annonce annulée"
+         );
+       }
+     });
+
+
+
+
+
+
+
+
+
+
+
+    
   }
 
   // Alert message

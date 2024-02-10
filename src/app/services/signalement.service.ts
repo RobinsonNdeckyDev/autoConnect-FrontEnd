@@ -5,42 +5,31 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ListeMotosService {
+export class SignalementService {
   private apiUrl = 'http://127.0.0.1:8000/api'; // URL de votre API
 
   constructor(private http: HttpClient) {}
 
-  // Liste motos
-  getAnnonces(id: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/annoncesParCategorie${id}`);
-  }
 
-  // Méthode pour avoir les donnees sur une moto
-  infoMoto(idMoto: number): Observable<any> {
+  // Liste signalements
+  listeSignals(){
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');
     if (token) {
       headers = headers.set('Authorization', 'Bearer ' + token);
     }
-
-    return this.http.get<any>(`${this.apiUrl}/annonceDetail${idMoto}`, {
+    return this.http.get<any[]>(`${this.apiUrl}/signalements`);
+  }
+  
+  // Signaler annonce
+  signalAnnonce(annonceSignal: any, idAnnonce: number){
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    return this.http.post<any[]>(`${this.apiUrl}/signalementStore${annonceSignal}`,idAnnonce,{
       headers: headers,
     });
-  }
-
-  // supprimer une annonce
-  deleteAnnonce(annonceId: number): Observable<any> {
-    let headers = new HttpHeaders();
-    const token = localStorage.getItem('token');
-    if (token) {
-      headers = headers.set('Authorization', 'Bearer ' + token);
-    }
-
-    return this.http.delete<any>(
-      `${this.apiUrl}/annonceDestroyAdmin${annonceId}`,
-      {
-        headers: headers,
-      }
-    );
   }
 }

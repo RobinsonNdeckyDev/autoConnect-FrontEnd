@@ -1,4 +1,4 @@
-.signalementContain a{
+.signalementContain a {
     color: #0F42A8;
     text-decoration: none;
 }
@@ -39,6 +39,6 @@
     color: white;
 }
 
-.card-body img{
+.card-body img {
     height: 200px;
 }

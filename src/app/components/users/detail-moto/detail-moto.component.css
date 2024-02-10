@@ -6,6 +6,10 @@
     padding: 21% 0;
 }
 
+.imgPrinc {
+    height: 180px;
+}
+
 .detailAnnonce h2 {
     color: #0F42A8;
 }
@@ -185,7 +189,7 @@
 
 .commentsContain .avis .textC {
     color: white;
-    margin-top: 25px;
+    margin-top: 5px;
     text-align: justify;
     font-weight: 300;
 }

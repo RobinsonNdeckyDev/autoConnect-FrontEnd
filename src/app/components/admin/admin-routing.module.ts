@@ -22,6 +22,8 @@ import { DtsMotoComponent } from './dts-moto/dts-moto.component';
 import { DtsUtilitaireComponent } from './dts-utilitaire/dts-utilitaire.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { DetailProprietaireComponent } from './detail-proprietaire/detail-proprietaire.component';
+import { CommentairesComponent } from './commentaires/commentaires.component';
+import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 // import { DetailVendeurComponent } from './detail-vendeur/detail-vendeur.component';
 
 const routes: Routes = [
@@ -67,12 +69,14 @@ const routes: Routes = [
       { path: 'annonces/voitures/detail/:id', component: DtsVoitureComponent },
       { path: 'blogs', component: BlogsComponent },
       { path: 'categories', component: CategoriesComponent },
+      { path: 'profil_Admin', component: ProfilAdminComponent },
       { path: 'contacts', component: ContactsComponent },
       { path: 'newsletters', component: NewslettersComponent },
       { path: 'utilisateurs/vendeurs', component: VendeursComponent },
       { path: 'utilisateurs/acheteurs', component: AcheteursComponent },
       { path: 'detail annonce', component: DetailAnnonceComponent },
       { path: 'signalements', component: SignalementsComponent },
+      { path: 'commentaires', component: CommentairesComponent },
       { path: 'proprietaires', component: VendeursComponent },
       { path: 'acheteurs', component: AcheteursComponent },
       { path: '', redirectTo: 'Accueil_Admin', pathMatch: 'full' },

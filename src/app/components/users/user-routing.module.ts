@@ -21,41 +21,72 @@ import { AnnoncesVendeursComponent } from '../proprietaire/annonces-vendeurs/ann
 import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: MainUserComponent,  children: 
-  // canActivate: [AuthGuard],
+  {
+    path: '',
+    component: MainUserComponent,
+    children:
+      // canActivate: [AuthGuard],
       [
-          { path:'', redirectTo: 'accueil', pathMatch: 'full'},
-          { path: 'accueil', component: AccueilComponent},
-          { path: 'about', component: AboutComponent},
-          { path: 'vehicules', children: [
+        { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+        { path: 'accueil', component: AccueilComponent },
+        { path: 'about', component: AboutComponent },
+        {
+          path: 'vehicules',
+          children: [
             { path: '', component: VehiculesComponent },
-            { path: 'voitures', children: [
-              { path: '', component: VoituresComponent},
-              { path: 'detailVoiture', component: DetailVoitureComponent}
-            ]},
-            { path: 'motos', children: [
-              { path: '', component: MotosComponent},
-              { path: 'detailMoto', component: DetailMotoComponent}
-            ]},
-            { path: 'utilitaires', children: [
-              { path: '', component: UtilitairesComponent},
-              { path: 'detailUtilitaire', component: DetailUtilitaireComponent}
-            ]}
-          ]
-          },
-          { path: 'blog', children: [
+            {
+              path: 'voitures',
+              children: [
+                { path: '', component: VoituresComponent },
+                { path: 'detailVoiture', component: DetailVoitureComponent },
+              ],
+            },
+            {
+              path: 'motos',
+              children: [
+                { path: '', component: MotosComponent },
+                { path: 'detailMoto', component: DetailMotoComponent },
+              ],
+            },
+            {
+              path: 'utilitaires',
+              children: [
+                { path: '', component: UtilitairesComponent },
+                {
+                  path: 'detailUtilitaire',
+                  component: DetailUtilitaireComponent,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          path: 'blog',
+          children: [
             { path: '', component: BlogsComponent },
             { path: 'detailsBlog', component: DetailsBlogComponent },
-          ]
-          },
-          { path: 'contact', component: ContactComponent},
-          { path: 'conditions', component: ConditionsComponent},
-          { path: 'confidentialite', component: ConfidentialiteComponent},
-          { path: 'login', component: LoginComponent},
-
-    ]
-  }
-]
+          ],
+        },
+        {
+          path: 'vehicules/voitures/detailVoiture/:id',
+          component: DetailVoitureComponent,
+        },
+        {
+          path: 'vehicules/motos/detailMoto/:id',
+          component: DetailMotoComponent,
+        },
+        {
+          path: 'vehicules/utilitaires/detailUtilitaire/:id',
+          component: DetailUtilitaireComponent,
+        },
+        { path: 'blog/detailsBlog/:id', component: DetailsBlogComponent },
+        { path: 'contact', component: ContactComponent },
+        { path: 'conditions', component: ConditionsComponent },
+        { path: 'confidentialite', component: ConfidentialiteComponent },
+        { path: 'login', component: LoginComponent },
+      ],
+  },
+];
 
 @NgModule({
   declarations: [],

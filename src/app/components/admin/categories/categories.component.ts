@@ -69,6 +69,9 @@ export class CategoriesComponent implements OnInit {
 
   // Ajout d'un blog
   addCategorie() {
+    console.log(this.nom);
+
+    
     if (this.nom == '') {
       this.alertMessage(
         'error',

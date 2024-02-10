@@ -40,6 +40,42 @@ export class ListeUsersService {
     return this.http.post<any[]>(`${this.apiUrl}/whatsap${idUser}`, {});
   }
 
+  // UsershowId
+  // Supprimer un user
+  userShowDetail(userId: number): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    return this.http.get<any>(`${this.apiUrl}/proprietaireShow${userId}`, {
+      headers: headers,
+    });
+  }
+
+  // Supprimer un user
+  // userUpdateDetail(userId: number, proprietaireData: any): Observable<any> {
+  //   let headers = new HttpHeaders();
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     headers = headers.set('Authorization', 'Bearer ' + token);
+  //   }
+  //   return this.http.patch<any>(`${this.apiUrl}/proprietaireUpdate${userId}`, {
+  //     proprietaireData,
+  //   });
+  // }
+
+  userUpdateDetail(id: number, proprietaireData: any): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    // Utilisation de l'ID fourni dans l'URL
+    const url = `${this.apiUrl}/proprietaireUpdate${id}`;
+    return this.http.patch(url, proprietaireData);
+  }
+
   // Supprimer un user
   deleteUser(userId: number): Observable<any> {
     let headers = new HttpHeaders();
@@ -51,4 +87,6 @@ export class ListeUsersService {
       headers: headers,
     });
   }
+
+  // detail d'un user
 }

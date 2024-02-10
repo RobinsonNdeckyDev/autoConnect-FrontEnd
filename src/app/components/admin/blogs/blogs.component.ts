@@ -35,6 +35,7 @@ export class BlogsComponent {
 
   ngOnInit(): void {
     this.getBlogs();
+    // this.prepareEdit(this.Blogs);
   }
 
   // Liste des Blogs
@@ -120,8 +121,20 @@ export class BlogsComponent {
 
   // Méthode pour éditer le blog
   editBlog() {
+    // Créez une nouvelle instance de FormData pour stocker les données du formulaire
+    let formData = new FormData();
+
+    // Ajoutez les données du blog à modifier dans le FormData
+    formData.append('titre', this.blogToEdit.titre);
+    formData.append('description', this.blogToEdit.description);
+
+    // Vérifiez si une nouvelle image a été sélectionnée
+    if (this.image) {
+      formData.append('image', this.image, this.image.name); // Ajoutez la nouvelle image
+    }
+
     // Appeler la méthode de votre service pour modifier le blog
-    this.listeBlogs.modifierBlog(this.blogToEdit.id, this.blogToEdit).subscribe(
+    this.listeBlogs.modifierBlog(this.blogToEdit.id, formData).subscribe(
       (response) => {
         console.log(response);
         console.log('Blog modifié avec succès.');

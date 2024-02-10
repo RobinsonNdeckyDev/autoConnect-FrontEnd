@@ -42,20 +42,18 @@ export class PublierAnnonceComponent {
   image4!: File;
 
   // Utilisateur connecté
-  
 
-  // Ajout d'une annonce
   addAnnonce() {
+    this.validateForm();
 
-    let userInfoConnected = localStorage.getItem('currentUser');
-    if (userInfoConnected !== null) {
-      userInfoConnected = JSON.parse(userInfoConnected);
-      console.log(userInfoConnected);
-    } else {
-      console.log("'currentUser' n'est pas défini dans le localStorage");
-    }
+    this.registerAnnonce();
+
+    this.viderChamps();
+  }
 
 
+
+  validateForm() {
     if (this.nom == '') {
       this.alertMessage(
         'error',
@@ -139,132 +137,63 @@ export class PublierAnnonceComponent {
         'Merci de renseigner la catégorie du véhicule'
       );
       return;
-    } else {
-
-      let nouvelleAnnonce: Annonce = {
-        nom: this.nom,
-        marque: this.marque,
-        couleur: this.couleur,
-        image: this.image as File,
-        prix: this.prix,
-        description: this.description,
-        nbrePlace: this.nbrePlace,
-        localisation: this.localisation,
-        moteur: this.moteur,
-        annee: this.annee,
-        carburant: this.carburant,
-        carosserie: this.carosserie,
-        kilometrage: this.kilometrage,
-        transmission: this.transmission,
-        climatisation: this.climatisation,
-        categorie_id: this.categorie_id,
-        image1: this.image1 as File,
-        image2: this.image2 as File,
-        image3: this.image3 as File,
-        image4: this.image4 as File,
-        commentaires: [],
-        signalements: [],
-      };
-
-      let formData = new FormData();
-      Object.entries(nouvelleAnnonce).forEach(([key, value]) => {
-        // Utilisez "as Blob" pour forcer TypeScript à reconnaître les valeurs comme des blobs
-        formData.append(key, value as Blob);
-      });
-
-      // envoi de l'annonce
-      this.publierAnnonce.addAnnonce(formData).subscribe(
-        (response: any) => {
-          console.log(response);
-          console.log('Annonce créee avec succés');
-          this.alertMessage('success', 'Super', 'Annonce ajouté avec succés');
-          console.log(response);
-        },
-        (error) => {
-          console.log("Oops l'annonce n'a pas été créee");
-        }
-      );
-
-      // let newAnnonce = new FormData();
-      // // let image = new FormData();
-      // newAnnonce.append('nom', this.nom);
-      // newAnnonce.append('marque', this.marque);
-      // newAnnonce.append('couleur', this.couleur);
-      // newAnnonce.append('image', this.image as Blob);
-      // newAnnonce.append('prix', `${this.prix}`);
-      // newAnnonce.append('description', this.description);
-      // newAnnonce.append('nbrePlace', `${this.nbrePlace}`);
-      // newAnnonce.append('localisation', this.localisation);
-      // newAnnonce.append('moteur', this.moteur);
-      // newAnnonce.append('annee', `${this.annee}`);
-      // newAnnonce.append('carburant', this.carburant);
-      // newAnnonce.append('carosserie', this.carosserie);
-      // newAnnonce.append('kilometrage', this.kilometrage);
-      // newAnnonce.append('transmission', this.transmission);
-      // newAnnonce.append('climatisation', this.climatisation);
-      // newAnnonce.append('categorie_id', `${this.categorie_id}`);
-      // newAnnonce.append('image1', this.image1 as Blob);
-      // newAnnonce.append('image2', this.image2 as Blob);
-      // newAnnonce.append('image3', this.image3 as Blob);
-      // newAnnonce.append('image4', this.image4 as Blob);
-
-      //  let imagesFormData = new FormData();
-      //  if (this.images && this.images.length > 0) {
-      //    for (let i = 0; i < this.images.length; i++) {
-      //      imagesFormData.append('url[]', this.images[i]);
-      //    }
-      //  }
-
-      // console.log("Contenu de newAnnonce avant l'envoi :", newAnnonce);
-      // this.publierAnnonce.addAnnonce(newAnnonce).subscribe(
-      //   (response: any) => {
-      //     this.alertMessage('success', 'Super', 'Annonce ajouté avec succés');
-      //     console.log(response);
-      //     this.viderChamps();
-
-      //     // Récupérer l'ID de l'annonce depuis la réponse
-      //     // const annonceId = response.id;
-      //     // console.log(annonceId);
-      //     // Assurez-vous que votre backend renvoie l'ID correctement
-      //     // Envoyer l'ID de l'annonce avec les images
-      //     // imagesFormData.append('annonce_id', annonceId);
-
-      //     // Envoi des images au backend
-      //     // this.publierAnnonce.addAnnonce(imagesFormData).subscribe(
-      //     //   (response) => {
-      //     //     // Gestion de la réponse
-      //     //     this.alertMessage('success', 'Cool', 'Image ajouté avec succés');
-      //     //   },
-      //     //   (error) => {
-      //     //     // Gestion de l'erreur
-      //     //     this.alertMessage(
-      //     //       'error',
-      //     //       'Oops',
-      //     //       "Erreur lors de l'ajout de des images"
-      //     //     );
-      //     //   }
-      //     // );
-
-      //     // console.log(newAnnonce);
-      //     //   console.log(response);
-      //     //   console.log('Annonce ajouté avec succès.');
-      //     //   this.alertMessage('success', 'Cool', 'Ann ajouté avec succés');
-      //     //   console.log('Contenu de newAnnonce envoyé au serveur :', newAnnonce);
-      //   },
-      //   (error) => {
-      //     this.alertMessage(
-      //       'error',
-      //       'Oops',
-      //       "Erreur lors de l'ajout de l'annonce"
-      //     );
-      //     console.error(
-      //       "Une erreur s'est produite lors de l'ajout de l'annonce: ",
-      //       error
-      //     );
-      //   }
-      // );
     }
   }
+
+
+  registerAnnonce(){
+
+    let nouvelleAnnonce = {
+      nom: this.nom,
+      marque: this.marque,
+      couleur: this.couleur,
+      image: this.image as File,
+      prix: this.prix,
+      description: this.description,
+      nbrePlace: this.nbrePlace,
+      localisation: this.localisation,
+      moteur: this.moteur,
+      annee: this.annee,
+      carburant: this.carburant,
+      carosserie: this.carosserie,
+      kilometrage: this.kilometrage,
+      transmission: this.transmission,
+      climatisation: this.climatisation,
+      categorie_id: this.categorie_id,
+      image1: this.image1 as File,
+      image2: this.image2 as File,
+      image3: this.image3 as File,
+      image4: this.image4 as File,
+      commentaires: [],
+      signalements: [],
+    };
+
+    console.log("new annonce avant ajout: ", nouvelleAnnonce);
+
+    let formData = new FormData();
+    Object.entries(nouvelleAnnonce).forEach(([key, value]) => {
+      // Utilisez "as Blob" pour forcer TypeScript à reconnaître les valeurs comme des blobs
+      formData.append(key, value as Blob);
+    });
+
+    this.publierAnnonce.addAnnonce(formData).subscribe(
+      (response: any) => {
+        console.log(response);
+        console.log('réponse après ajout :', response.annonce);
+        console.log('Annonce créee avec succés');
+        this.alertMessage('success', 'Super', 'Annonce ajouté avec succés');
+        console.log(response);
+      },
+      (error) => {
+        console.log("Oops l'annonce n'a pas été créee");
+        console.log(error.annonce);
+      }
+    );
+
+
+  }
+
+  
 
   // vider champs
   viderChamps() {

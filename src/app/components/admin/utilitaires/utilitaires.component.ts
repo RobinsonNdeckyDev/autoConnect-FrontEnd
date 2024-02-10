@@ -167,17 +167,17 @@ export class UtilitairesComponent {
       if (result.isConfirmed) {
         // Si l'utilisateur clique sur "Oui, activer"
         this.annonceServiceEtat
-            .updateAnnonceState(annonceId, newState)
-            .subscribe(() => {
-              // Mettre à jour l'état de l'annonce dans votre frontend après avoir reçu la réponse du serveur
-              this.annonceSelectionnee.etat = newState;
-              this.alertMessage(
-                'success',
-                'Super',
-                'Annonce activée avec succés'
-              );
-              this.listesAnnonces();
-            });
+          .updateAnnonceState(annonceId, newState)
+          .subscribe(() => {
+            // Mettre à jour l'état de l'annonce dans votre frontend après avoir reçu la réponse du serveur
+            this.annonceSelectionnee.etat = newState;
+            this.alertMessage(
+              'success',
+              'Super',
+              'Annonce activée avec succés'
+            );
+            this.listesAnnonces();
+          });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
         console.log("L'activation de l'annonce a été annulée.");
@@ -186,6 +186,44 @@ export class UtilitairesComponent {
     });
   }
 
+  // supprimer Annonce
+  detetedAnnonce(annonceId: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir supprimer cette annonce ?',
+      text: 'Vous allez supprimer cette annonce !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, supprimer',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, d"sactiver"
+        this.listeUtilitaireService.deleteAnnonce(annonceId).subscribe(
+          (response) => {
+            console.log(response);
+            this.alertMessage(
+              'success',
+              'Super',
+              'Annonce supprimée avec succés'
+            );
+            this.listesAnnonces();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log("La suppression de l'annonce a été annulée.");
+        this.alertMessage(
+          'info',
+          'Annulée',
+          "Suppression de l'annonce annulée"
+        );
+      }
+    });
+  }
 
   // Alert message
   alertMessage(icon: any, title: any, text: any) {
@@ -195,6 +233,4 @@ export class UtilitairesComponent {
       text: text,
     });
   }
-
-  
 }

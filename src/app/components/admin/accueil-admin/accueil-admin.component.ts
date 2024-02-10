@@ -143,6 +143,7 @@ export class AccueilAdminComponent {
       (response: any) => {
         console.log(response);
         this.listeDesMotos = response.annonces;
+        console.log(this.listeDesMotos);
 
         this.listeMotosFiltree = this.listeDesMotos.filter(
           (annonceMoto: any) => annonceMoto.etat === 'accepter'

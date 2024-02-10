@@ -25,7 +25,7 @@ export class VendeurSubscribeComponent {
   adresse: string = '';
   description: string = '';
   image!: File;
-  role: string = 'vendeur';
+  role: string = 'proprietaire';
 
   emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
 
@@ -123,24 +123,22 @@ export class VendeurSubscribeComponent {
   }
 
   registerUser() {
-    // Créez une instance de Proprietaire avec les données d'inscription
+    
+    let formData = new FormData();
+    formData.append('nom', this.nom);
+    formData.append('prenom', this.prenom);
+    formData.append('email', this.email);
+    formData.append('password', this.password);
+    formData.append('confirmation', this.confirmation);
+    formData.append('telephone', this.telephone);
+    formData.append('adresse', this.adresse);
+    formData.append('description', this.description);
+    formData.append('role', this.role);
+    // Ajouter l'image
+    formData.append('image', this.image);
 
-    let newProprietaire: Proprietaire = {
-      nom: this.nom,
-      prenom: this.prenom,
-      email: this.email,
-      password: this.password,
-      confirmation: this.confirmation,
-      telephone: this.telephone,
-      adresse: this.adresse,
-      description: this.description,
-      image: this.image as File,
-      role: this.role,
-    }
-
-    console.log(newProprietaire);
-
-    this.authService.registerproprietaire(newProprietaire).subscribe(
+    
+    this.authService.registerproprietaire(formData).subscribe(
       (response) => {
         console.log(response);
 

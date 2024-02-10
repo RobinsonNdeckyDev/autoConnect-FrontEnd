@@ -36,10 +36,11 @@ export class AuthenticationService {
   }
 
   // Inscription
-  registerproprietaire(proprietaire: Proprietaire): Observable<any> {
-    console.log("Données d'inscription :", proprietaire);
 
-    return this.http.post<any>(`${this.apiUrl}/register`, proprietaire).pipe(
+  registerproprietaire(formData: FormData): Observable<any> {
+    console.log("Données d'inscription :", formData);
+
+    return this.http.post<any>(`${this.apiUrl}/register`, formData).pipe(
       tap((response) => {
         console.log("Réponse de l'API après inscription :", response);
       }),
@@ -49,6 +50,20 @@ export class AuthenticationService {
       })
     );
   }
+
+  // registerproprietaire(proprietaire: Proprietaire): Observable<any> {
+  //   console.log("Données d'inscription :", proprietaire);
+
+  //   return this.http.post<any>(`${this.apiUrl}/register`, proprietaire).pipe(
+  //     tap((response) => {
+  //       console.log("Réponse de l'API après inscription :", response);
+  //     }),
+  //     catchError((error) => {
+  //       console.error("Erreur lors de l'inscription :", error);
+  //       throw error;
+  //     })
+  //   );
+  // }
 
   // vendeur
   registerAcheteur(acheteur: Acheteur): Observable<any> {
@@ -64,7 +79,6 @@ export class AuthenticationService {
       })
     );
   }
-
 
   // Déconnexion
   logout(): Observable<any> {
@@ -97,9 +111,6 @@ export class AuthenticationService {
     );
   }
 
-
-
-
   // récupération du token
 
   getToken(): string | null {
@@ -110,8 +121,6 @@ export class AuthenticationService {
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
-
-
 
   // Récupérer les informations du vendeur depuis l'API
   getvendeurDetails(id: number): Observable<any> {
@@ -134,10 +143,6 @@ export class AuthenticationService {
       );
   }
 
-
-
-
-
   // Mettre à jour les informations de l'vendeur
   updatevendeurDetails(id: number, vendeurData: any): Observable<any> {
     const token = this.getToken();
@@ -159,9 +164,6 @@ export class AuthenticationService {
       );
   }
 
-
-
-
   // Méthode fictive pour récupérer l'ID de l'utilisateur connecté
   getLoggedInUserId(): number | null {
     const token = localStorage.getItem('token');
@@ -173,13 +175,6 @@ export class AuthenticationService {
       return null;
     }
   }
-
-
-  
-
-
-
-  
 }
 
 

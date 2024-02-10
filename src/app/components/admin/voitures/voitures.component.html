@@ -20,11 +20,11 @@
                 <div class="card rounded-3">
                     <div class="card-head mx-3 mt-3">
                         <p class="nomCar"> {{voiture.nom}} </p>
-                        <img src="" class="img-fluid" alt="">
+                        <img src="http://127.0.0.1:8000/images/{{infoProprietaire?.image}}" class="img-fluid" alt="">
                     </div>
 
                     <div class="card-body">
-                        <img src="http://127.0.0.1:8000/images/{{voiture.image}}" alt="" class="img-fluid">
+                        <img src="http://127.0.0.1:8000/images/{{voiture.image1}}" alt="" class="img-fluid imgAnnonce">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="afficherDetailAnnonce(voiture)">Voir détail</button>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
         </nav>
     </div>
 
-    <!-- Liiste des annonces actives -->
+    <!-- Liste des annonces inactives -->
     <div class="cars shadow py-3 px-4 rounded-4" *ngIf="!annonces">
         <p class="text-dark"><i class="fa-regular fa-hand-point-right iconhand"></i>Liste annonces actives</p>
         <div class="d-flex annoncesHead">
@@ -125,11 +125,11 @@
                 <div class="card rounded-3">
                     <div class="card-head mx-3 mt-3">
                         <p class="nomCar"> {{voiture.nom}} </p>
-                        <img src="" class="img-fluid" alt="">
+                        <img src="http://127.0.0.1:8000/images/{{infoProprietaire?.image}}" class="img-fluid" alt="">
                     </div>
     
                     <div class="card-body">
-                        <img src="http://127.0.0.1:8000/images/{{voiture.image}}" alt="" class="img-fluid">
+                        <img src="http://127.0.0.1:8000/images/{{voiture.image1}}" alt="" class="img-fluid imgAnnonce">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" 
                             (click)="afficherDetailAnnonce(voiture)">
                             Voir détail
@@ -176,7 +176,7 @@
                     <div class="row mt-3">
                         <div class="col-12 col-md-7">
                             <div class="contentL d-flex">
-                                <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image}}" alt="" class="img-fluid w-25">
+                                <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image1}}" alt="" class="img-fluid w-25">
                                 <span> {{annonceSelectionnee?.nom}} </span>
                             </div>
                             <div class="text-detail">
@@ -189,7 +189,7 @@
                             <div class="contentR">
                                 <div class="row">
                                     <div class="col-12 col-md-6">
-                                        <img src="/assets/images/profil/profil1.jpg" class="img-fluid rounded-4" alt="">
+                                        <img src="http://127.0.0.1:8000/images/{{infoProprietaire.image}}" class="img-fluid rounded-4" alt="">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <p class="infos"> {{infoProprietaire.nom}} {{infoProprietaire.prenom}} </p>
@@ -252,6 +252,7 @@
                                         (click)="updateAnnonceStateActive('accepter')">Activer</button>
                                     <button *ngIf="annonceSelectionnee?.etat === 'accepter'" class="btnDesactiver btn"
                                         (click)="updateAnnonceStateInactive('refuser')">Désactiver</button>
+                                    <button class="btnBlack btn" (click)="detetedAnnonce(annonceSelectionnee.id)">Supprimer</button>
                                     <button class="btnBlack btn" data-bs-dismiss="modal">Fermer</button>
                                 </div>
                             </div>

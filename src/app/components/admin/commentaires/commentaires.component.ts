@@ -1,23 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { CommentaireService } from 'src/app/services/commentaire.service';
 import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { SignalementService } from 'src/app/services/signalement.service';
 
 @Component({
-  selector: 'app-signalements',
-  templateUrl: './signalements.component.html',
-  styleUrls: ['./signalements.component.css'],
+  selector: 'app-commentaires',
+  templateUrl: './commentaires.component.html',
+  styleUrls: ['./commentaires.component.css'],
 })
-export class SignalementsComponent {
+export class CommentairesComponent {
   dtOptions: DataTables.Settings = {};
 
   constructor(
     private http: HttpClient,
-    private listeSignalService: SignalementService,
+    private listeCommentService: CommentaireService,
     private listeAcheteurService: ListeUsersService
   ) {}
 
-  tabSignalements: any[] = [];
+  tabCommentaires: any[] = [];
   tabAcheteurs: any[] = [];
   infoUserSignal: any;
 
@@ -33,7 +34,7 @@ export class SignalementsComponent {
       searching: true,
       lengthChange: false,
       paging: true,
-      pageLength: 6,
+      pageLength: 5,
       pagingType: 'simple_numbers',
       info: false,
       language: {
@@ -51,20 +52,21 @@ export class SignalementsComponent {
 
   // Getsignals
   getSignals() {
-    this.listeSignalService.listeSignals().subscribe(
+    this.listeCommentService.getcommentaires().subscribe(
       (response: any) => {
         console.log('listeSignalements: ', response);
-        this.tabSignalements = response.signalements;
-        console.log('listeSignalements: ', this.tabSignalements);
+        this.tabCommentaires = response.commentaires;
+        console.log('listeSignalements: ', this.tabCommentaires);
 
         // L'utilisateur qui a signalé l'annonce
-        this.tabSignalements.forEach(signalement => {
-          const proprietaireAnnonce = this.tabAcheteurs.find(user => user.id === signalement.user_id);
-          // signalement.infoUserSignal = proprietaireAnnonce;
+        this.tabCommentaires.forEach((commentaire) => {
+          const proprietaireAnnonce = this.tabAcheteurs.find(
+            (user) => user.id === commentaire.user_id
+          );
+          // commentaire.infoUserSignal = proprietaireAnnonce;
           this.infoUserSignal = proprietaireAnnonce;
-          console.log("infoUserSignal: ", proprietaireAnnonce);
+          console.log('infoUserSignal: ', proprietaireAnnonce);
         });
-        
       },
       (error) => {
         console.log(error);

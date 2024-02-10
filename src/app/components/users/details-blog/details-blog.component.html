@@ -12,155 +12,29 @@
 </div>
 
 
-<section class="detailBlogs">
-    <h1 class="text-center my-4">Vendre votre véhicule avec succés</h1>
+<section class="detailBlogs" *ngIf="blogDetails">
+    <h1 class="text-center my-4"> {{blogDetails.titre}} </h1>
     <div class="trait m-auto"></div>
 
-    <div class="detailContain container">
+    <div class="detailContain container my-4">
 
-        <div class="content my-4">
+        <div class="content my-5">
             <div class="row">
-                <div class="col-12 col-md-4">
-                    <div class="ctnLeft">
-                        <img src="" alt="">
+                <div class="col-12 col-md-6">
+                    <div class="">
+                        <!-- ctnLeft -->
+                        <img src="http://127.0.0.1:8000/images/{{blogDetails.image}}" class="img-fluid w-100 " alt="">
                     </div>
                 </div>
-                <div class="col-12 col-md-8">
-                    <div class="ctnR">
-                        
+                <div class="col-12 col-md-6 ctnR">
+                    <div class="">
+                        <p>{{blogDetails.description}}</p>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <!-- <div class="content">
-            <div class="mb-3 textcont">
-                <img src="" class="img-fluid mb-3" alt="">
-                <p class="mb-3 first text-center">
-                    La vente de votre véhicule peut être une étape importante, que ce soit pour passer à un nouveau
-                    modèle ou pour des raisons personnelles. Pour vous aider à naviguer à travers ce processus, voici un
-                    guide complet pour vendre votre véhicule avec succès.
-                </p>
-            </div>
-
-            <div class="mb-3 textcont">
-                <h4 class="text-center">Préparation du véhicule</h4>
-                <div class="my-3">
-                    <h6 class="libelle">Nettoyage approfondi :</h6>
-                    <p>
-                        Avant de prendre des photos ou de rencontrer des acheteurs potentiels, assurez-vous que votre
-                        véhicule est propre à l'intérieur comme à l'extérieur. Un véhicule propre crée une première
-                        impression positive.
-                    </p>
-                    <br>
-                    <h6 class="libelle">Maintenance préventive :</h6>
-                    <p>
-                        Effectuez des vérifications de base, comme le changement d'huile, le remplacement des filtres et la
-                        vérification des niveaux de liquide. Cela démontre que le véhicule a été bien entretenu.
-                    </p>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <h4 class="text-center">Documentation du véhicule</h4>
-                <div class="my-3">
-                    <h6 class="libelle">Rassemblez les documents :</h6>
-                    <p>
-                        Réunissez tous les documents pertinents, y compris le titre du véhicule, le manuel du propriétaire, les
-                        enregistrements d'entretien et tout autre papier lié à l'historique du véhicule.
-                    </p>
-                    <br>
-                    <h6 class="libelle">Rapport sur l'historique du véhicule :</h6>
-                    <p>
-                        Si possible, obtenez un rapport d'historique du véhicule. Cela peut rassurer les acheteurs potentiels
-                        quant à l'état du véhicule et à son passé.
-                    </p>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <h4 class="texte-center">Fixation du prix</h4>
-                <div class="my-3">
-                    <h6 class="libelle">Recherche de la valeur :</h6>
-                    <p>
-                        Faites des recherches pour déterminer la valeur actuelle de votre véhicule en tenant compte du
-                        modèle, de l'année, du kilométrage et de l'état général.
-                    </p>
-                    <br>
-                    <h6 class="libelle">Flexibilité dans la négociation :</h6>
-                    <p>
-                        Fixez un prix légèrement supérieur à votre prix cible pour avoir de la marge lors des négociations.
-                    </p>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <h4 class="text-center">Annonce du véhicule</h4>
-                <div class="my-3">
-                    <h6 class="libelle">Rédaction d'une annonce :</h6>
-                    <p>
-                        Créez une annonce détaillée avec des informations claires sur le véhicule, y compris sa marque, son
-                        modèle, son année, son kilométrage, son état, etc.
-                    </p>
-                    <br>
-                    <h6 class="libelle">Photos de qualité :</h6>
-                    <p>
-                        Prenez des photos nettes et de haute qualité du véhicule sous différents angles, mettant en évidence
-                        ses caractéristiques importantes.
-                    </p>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <h4 class="text-center">Rencontre avec l'acheteur</h4>
-                <div class="my-3">
-                    <h6 class="libelle">Sécurité d'abord :</h6>
-                    <p>
-                        Rencontrez les acheteurs dans un lieu public et évitez de donner votre adresse personnelle. Si
-                        possible, amenez quelqu'un avec vous lors des rencontres.
-                    </p>
-                    <br>
-                    <h6 class="libelle">Essai routier :</h6>
-                    <p>
-                        Permettez aux acheteurs potentiels de faire un essai routier, mais assurez-vous qu'ils sont couverts
-                        par leur propre assurance automobile.
-                    </p>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <h4 class="text-center">Finaliser la vente</h4>
-                <div class="my-3">
-                    <h6 class="libelle">Négociations :</h6>
-                    <p>
-                        Soyez prêt à négocier le prix, mais soyez clair sur vos limites.
-                    </p>
-                    
-                    <h6 class="libelle">Contrat de vente :</h6>
-                    <p>
-                        Rédigez un contrat de vente détaillé, indiquant les conditions de la vente, y compris le prix, les
-                        modalités de paiement et la déclaration de cession.
-                    </p>
-                    <br>
-                    <h6 class="libelle">Paiement sécurisé :</h6>
-                    <p>
-                        Acceptez le paiement de manière sécurisée, par chèque certifié, virement bancaire ou autre méthode
-                        sûre.
-                    </p>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <p>
-                    Pour terminer, en suivant ce guide, vous maximiserez vos chances de vendre votre véhicule de manière efficace et
-                    sécurisée.
-                    <br>
-                    Restez transparent tout au long du processus pour établir une relation de confiance avec
-                    les acheteurs potentiels.
-                </p>
-            </div>
-        </div> -->
     </div>
 </section>
 <app-footer></app-footer>
