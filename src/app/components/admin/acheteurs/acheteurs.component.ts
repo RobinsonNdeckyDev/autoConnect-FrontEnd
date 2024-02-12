@@ -35,7 +35,7 @@ export class AcheteursComponent {
       searching: true,
       lengthChange: false,
       paging: true,
-      pageLength: 6,
+      pageLength: 5,
       pagingType: 'simple_numbers',
       info: false,
       language: {

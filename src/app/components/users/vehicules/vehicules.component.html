@@ -8,7 +8,7 @@
         <div class="trait mb-4"></div>
 
         <div class="carteAnnonces mb-5 container mt-3">
-            <div class="row cartes m-0 g-4">
+            <div class="row cartes m-0 g-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="800">
                 
                 <p class="vhls"><img src="/assets/images/vehicules/pointCar.png" class="" alt=""><a class="text-decoration-none" routerLink="voitures">Annonces de vente de voitures</a></p>
                 
@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <div class="row cartes mt-2 g-4">
+            <div class="row cartes mt-2 g-4" [attr.data-aos]="'fade-in'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="880">
                 
                 <p class="vhls"><img src="/assets/images/vehicules/pointCar.png" class="" alt=""><a class="text-decoration-none" routerLink="motos">Annonces de vente de motos</a></p>
                 
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="row cartes mt-2 g-4">
+            <div class="row cartes mt-2 g-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="900">
     
                 <p class="vhls"><img src="/assets/images/vehicules/pointCar.png" class="" alt=""><a class="text-decoration-none" routerLink="utilitaires">Annonces de vent de véhicules utilitaires</a></p>
             
@@ -114,7 +114,7 @@
     </div>
 </section>
 
-<section class="bannerEnd"></section>
+<section class="bannerEnd" [attr.data-aos]="'fade-in'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="980"></section>
 
 <app-scroll-button></app-scroll-button>
 

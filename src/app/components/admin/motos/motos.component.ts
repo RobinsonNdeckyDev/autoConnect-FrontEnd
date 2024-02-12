@@ -22,6 +22,10 @@ export class MotosComponent {
   // Variable pour stocker l'annonce sélectionné
   annonceSelectionnee: any;
 
+  // Propriété pour stocker la valeur de recherche
+  searchTermActive: string = '';
+  searchTermInactive: string = '';
+
   constructor(
     public listeMotoService: ListeMotosService,
     private proprietaireService: ListeUsersService,
@@ -44,8 +48,8 @@ export class MotosComponent {
   listesAnnonces(): void {
     // Remplacez par l'ID de la catégorie dont vous souhaitez récupérer les annonces
     const categorieId = 2;
-    const etat = 'refuser';
-    const etatInactive = 'accepter';
+    const etatActive = 'accepter';
+    const etatInactive = 'Refuser';
 
     this.listeMotoService.getAnnonces(categorieId).subscribe(
       (response: any) => {
@@ -53,7 +57,7 @@ export class MotosComponent {
         this.listeMotos = response.annonces;
 
         this.annoncesMotosFiltreesInactives = this.listeMotos.filter(
-          (annonceMoto) => annonceMoto.etat === etat
+          (annonceMoto) => annonceMoto.etat === etatInactive
         );
         console.log(
           'Annonces filtrées motos Actives : ',
@@ -61,7 +65,7 @@ export class MotosComponent {
         );
 
         this.annoncesMotosFiltreesActives = this.listeMotos.filter(
-          (annonceMoto) => annonceMoto.etat === etatInactive
+          (annonceMoto) => annonceMoto.etat === etatActive
         );
 
         console.log(
@@ -224,6 +228,27 @@ export class MotosComponent {
         );
       }
     });
+  }
+
+  // recherche et filtre
+  // Méthode pour filtrer les motos en fonction de la recherche
+  filtrerMotosActives(): void {
+    const recherche = this.searchTermActive.toLowerCase();
+    console.log(recherche);
+    this.annoncesMotosFiltreesActives = this.listeMotos.filter(
+      (moto) => moto.nom.toLowerCase().includes(recherche)
+    );
+    console.log('resultat recherche: ', this.annoncesMotosFiltreesActives);
+  }
+
+  // Méthode pour filtrer les motos en fonction de la recherche
+  filtrerMotosInactives(): void {
+    const recherche = this.searchTermInactive.toLowerCase();
+    console.log(recherche);
+    this.annoncesMotosFiltreesInactives = this.listeMotos.filter(
+      (moto) => moto.nom.toLowerCase().includes(recherche)
+    );
+    console.log('resultat recherche: ', this.annoncesMotosFiltreesInactives);
   }
 
   // Alert message

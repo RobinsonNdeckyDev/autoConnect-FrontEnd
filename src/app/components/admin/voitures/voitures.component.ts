@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { error } from 'jquery';
+import { error, event } from 'jquery';
 import { AuthenticationService } from 'src/app/services/authentification.service';
 import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { ListeVoituresService } from 'src/app/services/liste-voitures.service';
@@ -21,6 +21,10 @@ export class VoituresComponent {
 
   // Variable pour stocker l'annonce sélectionné
   annonceSelectionnee: any;
+
+  // Propriété pour stocker la valeur de recherche
+  searchTermActive: string = '';
+  searchTermInactive: string = '';
 
   constructor(
     public listeVoitureService: ListeVoituresService,
@@ -47,8 +51,8 @@ export class VoituresComponent {
   listesAnnonces(): void {
     // Remplacez par l'ID de la catégorie dont vous souhaitez récupérer les annonces
     const categorieId = 1;
-    const etat = 'refuser';
-    const etatInactive = 'accepter';
+    const etatActive = 'accepter';
+    const etatInactive = 'refuser';
 
     this.listeVoitureService.getAnnonces(categorieId).subscribe(
       (response: any) => {
@@ -56,7 +60,7 @@ export class VoituresComponent {
         this.listeVoitures = response.annonces;
 
         this.annoncesVoituresFiltreesActives = this.listeVoitures.filter(
-          (annonceVoiture) => annonceVoiture.etat === etat
+          (annonceVoiture) => annonceVoiture.etat === etatActive
         );
         console.log(
           'Annonces filtrées Actives : ',
@@ -104,12 +108,9 @@ export class VoituresComponent {
     console.log(this.annonceSelectionnee.user_id);
 
     this.propInfo();
-
   }
 
-
-
-  propInfo(){
+  propInfo() {
     // / On recherche le propriétaire qui a les infos de user_id
     this.infoProprietaire = this.tabUsers.find(
       (user: any) => user.id === this.annonceSelectionnee.user_id
@@ -174,7 +175,7 @@ export class VoituresComponent {
       showCancelButton: true,
       confirmButtonColor: '#0F42A8',
       cancelButtonColor: 'black',
-      confirmButtonText: 'Oui, désactiver'
+      confirmButtonText: 'Oui, désactiver',
     }).then((result) => {
       if (result.isConfirmed) {
         // Si l'utilisateur clique sur "Oui, d"sactiver"
@@ -183,69 +184,86 @@ export class VoituresComponent {
           .subscribe(() => {
             // Mettre à jour l'état de l'annonce après avoir reçu la réponse du serveur
             this.annonceSelectionnee.etat = newState;
-            this.alertMessage("success", "Super", "Annonce désactivée avec succés");
+            this.alertMessage(
+              'success',
+              'Super',
+              'Annonce désactivée avec succés'
+            );
             this.listesAnnonces();
           });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
         console.log("La désactivation de l'annonce a été annulée.");
-        this.alertMessage('info', 'Annulée', "Désctivation de l'annonce annulée");
+        this.alertMessage(
+          'info',
+          'Annulée',
+          "Désctivation de l'annonce annulée"
+        );
       }
     });
   }
 
   // supprimer Annonce
-  detetedAnnonce(annonceId: number){
-
-     Swal.fire({
-       title: 'Êtes-vous sûr de vouloir supprimer cette annonce ?',
-       text: 'Vous allez supprimer cette annonce !',
-       icon: 'warning',
-       showCancelButton: true,
-       confirmButtonColor: '#0F42A8',
-       cancelButtonColor: 'black',
-       confirmButtonText: 'Oui, supprimer',
-     }).then((result) => {
-       if (result.isConfirmed) {
-         // Si l'utilisateur clique sur "Oui, d"sactiver"
-         this.listeVoitureService.deleteAnnonce(annonceId).subscribe(
-           (response) => {
-              console.log(response);
-              this.alertMessage(
-                'success',
-                'Super',
-                'Annonce supprimée avec succés'
-              );
-              this.listesAnnonces();
-           },
-           (error) => {
-             console.log(error);
-           }
-         );
-       } else if (result.dismiss === Swal.DismissReason.cancel) {
-         // Si l'utilisateur clique sur "Annuler"
-         console.log("La suppression de l'annonce a été annulée.");
-         this.alertMessage(
-           'info',
-           'Annulée',
-           "Suppression de l'annonce annulée"
-         );
-       }
-     });
-
-
-
-
-
-
-
-
-
-
-
-    
+  detetedAnnonce(annonceId: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir supprimer cette annonce ?',
+      text: 'Vous allez supprimer cette annonce !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, supprimer',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, d"sactiver"
+        this.listeVoitureService.deleteAnnonce(annonceId).subscribe(
+          (response) => {
+            console.log(response);
+            this.alertMessage(
+              'success',
+              'Super',
+              'Annonce supprimée avec succés'
+            );
+            this.listesAnnonces();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log("La suppression de l'annonce a été annulée.");
+        this.alertMessage(
+          'info',
+          'Annulée',
+          "Suppression de l'annonce annulée"
+        );
+      }
+    });
   }
 
+  // recherche et filtre
+  // Méthode pour filtrer les voitures en fonction de la recherche
+  filtrerVoitureActives(): void {
+    const recherche = this.searchTermActive.toLowerCase();
+    console.log(recherche);
+    this.annoncesVoituresFiltreesActives = this.listeVoitures.filter(
+      (voiture) => voiture.nom.toLowerCase().includes(recherche)
+    );
+    console.log('resultat recherche: ', this.annoncesVoituresFiltreesActives);
+  }
+
+  // Méthode pour filtrer les voitures en fonction de la recherche
+  filtrerVoitureInactives(): void {
+    const recherche = this.searchTermInactive.toLowerCase();
+    console.log(recherche);
+    this.annoncesVoituresFiltreesInactives = this.listeVoitures.filter(
+      (voiture) => voiture.nom.toLowerCase().includes(recherche)
+    );
+    console.log('resultat recherche: ', this.annoncesVoituresFiltreesActives);
+  }
+
+  
   // Alert message
   alertMessage(icon: any, title: any, text: any) {
     Swal.fire({

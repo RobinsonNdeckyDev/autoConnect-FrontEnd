@@ -146,3 +146,14 @@
     background-size: 100%;
     padding: 15% 0;
 }
+
+@media only screen and (min-width: 168px) and (max-width: 767px) {
+    .blog2 .blog2Contain .autresBlogs h3{
+        text-align: center;
+    }
+
+    .blog2 .blog2Contain .autresBlogs .pAutre{
+        text-align: justify;
+    }
+
+}

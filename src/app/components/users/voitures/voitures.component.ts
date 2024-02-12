@@ -16,6 +16,9 @@ export class VoituresComponent {
   tabProprietaires: any[] = [];
   proprietaireInfo: any;
   voitureSelected: any;
+  // Propriété pour stocker la valeur de recherche
+  searchTermActive: string = '';
+  listeVoituresSearch: any;
 
   constructor(
     private listeVoitureService: ListeVoituresService,
@@ -41,8 +44,7 @@ export class VoituresComponent {
         this.listeVoitures = this.ListeAnnonces.filter(
           (element: any) => element.categorie_id === categorie
         );
-        console.log("listeVoitures filtrées: ", this.listeVoitures);
-
+        console.log('listeVoitures filtrées: ', this.listeVoitures);
       },
       (error) => {
         console.log(error);
@@ -50,6 +52,32 @@ export class VoituresComponent {
     );
   }
 
+  // Méthode pour filtrer les voitures en fonction de la recherche
+  filtrerVoitureActives(event: any): void {
+    // Obtenir la valeur de l'entrée utilisateur en minuscules
+    const recherche = event.target.value.trim().toLowerCase();
+    console.log(recherche);
+
+    // Mettre à jour la propriété searchTermActive
+    this.searchTermActive = recherche;
+
+    // Si la recherche est vide, réinitialiser listeVoitures à la liste complète des voitures
+    if (recherche === '') {
+      this.listeVoitures = this.ListeAnnonces.filter(
+        // Vous pouvez ajuster cette condition selon vos besoins
+        (element: any) => element.categorie_id === 1
+      );
+    } else {
+      // Sinon, filtrer les voitures en fonction de la recherche
+      this.listeVoitures = this.ListeAnnonces.filter((voiture: any) =>
+        voiture.nom.toLowerCase().includes(recherche)
+      );
+    }
+
+    console.log('resultat recherche: ', this.listeVoitures);
+  }
+
+  
   // redirection vers la page details blog
   redirectToDetails(voitureId: number) {
     this.voitureSelected = voitureId;

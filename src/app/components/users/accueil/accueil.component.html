@@ -22,7 +22,7 @@
             <div class="col-12 col-md-4" *ngFor="let voiture of listeVoitures">
                 <div class="card shadow">
                     <div class="cardImg mx-3">
-                        <img src="http://127.0.0.1:8000/images/{{voiture?.image1}}" class="img-fluid" alt="">
+                        <img src="http://127.0.0.1:8000/images/{{voiture?.image1}}" class="img-fluid imgPrinc w-100" alt="">
                     </div>
                     <div class="cardTitle mx-3">
                         <span class="nom">{{voiture?.nom}}</span>
@@ -53,7 +53,7 @@
             <div class="col-12 col-md-4" *ngFor="let moto of listemotos">
                 <div class="card shadow">
                     <div class="cardImg mx-3">
-                        <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc" alt="">
+                        <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt="">
                     </div>
                     <div class="cardTitle mx-3">
                         <span class="nom">{{moto.nom}}</span>
@@ -128,7 +128,7 @@
     <h1 class="text-center mt-3 mb-3">Nos blogs</h1>
     <div class="trait m-auto mb-5"></div>
 
-    <div class="row mt-5 cardBlogs g-4 mx-3">
+    <div class="row mt-5 cardBlogs g-4 mx-3" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="900">
         <!-- [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="900" -->
         <div class="col-12 shadow p-3"  *ngFor="let blog of blogs">
             <div class="row">

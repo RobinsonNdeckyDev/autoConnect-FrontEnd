@@ -18,7 +18,7 @@
                     </thead>
                     <tbody>
                         <tr class="text-center" *ngFor="let acheteur of acheteurs">
-                            <td scope="col">{{ acheteur.image }}</td>
+                            <td scope="col"><img src="http://127.0.0.1:8000/images/{{ acheteur.image }}" alt=""></td>
                             <td scope="col">{{ acheteur.prenom }}</td>
                             <td scope="col">{{ acheteur.nom }}</td>
                             <td scope="col">{{ acheteur.email }}</td>
@@ -51,6 +51,11 @@
             </div>
             <div class="modal-body">
                 <div class="userContain">
+
+                    <div class="imgUser d-flex justify-content-center my-1">
+                        <img src="http://127.0.0.1:8000/images/{{ selectedAcheteur?.image }}" alt="" class="img-fluid">
+                    </div>
+
                     <div class="">
                         <h4 class="text-center my-3">{{ selectedAcheteur?.prenom }} {{selectedAcheteur?.nom}}
                         </h4>
@@ -58,14 +63,14 @@
                         <hr class="my-3">
                         <h5>Infos</h5>
                         <hr class="my-3">
-                        <p class="">{{ selectedAcheteur?.email }}</p>
-                        <p class="">{{ selectedAcheteur?.telephone }}</p>
-                        <p class="">{{ selectedAcheteur?.adresse }}</p>
+                        <p class="">Email: {{ selectedAcheteur?.email }}</p>
+                        <p class="">Telephone: {{ selectedAcheteur?.telephone }}</p>
+                        <p class="">Adresse: {{ selectedAcheteur?.adresse }}</p>
                         <p class="">Créer le {{ selectedAcheteur?.updated_at | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
-                        <hr class="my-3">
+                        <!-- <hr class="my-3">
                         <h5>Description</h5>
                         <hr class="my-3">
-                        <p class="mb-4">{{ selectedAcheteur?.description }}</p>
+                        <p class="mb-4">{{ selectedAcheteur?.description }}</p> -->
                     </div>
 
                     <div class="d-flex justify-content-center">

@@ -65,8 +65,8 @@
 
 <div class="row row2 mt-2 g-4">
     <div class="col-12 col-md-8">
-        <div class="card tableCard p-2 shadow border-0 px-3">
-            <p class="mb-2 px-2 mt-2 fs-4 text">Liste des propriétaires</p>
+        <div class="card tableCard py-4 shadow border-0 px-4">
+            <p class="mb-2 px-2 mt-1 fs-4 text fw-bold">Liste des propriétaires</p>
 
 
             <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="proprietaires">
@@ -80,7 +80,7 @@
                 </thead>
                 <tbody>
                     <tr class="text-center" *ngFor="let proprietaire of proprietaires">
-                        <td>{{ proprietaire.image }}</td>
+                        <td><img src="http://127.0.0.1:8000/images/{{ proprietaire.image }}" class="shadow imgProp" alt=""></td>
                         <td>{{ proprietaire.prenom }} {{ proprietaire.nom }}</td>
                         <td>{{ proprietaire.email }}</td>
                         <td>{{ proprietaire.telephone }}</td>

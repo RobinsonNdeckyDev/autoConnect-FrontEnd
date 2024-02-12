@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'jquery';
 import { Acheteur } from 'src/app/models/acheteur';
 import { AuthenticationService } from 'src/app/services/authentification.service';
 import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-acheteur-subscribe',
@@ -23,6 +23,7 @@ export class AcheteurSubscribeComponent {
   confirmation: string = '';
   telephone: string = '';
   adresse: string = '';
+  image!: File;
   role: string = 'acheteur';
 
   emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
@@ -43,7 +44,6 @@ export class AcheteurSubscribeComponent {
   }
 
   validateformAcheteur() {
-
     if (this.nom == '') {
       this.alertMessage('error', 'Attention', 'Merci de renseigner votre nom!');
       return false;
@@ -113,26 +113,24 @@ export class AcheteurSubscribeComponent {
     }
 
     return true;
-    
   }
 
   registerUser() {
     // Créez une instance de Proprietaire avec les données d'inscription
-    const nouveauAcheteur = new Acheteur(
-      this.nom,
-      this.prenom,
-      this.email,
-      this.password,
-      this.confirmation,
-      this.adresse,
-      this.telephone,
-      this.role
-    );
+    let acheteur = new FormData();
+    acheteur.append('nom', this.nom);
+    acheteur.append('prenom', this.prenom);
+    acheteur.append('email', this.email);
+    acheteur.append('password', this.password);
+    acheteur.append('confirmation', this.confirmation);
+    acheteur.append('telephone', this.telephone);
+    acheteur.append('adresse', this.adresse);
+    acheteur.append('role', this.role);
+    acheteur.append('image', this.image as Blob);
 
-    this.authService.registerAcheteur(nouveauAcheteur).subscribe(
+    this.authService.registerAcheteur(acheteur).subscribe(
       (response) => {
-        console.log(response);
-
+        console.log('reussie', response);
         this.route.navigate(['/login']);
 
         this.alertMessage(
@@ -141,15 +139,16 @@ export class AcheteurSubscribeComponent {
           'Vous vous êtes inscrit avec succès!'
         );
       },
-      (error) => {
-        console.error(error);
+      (error) =>{
+        console.log("erreur", error);
         this.alertMessage(
           'error',
-          'Attention',
+          'Oops',
           'Inscription refusée. Veuillez réessayer.'
         );
       }
-    );
+    )
+    
   }
 
   cleanForm() {
@@ -168,5 +167,11 @@ export class AcheteurSubscribeComponent {
       title: title,
       text: text,
     });
+  }
+
+  // File img1
+  profilAdd(event: any) {
+    this.image = event.target.files[0] as File;
+    console.warn(event.target.files[0]);
   }
 }

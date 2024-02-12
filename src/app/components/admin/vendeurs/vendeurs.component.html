@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                         <tr class="text-center" *ngFor="let proprietaire of proprietaires">
-                            <td scope="col">{{ proprietaire.image }}</td>
+                            <td scope="col"><img src="http://127.0.0.1:8000/images/{{ proprietaire.image }}" class="shadow imgProp" alt=""></td>
                             <td scope="col">{{ proprietaire.prenom }}</td>
                             <td scope="col">{{ proprietaire.nom }}</td>
                             <td scope="col">{{ proprietaire.email }}</td>
@@ -57,10 +57,9 @@
             <div class="modal-body">
                 <div class="userContain">
 
-                    <div class="imgUser d-flex justify-content-center my-3">
-                        <img src="https://img.freepik.com/free-photo/young-handsome-african-man-with-crossed-arms-blue-wall_176420-2321.jpg?w=996&t=st=1707018444~exp=1707019044~hmac=b5cf6f754ed7d7134dad04a67fc2307cc17c8a4b56ccaa5250092d63b46d4e08"
+                    <div class="imgUser d-flex justify-content-center my-1">
+                        <img src="http://127.0.0.1:8000/images/{{ selectedProprietaire?.image }}"
                             alt="" class="img-fluid">
-                        <!-- http://127.0.0.1:8000/images/{{selectedProprietaire?.image}} -->
                     </div>
 
                     <div class="">
@@ -69,10 +68,10 @@
                         <hr class="my-3">
                         <h5>Infos</h5>
                         <hr class="my-3">
-                        <p class="">{{ selectedProprietaire?.email }}</p>
-                        <p class="">{{ selectedProprietaire?.telephone }}</p>
-                        <p class="">{{ selectedProprietaire?.adresse }}</p>
-                        <p class="">Créer le {{ selectedProprietaire?.updated_at | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+                        <p class="">Email: {{ selectedProprietaire?.email }}</p>
+                        <p class="">Tlephone: {{ selectedProprietaire?.telephone }}</p>
+                        <p class="">Adresse: {{ selectedProprietaire?.adresse }}</p>
+                        <p class="">Date: Créer le {{ selectedProprietaire?.updated_at | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
                         <hr class="my-3">
                         <h5>Description</h5>
                         <hr class="my-3">

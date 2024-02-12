@@ -1,8 +1,8 @@
 .bannerAuto{
-    background-image: url(/assets/images/vehicules/ban1.png);
+    background-image: url(/assets/images/vehicules/banAuto.png);
     background-repeat: no-repeat;
     background-size: 100%;
-    padding: 21% 0;
+    padding: 20% 0;
 }
 
 .imgPrinc{
@@ -142,4 +142,12 @@
     background-repeat: no-repeat;
     background-size: 100%;
     padding: 15% 0;
+}
+
+
+@media only screen and (min-width: 168px) and (max-width: 767px) {
+    .carteAnnonces .vhls{
+        font-size: 12px !important;
+        text-align: center;
+    }
 }

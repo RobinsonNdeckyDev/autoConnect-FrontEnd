@@ -33,4 +33,11 @@
     color: #0F42A8;
     margin: 15px 0;
     font-weight: 600;
+    text-align: center;
+}
+
+@media only screen and (min-width: 168px) and (max-width: 767px) {
+    .cfdtsContainer h2{
+        font-size: 28px !important;
+    }
 }

@@ -24,7 +24,7 @@
                 <div class="col-12 col-md-4" *ngFor="let moto of listeMotos">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
-                            <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc" alt="">
+                            <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt="">
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom">{{moto.nom}}</span>
@@ -46,7 +46,7 @@
                         <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt="">{{moto.prix}} Fcfa</p>
                         <div class="cardTrait"></div>
                         <div class="cardButton mx-3 my-3">
-                            <button class="btn" (click)="redirectToDetails(moto.id)">Consulter l'annonce</button>
+                            <button class="btn fw-bold text-light" (click)="redirectToDetails(moto.id)">Consulter l'annonce</button>
                         </div>
                     </div>
                 </div>

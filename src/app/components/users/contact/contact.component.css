@@ -1,8 +1,9 @@
 .bannerContact{
-    background-image: url(../../../../assets/images/contact/ban1.png);
+    background-image: url(/assets/images/contact/banContact.png);
     background-repeat: no-repeat;
     background-size: 100%;
-    padding: 22% 0;
+    padding: 20% 0;
+    margin-bottom: 0 !important;
 }
 
 .coods .coodsContainer h2{
@@ -54,6 +55,7 @@
     background-image: url(../../../../assets/images/contact/ban2.png);
     background-repeat: no-repeat;
     background-size: 100%;
+    /* border: 1px solid red; */
 }
 
 .contactContain .RC{
@@ -97,4 +99,17 @@
     background-repeat: no-repeat;
     background-size: 100%;
     padding: 15% 0;
+}
+
+@media only screen and (min-width: 168px) and (max-width: 767px) {
+
+    .formContact .contactContain .RC{
+        background-color: #0F42A8;
+        width: 100%;
+    }
+
+    .formContact .contactContain .formContain{
+        /* border: 1px solid red; */
+        /* background-color: #0F42A8; */
+    }
 }

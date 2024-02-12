@@ -82,6 +82,6 @@ export class MotosComponent {
   redirectToDetails(motoId: number) {
     this.motoSelected = motoId;
     console.log(this.motoSelected);
-    this.route.navigate(['vehicules/voitures/detailMoto', motoId]);
+    this.route.navigate(['vehicules/motos/detailMoto', motoId]);
   }
 }

@@ -66,7 +66,7 @@ export class AuthenticationService {
   // }
 
   // vendeur
-  registerAcheteur(acheteur: Acheteur): Observable<any> {
+  registerAcheteur(acheteur: any): Observable<any> {
     console.log("Données d'inscription :", acheteur);
 
     return this.http.post<any>(`${this.apiUrl}/register`, acheteur).pipe(

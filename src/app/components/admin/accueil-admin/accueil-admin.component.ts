@@ -64,7 +64,7 @@ export class AccueilAdminComponent {
       searching: true,
       lengthChange: false,
       paging: true,
-      pageLength: 3,
+      pageLength: 2,
       pagingType: 'simple_numbers',
       info: false,
       language: {

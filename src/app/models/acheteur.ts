@@ -1,4 +1,4 @@
-export class Acheteur {
+export interface Acheteur {
   nom: string;
   prenom: string;
   email: string;
@@ -7,24 +7,6 @@ export class Acheteur {
   telephone: string;
   adresse: string;
   role: string;
+  image: File;
 
-  constructor(
-    nom: string,
-    prenom: string,
-    email: string,
-    password: string,
-    confirmation: string,
-    telephone: string,
-    adresse: string,
-    role: string
-  ) {
-    this.nom = nom;
-    this.prenom = prenom;
-    this.email = email;
-    this.password = password;
-    this.confirmation = confirmation;
-    this.telephone = telephone;
-    this.adresse = adresse;
-    this.role = 'acheteur';
-  }
 }
