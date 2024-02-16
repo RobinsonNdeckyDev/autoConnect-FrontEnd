@@ -78,12 +78,11 @@ export class AnnoncesVendeursComponent {
     this.getCategories();
   }
 
-
   // methode pour les infos du user connecté
-  getInfoCurrentUser(){
-    let info: any = localStorage.getItem("currentUser");
+  getInfoCurrentUser() {
+    let info: any = localStorage.getItem('currentUser');
     this.currentUser = JSON.parse(info);
-    console.log("info currentUser: ", this.currentUser);
+    console.log('info currentUser: ', this.currentUser);
   }
 
   // Annonces valides
@@ -299,6 +298,9 @@ export class AnnoncesVendeursComponent {
       icon: icon,
       title: title,
       text: text,
+      timer: 1500, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 
@@ -316,10 +318,12 @@ export class AnnoncesVendeursComponent {
     );
   }
 
-
   // Méthode pour mettre à jour une annonce
-  annonceUpdateOnly(idAnnonce: number){
-    console.log("L'identifiant de l'annonce est: ", this.infoAnnonceSelected.id);
+  annonceUpdateOnly(idAnnonce: number) {
+    console.log(
+      "L'identifiant de l'annonce est: ",
+      this.infoAnnonceSelected.id
+    );
 
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir modifier cette annonce ?',
@@ -375,7 +379,6 @@ export class AnnoncesVendeursComponent {
               console.log(error);
             }
           );
-
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
         console.log("La modification de l'annonce a été annulée.");
@@ -386,17 +389,6 @@ export class AnnoncesVendeursComponent {
         );
       }
     });
-
-
-
-
-
-
-
-
-    
-    
-    
   }
 
   // File img

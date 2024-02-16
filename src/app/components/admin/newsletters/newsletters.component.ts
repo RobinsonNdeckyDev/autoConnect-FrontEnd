@@ -67,38 +67,37 @@ export class NewslettersComponent {
       cancelButtonColor: 'black',
       confirmButtonText: 'Oui, supprimer',
     }).then((result) => {
-
       if (result.isConfirmed) {
         // Si l'utilisateur clique sur "Oui, supprimer"
         this.listeNews.deleteNewsletter(newsId).subscribe(
-        () => {
-          console.log("L'abonné a été supprimé avec succès.");
-          // Réaliser d'autres actions après la suppression si nécessaire
-          this.alertMessage(
-            'success',
-            'réussie',
-            'Abonné supprimé avec succés'
-          );
+          () => {
+            console.log("L'abonné a été supprimé avec succès.");
+            // Réaliser d'autres actions après la suppression si nécessaire
+            this.alertMessage(
+              'success',
+              'réussie',
+              'Abonné supprimé avec succés'
+            );
 
-          this.getNewsletters();
-        },
-        (error) => {
-          console.error(
-            "Une erreur s'est produite lors de la suppression de l'abonné :",
-            error
-          );
-          this.alertMessage(
-            'error',
-            'Oops',
-            "Erreur lors de la suppression de l'abonné"
-          );
-          // Gérer l'erreur de suppression de l'abonné
-        }
-      );
+            this.getNewsletters();
+          },
+          (error) => {
+            console.error(
+              "Une erreur s'est produite lors de la suppression de l'abonné :",
+              error
+            );
+            this.alertMessage(
+              'error',
+              'Oops',
+              "Erreur lors de la suppression de l'abonné"
+            );
+            // Gérer l'erreur de suppression de l'abonné
+          }
+        );
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
-        console.log('La suppression de l\'abonné a été annulée.');
-        this.alertMessage('info', 'Annulée', 'Suppression de l\'abonné annulée');
+        console.log("La suppression de l'abonné a été annulée.");
+        this.alertMessage('info', 'Annulée', "Suppression de l'abonné annulée");
       }
     });
   }
@@ -116,6 +115,9 @@ export class NewslettersComponent {
       icon: icon,
       title: title,
       text: text,
+      timer: 2000, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 }

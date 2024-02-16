@@ -136,7 +136,7 @@ export class AccueilAdminComponent {
   // liste annonces motos
   getMotos() {
     // Remplacez par l'ID de la catégorie dont vous souhaitez récupérer les annonces
-    const categorieId = 2;
+    const categorieId = 8;
     const etat = 'accepter';
 
     this.listeMotos.getAnnonces(categorieId).subscribe(

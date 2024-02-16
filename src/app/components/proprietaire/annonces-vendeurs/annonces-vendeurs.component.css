@@ -3,8 +3,9 @@
     text-decoration: none;
 }
 
-#exampleModalInvalide .modal-header{
-    border-bottom: 2px solid #0F42A8;
+.modal-header{
+    border-bottom: 2px solid #0F42A8 !important;
+
 }
 
 .imgSlide{
@@ -15,23 +16,28 @@
     border: 2px solid #0F42A8;
 }
 
-#exampleModalInvalide .modal-header h1{
+.modal-header h1{
     color: #0F42A8;
 }
 
-#exampleModalInvalide .modal-header span i {
+.modal-header span i {
     color: #0F42A8;
     font-size: 25px;
 }
 
-#exampleModalInvalide .modal-body .infosP{
+.modal-body .infosP{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.modal-footer{
+    border-top: 2px solid #0F42A8 !important;
+}
+
 .imgAnnonce{
-    height: 100px
+    height: 100px;
+    cursor: pointer;
 }
 
 /* .cars{
@@ -219,7 +225,7 @@ hr {
 
 .middleDetail {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 }
 

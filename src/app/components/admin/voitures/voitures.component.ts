@@ -73,16 +73,6 @@ export class VoituresComponent {
           'Annonces filtrées Inactives : ',
           this.annoncesVoituresFiltreesInactives
         );
-
-        // Obtenir les informations sur le propriétaire pour chaque annonce
-        // this.annoncesVoituresFiltreesActives.forEach((annonce) => {
-        //   this.propInfo(annonce);
-        // });
-
-        // this.annoncesVoituresFiltreesInactives.forEach((annonce) => {
-        //   this.propInfo(annonce);
-        // });
-
       },
       (error) => {
         console.error(
@@ -274,6 +264,9 @@ export class VoituresComponent {
       icon: icon,
       title: title,
       text: text,
+      timer: 2000, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 }

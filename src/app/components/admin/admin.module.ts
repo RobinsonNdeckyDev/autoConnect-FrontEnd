@@ -12,7 +12,6 @@ import { AnnoncesComponent } from './annonces/annonces.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { DetailAnnonceComponent } from './detail-annonce/detail-annonce.component';
-// import { DetailVendeurComponent } from './detail-vendeur/detail-vendeur.component';
 import { DetailAcheteurComponent } from './detail-acheteur/detail-acheteur.component';
 import { AccueilAdminComponent } from './accueil-admin/accueil-admin.component';
 import { MainAdminComponent } from './main-admin/main-admin.component';
@@ -30,7 +29,6 @@ import { DataTablesModule } from 'angular-datatables';
 import { DetailProprietaireComponent } from './detail-proprietaire/detail-proprietaire.component';
 import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { FormsModule } from '@angular/forms';
-import { CommentairesComponent } from './commentaires/commentaires.component';
 import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 
 
@@ -49,7 +47,6 @@ import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
     CategoriesComponent,
     ContactsComponent,
     DetailAnnonceComponent,
-    // DetailVendeurComponent,
     DetailAcheteurComponent,
     AccueilAdminComponent,
     MainAdminComponent,
@@ -64,7 +61,6 @@ import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
     TableTestComponent,
     DetailProprietaireComponent,
     DetailProprietaireComponent,
-    CommentairesComponent,
     ProfilAdminComponent,
   ],
   imports: [CommonModule, RouterModule, AdminRoutingModule, DataTablesModule, FormsModule],

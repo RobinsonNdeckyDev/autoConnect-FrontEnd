@@ -78,9 +78,9 @@ export class MotosComponent {
 
     this.listeMotoService.getAnnonces(categorieId).subscribe(
       (response: any) => {
-        console.log("annonces motos:", response.annonces);
+        console.log('annonces motos:', response.annonces);
         this.listeMotos = response.annonces;
-        console.log("listeMotos:", this.listeMotos);
+        console.log('listeMotos:', this.listeMotos);
 
         this.annoncesMotosFiltreesInactives = this.listeMotos.filter(
           (annonceMoto) => annonceMoto.etat == etatInactive
@@ -117,7 +117,6 @@ export class MotosComponent {
       this.tabUsers = resp.proprietaire;
     });
   }
-
 
   // Variable pour stocker les utilisateurs
   tabUsers: any[] = [];
@@ -284,6 +283,9 @@ export class MotosComponent {
       icon: icon,
       title: title,
       text: text,
+      timer: 2000, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 }

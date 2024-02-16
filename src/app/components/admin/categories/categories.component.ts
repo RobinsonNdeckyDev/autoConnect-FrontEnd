@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class CategoriesComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
+  CategoriesListe: boolean = true;
   categories: any[] = [];
   nom: string = '';
 
@@ -71,7 +72,6 @@ export class CategoriesComponent implements OnInit {
   addCategorie() {
     console.log(this.nom);
 
-    
     if (this.nom == '') {
       this.alertMessage(
         'error',
@@ -113,7 +113,6 @@ export class CategoriesComponent implements OnInit {
 
   // Méthode pour éditer le blog
   editCategorie() {
-
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir cette categorie ?',
       text: 'Vous allez cette categorie !',
@@ -151,14 +150,16 @@ export class CategoriesComponent implements OnInit {
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
         console.log('La modification de la catégorie a été annulée.');
-        this.alertMessage('info', 'Annulée', 'Modification de la catégorie annulée');
+        this.alertMessage(
+          'info',
+          'Annulée',
+          'Modification de la catégorie annulée'
+        );
       }
     });
-
   }
 
-
-  // Méthode pour éditer le blog
+  // Méthode supprimer un blog
   deleteCategorie(categorieId: number) {
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir supprimer ce blog ?',
@@ -197,7 +198,7 @@ export class CategoriesComponent implements OnInit {
         this.alertMessage(
           'info',
           'Annulée',
-          'Suppression dde la catégorie annulée'
+          'Suppression de la catégorie annulée'
         );
       }
     });
@@ -214,6 +215,14 @@ export class CategoriesComponent implements OnInit {
       icon: icon,
       title: title,
       text: text,
+      timer: 2000, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
+  }
+
+  // Afficher categories
+  afficherCategories() {
+    this.CategoriesListe = !this.CategoriesListe;
   }
 }

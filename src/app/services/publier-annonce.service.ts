@@ -36,9 +36,8 @@ export class PublierAnnonceService {
     });
   }
 
- 
   // Modification d'une annonce
-  updateAnnonceOnly(id: number, annonceAjour:any): Observable<any> {
+  updateAnnonceOnly(id: number, annonceAjour: any): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');
     if (token) {
@@ -74,5 +73,21 @@ export class PublierAnnonceService {
   // Annonces Userproprietaire invalides
   getAnnonceUserInvalide(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/annonceUserInvalides`);
+  }
+
+  // Suppression d'une annonce signalée
+  // Modification d'une annonce
+  supprimerAnnonceSignale(id: number): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    return this.http.delete<any>(
+      `${this.apiUrl}/signalementDestroy${id}`,
+      {
+        headers: headers,
+      }
+    );
   }
 }

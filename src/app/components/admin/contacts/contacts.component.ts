@@ -65,7 +65,6 @@ export class ContactsComponent {
 
   // Supprimmer un abonné
   supprimerMessage(messageId: number): void {
-
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir supprimer ce contact?',
       text: 'Vous allez supprimer ce contact!',
@@ -78,33 +77,36 @@ export class ContactsComponent {
       if (result.isConfirmed) {
         // Si l'utilisateur clique sur "Oui, supprimer"
         this.listeContacts.deleteMessage(messageId).subscribe(
-      () => {
-        console.log('le message a été supprimé avec succès.');
-        // Réaliser d'autres actions après la suppression si nécessaire
-        this.alertMessage('success', 'réussie', 'Message supprimé avec succés');
+          () => {
+            console.log('le message a été supprimé avec succès.');
+            // Réaliser d'autres actions après la suppression si nécessaire
+            this.alertMessage(
+              'success',
+              'réussie',
+              'Message supprimé avec succés'
+            );
 
-        this.getContacts();
-      },
-      (error) => {
-        console.error(
-          "Une erreur s'est produite lors de la suppression du message :",
-          error
+            this.getContacts();
+          },
+          (error) => {
+            console.error(
+              "Une erreur s'est produite lors de la suppression du message :",
+              error
+            );
+            this.alertMessage(
+              'error',
+              'Oops',
+              'Erreur lors de la suppression du message'
+            );
+            // Gérer l'erreur de suppression du message
+          }
         );
-        this.alertMessage(
-          'error',
-          'Oops',
-          'Erreur lors de la suppression du message'
-        );
-        // Gérer l'erreur de suppression du message
-      }
-    );
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
         console.log('La suppression du contact a été annulée.');
         this.alertMessage('info', 'Annulée', 'Suppression du contact annulée');
       }
     });
-  
   }
 
   // Méthode pour ouvrir le modal avec le message sélectionné
@@ -125,6 +127,9 @@ export class ContactsComponent {
       icon: icon,
       title: title,
       text: text,
+      timer: 2000, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 }

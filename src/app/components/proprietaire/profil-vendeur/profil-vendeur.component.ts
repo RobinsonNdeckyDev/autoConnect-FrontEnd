@@ -68,15 +68,8 @@ export class ProfilVendeurComponent implements OnInit {
 
   // Envoie de la mise à jour du profil
   onSubmit(): void {
-
     // test
     console.log(this.imageCheck);
-    // console.log(this.userConnected.prenom);
-    // console.log(this.userConnected.email);
-    // console.log(this.userConnected.adresse);
-    // console.log(this.userConnected.telephone);
-    // console.log(this.userConnected.description);
-    // console.log(this.userConnected.image);
 
     // Envoyer les modifications au backend
     if (this.proprietaireId) {
@@ -87,74 +80,64 @@ export class ProfilVendeurComponent implements OnInit {
           : this.proprietaireId;
       console.log('proprietaireIdNumber: ', proprietaireIdNumber);
 
+      Swal.fire({
+        title: 'Êtes-vous sûr de vouloir modifier votre profil ?',
+        text: 'Vous allez modifier votre profil !',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0F42A8',
+        cancelButtonColor: 'black',
+        confirmButtonText: 'Oui, modifier',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let proprietaireData = {
+            nom: this.userConnected.nom,
+            prenom: this.userConnected.prenom,
+            email: this.userConnected.email,
+            telephone: this.userConnected.telephone,
+            description: this.userConnected.description,
+            adresse: this.userConnected.adresse,
+            image: this.imageCheck as Blob,
+            role: 'proprietaire',
+          };
 
-     Swal.fire({
-       title: 'Êtes-vous sûr de vouloir modifier votre profil ?',
-       text: 'Vous allez modifier votre profil !',
-       icon: 'warning',
-       showCancelButton: true,
-       confirmButtonColor: '#0F42A8',
-       cancelButtonColor: 'black',
-       confirmButtonText: 'Oui, modifier',
-     }).then((result) => {
-       if (result.isConfirmed) {
-        // Si l'utilisateur clique sur "Oui, modifier"
-        // let proprietaireData = new FormData();
-        // proprietaireData.append('nom', this.userConnected.nom);
-        // proprietaireData.append('prenom', this.userConnected.prenom);
-        // proprietaireData.append('email', this.userConnected.email);
-        // proprietaireData.append('telephone', this.userConnected.telephone);
-        // proprietaireData.append('adresse', this.userConnected.adresse);
-        // proprietaireData.append('description', this.userConnected.description);
-        // proprietaireData.append('role', 'proprietaire');
-        // proprietaireData.append('image', this.userConnected.image);
+          console.log('proprietaireData: ', proprietaireData);
 
-
-         let proprietaireData = {
-           nom: this.userConnected.nom,
-           prenom: this.userConnected.prenom,
-           email: this.userConnected.email,
-           telephone: this.userConnected.telephone,
-           description: this.userConnected.description,
-           adresse: this.userConnected.adresse,
-           image: this.imageCheck as Blob,
-           role: 'proprietaire',
-         };
-
-         console.log('proprietaireData: ', proprietaireData);
-
-         // injestion dans le service
-         this.proprietaireService
-           .userUpdateDetail(this.userConnected.id, proprietaireData)
-           .subscribe(
-             (response) => {
-               console.log('reponse: ', response);
-               this.alertMessage(
-                 'success',
-                 'Modifié',
-                 'Profil modifié avec succés'
-               );
-               this.viderChamps();
-               this.getuserConnected();
-               this.testConnected();
-             },
-             (error) => {
-               console.log(error);
-               this.alertMessage(
-                 'error',
-                 'Oops',
-                 'Une erreur est survenue lors de la modification du profil'
-               );
-             }
-           );
-       } else if (result.dismiss === Swal.DismissReason.cancel) {
-         // Si l'utilisateur clique sur "Annuler"
-         console.log('La modification du profil a été annulée.');
-         this.alertMessage('info', 'Annulée', 'modification du profil annulée');
-         this.viderChamps();
-       }
-     });
-
+          // injestion dans le service
+          this.proprietaireService
+            .userUpdateDetail(this.userConnected.id, proprietaireData)
+            .subscribe(
+              (response) => {
+                console.log('reponse: ', response);
+                this.alertMessage(
+                  'success',
+                  'Modifié',
+                  'Profil modifié avec succés'
+                );
+                this.viderChamps();
+                this.getuserConnected();
+                this.testConnected();
+              },
+              (error) => {
+                console.log(error);
+                this.alertMessage(
+                  'error',
+                  'Oops',
+                  'Une erreur est survenue lors de la modification du profil'
+                );
+              }
+            );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Si l'utilisateur clique sur "Annuler"
+          console.log('La modification du profil a été annulée.');
+          this.alertMessage(
+            'info',
+            'Annulée',
+            'modification du profil annulée'
+          );
+          this.viderChamps();
+        }
+      });
     }
   }
 
@@ -163,7 +146,6 @@ export class ProfilVendeurComponent implements OnInit {
     this.imageCheck = event.target.files[0] as File;
     console.warn(event.target.files[0]);
   }
-
 
   // Vider champs
   viderChamps() {
@@ -181,6 +163,9 @@ export class ProfilVendeurComponent implements OnInit {
       icon: icon,
       title: title,
       text: text,
+      timer: 1800, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 }

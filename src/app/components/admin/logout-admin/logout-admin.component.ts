@@ -15,7 +15,6 @@ export class LogoutAdminComponent {
   ) {}
 
   logout(): void {
-
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir vous déconnecter ?',
       text: 'Vous ne pourrez pas revenir en arrière !',
@@ -26,7 +25,6 @@ export class LogoutAdminComponent {
       confirmButtonText: 'Oui, me déconnecter',
     }).then((result) => {
       if (result.isConfirmed) {
-
         this.authService.logout().subscribe(
           (response) => {
             console.log(response);
@@ -50,9 +48,7 @@ export class LogoutAdminComponent {
         );
       }
     });
-
   }
-
 
   // alert message
   alertMessage(icon: any, title: any, text: any) {
@@ -60,6 +56,9 @@ export class LogoutAdminComponent {
       icon: icon,
       title: title,
       text: text,
+      timer: 2000, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 }

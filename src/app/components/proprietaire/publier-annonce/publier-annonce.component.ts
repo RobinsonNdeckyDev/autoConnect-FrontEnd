@@ -20,9 +20,8 @@ export class PublierAnnonceComponent {
     private route: ActivatedRoute
   ) {}
 
-
   ngOnInit(): void {
-      this.getCategories();
+    this.getCategories();
   }
 
   // Attributs
@@ -48,25 +47,23 @@ export class PublierAnnonceComponent {
   image4!: File;
 
   //Liste des années de 2000 à 2024
-  years: number[] = Array.from({length: 25}, (_, index) => 2000 + index);
-
+  years: number[] = Array.from({ length: 25 }, (_, index) => 2000 + index);
 
   // Liste des categories
   Categories: any[] = [];
 
-
   // Liste des catégories
-  getCategories(){
+  getCategories() {
     this.listeCategories.getCategoriesProp().subscribe(
       (response: any) => {
-        console.log("Liste des catégories: ", response.categories);
+        console.log('Liste des catégories: ', response.categories);
         this.Categories = response.categories;
-        console.log("Categories", this.Categories);
+        console.log('Categories', this.Categories);
       },
       (error) => {
-        console.log("Erreur lors de la récupération des catégories: ", error);
+        console.log('Erreur lors de la récupération des catégories: ', error);
       }
-    )
+    );
   }
 
   // ajouter une annonce
@@ -139,7 +136,7 @@ export class PublierAnnonceComponent {
         'Merci de renseigner des infos sur le moteur'
       );
       return;
-    } else if (this.annee == "") {
+    } else if (this.annee == '') {
       this.alertMessage(
         'error',
         'Oops',
@@ -167,9 +164,7 @@ export class PublierAnnonceComponent {
   }
 
   // registerAnnonce
-  registerAnnonce(){
-
-
+  registerAnnonce() {
     let nouvelleAnnonce = {
       nom: this.nom,
       marque: this.marque,
@@ -194,7 +189,7 @@ export class PublierAnnonceComponent {
       signalements: [],
     };
 
-    console.log("new annonce avant ajout: ", nouvelleAnnonce);
+    console.log('new annonce avant ajout: ', nouvelleAnnonce);
 
     let formData = new FormData();
     Object.entries(nouvelleAnnonce).forEach(([key, value]) => {
@@ -215,11 +210,7 @@ export class PublierAnnonceComponent {
         console.log(error);
       }
     );
-
-
   }
-
-  
 
   // vider champs
   viderChamps() {
@@ -228,10 +219,10 @@ export class PublierAnnonceComponent {
     this.couleur = '';
     this.description = '';
     this.prix = 0;
-    this.nbrePlace = "";
+    this.nbrePlace = '';
     this.localisation = '';
     this.moteur = '';
-    this.annee = "";
+    this.annee = '';
     this.carburant = '';
     this.carosserie = '';
     this.kilometrage = '';
@@ -245,6 +236,9 @@ export class PublierAnnonceComponent {
       icon: icon,
       title: title,
       text: text,
+      timer: 1800, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 

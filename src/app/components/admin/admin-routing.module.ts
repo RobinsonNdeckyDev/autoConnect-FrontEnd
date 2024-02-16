@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-// import { Routes } from '@angular/router';
 import { AccueilAdminComponent } from './accueil-admin/accueil-admin.component';
 import { MainAdminComponent } from './main-admin/main-admin.component';
 import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
@@ -22,9 +21,7 @@ import { DtsMotoComponent } from './dts-moto/dts-moto.component';
 import { DtsUtilitaireComponent } from './dts-utilitaire/dts-utilitaire.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { DetailProprietaireComponent } from './detail-proprietaire/detail-proprietaire.component';
-import { CommentairesComponent } from './commentaires/commentaires.component';
 import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
-// import { DetailVendeurComponent } from './detail-vendeur/detail-vendeur.component';
 
 const routes: Routes = [
   {
@@ -38,7 +35,6 @@ const routes: Routes = [
         path: 'detailProprietaire/:id',
         component: DetailProprietaireComponent,
       },
-      // { path: 'detailVendeur/:id', component: DetailVendeurComponent},
       {
         path: 'annonces',
         children: [
@@ -76,7 +72,6 @@ const routes: Routes = [
       { path: 'utilisateurs/acheteurs', component: AcheteursComponent },
       { path: 'detail annonce', component: DetailAnnonceComponent },
       { path: 'signalements', component: SignalementsComponent },
-      { path: 'commentaires', component: CommentairesComponent },
       { path: 'proprietaires', component: VendeursComponent },
       { path: 'acheteurs', component: AcheteursComponent },
       { path: '', redirectTo: 'Accueil_Admin', pathMatch: 'full' },

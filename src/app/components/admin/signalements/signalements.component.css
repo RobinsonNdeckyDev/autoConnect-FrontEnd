@@ -42,3 +42,66 @@
 .card-body img{
     height: 200px;
 }
+
+
+/* =============================================== Modal signalement ============================================== */
+
+
+.imgAnnonce{
+    height: 150px !important;
+    width: 100%;
+}
+
+#detailSignalement .modal-header{
+    border-bottom: 2px solid #0F42A8;
+}
+
+#detailSignalement .modal-header h1{
+    color: #0F42A8;
+}
+
+#detailSignalement .modal-header i {
+    color: #0F42A8;
+    font-size: 35px;
+}
+
+#detailSignalement .modal-body .userContain img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #0F42A8;
+    margin-bottom: 15px;
+}
+
+#detailSignalement .modal-body .infoDetails h4{
+    color: #0F42A8;
+    letter-spacing: 2px;
+}
+
+#detailSignalement .modal-body hr{
+    background-color: #0F42A8;
+    height: 2px;
+}
+
+#detailSignalement .modal-body h6{
+    color: #0F42A8;
+}
+
+#detailSignalement .modal-footer{
+    border-top: 2px solid #0F42A8;
+}
+
+#detailSignalement .modal-footer .btnsFooter{
+    display: flex;
+    justify-content: space-between;
+}
+
+#detailSignalement .modal-footer .btnsFooter .btnDelete{
+    background-color: #0F42A8;
+    color: white;
+}
+
+#detailSignalement .modal-footer .btnsFooter .btnClose {
+    background-color: black;
+    color: white;
+}
