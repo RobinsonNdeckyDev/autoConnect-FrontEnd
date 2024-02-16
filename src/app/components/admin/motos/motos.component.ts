@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ListeCategoriesService } from 'src/app/services/liste-categories.service';
 import { ListeMotosService } from 'src/app/services/liste-motos.service';
 import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { PublierAnnonceService } from 'src/app/services/publier-annonce.service';
@@ -18,6 +19,7 @@ export class MotosComponent {
   listeMotos: any[] = [];
   listeMotosActives: any[] = [];
   annoncesMotosFiltrees: any[] = [];
+  categories: any[] = [];
 
   // Variable pour stocker l'annonce sélectionné
   annonceSelectionnee: any;
@@ -30,6 +32,7 @@ export class MotosComponent {
     public listeMotoService: ListeMotosService,
     private proprietaireService: ListeUsersService,
     private annonceServiceEtat: PublierAnnonceService,
+    private listeCategories: ListeCategoriesService,
     private http: HttpClient
   ) {}
 
@@ -42,25 +45,48 @@ export class MotosComponent {
 
     // initialisation de la liste des proprietaires
     this.listeProprietaire();
+
+    this.getCategories();
+  }
+
+  // Liste Categories
+  getCategories(): void {
+    this.listeCategories.getCategories().subscribe(
+      (response: any) => {
+        // Affiche le tableau des categories dans la console
+        console.log(response.categories);
+
+        // accéder à l'array categorie
+        this.categories = response.categories;
+      },
+      (error) => {
+        console.error(
+          "Une erreur s'est produite lors de la récupération des categories : ",
+          error
+        );
+      }
+    );
   }
 
   // Liste des voitures
   listesAnnonces(): void {
-    // Remplacez par l'ID de la catégorie dont vous souhaitez récupérer les annonces
-    const categorieId = 2;
+    // Remplacez par l'ID de la catégorie POUR récupérer les annonces
+    let categorieId = 8;
+    // console.log(typeof(categorieId));
     const etatActive = 'accepter';
-    const etatInactive = 'Refuser';
+    const etatInactive = 'refuser';
 
     this.listeMotoService.getAnnonces(categorieId).subscribe(
       (response: any) => {
-        console.log(response.annonces);
+        console.log("annonces motos:", response.annonces);
         this.listeMotos = response.annonces;
+        console.log("listeMotos:", this.listeMotos);
 
         this.annoncesMotosFiltreesInactives = this.listeMotos.filter(
-          (annonceMoto) => annonceMoto.etat === etatInactive
+          (annonceMoto) => annonceMoto.etat == etatInactive
         );
         console.log(
-          'Annonces filtrées motos Actives : ',
+          'Annonces filtrées motos Inactives : ',
           this.annoncesMotosFiltreesInactives
         );
 
@@ -91,6 +117,7 @@ export class MotosComponent {
       this.tabUsers = resp.proprietaire;
     });
   }
+
 
   // Variable pour stocker les utilisateurs
   tabUsers: any[] = [];
@@ -235,8 +262,8 @@ export class MotosComponent {
   filtrerMotosActives(): void {
     const recherche = this.searchTermActive.toLowerCase();
     console.log(recherche);
-    this.annoncesMotosFiltreesActives = this.listeMotos.filter(
-      (moto) => moto.nom.toLowerCase().includes(recherche)
+    this.annoncesMotosFiltreesActives = this.listeMotos.filter((moto) =>
+      moto.nom.toLowerCase().includes(recherche)
     );
     console.log('resultat recherche: ', this.annoncesMotosFiltreesActives);
   }
@@ -245,8 +272,8 @@ export class MotosComponent {
   filtrerMotosInactives(): void {
     const recherche = this.searchTermInactive.toLowerCase();
     console.log(recherche);
-    this.annoncesMotosFiltreesInactives = this.listeMotos.filter(
-      (moto) => moto.nom.toLowerCase().includes(recherche)
+    this.annoncesMotosFiltreesInactives = this.listeMotos.filter((moto) =>
+      moto.nom.toLowerCase().includes(recherche)
     );
     console.log('resultat recherche: ', this.annoncesMotosFiltreesInactives);
   }

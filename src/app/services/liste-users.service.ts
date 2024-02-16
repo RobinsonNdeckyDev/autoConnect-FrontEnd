@@ -65,6 +65,7 @@ export class ListeUsersService {
   //   });
   // }
 
+  // Modifier le profil du proprietaire
   userUpdateDetail(id: number, proprietaireData: any): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');

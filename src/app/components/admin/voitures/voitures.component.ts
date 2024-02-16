@@ -1,7 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { error, event } from 'jquery';
-import { AuthenticationService } from 'src/app/services/authentification.service';
 import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { ListeVoituresService } from 'src/app/services/liste-voitures.service';
 import { PublierAnnonceService } from 'src/app/services/publier-annonce.service';
@@ -18,6 +15,10 @@ export class VoituresComponent {
   listeVoituresActives: any[] = [];
   annoncesVoituresFiltreesActives: any[] = [];
   annoncesVoituresFiltreesInactives: any[] = [];
+
+  // Variable pour stocker les proprietaires
+  tabProprietaires: any[] = [];
+  infoProprietaire: any;
 
   // Variable pour stocker l'annonce sélectionné
   annonceSelectionnee: any;
@@ -42,9 +43,6 @@ export class VoituresComponent {
 
     // initialisation de la liste des proprietaires
     this.listeProprietaire();
-
-    // propInfo
-    // this.propInfo();
   }
 
   // Liste des voitures
@@ -75,6 +73,16 @@ export class VoituresComponent {
           'Annonces filtrées Inactives : ',
           this.annoncesVoituresFiltreesInactives
         );
+
+        // Obtenir les informations sur le propriétaire pour chaque annonce
+        // this.annoncesVoituresFiltreesActives.forEach((annonce) => {
+        //   this.propInfo(annonce);
+        // });
+
+        // this.annoncesVoituresFiltreesInactives.forEach((annonce) => {
+        //   this.propInfo(annonce);
+        // });
+
       },
       (error) => {
         console.error(
@@ -91,13 +99,9 @@ export class VoituresComponent {
   listeProprietaire() {
     // on recupere la liste des utilisateurs
     this.proprietaireService.getProprietaires().subscribe((resp: any) => {
-      this.tabUsers = resp.proprietaire;
+      this.tabProprietaires = resp.proprietaire;
     });
   }
-
-  // Variable pour stocker les utilisateurs
-  tabUsers: any[] = [];
-  infoProprietaire: any;
 
   // Méthode pour afficher les details d'une annonce
   afficherDetailAnnonce(voiture: any) {
@@ -110,9 +114,10 @@ export class VoituresComponent {
     this.propInfo();
   }
 
+  // Informations du proprietaire
   propInfo() {
     // / On recherche le propriétaire qui a les infos de user_id
-    this.infoProprietaire = this.tabUsers.find(
+    this.infoProprietaire = this.tabProprietaires.find(
       (user: any) => user.id === this.annonceSelectionnee.user_id
     );
     console.log(
@@ -263,7 +268,6 @@ export class VoituresComponent {
     console.log('resultat recherche: ', this.annoncesVoituresFiltreesActives);
   }
 
-  
   // Alert message
   alertMessage(icon: any, title: any, text: any) {
     Swal.fire({

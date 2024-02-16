@@ -1,5 +1,9 @@
+import { getLocaleCurrencyCode } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { error } from 'jquery';
+import { ListeCategoriesService } from 'src/app/services/liste-categories.service';
 import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { PublierAnnonceService } from 'src/app/services/publier-annonce.service';
 import Swal from 'sweetalert2';
@@ -20,11 +24,45 @@ export class AnnoncesVendeursComponent {
   infoProprietaire: any;
   // Infos annonce sélectionnée
   infoAnnonceSelected: any;
+  // Variable pour stocker les infos de l'utilisateur connecté à partir du localstorage
+  currentUser: any;
+
+  // Attributs pour modifier une annonce
+  nom: string = '';
+  marque: string = '';
+  couleur: string = '';
+  etat: string = 'refuser';
+  image!: File;
+  prix!: number;
+  description = '';
+  climatisation: string = '';
+  kilometrage: string = '';
+  nbrePlace: string = '';
+  localisation: string = '';
+  moteur: string = '';
+  annee: string = '';
+  carburant: string = '';
+  carosserie: string = '';
+  categorie_id: number = 0;
+  image1!: File;
+  image2!: File;
+  image3!: File;
+  image4!: File;
+
+  //Liste des années de 2000 à 2024
+  years: number[] = Array.from({ length: 25 }, (_, index) => 2000 + index);
+
+  // Liste des categories
+  Categories: any[] = [];
+
+  // Conrecteur
 
   constructor(
     private route: ActivatedRoute,
     private annoncesValidesProps: PublierAnnonceService,
-    private proprietaireService: ListeUsersService
+    private updateAnnonceService: PublierAnnonceService,
+    private proprietaireService: ListeUsersService,
+    private listeCategories: ListeCategoriesService
   ) {}
 
   afficherAnnonces() {
@@ -35,12 +73,20 @@ export class AnnoncesVendeursComponent {
     // annonces valides
     this.annoncesValides();
     this.annoncesInvalides();
+    this.getInfoCurrentUser();
     this.listeProprietaire();
-    // this.afficherDetailAnnonceValide(this.annonces);
+    this.getCategories();
+  }
+
+
+  // methode pour les infos du user connecté
+  getInfoCurrentUser(){
+    let info: any = localStorage.getItem("currentUser");
+    this.currentUser = JSON.parse(info);
+    console.log("info currentUser: ", this.currentUser);
   }
 
   // Annonces valides
-
   annoncesValides() {
     this.annoncesValidesProps.getAnnonceUserValide().subscribe(
       (response: any) => {
@@ -84,7 +130,7 @@ export class AnnoncesVendeursComponent {
     console.log('Annonce sélectionnée: ', this.annonceSelectionnee);
 
     // on stocke les infos de l'annonce selectionnée dans infoAnnonceselected
-    this.infoAnnonceSelected = this.validesAnnonces.find(
+    this.infoAnnonceSelected = this.invalidesAnnonces.find(
       (annonce) => annonce.id === this.annonceSelectionnee
     );
     console.log('info annonce selected: ', this.infoAnnonceSelected);
@@ -254,5 +300,150 @@ export class AnnoncesVendeursComponent {
       title: title,
       text: text,
     });
+  }
+
+  // Methode pour la modification d'une annonce
+  getCategories() {
+    this.listeCategories.getCategoriesProp().subscribe(
+      (response: any) => {
+        console.log('Liste des catégories: ', response.categories);
+        this.Categories = response.categories;
+        console.log('Categories', this.Categories);
+      },
+      (error) => {
+        console.log('Erreur lors de la récupération des catégories: ', error);
+      }
+    );
+  }
+
+
+  // Méthode pour mettre à jour une annonce
+  annonceUpdateOnly(idAnnonce: number){
+    console.log("L'identifiant de l'annonce est: ", this.infoAnnonceSelected.id);
+
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir modifier cette annonce ?',
+      text: 'Vous allez modifier cette annonce !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, modifier',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, modifier"
+        let annonceAjour = {
+          nom: this.infoAnnonceSelected.nom,
+          marque: this.infoAnnonceSelected.marque,
+          couleur: this.infoAnnonceSelected.couleur,
+          image: this.infoAnnonceSelected.image as File,
+          prix: this.infoAnnonceSelected.prix,
+          description: this.infoAnnonceSelected.description,
+          nbrePlace: this.infoAnnonceSelected.nbrePlace,
+          localisation: this.infoAnnonceSelected.localisation,
+          moteur: this.infoAnnonceSelected.moteur,
+          annee: this.infoAnnonceSelected.annee,
+          etat: this.infoAnnonceSelected.etat,
+          carburant: this.infoAnnonceSelected.carburant,
+          carosserie: this.infoAnnonceSelected.carosserie,
+          kilometrage: this.infoAnnonceSelected.kilometrage,
+          climatisation: this.infoAnnonceSelected.climatisation,
+          categorie_id: this.infoAnnonceSelected.categorie_id,
+          image1: this.infoAnnonceSelected.image1 as File,
+          image2: this.infoAnnonceSelected.image2 as File,
+          image3: this.infoAnnonceSelected.image3 as File,
+          image4: this.infoAnnonceSelected.image4 as File,
+          commentaires: [],
+          signalements: [],
+        };
+
+        console.log('new annonce avant ajout: ', annonceAjour);
+
+        this.updateAnnonceService
+          .updateAnnonceOnly(idAnnonce, annonceAjour)
+          .subscribe(
+            (response) => {
+              console.log(response);
+              this.annoncesInvalides();
+              this.alertMessage(
+                'success',
+                'Modifiée',
+                'Annonce modifié avec succés'
+              );
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log("La modification de l'annonce a été annulée.");
+        this.alertMessage(
+          'info',
+          'Annulée',
+          "modification de l'annonce annulée"
+        );
+      }
+    });
+
+
+
+
+
+
+
+
+    
+    
+    
+  }
+
+  // File img
+  onFileChange(event: any) {
+    console.warn(event.target.files[0]);
+    this.image = event.target.files[0] as File;
+  }
+
+  // File img1
+  img1(event: any) {
+    this.image1 = event.target.files[0] as File;
+    console.warn(event.target.files[0]);
+  }
+
+  // File img1
+  img2(event: any) {
+    this.image2 = event.target.files[0] as File;
+    console.warn(event.target.files[0]);
+  }
+
+  // File img1
+  img3(event: any) {
+    this.image3 = event.target.files[0] as File;
+    console.warn(event.target.files[0]);
+  }
+
+  // File img1
+  img4(event: any) {
+    this.image4 = event.target.files[0] as File;
+    console.warn(event.target.files[0]);
+  }
+
+  // vider champs
+  viderChamps() {
+    this.nom = '';
+    this.marque = '';
+    this.couleur = '';
+    this.description = '';
+    this.prix = 0;
+    this.nbrePlace = '';
+    this.localisation = '';
+    this.moteur = '';
+    this.annee = '';
+    this.carburant = '';
+    this.carosserie = '';
+    this.kilometrage = '';
+    this.climatisation = '';
+    this.categorie_id = 0;
   }
 }

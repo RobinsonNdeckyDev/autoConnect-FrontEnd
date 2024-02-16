@@ -19,7 +19,7 @@ export class ProfilVendeurComponent implements OnInit {
   telephone: string = '';
   adresse: string = '';
   description: string = '';
-  image!: File;
+  imageCheck!: File;
 
   constructor(private proprietaireService: ListeUsersService) {}
 
@@ -70,12 +70,13 @@ export class ProfilVendeurComponent implements OnInit {
   onSubmit(): void {
 
     // test
-    console.log(this.nom);
-    console.log(this.prenom);
-    console.log(this.email);
-    console.log(this.adresse);
-    console.log(this.telephone);
-    console.log(this.description);
+    console.log(this.imageCheck);
+    // console.log(this.userConnected.prenom);
+    // console.log(this.userConnected.email);
+    // console.log(this.userConnected.adresse);
+    // console.log(this.userConnected.telephone);
+    // console.log(this.userConnected.description);
+    // console.log(this.userConnected.image);
 
     // Envoyer les modifications au backend
     if (this.proprietaireId) {
@@ -97,7 +98,18 @@ export class ProfilVendeurComponent implements OnInit {
        confirmButtonText: 'Oui, modifier',
      }).then((result) => {
        if (result.isConfirmed) {
-         // Si l'utilisateur clique sur "Oui, modifier"
+        // Si l'utilisateur clique sur "Oui, modifier"
+        // let proprietaireData = new FormData();
+        // proprietaireData.append('nom', this.userConnected.nom);
+        // proprietaireData.append('prenom', this.userConnected.prenom);
+        // proprietaireData.append('email', this.userConnected.email);
+        // proprietaireData.append('telephone', this.userConnected.telephone);
+        // proprietaireData.append('adresse', this.userConnected.adresse);
+        // proprietaireData.append('description', this.userConnected.description);
+        // proprietaireData.append('role', 'proprietaire');
+        // proprietaireData.append('image', this.userConnected.image);
+
+
          let proprietaireData = {
            nom: this.userConnected.nom,
            prenom: this.userConnected.prenom,
@@ -105,7 +117,7 @@ export class ProfilVendeurComponent implements OnInit {
            telephone: this.userConnected.telephone,
            description: this.userConnected.description,
            adresse: this.userConnected.adresse,
-           image: this.userConnected.image as Blob,
+           image: this.imageCheck as Blob,
            role: 'proprietaire',
          };
 
@@ -113,7 +125,7 @@ export class ProfilVendeurComponent implements OnInit {
 
          // injestion dans le service
          this.proprietaireService
-           .userUpdateDetail(proprietaireIdNumber, proprietaireData)
+           .userUpdateDetail(this.userConnected.id, proprietaireData)
            .subscribe(
              (response) => {
                console.log('reponse: ', response);
@@ -143,38 +155,12 @@ export class ProfilVendeurComponent implements OnInit {
        }
      });
 
-
-    // if (this.nom == '') {
-    //   this.alertMessage('error', 'Oops!', 'Merci de renseigner le nom');
-    //   return;
-    // } else if (this.prenom == '') {
-    //   this.alertMessage('error', 'Oops!', 'Merci de renseigner le prenom');
-    //   return;
-    // } else if (this.email == '') {
-    //   this.alertMessage('error', 'Oops!', 'Merci de renseigner l\'email');
-    //   return;
-    // } else if (this.adresse == '') {
-    //   this.alertMessage('error', 'Oops!', 'Merci de renseigner l\'adresse');
-    //   return;
-    // } else if (this.telephone == '') {
-    //   this.alertMessage('error', 'Oops!', 'Merci de renseigner le numéro de telephone');
-    //   return;
-    // } else if (this.description == '') {
-    //   this.alertMessage('error', 'Oops!', 'Merci de renseigner votre description');
-    //   return;
-    // }else{
-
-     
-
-    // }
-
-
     }
   }
 
   // File img1
   profilAdd(event: any) {
-    this.image = event.target.files[0] as File;
+    this.imageCheck = event.target.files[0] as File;
     console.warn(event.target.files[0]);
   }
 

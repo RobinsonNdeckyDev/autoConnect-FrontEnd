@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'jquery';
 import { Annonce } from 'src/app/models/annonce';
+import { ListeCategoriesService } from 'src/app/services/liste-categories.service';
 // import { ActivatedRoute } from '@angular/router';
 import { PublierAnnonceService } from 'src/app/services/publier-annonce.service';
 import Swal from 'sweetalert2';
@@ -15,8 +16,14 @@ import Swal from 'sweetalert2';
 export class PublierAnnonceComponent {
   constructor(
     private publierAnnonce: PublierAnnonceService,
+    private listeCategories: ListeCategoriesService,
     private route: ActivatedRoute
   ) {}
+
+
+  ngOnInit(): void {
+      this.getCategories();
+  }
 
   // Attributs
   nom: string = '';
@@ -28,21 +35,41 @@ export class PublierAnnonceComponent {
   description = '';
   climatisation: string = '';
   kilometrage: string = '';
-  nbrePlace!: number;
+  nbrePlace: string = '';
   localisation: string = '';
   moteur: string = '';
-  annee!: number;
+  annee: string = '';
   carburant: string = '';
   carosserie: string = '';
-  transmission: string = '';
   categorie_id: number = 0;
   image1!: File;
   image2!: File;
   image3!: File;
   image4!: File;
 
-  // Utilisateur connecté
+  //Liste des années de 2000 à 2024
+  years: number[] = Array.from({length: 25}, (_, index) => 2000 + index);
 
+
+  // Liste des categories
+  Categories: any[] = [];
+
+
+  // Liste des catégories
+  getCategories(){
+    this.listeCategories.getCategoriesProp().subscribe(
+      (response: any) => {
+        console.log("Liste des catégories: ", response.categories);
+        this.Categories = response.categories;
+        console.log("Categories", this.Categories);
+      },
+      (error) => {
+        console.log("Erreur lors de la récupération des catégories: ", error);
+      }
+    )
+  }
+
+  // ajouter une annonce
   addAnnonce() {
     this.validateForm();
 
@@ -51,8 +78,7 @@ export class PublierAnnonceComponent {
     this.viderChamps();
   }
 
-
-
+  // Validation des champs
   validateForm() {
     if (this.nom == '') {
       this.alertMessage(
@@ -113,7 +139,7 @@ export class PublierAnnonceComponent {
         'Merci de renseigner des infos sur le moteur'
       );
       return;
-    } else if (this.annee == 0) {
+    } else if (this.annee == "") {
       this.alertMessage(
         'error',
         'Oops',
@@ -140,8 +166,9 @@ export class PublierAnnonceComponent {
     }
   }
 
-
+  // registerAnnonce
   registerAnnonce(){
+
 
     let nouvelleAnnonce = {
       nom: this.nom,
@@ -157,7 +184,6 @@ export class PublierAnnonceComponent {
       carburant: this.carburant,
       carosserie: this.carosserie,
       kilometrage: this.kilometrage,
-      transmission: this.transmission,
       climatisation: this.climatisation,
       categorie_id: this.categorie_id,
       image1: this.image1 as File,
@@ -186,7 +212,7 @@ export class PublierAnnonceComponent {
       },
       (error) => {
         console.log("Oops l'annonce n'a pas été créee");
-        console.log(error.annonce);
+        console.log(error);
       }
     );
 
@@ -202,14 +228,13 @@ export class PublierAnnonceComponent {
     this.couleur = '';
     this.description = '';
     this.prix = 0;
-    this.nbrePlace = 0;
+    this.nbrePlace = "";
     this.localisation = '';
     this.moteur = '';
-    this.annee = 0;
+    this.annee = "";
     this.carburant = '';
     this.carosserie = '';
     this.kilometrage = '';
-    this.transmission = '';
     this.climatisation = '';
     this.categorie_id = 0;
   }

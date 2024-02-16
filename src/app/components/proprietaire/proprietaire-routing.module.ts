@@ -7,6 +7,7 @@ import { ProfilVendeurComponent } from './profil-vendeur/profil-vendeur.componen
 import { DetailAnnoncePropComponent } from './detail-annonce-prop/detail-annonce-prop.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { PublierAnnonceComponent } from './publier-annonce/publier-annonce.component';
+// import { ModifierAnnonceComponent } from './modifier-annonce/modifier-annonce.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
         children: [
           { path: '', component: AnnoncesVendeursComponent },
           { path: 'detailAnnonce', component: DetailAnnoncePropComponent },
+          // { path: 'modifierAnnonce', component: ModifierAnnonceComponent },
         ],
       },
       { path: 'mon_profil', component: ProfilVendeurComponent },

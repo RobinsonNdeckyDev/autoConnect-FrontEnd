@@ -19,6 +19,15 @@ export class ListeCategoriesService {
     return this.http.get<any[]>(`${this.apiUrl}/categories`);
   }
 
+  getCategoriesProp(): Observable<any[]> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    return this.http.get<any[]>(`${this.apiUrl}/listeCategories`);
+  }
+
   // Ajout blog
   addCategorie(newCategorie: any): Observable<any[]> {
     let headers = new HttpHeaders();
@@ -35,7 +44,6 @@ export class ListeCategoriesService {
     );
   }
 
-  
   // Méthode pour modifier un blog
   modifierCategorie(id: number, newData: any): Observable<any> {
     const url = `${this.apiUrl}/categorieUpdate${id}`; // Utilisation de l'ID fourni dans l'URL

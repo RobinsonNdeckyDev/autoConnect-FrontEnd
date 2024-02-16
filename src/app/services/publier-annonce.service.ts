@@ -23,7 +23,7 @@ export class PublierAnnonceService {
     });
   }
 
-  // Mettre à jour une annonce
+  // Mettre à jour l'etat d'une annonce
   updateAnnonceState(annonceId: number, newState: string): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');
@@ -34,6 +34,19 @@ export class PublierAnnonceService {
     return this.http.patch(`${this.apiUrl}/updateEtataAnnonce${annonceId}`, {
       etat: newState,
     });
+  }
+
+ 
+  // Modification d'une annonce
+  updateAnnonceOnly(id: number, annonceAjour:any): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    // Utilisation de l'ID fourni dans l'URL
+    const url = `${this.apiUrl}/annonceUpdate${id}`;
+    return this.http.patch(url, annonceAjour);
   }
 
   // Annonces proprietaire valides

@@ -3,6 +3,8 @@
 
     <div class="cars shadow py-3 px-4 rounded-4" *ngIf="annonces">
         <p class="text-dark"><i class="fa-regular fa-hand-point-right iconhand"></i>Liste annonces Inactives</p>
+
+
         <div class="d-flex annoncesHead">
             <div>
                 <button class="btn btn-active" (click)="afficherAnnonces()">Voir liste des annonces Actives</button>
@@ -14,16 +16,21 @@
             </div>
         </div>
 
+        <div *ngIf="annoncesMotosFiltreesInactives.length === 0">
+            <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces pour l'instant...</p>
+        </div>
+
         <div class="row mb-3 mt-4">
-            <div class="col-12 col-md-4 g-3" *ngFor="let moto of annoncesMotosFiltreesInactives">
+            <div class="col-12 col-md-3 g-3" *ngFor="let moto of annoncesMotosFiltreesInactives">
                 <div class="card rounded-3">
                     <div class="card-head mx-3 mt-3">
                         <p class="nomCar"> {{moto?.nom}} </p>
-                        <img src="http://127.0.0.1:8000/images/{{infoProprietaire?.image}}" class="img-fluid" alt="">
+                        <!-- <img src="http://127.0.0.1:8000/images/{{infoProprietaire?.image}}" class="img-fluid" alt=""> -->
+                        <p class="fw-lighter"> {{moto.prix}} Fcfa</p>
                     </div>
             
                     <div class="card-body">
-                        <img src="http://127.0.0.1:8000/images/{{moto?.image2}}" alt="" class="img-fluid imgAnnonce">
+                        <img src="http://127.0.0.1:8000/images/{{moto?.image2}}" alt="" class="img-fluid imgAnnonce rounded-4">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             (click)="afficherDetailAnnonce(moto)">Voir détail</button>
                     </div>
@@ -31,23 +38,6 @@
             </div>
         </div>
 
-        <nav class="pagine mt-4 mb-2 p-0 d-flex justify-content-end">
-            <ul class="pagination m-0 ">
-                <li class="page-item">
-                    <a class="page-link"><i class="fa-solid fa-angles-left"></i></a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item" aria-current="page">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#"><i class="fa-solid fa-angles-right"></i></a>
-                </li>
-            </ul>
-        </nav>
     </div>
 
 
@@ -65,17 +55,22 @@
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
         </div>
+
+        <div *ngIf="annoncesMotosFiltreesActives.length === 0">
+            <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces pour l'instant...</p>
+        </div>
     
         <div class="row mb-3 mt-4">
-            <div class="col-12 col-md-4 g-3" *ngFor="let moto of annoncesMotosFiltreesActives">
+            <div class="col-12 col-md-3 g-3" *ngFor="let moto of annoncesMotosFiltreesActives">
                 <div class="card rounded-3">
                     <div class="card-head mx-3 mt-3">
                         <p class="nomCar"> {{moto.nom}} </p>
-                        <img src="http://127.0.0.1:8000/images/{{infoProprietaire?.image}}" class="img-fluid" alt="">
+                        <!-- <img src="http://127.0.0.1:8000/images/{{infoProprietaire?.image}}" class="img-fluid" alt=""> -->
+                        <p class="fw-lighter"> {{moto.prix}} Fcfa</p>
                     </div>
             
                     <div class="card-body">
-                        <img src="http://127.0.0.1:8000/images/{{moto.image2}}" alt="" class="img-fluid imgAnnonce">
+                        <img src="http://127.0.0.1:8000/images/{{moto.image2}}" alt="" class="img-fluid imgAnnonce rounded-4">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             (click)="afficherDetailAnnonce(moto)">Voir détail</button>
                     </div>
@@ -83,23 +78,6 @@
             </div>
         </div>
 
-        <nav class="pagine mt-4 mb-2 p-0 d-flex justify-content-end">
-            <ul class="pagination m-0 ">
-                <li class="page-item">
-                    <a class="page-link"><i class="fa-solid fa-angles-left"></i></a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item" aria-current="page">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#"><i class="fa-solid fa-angles-right"></i></a>
-                </li>
-            </ul>
-        </nav>
     </div>
 </div>
 
@@ -116,26 +94,49 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
+
+            <!-- Modal header -->
             <div class="modal-header shadow">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Detail de l'annonce</h1>
-                <span type="button" class="btnCloseModal" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></span>
+                <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Informations sur l'annonce</h1>
+                <span type="button" class="btnCloseModal" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i>
+                </span>
             </div>
+
+            <!-- Modal body -->
             <div class="modal-body">
                 <div class="profil mt-4 rounded-4 py-3 px-4">
                     <div class="row mt-3">
                         <div class="col-12 col-md-7">
-                            <div class="contentL d-flex">
-                                <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image1}}" alt=""
-                                    class="img-fluid w-25">
-                                <span> {{annonceSelectionnee?.nom}} </span>
-                            </div>
-                            <div class="text-detail">
-                                <p>
-                                    {{annonceSelectionnee?.description}}
-                                </p>
+                            <div id="carouselExampleInterval" class="carousel slide rounded-3 p-4 shadow" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" data-bs-interval="10000">
+                                        <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image1}}"
+                                            class="d-block w-100 imgSlide rounded-3" alt="...">
+                                    </div>
+                                    <div class="carousel-item" data-bs-interval="2000">
+                                        <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image2}}"
+                                            class="d-block w-100 imgSlide rounded-3" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image3}}"
+                                            class="d-block w-100 imgSlide rounded-3" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image4}}"
+                                            class="d-block w-100 imgSlide rounded-3" alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
                         </div>
-                        <div class="col-12 col-md-5" *ngIf="infoProprietaire">
+                        <div class="col-12 col-md-5 infosP" *ngIf="infoProprietaire">
                             <div class="contentR">
                                 <div class="row">
                                     <div class="col-12 col-md-6">
@@ -160,6 +161,7 @@
                         </div>
                     </div>
 
+                    <!-- Images secondaires -->
                     <hr class="mt-4">
                     <div class="imagesSecondaires">
                         <img src="http://127.0.0.1:8000/images/{{annonceSelectionnee?.image1}}" class="shadow" alt="">
@@ -169,48 +171,100 @@
                     </div>
 
                     <hr>
-                    <div class="middleDetail mb-3">
+                    <div class="middleDetail mb-3 d-flex justify-content-center">
                         <span>Caractéristique du véhicule</span>
                     </div>
                     <hr>
 
+                    <!-- Content Detail -->
                     <div class="contentDetail">
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="infosV">
-                                    <p class="libelle">Moteur:</p>
-                                    <p class="value"> {{annonceSelectionnee?.moteur}} </p>
+                        <div class="caracteristiques row mb-3 d-flex justify-content-center">
+                            <div class="col-12 col-md-2">
+                                <div class="card infosV shadow rounded-3">
+                                    <span class="libelle w-100 m-0">Nom:</span>
+                                    <p class="value"> {{annonceSelectionnee?.nom}} </p>
                                 </div>
-                                <div class="infosV">
-                                    <p class="libelle">Kilométrage:</p>
-                                    <p class="value"> {{annonceSelectionnee?.kilometrage}} Km</p>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="card infosV shadow rounded-3">
+                                    <span class="libelle w-100 m-0">Kilométrage:</span>
+                                    <p class="value"> {{annonceSelectionnee?.kilometrage}}</p>
                                 </div>
-                                <div class="infosV">
-                                    <p class="libelle">Année:</p>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="card infosV shadow rounded-3">
+                                    <span class="libelle w-100 m-0">Année:</span>
                                     <p class="value"> {{annonceSelectionnee?.annee}} </p>
                                 </div>
-                                <div class="infosV">
-                                    <p class="libelle">Carburant:</p>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="card infosV shadow rounded-3">
+                                    <span class="libelle w-100 m-0">Carburant:</span>
                                     <p class="value"> {{annonceSelectionnee?.carburant}} </p>
                                 </div>
-                                <div class="infosV">
-                                    <p class="libelle">Prix:</p>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="card infosV shadow rounded-3">
+                                    <span class="libelle w-100 m-0">Prix:</span>
                                     <p class="value"> {{annonceSelectionnee?.prix}} Fcfa</p>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6 positionR">
-                                <div class="boutons">
-                                    <button *ngIf="annonceSelectionnee?.etat=== 'refuser'" class="btnBlue btn"
-                                        (click)="updateAnnonceStateActive('accepter')">Activer</button>
-                                    <button *ngIf="annonceSelectionnee?.etat === 'accepter'" class="btnDesactiver btn"
-                                        (click)="updateAnnonceStateInactive('refuser')">Désactiver</button>
-                                        <button class="btnBlack btn" (click)="detetedAnnonce(annonceSelectionnee.id)">Supprimer</button>
-                                    <button class="btnBlack btn" data-bs-dismiss="modal">Fermer</button>
+                        </div>
+                        <div class="caracteristiques row mb-3 d-flex justify-content-center">
+                            <div class="col-12 col-md-2">
+                                <div class="card infosV shadow rounded-3">
+                                    <span class="libelle w-100 m-0">Couleur:</span>
+                                    <p class="value"> {{annonceSelectionnee?.couleur}}</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="card infosV shadow rounded-3">
+                                    <span class="libelle w-100 m-0">Marque:</span>
+                                    <p class="value"> {{annonceSelectionnee?.marque}}</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="card infosV shadow rounded-3">
+                                    <span class="libelle w-100 m-0">Adresse:</span>
+                                    <p class="value"> {{annonceSelectionnee?.localisation}}</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="card infosV shadow rounded-3">
+                                    <span class="libelle w-100 m-0">Places:</span>
+                                    <p class="value"> {{annonceSelectionnee?.nbrePlace}}</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="card infosV shadow rounded-3">
+                                    <span class="libelle w-100 m-0">Carosserie:</span>
+                                    <p class="value"> {{annonceSelectionnee?.carosserie}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Commentaires -->
+                    <hr>
+                    <div class="middleDetail mb-3 d-flex justify-content-center">
+                        <span class="text-center">Liste des commentaires</span>
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer shadow">
+                <div class="">
+                    <div class="boutons px-3">
+                        <button *ngIf="annonceSelectionnee?.etat=== 'refuser'" class="btnBlue btn"
+                            (click)="updateAnnonceStateActive('accepter')">Activer</button>
+                        <button *ngIf="annonceSelectionnee?.etat === 'accepter'" class="btnDesactiver btn"
+                            (click)="updateAnnonceStateInactive('refuser')">Désactiver</button>
+                        <button class="btnBlack btn" (click)="detetedAnnonce(annonceSelectionnee.id)">Supprimer</button>
+                        <button class="btnBlack btn" data-bs-dismiss="modal">Fermer</button>
+                    </div>
                 </div>
             </div>
         </div>

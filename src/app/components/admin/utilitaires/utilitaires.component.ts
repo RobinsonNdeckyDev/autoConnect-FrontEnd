@@ -49,8 +49,8 @@ export class UtilitairesComponent {
   listesAnnonces(): void {
     // Remplacez par l'ID de la catégorie dont vous souhaitez récupérer les annonces
     const categorieId = 3;
-    const etat = 'refuser';
-    const etatInactive = 'accepter';
+    const etatAcive = 'accepter';
+    const etatInactive = 'refuser';
 
     this.listeUtilitaireService.getAnnonces(categorieId).subscribe(
       (response: any) => {
@@ -58,7 +58,7 @@ export class UtilitairesComponent {
         this.listeUtilitaires = response.annonces;
 
         this.annoncesUtilitairesFiltreesActivees = this.listeUtilitaires.filter(
-          (annonceUtilitaire) => annonceUtilitaire.etat === etat
+          (annonceUtilitaire) => annonceUtilitaire.etat === etatAcive
         );
         console.log(
           'Annonces utilitaires filtrées actives : ',

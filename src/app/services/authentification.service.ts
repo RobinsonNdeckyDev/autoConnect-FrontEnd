@@ -7,6 +7,7 @@ import { tap } from 'rxjs/operators';
 import { Proprietaire } from '../models/proprietaire';
 import { Acheteur } from '../models/acheteur';
 import { JwtPayload } from 'jwt-decode';
+import { Router } from '@angular/router';
 declare function jwt_decode<T extends JwtPayload = JwtPayload>( token: string ): T;
 
 
@@ -14,9 +15,11 @@ declare function jwt_decode<T extends JwtPayload = JwtPayload>( token: string ):
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private apiUrl = 'http://127.0.0.1:8000/api'; // URL de votre API
+  // URL de mon API
+  private apiUrl = 'http://127.0.0.1:8000/api';
+  private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // connexion
   login(email: string, password: string): Observable<any> {
@@ -27,6 +30,7 @@ export class AuthenticationService {
           // Stocker les informations utilisateur et le token dans le stockage local
           localStorage.setItem('currentUser', JSON.stringify(response.user));
           localStorage.setItem('token', response.access_token);
+          // this.startTokenExpirationTimer();
           return response;
         }),
         catchError((error) => {
@@ -50,20 +54,6 @@ export class AuthenticationService {
       })
     );
   }
-
-  // registerproprietaire(proprietaire: Proprietaire): Observable<any> {
-  //   console.log("Données d'inscription :", proprietaire);
-
-  //   return this.http.post<any>(`${this.apiUrl}/register`, proprietaire).pipe(
-  //     tap((response) => {
-  //       console.log("Réponse de l'API après inscription :", response);
-  //     }),
-  //     catchError((error) => {
-  //       console.error("Erreur lors de l'inscription :", error);
-  //       throw error;
-  //     })
-  //   );
-  // }
 
   // vendeur
   registerAcheteur(acheteur: any): Observable<any> {
@@ -98,11 +88,15 @@ export class AuthenticationService {
     // Effectuez la requête HTTP POST pour se déconnecter
     return this.http.post<any>(logoutUrl, {}).pipe(
       tap(() => {
+        clearTimeout(this.tokenExpirationTimer);
         // Supprimer le token du stockage local
         localStorage.removeItem('token');
 
         // Vider complètement le localStorage
         localStorage.clear();
+
+        // Redirection vers la page de connexion
+        // this.router.navigate(['/login']);
       }),
 
       catchError((error) => {
@@ -121,6 +115,26 @@ export class AuthenticationService {
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
+
+  // private startTokenExpirationTimer(): void {
+  //   const token = this.getToken();
+  //   if (token) {
+  //     const tokenData = jwt_decode(token);
+  //     if (tokenData && tokenData.exp) {
+  //       const expirationTime = tokenData.exp * 1000;
+  //       const expiresIn = expirationTime - Date.now();
+  //       this.tokenExpirationTimer = setTimeout(() => {
+  //         this.logout(); // Déconnexion automatique lorsque le token expire
+  //       }, expiresIn);
+  //     } else {
+  //       console.error("Le token n'est pas valide ou n'a pas d'expiration");
+  //     }
+  //   }
+  // }
+
+  // private stopTokenExpirationTimer(): void {
+  //   clearTimeout(this.tokenExpirationTimer);
+  // }
 
   // Récupérer les informations du vendeur depuis l'API
   getvendeurDetails(id: number): Observable<any> {
