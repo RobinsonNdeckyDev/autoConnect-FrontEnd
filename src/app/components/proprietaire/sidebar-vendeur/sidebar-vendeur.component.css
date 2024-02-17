@@ -47,7 +47,7 @@
     border-radius: 15px;
     background-color: black;
     margin-bottom: 40px !important;
-    margin-top: 320px !important;
+    margin-top: 280px !important;
 }
 
 .disconnect {
@@ -93,4 +93,9 @@
 
 .annoncesIcon i {
     margin-left: 20% !important;
+}
+
+.iconDisconnect{
+    color: white !important;
+    margin-right: 15px;
 }

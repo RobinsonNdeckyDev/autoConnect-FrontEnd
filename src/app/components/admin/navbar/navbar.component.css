@@ -58,4 +58,8 @@
     .Navbar .navLeft{
         width: 150px;
     }
+
+    .rightNav .dropdown-center span{
+        display: none;
+    }
 }

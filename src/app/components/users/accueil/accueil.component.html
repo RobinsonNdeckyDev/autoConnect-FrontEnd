@@ -1,7 +1,6 @@
 <app-navbar></app-navbar>
 <div class="bannerAccueil mt-5">
-    <!-- <img src="../../../assets/ban2.png" class="img-fluid" alt=""> -->
-    <!-- gjhcdjhj -->
+    
     <div class="containBanner w-50">
         <h1>Trouvez le bon <br> véhicule pour vous !</h1>
         <p class="bannerP">Plateforme d'annonces de vente de véhicules 100% fiable</p>
@@ -15,181 +14,68 @@
     <h1 class="text-center mt-3 mb-3">Les annonces les plus mises en avant</h1>
     <div class="trait m-auto"></div>
 
+    <!-- [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500"
+    [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500" -->
+
     <div class="carteAnnonces container mt-4">
         <div class="row cartes m-0 g-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-4" *ngFor="let voiture of listeVoitures">
                 <div class="card shadow">
                     <div class="cardImg mx-3">
-                        <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
+                        <img src="http://127.0.0.1:8000/images/{{voiture?.image1}}" class="img-fluid imgPrinc w-100" alt="">
                     </div>
                     <div class="cardTitle mx-3">
-                        <span class="nom">Version Acura Sport</span>
+                        <span class="nom">{{voiture?.nom}}</span>
                         <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
                                 alt=""></span>
                     </div>
                     <div class="cardTrait mb-3 mt-3"></div>
                     <div class="cardDetails mx-3">
                         <div class="left">
-                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                            <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                            <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
+                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt=""> {{voiture?.moteur}}</p>
+                            <p><img src="/assets/images/iconSvg/calendar.png" alt=""> {{voiture?.annee}}</p>
+                            <!-- <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p> -->
                         </div>
                         <div class="Right">
-                            <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                            <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                            <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
+                            <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{voiture?.kilometrage}} KM</p>
+                            <p><img src="/assets/images/iconSvg/fuel.png" alt=""> {{voiture?.carburant}}</p>
                         </div>
                     </div>
+                    <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt=""> {{voiture?.prix}} Fcfa</p>
                     <div class="cardTrait"></div>
                     <div class="cardButton mx-3 my-3">
-                        <button class="btn"><a routerLink="/vehicules/voitures/detailVoiture">Consulter l'annonce</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="card shadow">
-                    <div class="cardImg mx-3">
-                        <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="cardTitle mx-3">
-                        <span class="nom">Version Acura Sport</span>
-                        <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
-                                alt=""></span>
-                    </div>
-                    <div class="cardTrait mb-3 mt-3"></div>
-                    <div class="cardDetails mx-3">
-                        <div class="left">
-                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                            <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                            <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
-                        </div>
-                        <div class="Right">
-                            <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                            <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                            <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
-                        </div>
-                    </div>
-                    <div class="cardTrait"></div>
-                    <div class="cardButton mx-3 my-3">
-                        <button class="btn"><a routerLink="/vehicules/motos/detailMoto">Consulter l'annonce</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="card shadow">
-                    <div class="cardImg mx-3">
-                        <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="cardTitle mx-3">
-                        <span class="nom">Version Acura Sport</span>
-                        <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
-                                alt=""></span>
-                    </div>
-                    <div class="cardTrait mb-3 mt-3"></div>
-                    <div class="cardDetails mx-3">
-                        <div class="left">
-                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                            <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                            <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
-                        </div>
-                        <div class="Right">
-                            <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                            <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                            <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
-                        </div>
-                    </div>
-                    <div class="cardTrait"></div>
-                    <div class="cardButton mx-3 my-3">
-                        <button class="btn"><a routerLink="/vehicules/utilitaires/detailUtilitaire">Consulter l'annonce</a></button>
+                        <button class="btn fw-bold text-light"(click)="redirectToDetailsVoiture(voiture.id)">Consulter l'annonce</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row cartes mt-5 g-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-4" *ngFor="let moto of listemotos">
                 <div class="card shadow">
                     <div class="cardImg mx-3">
-                        <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
+                        <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt="">
                     </div>
                     <div class="cardTitle mx-3">
-                        <span class="nom">Version Acura Sport</span>
+                        <span class="nom">{{moto.nom}}</span>
                         <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
                                 alt=""></span>
                     </div>
                     <div class="cardTrait mb-3 mt-3"></div>
                     <div class="cardDetails mx-3">
                         <div class="left">
-                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                            <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                            <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
+                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt=""> {{moto.moteur}}</p>
+                            <p><img src="/assets/images/iconSvg/calendar.png" alt=""> {{moto.annee}}</p>
+                            <!-- <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p> -->
                         </div>
                         <div class="Right">
-                            <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                            <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                            <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
+                            <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{moto.kilometrage}} KM</p>
+                            <p><img src="/assets/images/iconSvg/fuel.png" alt=""> {{moto.carburant}}</p>
                         </div>
                     </div>
+                    <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt=""> {{moto.prix}} Fcfa</p>
                     <div class="cardTrait"></div>
                     <div class="cardButton mx-3 my-3">
-                        <button class="btn"><a routerLink="/vehicules/voitures/detailVoiture">Consulter l'annonce</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="card shadow">
-                    <div class="cardImg mx-3">
-                        <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="cardTitle mx-3">
-                        <span class="nom">Version Acura Sport</span>
-                        <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
-                                alt=""></span>
-                    </div>
-                    <div class="cardTrait mb-3 mt-3"></div>
-                    <div class="cardDetails mx-3">
-                        <div class="left">
-                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                            <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                            <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
-                        </div>
-                        <div class="Right">
-                            <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                            <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                            <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
-                        </div>
-                    </div>
-                    <div class="cardTrait"></div>
-                    <div class="cardButton mx-3 my-3">
-                        <button class="btn"><a routerLink="/vehicules/motos/detailMoto">Consulter l'annonce</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="card shadow">
-                    <div class="cardImg mx-3">
-                        <img src="../../../assets/images/cars/car-06.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="cardTitle mx-3">
-                        <span class="nom">Version Acura Sport</span>
-                        <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
-                                alt=""></span>
-                    </div>
-                    <div class="cardTrait mb-3 mt-3"></div>
-                    <div class="cardDetails mx-3">
-                        <div class="left">
-                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">6 Cylindres</p>
-                            <p><img src="/assets/images/iconSvg/calendar.png" alt="">2019</p>
-                            <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p>
-                        </div>
-                        <div class="Right">
-                            <p><img src="/assets/images/iconSvg/dashboard.png" alt="">42 KM</p>
-                            <p><img src="/assets/images/iconSvg/fuel.png" alt="">essence</p>
-                            <p><img src="/assets/images/iconSvg/money.png" alt="">3.000.000 Fcfa</p>
-                        </div>
-                    </div>
-                    <div class="cardTrait"></div>
-                    <div class="cardButton mx-3 my-3">
-                        <button class="btn"><a routerLink="/vehicules/utilitaires/detailUtilitaire">Consulter l'annonce</a></button>
+                        <button class="btn fw-bold text-light" (click)="redirectToDetailsMoto(moto.id)">Consulter l'annonce</button>
                     </div>
                 </div>
             </div>
@@ -202,34 +88,28 @@
     <div class="trait m-auto mb-1"></div>
 
     <div class="row m-0 g-4">
-        <div class="col-12 col-md-6 p-5" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="700">
+        <div class="col-12 col-md-6 p-5" [attr.data-aos]="'fade-up'" >
+            <!-- [attr.data-aos-duration]="800" [attr.data-aos-delay]="700"
+            [attr.data-aos-duration]="800" [attr.data-aos-delay]="700" -->
             <img src="/assets/images/propos/p1.png" class="img-fluid" alt="">
         </div>
-        <div class="col-12 col-md-6 right" [attr.data-aos]="'fade-in'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="700">
+        <div class="col-12 col-md-6 right" [attr.data-aos]="'fade-in'" >
             <div class="contentPropos">
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                    Ut
-                    enim minim veniam, quis nostrud exercice ullamco laboris nisi esse cillum dolore eu fugiat nulla
-                    pariatur.Lorem
-                    ipsum
-                    dolor sit amet.
+                    L'évolution rapide de notre environnement a donné lieu à une réalité où les propriétaires de véhicules, qu'il s'agisse
+                    de voitures, de motos ou de véhicules utilitaires, font face à la nécessité de trouver des moyens efficaces pour céder
+                    leurs biens. 
+                    
+                    L'inconfort causé par la dégradation progressive des véhicules dans des garages ou sur la voie publique
+                    mais aussi la difficulté de trouver un acheteur intéressé a mis en lumière la pertinence d'une solution innovante.
 
-                    Consectetur adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                    minim veniam, quis
-                    nostrud exercice ullamco laboris nisi esse cillum dolore eu fugiat nulla pariaturt ut labore et
-                    dolore magna aliqua.
-                    Ut
-                    enim minim veniam, quis nostrud exercice ullamco laboris nisi esse cillum dolore eu fugiat nulla
-                    pariatur.
+                    C'est dans ce contexte concret que s'inscrit notre projet, avec pour objectif de remédier à ces défis, de faciliter le
+                    processus de vente et d'achat, tout en assurant une transition fluide vers un marché plus dynamique.
 
-                    Ut enim minim veniam, quis nostrud exercice ullamco laboris nisi esse cillum dolore eu fugiat nulla
-                    pariatur.
                 </p>
 
                 <button class="mt-4 btn w-50">
-                    <a routerLink="/blog">En savoir plus</a>
+                    <a routerLink="/about">En savoir plus</a>
                 </button>
             </div>
         </div>
@@ -240,76 +120,33 @@
     <h1 class="text-center mt-3 mb-3">Nos blogs</h1>
     <div class="trait m-auto mb-5"></div>
 
-    <div class="row mt-5 cardBlogs">
-        <div class="col-12 col-md-4 p-3" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="900">
-            <div class="card px-3 shadow">
-                <div class="cardImg mt-3">
-                    <img src="/assets/images/blogs/b1.png" class="img-fluid shadow rounded-4" alt="">
+    <div class="row mt-5 cardBlogs g-4 mx-3" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="900">
+        <!-- [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="900" -->
+        <div class="col-12 shadow p-3"  *ngFor="let blog of blogs">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <div class="cardImg">
+                        <img src="http://127.0.0.1:8000/images/{{blog.image}}" class="img-fluid shadow rounded-4" alt="">
+                    </div>
                 </div>
-                <div class="card cardBody p-3 mx-3">
-                    <div class="cardTitle">
-                        <h4 class="text-center">L'avenir de la vente de véhicules</h4>
+                <div class="col-12 col-md-9 contBody">
+                    <div class="cardBody p-3 mx-3">
+                        <div class="cardTitle">
+                            <h4 class="text-center"> {{blog.titre}} </h4>
+                        </div>
+                        <div class="cardDetail">
+                            <p class="textBlog">
+                                {{blog.description}}
+                            </p>
+                        </div>
+                    
+                        <div class="d-flex justify-content-center">
+                            <button class="btn mt-2" (click)="redirectToDetails(blog.id)">
+                                <!-- routerLink="/blog/detailsBlog" -->
+                                <a>En savoir plus</a>
+                            </button>
+                        </div>
                     </div>
-                    <div class="cardDetail">
-                        <p class="textBlog">
-                            Alors que la technologie continue de progresser à un rythme rapide,
-                            le secteur de la vente de voitures est sur le point de connaître un changement
-                            transformateur.
-                            L’avenir de la vente de voitures promet.
-                        </p>
-                    </div>
-
-                    <button class="btn mt-2">
-                        <a routerLink="/blog/detailsBlog">En savoir plus</a>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-4 p-3" [attr.data-aos]="'fade-in'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="900">
-            <div class="card px-3 shadow">
-                <div class="cardImg mt-3">
-                    <img src="/assets/images/blogs/b2.png" class="img-fluid shadow rounded-4" alt="">
-                </div>
-                <div class="card cardBody p-3 mx-3">
-                    <div class="cardTitle">
-                        <h4 class="text-center">L'avenir de la vente de véhicules</h4>
-                    </div>
-                    <div class="cardDetail">
-                        <p class="textBlog">
-                            Alors que la technologie continue de progresser à un rythme rapide,
-                            le secteur de la vente de voitures est sur le point de connaître un changement
-                            transformateur.
-                            L’avenir de la vente de voitures promet.
-                        </p>
-                    </div>
-
-                    <button class="btn mt-2">
-                        <a routerLink="/blog/detailsBlog">En savoir plus</a>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-4 p-3" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="1000" [attr.data-aos-delay]="900">
-            <div class="card px-3 shadow">
-                <div class="cardImg mt-3">
-                    <img src="/assets/images/blogs/b3.png" class="img-fluid shadow rounded-4" alt="">
-                </div>
-                <div class="card cardBody p-3 mx-3">
-                    <div class="cardTitle">
-                        <h4 class="text-center">L'avenir de la vente de véhicules</h4>
-                    </div>
-                    <div class="cardDetail">
-                        <p class="textBlog">
-                            Alors que la technologie continue de progresser à un rythme rapide,
-                            le secteur de la vente de voitures est sur le point de connaître un changement
-                            transformateur.
-                            L’avenir de la vente de voitures promet.
-                        </p>
-                    </div>
-
-                    <button class="btn mt-2">
-                        <a routerLink="/blog/detailsBlog">En savoir plus</a>
-                    </button>
                 </div>
             </div>
         </div>
@@ -463,11 +300,12 @@
     </div>
 </section>
 
-<section class="bannerAnnonce py-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="1000">
-    <div class="container">
+<section class="bannerAnnonce py-4" >
+    <!-- [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="1000" -->
+    <div class="container" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="1000">
         <div class="row">
             <div class="col-12 col-md-6">
-                <p>Vous souhaitez vendre votre véhicule ? <br> N'attendez-plus !</p>
+                <p class="pBanner">Vous souhaitez vendre votre véhicule ? <br> N'attendez-plus !</p>
             </div>
             <div class="col-12 col-md-6 ">
 
@@ -481,29 +319,30 @@
     </div>
 </section>
 
-<section class="contact py-5" [attr.data-aos]="'fade-in'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="1000">
-    <div class="containContact container">
+<section class="contact py-5" >
+    <!-- [attr.data-aos]="'fade-in'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="1000" -->
+    <div class="containContact container" [attr.data-aos]="'fade-in'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="1000">
         <div class="row">
             <div class="col-12 col-md-6 p-4">
                 <div class="formContent">
                     <div class="">
                         <h4 class="text-center mb-3">Contactez-nous</h4>
-                        <form action="" class="">
+                        <form action="" class="" (ngSubmit)="addContact()">
                             <div class="mb-3">
                                 <label for="nomComplet">Nom complet</label>
-                                <input type="text" class="form-control" id="nomComplet" name="nomComplet">
+                                <input type="text" class="form-control" id="nomComplet" name="nomComplet" [(ngModel)]="nomComplet">
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email">
+                                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email">
                             </div>
                             <div class="mb-3">
                                 <label for="message">Message</label>
-                                <textarea name="message" id="message" rows="5" class="form-control"></textarea>
+                                <textarea name="message" id="message" rows="5" class="form-control" [(ngModel)]="message"></textarea>
                             </div>
 
                             <div class="mt-4 d-flex justify-content-center align-content-center">
-                                <button class="btn w-25 p-2 rounded-4">
+                                <button class="btn p-2 rounded-4">
                                     Envoyer
                                 </button>
                             </div>

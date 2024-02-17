@@ -32,6 +32,7 @@
 .footer .newsletter {
     border: 1px solid rgb(3, 3, 3);
     border: 15px;
+    /* background-color: white; */
 }
 
 .footer .newsletter button {
@@ -97,4 +98,10 @@
     font-size: 16px;
     font-weight: thin;
     margin: 0;
+}
+
+@media only screen and (min-width: 168px) and (max-width: 767px) {
+    .fRight .newsletter{
+        border: 1px solid red;
+    }
 }

@@ -3,14 +3,17 @@
         <li class="" routerLinkActive="activeLink">
             <a class="" href="" routerLink="Accueil_Admin"><i class="fa-solid fa-house"></i>Dashboard</a>
         </li>
-        <li class="collapsed" routerLinkActive="activeLink">
-            <a class="btn-toggle fw-bold" data-bs-toggle="collapse" data-bs-target="#utilisateurs"
-                aria-expanded="false" routerLink="utilisateurs/vendeurs">
+
+        <li class="">
+            <a class="btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                (click)="toggleCollapse('home')" [attr.aria-expanded]="homeCollapsed ? 'false' : 'true'"
+                [attr.data-bs-target]="'#home-collapse'" aria-controls="home-collapse">
                 <i class="fa-solid fa-user"></i>
-                Utilisateurs <i class="fa-solid fa-caret-down dropicon"></i>
+                Utilisateurs 
+                <i class="fa-solid fa-caret-down dropicon"></i>
             </a>
-            <div class="collapse" id="utilisateurs" class="p-0">
-                <ul class="btn-toggle-nav">
+            <div class="collapse" id="home-collapse" [ngClass]="{ 'show': !homeCollapsed }">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                         <a routerLink="utilisateurs/vendeurs" routerLinkActive="selected">Propriétaires</a>
                     </li>
@@ -20,15 +23,17 @@
                 </ul>
             </div>
         </li>
-        <li class="collapsed" routerLinkActive="activeLink">
-            <a class="btn-toggle annoncesIcon"  data-bs-toggle="collapse" data-bs-target="#annonces" aria-expanded="false"
-                routerLink="annonces/voitures">
+
+        <li class="">
+            <a class="btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                (click)="toggleCollapse('dashboard')" [attr.aria-expanded]="dashboardCollapsed ? 'false' : 'true'"
+                [attr.data-bs-target]="'#dashboard-collapse'" aria-controls="dashboard-collapse">
                 <i class="fa-solid fa-bullhorn"></i>
-                Annonces 
+                Annonces
                 <i class="fa-solid fa-caret-down dropicon"></i>
             </a>
-            <div class="collapse" id="annonces">
-                <ul class="btn-toggle-nav">
+            <div class="collapse" id="dashboard-collapse" [ngClass]="{ 'show': !dashboardCollapsed }">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                         <a routerLink="annonces/voitures" routerLinkActive="selected">Voitures</a>
                     </li>
@@ -41,17 +46,21 @@
                 </ul>
             </div>
         </li>
-        <!-- <li class="" routerLinkActive="activeLink"><a href="" routerLink="annonces">Annonces</a></li> -->
         <li class="" routerLinkActive="activeLink">
-            <a href="" routerLink="categories"><i class="fa-solid fa-layer-group"></i>Catégories</a></li>
+            <a href="" routerLink="categories"><i class="fa-solid fa-layer-group"></i>Catégories</a>
+        </li>
         <li class="" routerLinkActive="activeLink">
-            <a href="" routerLink="contacts"><i class="fa-solid fa-address-book"></i>Contacts</a></li>
+            <a href="" routerLink="contacts"><i class="fa-solid fa-address-book"></i>Contacts</a>
+        </li>
         <li class="" routerLinkActive="activeLink">
-            <a href="" routerLink="signalements"><i class="fa-solid fa-triangle-exclamation"></i>Signalements</a></li>
+            <a href="" routerLink="signalements"><i class="fa-solid fa-triangle-exclamation"></i>Signalements</a>
+        </li>
         <li class="" routerLinkActive="activeLink">
-            <a href="" routerLink="newsletters"><i class="fa-solid fa-newspaper"></i>Newsletters</a></li>
+            <a href="" routerLink="newsletters"><i class="fa-solid fa-newspaper"></i>Newsletters</a>
+        </li>
         <li class="" routerLinkActive="activeLink">
-            <a href="" routerLink="blogs"><i class="fa-solid fa-file-invoice"></i>Blogs</a></li>
+            <a href="" routerLink="blogs"><i class="fa-solid fa-file-invoice"></i>Blogs</a>
+        </li>
     </ul>
     <div class="logoConnect m-auto ">
         <a href="" routerLink="/admin">
@@ -59,9 +68,10 @@
         </a>
     </div>
 
-    <p class="disconnect">
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <a href="" routerLink="/admin">Déconnexion</a>
-    </p>
- 
+    <div class="disconnect d-flex justify-content-start align-content-center mb-4">
+        <i class="fa-solid fs-4 fa-right-from-bracket "></i>
+        <app-logout-admin class="text-light"></app-logout-admin>
+        <!-- <a href="" routerLink="/admin">Déconnexion</a> -->
+    </div>
+
 </div>

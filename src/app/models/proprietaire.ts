@@ -1,14 +1,14 @@
 export interface Proprietaire {
-    id?: number;
-    nom: string;
-    adresse: string;
-    prenom: string;
-    email: string;
-    password: string;
-    telephone: string;
-    description: string;
-    role: string;
-    photoProfile: string;
+  nom: string;
+  prenom: string;
+  email: string;
+  telephone: string;
+  adresse: string;
+  description: string;
+  password: string;
+  confirmation: string;
+  image: File | string;
+  role: string;
 }
 
 

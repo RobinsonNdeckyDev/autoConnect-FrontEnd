@@ -10,6 +10,9 @@ import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
 import { DetailAnnoncePropComponent } from './detail-annonce-prop/detail-annonce-prop.component';
 import { RouterModule } from '@angular/router';
 import { LogoutProprietaireComponent } from './logout-proprietaire/logout-proprietaire.component';
+import { PublierAnnonceComponent } from './publier-annonce/publier-annonce.component';
+import { FormsModule } from '@angular/forms';
+// import { ModifierAnnonceComponent } from './modifier-annonce/modifier-annonce.component';
 
 
 
@@ -23,11 +26,14 @@ import { LogoutProprietaireComponent } from './logout-proprietaire/logout-propri
     ScrollButtonComponent,
     DetailAnnoncePropComponent,
     LogoutProprietaireComponent,
+    PublierAnnonceComponent,
+    // ModifierAnnonceComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
-    ProprietaireRoutingModule
+    ProprietaireRoutingModule,
+    FormsModule
   ]
 })
 export class ProprietaireModule { }

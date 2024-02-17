@@ -3,9 +3,18 @@
     color: #0F42A8;
 }
 
+.active{
+    color: #0F42A8 !important;
+}
+
 .profilhead h3{
     color: #0F42A8;
 }
+
+/* .profilImg img{
+    height: 250px;
+    width: 100%;
+} */
 
 hr{
     background-color: #0F42A8;
@@ -32,4 +41,37 @@ hr{
 
 .profilBody h3{
     color: #0F42A8;
+}
+
+.navProfil{
+    border-bottom: 2px solid #0F42A8;
+    margin-bottom: 10px;
+}
+
+.navProfil a{
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}
+
+.activeLink{
+    color: #0F42A8 !important;
+    font-weight: bold;
+    position: relative;
+    bottom: 5px;
+}
+
+.pfInfos{
+    margin-top: 15%;
+}
+
+.pfInfos .logo{
+    background-color: black;
+    border-radius: 20px;
+    padding: 4%;
+}
+
+.btnUpdate{
+    background-color: #0F42A8;
+    color: white;
 }

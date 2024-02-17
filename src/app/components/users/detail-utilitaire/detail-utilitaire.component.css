@@ -6,6 +6,67 @@
     padding: 21% 0;
 }
 
+.contentDetail .caracteristiques .infosV .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3% 0;
+}
+
+.contentDetail .caracteristiques .infosV .card:hover {
+    position: relative;
+    bottom: 8px;
+    background-color: #0F42A8;
+    border: 1px solid white;
+    /* transition: 1s ease; */
+}
+
+.contentDetail .caracteristiques .infosV .card:hover .libelle {
+    color: white;
+    font-weight: 600;
+}
+
+.contentDetail .caracteristiques .infosV .card:hover .value {
+    color: white;
+}
+
+.contentDetail .caracteristiques .infosV .card .libelle {
+    color: #0F42A8;
+    font-weight: 500;
+}
+
+.contentDetail .caracteristiques .infosV .card .value {
+    font-size: 14px;
+    font-weight: lighter;
+    margin: 0;
+}
+
+.contentDetail .description .libelle {
+    color: #0F42A8;
+    font-weight: 500;
+}
+
+.contentDetail .description .value {
+    font-size: 14px;
+    font-weight: lighter;
+    margin: 0;
+}
+
+.middleDetail h4 {
+    color: #0F42A8;
+}
+
+.detailAnnonce .ligneCrts {
+    background-color: #0F42A8;
+    border: 0;
+    height: 2px;
+}
+
+.imgPrinc{
+    height: 180px;
+}
+
 .detailAnnonce h2 {
     color: #0F42A8;
 }
@@ -185,7 +246,7 @@
 
 .commentsContain .avis .textC {
     color: white;
-    margin-top: 25px;
+    margin-top: 5px;
     text-align: justify;
     font-weight: 300;
 }

@@ -11,26 +11,26 @@
     <div class="rightNav">
         
 
-        <div class="dropdown-center">
+        <!-- <div class="dropdown-center">
             <i class="fa-solid fa-bell mx-4 " type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Centered dropdown
-            </button> -->
+            </button>
             <ul class="dropdown-menu mt-4">
                 <li><a class="dropdown-item" href="#">Voir toutes</a></li>
                 <li><a class="dropdown-item" href="#">Récentes</a></li>
             </ul>
-        </div>
+        </div> -->
 
         <!-- Example single danger button -->
         <div class="dropdown-center m-0 p-0">
             <button type="button" class="btn m-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="../../../../assets/images/profil/profil2.jpg" class="" alt="">
-                Admin
+                <span>{{userConnected?.prenom}}</span>
             </button>
             <ul class="dropdown-menu mt-3">
-                <li><a class="dropdown-item" href="#">Mon profil</a></li>
-                <li><app-logout-admin></app-logout-admin></li>
+                <li><a class="dropdown-item" routerLink="profil_Admin">Mon profil</a></li>
+                <li class=""><app-logout-admin></app-logout-admin></li>
             </ul>
         </div>
 

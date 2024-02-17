@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+.imgPrinc {
+    height: 180px;
+}
+
 
 .bannerAccueil {
     /* padding: 0; */
@@ -10,6 +14,7 @@
     background-repeat: no-repeat;
     background-size: 100%;
     padding: 14% 0;
+    border: 1px ;
 }
 
 .containBanner {
@@ -164,6 +169,12 @@
     width: 150px;
 }
 
+.contBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .blogs .cardBlogs .card {
     border: none;
     border-radius: 20px;
@@ -172,7 +183,7 @@
 
 .blogs .cardBody {
     position: relative;
-    bottom: 25px;
+    /* bottom: 25px; */
     background-color: #0F42A8;
     border-radius: 15px;
 }
@@ -345,4 +356,42 @@
     background-color: black;
     color: white;
     font-weight: 700;
+}
+
+
+@media only screen and (min-width: 168px) and (max-width: 767px) {
+    .containBanner{
+        display: block;
+        padding-left: 25px;
+    }
+
+    .containBanner button,.bannerP{
+        display: none;
+    }
+
+    .containBanner h1{
+        font-size: 16px;
+    }
+
+    .annonces h1{
+        font-size: 18px;
+    }
+
+    .containContact .formContent button{
+        width: 40%;
+    }
+
+    .temoignages .content h1{
+        font-size: 16px;
+    }
+
+    .bannerAnnonce .pBanner{
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .bannerAnnonce .btnAnnonce{
+        display: flex;
+        justify-content: center;
+    }
 }

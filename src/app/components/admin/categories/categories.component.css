@@ -3,6 +3,41 @@
     color: #0F42A8;
 }
 
+.btnCloseModal i {
+    font-size: 25px;
+    color: #0F42A8;
+}
+
+.modal-header {
+    border-bottom: 2px solid #0F42A8;
+}
+
+.modal-footer {
+    border-top: 2px solid #0F42A8;
+}
+
+.modal-body label {
+    color: #0F42A8;
+}
+
+.btnFermer {
+    background-color: black;
+    color: white;
+}
+
+.modal-header h1,
+h5 {
+    color: #0F42A8;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.btnModifier{
+    background-color: #0F42A8;
+    color: white;
+    font-weight: 500;
+}
+
 .trait{
     width: 100px;
     border: 2px solid #0F42A8;

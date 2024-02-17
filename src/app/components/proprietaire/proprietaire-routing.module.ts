@@ -5,20 +5,28 @@ import { MainVendeurComponent } from './main-vendeur/main-vendeur.component';
 import { AnnoncesVendeursComponent } from './annonces-vendeurs/annonces-vendeurs.component';
 import { ProfilVendeurComponent } from './profil-vendeur/profil-vendeur.component';
 import { DetailAnnoncePropComponent } from './detail-annonce-prop/detail-annonce-prop.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
+import { PublierAnnonceComponent } from './publier-annonce/publier-annonce.component';
+// import { ModifierAnnonceComponent } from './modifier-annonce/modifier-annonce.component';
 
 
 const routes: Routes = [
   {
-    path: '', component: MainVendeurComponent, children: [
-      { path: 'proprietaire', component: AnnoncesVendeursComponent },
+    path: '',
+    component: MainVendeurComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'proprietaire', component: PublierAnnonceComponent },
       {
         path: 'mes_annonces',
         children: [
           { path: '', component: AnnoncesVendeursComponent },
           { path: 'detailAnnonce', component: DetailAnnoncePropComponent },
+          // { path: 'modifierAnnonce', component: ModifierAnnonceComponent },
         ],
       },
       { path: 'mon_profil', component: ProfilVendeurComponent },
+      { path: 'publierAnnonce', component: PublierAnnonceComponent },
       { path: '', redirectTo: 'mes_annonces', pathMatch: 'full' },
     ],
   },

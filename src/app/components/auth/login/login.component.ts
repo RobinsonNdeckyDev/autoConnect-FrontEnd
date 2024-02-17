@@ -50,36 +50,34 @@ export class LoginComponent {
           // Rediriger l'utilisateur vers une autre page
 
           switch (response.user.role) {
-              case 'admin':
-                this.route.navigate(['/admin']);
-                this.alertMessage(
-                  'success',
-                  'Super',
-                  'Connexion réussie avec succés.'
-                );
-                break;
-              case 'proprietaire':
-                this.route.navigate(['/proprietaire']);
-                this.alertMessage(
-                  'success',
-                  'Super',
-                  'Connexion réussie avec succés.'
-                );
-                break;
-              case 'acheteur':
-                this.route.navigate(['/accueil']);
-                this.alertMessage(
-                  'success',
-                  'Super',
-                  'Connexion réussie avec succés.'
-                );
-                break;
-              default:
-                // Redirection par défaut si le rôle n'est pas reconnu
-                this.route.navigate(['/accueil']);
-                
-            }
-
+            case 'admin':
+              this.route.navigate(['/admin']);
+              this.alertMessage(
+                'success',
+                'Super',
+                'Connexion réussie avec succés.'
+              );
+              break;
+            case 'proprietaire':
+              this.route.navigate(['/proprietaire']);
+              this.alertMessage(
+                'success',
+                'Super',
+                'Connexion réussie avec succés.'
+              );
+              break;
+            case 'acheteur':
+              this.route.navigate(['/accueil']);
+              this.alertMessage(
+                'success',
+                'Super',
+                'Connexion réussie avec succés.'
+              );
+              break;
+            default:
+              // Redirection par défaut si le rôle n'est pas reconnu
+              this.route.navigate(['/accueil']);
+          }
         },
         (error) => {
           // En cas d'erreur, afficher un message d'erreur
@@ -98,6 +96,9 @@ export class LoginComponent {
       icon: icon,
       title: title,
       text: text,
+      timer: 2000, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 }

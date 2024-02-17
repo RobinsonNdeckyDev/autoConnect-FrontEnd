@@ -3,6 +3,17 @@
     color: #0F42A8;
 }
 
+.btnCloseModal i{
+    font-size: 25px;
+    color: #0F42A8;
+}
+
+.bodyBlog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .headerBlog{
     display: flex;
     justify-content: space-between;
@@ -30,17 +41,46 @@
     padding: 0 15px;
 }
 
+.modal-header{
+    border-bottom: 2px solid #0F42A8;
+}
+
+.modal-footer{
+    border-top: 2px solid #0F42A8;
+}
+
+.modal-body label{
+    color: #0F42A8;
+}
+
+.btnAddBlog{
+    background-color: #0F42A8;
+    color: white;
+}
+
+.btnFermer{
+    background-color: black;
+    color: white;
+}
+
 .search .searchIcon i {
     color: white;
     font-size: 18px;
 }
 
+.modal-header h1,h5{
+    color: #0F42A8;
+    font-weight: 500;
+    text-decoration: none;
+}
+
 .card{
-    border-bottom: 15px solid #0F42A8;
+    border-bottom: 8px solid #0F42A8;
 }
 
 .cardImg img{
     border-radius: 20px !important;
+    /* border: 1px solid red; */
 }
 
 .cardbody{
@@ -48,7 +88,7 @@
     color: white;
     padding: 8px 15px;
     position: relative;
-    bottom: 22px;
+    bottom: 0px;
 }
 
 .cardbody .cardtexte{
@@ -75,4 +115,10 @@
 
 .pagine ul li {
     border: none !important;
+}
+
+#detailBlog .detailContain{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
