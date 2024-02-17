@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { ListeVoituresService } from 'src/app/services/liste-voitures.service';
 import { PublierAnnonceService } from 'src/app/services/publier-annonce.service';
 
@@ -16,18 +17,32 @@ export class VoituresComponent {
   tabProprietaires: any[] = [];
   proprietaireInfo: any;
   voitureSelected: any;
+  filteredVoitures: any[] = [];
   // Propriété pour stocker la valeur de recherche
-  searchTermActive: string = '';
+  searchTerm: string = '';
   listeVoituresSearch: any;
 
   constructor(
     private listeVoitureService: ListeVoituresService,
     private listeAnnonceService: PublierAnnonceService,
+    private proprietaireService: ListeUsersService,
     private route: Router
   ) {}
 
   ngOnInit(): void {
+    this.getProprietaire();
     this.getAnnoncesValides();
+  }
+
+  // Méthode pour récupérer la liste des propriétaires
+  getProprietaire() {
+    // on recupere la liste des utilisateurs
+    this.proprietaireService.getProprietaires().subscribe((response: any) => {
+      console.log(response);
+      console.log(response);
+      this.tabProprietaires = response.proprietaire;
+      console.log('liste props: ', this.tabProprietaires);
+    });
   }
 
   // Liste des annonces mises en avant
@@ -45,6 +60,21 @@ export class VoituresComponent {
           (element: any) => element.categorie_id === categorie
         );
         console.log('listeVoitures filtrées: ', this.listeVoitures);
+
+        // Pour chaque annonce, trouvez l'utilisateur concernée
+        this.listeVoitures.forEach((annonce: any) => {
+          const prorietaireAnnonce = this.tabProprietaires.find(
+            (user: any) => user.id === annonce.user_id
+          );
+          console.log('prorietaireAnnonce: ', prorietaireAnnonce);
+
+          // Associez l'utilisateur et l'annonce
+          annonce.infosProprietaire = prorietaireAnnonce;
+        });
+
+        // Initialisation de filteredVoitures avec les signalements récupérés
+        this.filteredVoitures = [...this.listeVoitures];
+        console.log('filteredVoitures: ', this.filteredVoitures);
       },
       (error) => {
         console.log(error);
@@ -52,36 +82,30 @@ export class VoituresComponent {
     );
   }
 
-  // Méthode pour filtrer les voitures en fonction de la recherche
-  filtrerVoitureActives(event: any): void {
-    // Obtenir la valeur de l'entrée utilisateur en minuscules
-    const recherche = event.target.value.trim().toLowerCase();
-    console.log(recherche);
-
-    // Mettre à jour la propriété searchTermActive
-    this.searchTermActive = recherche;
-
-    // Si la recherche est vide, réinitialiser listeVoitures à la liste complète des voitures
-    if (recherche === '') {
-      this.listeVoitures = this.ListeAnnonces.filter(
-        // Vous pouvez ajuster cette condition selon vos besoins
-        (element: any) => element.categorie_id === 1
-      );
-    } else {
-      // Sinon, filtrer les voitures en fonction de la recherche
-      this.listeVoitures = this.ListeAnnonces.filter((voiture: any) =>
-        voiture.nom.toLowerCase().includes(recherche)
-      );
-    }
-
-    console.log('resultat recherche: ', this.listeVoitures);
-  }
-
-  
   // redirection vers la page details blog
   redirectToDetails(voitureId: number) {
     this.voitureSelected = voitureId;
     console.log(this.voitureSelected);
     this.route.navigate(['vehicules/voitures/detailVoiture', voitureId]);
+  }
+
+  // Fonction pour filtrer les motos en fonction du terme de recherche
+
+  filterVoiture(): void {
+    // Si le terme de recherche est vide, afficher tous les blogs
+    if (!this.searchTerm.trim()) {
+      this.filteredVoitures = [...this.listeVoitures];
+    } else {
+      // Sinon, filtrer les blogs dont le titre ou la description contient le terme de recherche
+      this.filteredVoitures = this.listeVoitures.filter((annonce: any) =>
+        annonce.nom.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+  }
+
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChange(): void {
+    // Filtrer les blogs avec le nouveau terme de recherche
+    this.filterVoiture();
   }
 }

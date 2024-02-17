@@ -15,6 +15,8 @@ export class MotosComponent {
   ListeAnnonces: any;
   motoSelected: any;
   proprietaireInfo: any;
+  searchTerm: string = '';
+  fiteredMotos: any[] = [];
 
   constructor(
     private listeMotoService: ListeMotosService,
@@ -54,22 +56,22 @@ export class MotosComponent {
         this.listeMotos = this.ListeAnnonces.filter(
           (element: any) => element.categorie_id === categorie
         );
-        console.log("Liste motos", this.listeMotos);
+        console.log('Liste motos', this.listeMotos);
 
-        // On recherche le propriétaire qui a les infos de user_id
-        // this.listeMotos.forEach((moto: any) => {
-        //   const proprietaire = this.tabProprietaires.find(
-        //     (user: any) => user.id === moto.user_id
-        //   );
-        //   if (proprietaire) {
-        //     moto.proprietaireInfo = proprietaire;
-        //     console.log(
-        //       'Informations du proprietaire à qui appartient cette annonce ',
-        //       proprietaire
-        //     );
-        //     console.log('nom du proprietaire: ', proprietaire.nom);
-        //   }
-        // });
+        // Pour chaque annonce, trouvez l'utilisateur concernée
+        this.listeMotos.forEach((annonce: any) => {
+          const prorietaireAnnonce = this.tabProprietaires.find(
+            (user: any) => user.id === annonce.user_id
+          );
+          console.log('prorietaireAnnonce: ', prorietaireAnnonce);
+
+          // Associez l'utilisateur et l'annonce
+          annonce.infosProprietaire = prorietaireAnnonce;
+        });
+
+        // Initialisation de filteredSignalements avec les signalements récupérés
+        this.fiteredMotos = [...this.listeMotos];
+        console.log('filteredSignalements: ', this.fiteredMotos);
 
       },
       (error) => {
@@ -84,4 +86,27 @@ export class MotosComponent {
     console.log(this.motoSelected);
     this.route.navigate(['vehicules/motos/detailMoto', motoId]);
   }
+
+  // Fonction pour filtrer les motos en fonction du terme de recherche
+
+  filterMotos(): void {
+    // Si le terme de recherche est vide, afficher tous les blogs
+    if (!this.searchTerm.trim()) {
+      this.fiteredMotos = [...this.listeMotos];
+    } else {
+      // Sinon, filtrer les blogs dont le titre ou la description contient le terme de recherche
+      this.fiteredMotos = this.listeMotos.filter((moto: any) =>
+        moto.nom
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase()) 
+      );
+    }
+  }
+
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChange(): void {
+    // Filtrer les blogs avec le nouveau terme de recherche
+    this.filterMotos();
+  }
+
 }

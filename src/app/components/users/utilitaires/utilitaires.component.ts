@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { ListeUtilitairesService } from 'src/app/services/liste-utilitaires.service';
 import { ListeVoituresService } from 'src/app/services/liste-voitures.service';
 import { PublierAnnonceService } from 'src/app/services/publier-annonce.service';
@@ -17,17 +18,31 @@ export class UtilitairesComponent {
   tabProprietaires: any[] = [];
   proprietaireInfo: any;
   utilitaireSelected: any;
-  // Propriété pour stocker la valeur de recherche
-  searchTermActive: string = '';
+  searchTerm: string = '';
+  fiteredUtilitaires: any[] = [];
 
   constructor(
     private listeUtilitaireService: ListeUtilitairesService,
     private listeAnnonceService: PublierAnnonceService,
+    private proprietaireService: ListeUsersService,
     private route: Router
   ) {}
 
   ngOnInit(): void {
+    this.getProprietaire();
+    
     this.getAnnoncesValides();
+  }
+
+  // Méthode pour récupérer la liste des propriétaires
+  getProprietaire() {
+    // on recupere la liste des utilisateurs
+    this.proprietaireService.getProprietaires().subscribe((response: any) => {
+      console.log(response);
+      console.log(response);
+      this.tabProprietaires = response.proprietaire;
+      console.log('liste props: ', this.tabProprietaires);
+    });
   }
 
   // Liste des annonces mises en avant
@@ -45,23 +60,26 @@ export class UtilitairesComponent {
           (element: any) => element.categorie_id === categorie
         );
         console.log('listeUtilitaires filtrées: ', this.listeUtilitaires);
+
+        // Pour chaque annonce, trouvez l'utilisateur concernée
+        this.listeUtilitaires.forEach((annonce: any) => {
+          const prorietaireAnnonce = this.tabProprietaires.find(
+            (user: any) => user.id === annonce.user_id
+          );
+          console.log('prorietaireAnnonce: ', prorietaireAnnonce);
+
+          // Associez l'utilisateur et l'annonce
+          annonce.infosProprietaire = prorietaireAnnonce;
+        });
+
+        // Initialisation de filteredUtilitaires avec les Utilitaires récupérés
+        this.fiteredUtilitaires = [...this.listeUtilitaires];
+        console.log('fiteredUtilitaires: ', this.fiteredUtilitaires);
       },
       (error) => {
         console.log(error);
       }
     );
-  }
-
-  // Méthode pour filtrer les voitures en fonction de la recherche
-  filtrerUtilitaireActives(event: any): void {
-    const recherche = event.target.value.toLowerCase(); // Obtenir la valeur de l'entrée utilisateur
-    console.log(recherche);
-    // Mettre à jour la propriété searchTermActive
-    this.searchTermActive = recherche;
-    this.listeUtilitaires = this.ListeAnnonces.filter((voiture: any) =>
-      voiture.nom.toLowerCase().includes(recherche)
-    );
-    console.log('resultat recherche: ', this.listeUtilitaires);
   }
 
   // redirection vers la page details blog
@@ -72,5 +90,26 @@ export class UtilitairesComponent {
       'vehicules/utilitaires/detailUtilitaire',
       utilitaireId,
     ]);
+  }
+
+  // Fonction pour filtrer les motos en fonction du terme de recherche
+
+  filterUtilitaire(): void {
+    // Si le terme de recherche est vide, afficher tous les blogs
+    if (!this.searchTerm.trim()) {
+      this.fiteredUtilitaires = [...this.listeUtilitaires];
+    } else {
+      // Sinon, filtrer les blogs dont le titre ou la description contient le terme de recherche
+      this.fiteredUtilitaires = this.listeUtilitaires.filter(
+        (utilitaire: any) =>
+          utilitaire.nom.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+  }
+
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChange(): void {
+    // Filtrer les blogs avec le nouveau terme de recherche
+    this.filterUtilitaire();
   }
 }

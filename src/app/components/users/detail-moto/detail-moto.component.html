@@ -296,7 +296,7 @@
             <h3 class="fw-bold mb-0">Avis</h3>
             <hr class="mb-3">
 
-            <div *ngIf="topComments.length === 0">
+            <div *ngIf="topComments && topComments.length === 0">
                 <p class="fw-lighter text-light fw-bold"> <span class="text-warning">Quelle chance!</span> Soyez le premier à laisser un commentaire.</p>
             </div>
 
@@ -348,14 +348,14 @@
             <div class="row cartes m-0 g-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800"
                 [attr.data-aos-delay]="500">
 
-                <div class="col-12 col-md-4" *ngFor="let moto of listeMotos">
+                <div class="col-12 col-md-4" *ngFor="let moto of listeMotosFiltered">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
                             <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt="">
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom"> {{moto.nom}} </span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
+                            <span class="profil"><img src="http://127.0.0.1:8000/images/{{moto.infosProprietaire?.image}}" class="img-fluid"
                                     alt=""></span>
                         </div>
                         <div class="cardTrait mb-3 mt-2"></div>

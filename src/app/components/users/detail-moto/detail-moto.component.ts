@@ -17,6 +17,7 @@ export class DetailMotoComponent {
   motoId?: number;
   motoDetails: any;
   tabProprietaires: any[] = [];
+  listeMotosFiltered: any[] = []; 
   proprietaireInfo: any;
   motoSelected: any;
   raisonSignal: string = '';
@@ -39,27 +40,24 @@ export class DetailMotoComponent {
   ) {}
 
   ngOnInit(): void {
-
-    this.getCommentaires();
-
     // Récupérer l'ID de l'annonce depuis les paramètres de l'URL
     this.route.params.subscribe((params) => {
       this.annonceId = params['id'];
       console.log('id: ' + this.annonceId);
-      // Appeler le service pour récupérer tous les commentaires
-      // commentaires
+
+      this.getCommentaires();
+
+      this.getProprietaire();
+
+      // id voiture
+      this.identifiantMoto();
+
+      // detail du blog
+      this.getMoto();
+
+      // Annonce en avant
+      this.getAnnoncesEnAvant();
     });
-
-    this.getProprietaire();
-
-    // id voiture
-    this.identifiantMoto();
-
-    // detail du blog
-    this.getMoto();
-
-    // Annonce en avant
-    this.getAnnoncesEnAvant();
   }
 
   // identifiant moto
@@ -67,10 +65,6 @@ export class DetailMotoComponent {
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       this.motoId = +id;
-      console.log(this.motoId);
-      // Utilisez cet ID pour charger les détails du blog
-    } else {
-      // Traitez le cas où l'ID est null
     }
   }
 
@@ -78,7 +72,6 @@ export class DetailMotoComponent {
   getProprietaire() {
     // on recupere la liste des utilisateurs
     this.proprietaireService.getProprietaires().subscribe((response: any) => {
-      console.log(response);
       this.tabProprietaires = response.proprietaire;
       console.log('liste props: ', this.tabProprietaires);
     });
@@ -90,24 +83,12 @@ export class DetailMotoComponent {
       let idMoto: number = this.motoId;
       this.listeMotoService.infoMoto(idMoto).subscribe(
         (response: any) => {
-          console.log('Détails de la moto: ', response.annonce);
-          // Enregistrer les détails de la moto dans la variable motoDetail
           this.motoDetails = response.annonce;
           console.log('detail moto: ', this.motoDetails);
-          console.log('commentaire auto: ', this.motoDetails.commentaires);
-
-          // On récupère le propriètaire de l'annonce
-          console.log('id du prop: ', this.motoDetails.user_id);
-
           // On recherche le propriétaire qui a les infos de user_id
           this.proprietaireInfo = this.tabProprietaires.find(
             (user: any) => user.id === this.motoDetails.user_id
           );
-          console.log(
-            'Informations du proprietaire à qui appartient cette annonce ',
-            this.proprietaireInfo
-          );
-          console.log('nom du proprietaire: ', this.proprietaireInfo.nom);
         },
         (error) => {
           console.log(
@@ -116,9 +97,33 @@ export class DetailMotoComponent {
           );
         }
       );
-    } else {
-      // Traitez le cas où l'ID de la moto est undefined
     }
+  }
+
+  getCommentaires() {
+    this.commentService.getcommentaires().subscribe(
+      (response: any) => {
+        console.log('Liste des commentaires: ', response.commentaires);
+
+        // récupération des commentaires dans tabCommentaires
+        this.tabCommentaires = response.commentaires;
+        console.log('TabCommentaires: ', this.tabCommentaires);
+        console.log("L'id de annonce: ", this.annonceId);
+
+        // Convertir annonceId en nombre si nécessaire
+        let identifiantAnnonce: number = Number(this.annonceId);
+        // Filtrer les commentaires pour ne récupérer que ceux liés à l'annonce sélectionnée
+        this.commentAnnonce = this.tabCommentaires.filter(
+          (comment) => parseInt(comment.annonce_id, 10) === identifiantAnnonce
+        );
+
+        // top commentaires
+        this.topComments = this.commentAnnonce.slice(0, 3);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   // Liste des annonces mises en avant
@@ -128,7 +133,20 @@ export class DetailMotoComponent {
         console.log(response);
         // liste motos
         this.listeMotos = response.annoncesMisesEnAvant.moto;
-        console.log('motos: ', this.listeMotos.slice(0, 3));
+        // Pour chaque annonce, trouvez l'utilisateur concernée
+        this.listeMotos.forEach((annonce: any) => {
+          const prorietaireAnnonce = this.tabProprietaires.find(
+            (user: any) => user.id === annonce.user_id
+          );
+          console.log('prorietaireAnnonce: ', prorietaireAnnonce);
+
+          // Associez l'utilisateur et l'annonce
+          annonce.infosProprietaire = prorietaireAnnonce;
+        });
+
+        // Initialisation de filteredSignalements avec les signalements récupérés
+        this.listeMotosFiltered = [...this.listeMotos];
+        console.log('AnnoncesEnAvantFiltered: ', this.listeMotosFiltered);
       },
       (error) => {
         console.log(error);
@@ -196,42 +214,8 @@ export class DetailMotoComponent {
     }
   }
 
-  // liste commentaires
-  getCommentaires() {
-    this.commentService.getcommentaires().subscribe(
-      (response: any) => {
-        console.log('Liste des commentaires: ', response.commentaires);
 
-        // récupération des commentaires dans tabCommentaires
-        this.tabCommentaires = response.commentaires;
-        console.log('TabCommentaires: ', this.tabCommentaires);
-        console.log("L'id de annonce: ", this.annonceId);
-        console.log(typeof this.annonceId);
-
-        // Convertir annonceId en nombre si nécessaire
-        let identifiantAnnonce: number = Number(this.annonceId);
-        console.log('identifiantAnnonce: ', identifiantAnnonce);
-        console.log('identifiantAnnonce: ', typeof identifiantAnnonce);
-
-        // Filtrer les commentaires pour ne récupérer que ceux liés à l'annonce sélectionnée
-        this.commentAnnonce = this.tabCommentaires.filter(
-          (comment) => parseInt(comment.annonce_id, 10) === identifiantAnnonce
-        );
-
-        console.log('comments of annonce: ', this.commentAnnonce);
-
-        // top commentaires
-        this.topComments = this.commentAnnonce.slice(0, 3);
-        console.log(this.topComments);
-        this.getCommentaires();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  // Signalement annonce
+  // ajout commentaire annonce
   addComment(idAnnonce: number) {
     console.log(this.commentaire);
 
