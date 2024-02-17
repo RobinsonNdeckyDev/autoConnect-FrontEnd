@@ -12,14 +12,14 @@
                 
                 <p class="vhls"><img src="/assets/images/vehicules/pointCar.png" class="" alt=""><a class="text-decoration-none" routerLink="voitures">Annonces de vente de voitures</a></p>
                 
-                <div class="col-12 col-md-4" *ngFor="let voiture of listeVoitures">
+                <div class="col-12 col-md-4" *ngFor="let voiture of annonceVoitureFiltered">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
                             <img src="http://127.0.0.1:8000/images/{{voiture?.image1}}" class="img-fluid w-100 imgPrinc" alt="">
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom"> {{voiture.nom}} </span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
+                            <span class="profil"><img src="http://127.0.0.1:8000/images/{{voiture.infosProprietaire?.image}}" class="img-fluid"
                                     alt=""></span>
                         </div>
                         <div class="cardTrait mb-3 mt-2"></div>
@@ -46,14 +46,14 @@
                 
                 <p class="vhls"><img src="/assets/images/vehicules/pointCar.png" class="" alt=""><a class="text-decoration-none" routerLink="motos">Annonces de vente de motos</a></p>
                 
-                <div class="col-12 col-md-4" *ngFor="let moto of listemotos">
+                <div class="col-12 col-md-4" *ngFor="let moto of annonceMotoFiltered">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
                             <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt="">
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom"> {{moto.nom}}</span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid" alt=""></span>
+                            <span class="profil"><img src="http://127.0.0.1:8000/images/{{moto.infosProprietaire?.image}}" class="img-fluid" alt=""></span>
                         </div>
                         <div class="cardTrait mb-3 mt-2"></div>
                         <div class="cardDetails mx-3">
@@ -80,14 +80,14 @@
     
                 <p class="vhls"><img src="/assets/images/vehicules/pointCar.png" class="" alt=""><a class="text-decoration-none" routerLink="utilitaires">Annonces de vent de véhicules utilitaires</a></p>
             
-                <div class="col-12 col-md-4" *ngFor="let utilitaire of listeUtilitaires">
+                <div class="col-12 col-md-4" *ngFor="let utilitaire of annonceUtilitaireFiltered">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
                             <img src="http://127.0.0.1:8000/images/{{utilitaire.image1}}" class="img-fluid imgPrinc w-100" alt="">
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom"> {{utilitaire.nom}} </span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid" alt=""></span>
+                            <span class="profil"><img src="http://127.0.0.1:8000/images/{{utilitaire.infosProprietaire?.image}}" class="img-fluid" alt=""></span>
                         </div>
                         <div class="cardTrait mb-3 mt-2"></div>
                         <div class="cardDetails mx-3">

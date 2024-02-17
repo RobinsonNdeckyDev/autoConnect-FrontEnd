@@ -16,6 +16,7 @@ import { CommentaireService } from 'src/app/services/commentaire.service';
 })
 export class DetailVoitureComponent {
   listeVoitures: any;
+  annonceVoituresEnAvant: any[] = [];
   voitureId?: number;
   voitureDetails: any;
   tabProprietaires: any[] = [];
@@ -40,26 +41,27 @@ export class DetailVoitureComponent {
   ) {}
 
   ngOnInit(): void {
-    this.getCommentaires();
 
     // Récupérer l'ID de l'annonce depuis les paramètres de l'URL
     this.route.params.subscribe((params) => {
       this.annonceId = params['id'];
+
+      this.getProprietaire();
+
       console.log('id: ' + this.annonceId);
-      // Appeler le service pour récupérer tous les commentaires
-      // commentaires
+
+      this.getCommentaires();
+
+      // id voiture
+      this.identifiantVoiture();
+
+      // detail du blog
+      this.getVoiture();
+
+      // Annonce en avant
+      this.getAnnoncesEnAvant();
     });
 
-    this.getProprietaire();
-
-    // id voiture
-    this.identifiantVoiture();
-
-    // detail du blog
-    this.getVoiture();
-
-    // Annonce en avant
-    this.getAnnoncesEnAvant();
   }
 
   // identifiant voiture
@@ -67,10 +69,6 @@ export class DetailVoitureComponent {
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       this.voitureId = +id;
-      console.log(this.voitureId);
-      // Utilisez cet ID pour charger les détails du blog
-    } else {
-      // Traitez le cas où l'ID est null
     }
   }
 
@@ -93,21 +91,12 @@ export class DetailVoitureComponent {
           console.log('Détails de la voiture: ', response.annonce);
           // Enregistrer les détails de la voiture dans la variable voitureDetail
           this.voitureDetails = response.annonce;
-          console.log('detail voiture: ', this.voitureDetails);
-          console.log('commentaire auto: ', this.voitureDetails.commentaires);
-
-          // On récupère le propriètaire de l'annonce
-          console.log('id du prop: ', this.voitureDetails.user_id);
+          console.log('voitureDetails: ', this.voitureDetails);
 
           // On recherche le propriétaire qui a les infos de user_id
           this.proprietaireInfo = this.tabProprietaires.find(
             (user: any) => user.id === this.voitureDetails.user_id
           );
-          console.log(
-            'Informations du proprietaire à qui appartient cette annonce ',
-            this.proprietaireInfo
-          );
-          console.log('nom du proprietaire: ', this.proprietaireInfo.nom);
         },
         (error) => {
           console.log(
@@ -116,8 +105,6 @@ export class DetailVoitureComponent {
           );
         }
       );
-    } else {
-      // Traitez le cas où l'ID de la voiture est undefined
     }
   }
 
@@ -130,13 +117,9 @@ export class DetailVoitureComponent {
         // récupération des commentaires dans tabCommentaires
         this.tabCommentaires = response.commentaires;
         console.log('TabCommentaires: ', this.tabCommentaires);
-        console.log("L'id de annonce: ", this.annonceId);
-        console.log(typeof this.annonceId);
 
         // Convertir annonceId en nombre si nécessaire
         let identifiantAnnonce: number = Number(this.annonceId);
-        console.log('identifiantAnnonce: ', identifiantAnnonce);
-        console.log('identifiantAnnonce: ', typeof identifiantAnnonce);
 
         // Filtrer les commentaires pour ne récupérer que ceux liés à l'annonce sélectionnée
         this.commentAnnonce = this.tabCommentaires.filter(
@@ -148,7 +131,6 @@ export class DetailVoitureComponent {
         // top commentaires
         this.topComments = this.commentAnnonce.slice(0, 3);
         console.log(this.topComments);
-        this.getCommentaires();
       },
       (error) => {
         console.log(error);
@@ -163,7 +145,22 @@ export class DetailVoitureComponent {
         console.log(response);
         // liste voitures
         this.listeVoitures = response.annoncesMisesEnAvant.voiture;
-        console.log('voitures: ', this.listeVoitures.slice(0, 3));
+        console.log('voitures en avant: ', this.listeVoitures.slice(0, 3));
+
+        // Pour chaque annonce, trouvez l'utilisateur concernée
+        this.listeVoitures.forEach((annonce: any) => {
+          const prorietaireAnnonce = this.tabProprietaires.find(
+            (user: any) => user.id === annonce.user_id
+          );
+          console.log('prorietaireAnnonce: ', prorietaireAnnonce);
+
+          // Associez l'utilisateur et l'annonce
+          annonce.infosProprietaire = prorietaireAnnonce;
+        });
+
+        // Initialisation de filteredSignalements avec les signalements récupérés
+        this.annonceVoituresEnAvant = [...this.listeVoitures];
+        console.log('annonceVoituresEnAvant: ', this.annonceVoituresEnAvant);
       },
       (error) => {
         console.log(error);
@@ -173,9 +170,7 @@ export class DetailVoitureComponent {
 
   // redirection vers la page details voiture
   redirectToDetails(voitureId: number) {
-    // this.identifiantVoiture();
     this.router.navigate(['vehicules/voitures/detailVoiture', voitureId]);
-    // this.getVoiture();
   }
 
   // Signalement annonce

@@ -11,10 +11,11 @@
         <div class="carteAnnonces mb-5 container mt-3">
 
             <div class="headAnnonces">
-                <button class="btn shadow"><a href="" routerLink="/connexion">Vendre mon véhicule</a></button>
+                <button class="btn shadow"><a href="" routerLink="/login">Vendre mon véhicule</a></button>
                 <div class="search shadow">
                     <input type="text" name="textSearch" class="border-0" id="textSearch"
-                        placeholder="Faite une recherche..." (input)="filtrerUtilitaireActives($event)">
+                        placeholder="Faite une recherche..." [(ngModel)]="searchTerm" (input)="onSearchChange()"
+                    >
                     <span><i class="fa-solid fa-magnifying-glass"></i></span>
                 </div>
             </div>
@@ -22,20 +23,20 @@
 
             <div class="row cartes m-0 g-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500">
 
-                <div *ngIf="listeUtilitaires.length === 0">
+                <div *ngIf="fiteredUtilitaires.length === 0">
                     <p class="fw-lighter fw-bold"> <span class="text-danger">Oops!</span> Pas de vehicule utilitaire
                         disponible pour l'instant
                     </p>
                 </div>
             
-                <div class="col-12 col-md-4" *ngFor="let utilitaire of listeUtilitaires">
+                <div class="col-12 col-md-4" *ngFor="let utilitaire of fiteredUtilitaires">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
                             <img src="http://127.0.0.1:8000/images/{{utilitaire.image1}}" class="img-fluid imgPrinc w-100" alt="">
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom"> {{utilitaire.nom}} </span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
+                            <span class="profil"><img src="http://127.0.0.1:8000/images/{{utilitaire.infosProprietaire?.image}}" class="img-fluid"
                                     alt=""></span>
                         </div>
                         <div class="cardTrait mb-3 mt-2"></div>

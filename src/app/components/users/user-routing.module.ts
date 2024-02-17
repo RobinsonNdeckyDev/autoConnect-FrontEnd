@@ -52,10 +52,10 @@ const routes: Routes = [
               path: 'utilitaires',
               children: [
                 { path: '', component: UtilitairesComponent },
-                {
-                  path: 'detailUtilitaire',
-                  component: DetailUtilitaireComponent,
-                },
+                // {
+                //   path: 'detailUtilitaire',
+                //   component: DetailUtilitaireComponent,
+                // },
               ],
             },
           ],

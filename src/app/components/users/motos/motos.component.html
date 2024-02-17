@@ -10,31 +10,33 @@
 
         <div class="carteAnnonces mb-5 container mt-3">
 
-            <div class="headAnnonces">
-                <button class="btn shadow"><a href="" routerLink="/connexion">Vendre mon véhicule</a></button>
+            <div class="headAnnonces mb-4">
+                <button class="btn shadow"><a href="" routerLink="/login">Vendre mon véhicule</a></button>
                 <div class="search shadow">
                     <input type="text" name="textSearch" class="border-0" id="textSearch"
-                        placeholder="Faite une recherche...">
+                        placeholder="Faite une recherche..." [(ngModel)]="searchTerm" (input)="onSearchChange()"
+                    >
                     <span><i class="fa-solid fa-magnifying-glass"></i></span>
                 </div>
             </div>
 
 
-            <div *ngIf="listeMotos.length === 0">
-                <p class="fw-lighter text-light fw-bold"> <span class="text-warning">Oops!</span>Pas de moto disponible pour l'instant</p>
+            <div *ngIf="fiteredMotos.length === 0">
+                <p class="fw-lighter fw-lighter"> <span class="text-danger fw-bold">Oops!</span> Pas de moto disponible pour l'instant</p>
             </div>
 
             <div class="row cartes m-0 g-4">
 
-                <div class="col-12 col-md-4" *ngFor="let moto of listeMotos">
+                <div class="col-12 col-md-4" *ngFor="let moto of fiteredMotos">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
                             <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt="">
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom">{{moto.nom}}</span>
-                            <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
-                                    alt=""></span>
+                            <span class="profil"><img src="http://127.0.0.1:8000/images/{{moto.infosProprietaire?.image}}" class="img-fluid imgPopAnnonce" 
+                                alt="">
+                            </span>
                         </div>
                         <div class="cardTrait mb-3 mt-2"></div>
                         <div class="cardDetails mx-3">
