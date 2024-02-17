@@ -3,6 +3,20 @@
     text-decoration: none;
 }
 
+.search .searchCont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search .searchCont span{
+    background-color: #0F42A8;
+}
+
+.search .searchCont span i{
+    color: white;
+}
+
 .iconDetail {
     color: #0F42A8;
     cursor: pointer;

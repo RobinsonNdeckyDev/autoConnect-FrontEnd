@@ -24,6 +24,7 @@ export class SignalementsComponent {
   tabAnnoncesValides: any[] = [];
   tabAnnoncesSignalees: any[] = [];
   tabAcheteurs: any[] = [];
+  filteredSignalements: any[] = [];
   annonceAcheteurSignal: any;
   infoUserSignal: any;
   infoAnnonceSignal: any;
@@ -31,6 +32,8 @@ export class SignalementsComponent {
 
   // Annonce sélectionnée
   annonceSelected: any;
+  // Propriété pour stocker la valeur de recherche
+  searchTerm: string = '';
 
   ngOnInit(): void {
     // Annonces valides
@@ -107,8 +110,10 @@ export class SignalementsComponent {
         });
 
         // Vérifiez les signalements après traitement
-
         console.log('TabSignalements après traitement: ', this.tabSignalements);
+        // Initialisation de filteredSignalements avec les signalements récupérés
+        this.filteredSignalements = [...this.tabSignalements];
+        console.log('filteredSignalements: ', this.filteredSignalements);
       },
       (error) => {
         console.log(error);
@@ -180,6 +185,54 @@ export class SignalementsComponent {
       }
     });
   }
+
+  // Fonction pour filtrer les signalements en fonction du terme de recherche
+
+  filterSignals(): void {
+    // Si le terme de recherche est vide, réinitialisez filteredSignalements pour afficher tous les signalements
+    if (!this.searchTerm.trim()) {
+      this.filteredSignalements = [...this.tabSignalements];
+    } else {
+      // Filtrer les signalements dont le nom de l'annonce contient le terme de recherche
+      this.filteredSignalements = this.tabSignalements.filter(
+        (signal) =>
+          signal.infoAnnonceSignal &&
+          signal.infoAnnonceSignal.nom
+            .toLowerCase()
+            .includes(this.searchTerm.toLowerCase())
+      );
+    }
+  }
+
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChange(): void {
+    // Filtrer les signalements avec le nouveau terme de recherche
+    this.filterSignals();
+  }
+
+  // filterCars(): void {
+  //   // Si le terme de recherche est vide, afficher toutes les signalements
+  //   if (!this.searchTerm.trim()) {
+  //     this. = this.tabAnnoncesValides.filter(
+  //       (annonceVoiture) => annonceVoiture.etat === 'accepter'
+  //     );
+  //   } else {
+  //     // Sinon, filtrer les signalements dont le nom contient le terme de recherche
+  //     this. = this.tabAnnoncesValides.filter(
+  //       (annonceVoiture) =>
+  //         annonceVoiture.etat === 'accepter' &&
+  //         annonceVoiture.nom
+  //           .toLowerCase()
+  //           .includes(this.searchTerm.toLowerCase())
+  //     );
+  //   }
+  // }
+
+  // // Fonction appelée à chaque changement dans le champ de recherche
+  // onSearchChange(): void {
+  //   // Filtrer les signalements avec le nouveau terme de recherche
+  //   this.filterCars();
+  // }
 
   // alert message
   alertMessage(icon: any, title: any, text: any) {

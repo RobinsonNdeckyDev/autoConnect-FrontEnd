@@ -71,7 +71,7 @@ export class MotosComponent {
   // Liste des voitures
   listesAnnonces(): void {
     // Remplacez par l'ID de la catégorie POUR récupérer les annonces
-    let categorieId = 8;
+    let categorieId = 9;
     // console.log(typeof(categorieId));
     const etatActive = 'accepter';
     const etatInactive = 'refuser';
@@ -168,7 +168,7 @@ export class MotosComponent {
             this.annonceSelectionnee.etat = newState;
             this.alertMessage(
               'success',
-              'Super',
+              'Désactivée',
               'Annonce désactivée avec succés'
             );
             this.listesAnnonces();
@@ -208,6 +208,11 @@ export class MotosComponent {
             // Mettre à jour l'état de l'annonce après avoir reçu la réponse du serveur
             this.annonceSelectionnee.etat = newState;
             this.listesAnnonces();
+            this.alertMessage(
+              'success',
+              'Activée',
+              'Annonce activée avec succés'
+            );
           });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
@@ -256,25 +261,54 @@ export class MotosComponent {
     });
   }
 
-  // recherche et filtre
-  // Méthode pour filtrer les motos en fonction de la recherche
-  filtrerMotosActives(): void {
-    const recherche = this.searchTermActive.toLowerCase();
-    console.log(recherche);
-    this.annoncesMotosFiltreesActives = this.listeMotos.filter((moto) =>
-      moto.nom.toLowerCase().includes(recherche)
-    );
-    console.log('resultat recherche: ', this.annoncesMotosFiltreesActives);
+  // Fonction pour filtrer les motos actives en fonction du terme de recherche
+  filterCarsActive(): void {
+    // Si le terme de recherche est vide, afficher toutes les motos
+    if (!this.searchTermActive.trim()) {
+      this.annoncesMotosFiltreesActives = this.listeMotos.filter(
+        (annonceVoiture) => annonceVoiture.etat === 'accepter'
+      );
+    } else {
+      // Sinon, filtrer les motos dont le nom contient le terme de recherche
+      this.annoncesMotosFiltreesActives = this.listeMotos.filter(
+        (annonceVoiture) =>
+          annonceVoiture.etat === 'accepter' &&
+          annonceVoiture.nom
+            .toLowerCase()
+            .includes(this.searchTermActive.toLowerCase())
+      );
+    }
   }
 
-  // Méthode pour filtrer les motos en fonction de la recherche
-  filtrerMotosInactives(): void {
-    const recherche = this.searchTermInactive.toLowerCase();
-    console.log(recherche);
-    this.annoncesMotosFiltreesInactives = this.listeMotos.filter((moto) =>
-      moto.nom.toLowerCase().includes(recherche)
-    );
-    console.log('resultat recherche: ', this.annoncesMotosFiltreesInactives);
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChangeActive(): void {
+    // Filtrer les motos avec le nouveau terme de recherche
+    this.filterCarsActive();
+  }
+
+  // Fonction pour filtrer les motos inactives en fonction du terme de recherche
+  filterCarsInactive(): void {
+    // Si le terme de recherche est vide, afficher toutes les voitures
+    if (!this.searchTermActive.trim()) {
+      this.annoncesMotosFiltreesInactives = this.listeMotos.filter(
+        (annonceVoiture) => annonceVoiture.etat === 'accepter'
+      );
+    } else {
+      // Sinon, filtrer les voitures dont le nom contient le terme de recherche
+      this.annoncesMotosFiltreesInactives = this.listeMotos.filter(
+        (annonceVoiture) =>
+          annonceVoiture.etat === 'accepter' &&
+          annonceVoiture.nom
+            .toLowerCase()
+            .includes(this.searchTermActive.toLowerCase())
+      );
+    }
+  }
+
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChangeInactive(): void {
+    // Filtrer les voitures avec le nouveau terme de recherche
+    this.filterCarsInactive();
   }
 
   // Alert message

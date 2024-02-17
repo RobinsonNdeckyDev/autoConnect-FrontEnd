@@ -237,25 +237,54 @@ export class VoituresComponent {
     });
   }
 
-  // recherche et filtre
-  // Méthode pour filtrer les voitures en fonction de la recherche
-  filtrerVoitureActives(): void {
-    const recherche = this.searchTermActive.toLowerCase();
-    console.log(recherche);
-    this.annoncesVoituresFiltreesActives = this.listeVoitures.filter(
-      (voiture) => voiture.nom.toLowerCase().includes(recherche)
-    );
-    console.log('resultat recherche: ', this.annoncesVoituresFiltreesActives);
+  // Fonction pour filtrer les voitures actives en fonction du terme de recherche
+  filterCarsActive(): void {
+    // Si le terme de recherche est vide, afficher toutes les voitures
+    if (!this.searchTermActive.trim()) {
+      this.annoncesVoituresFiltreesActives = this.listeVoitures.filter(
+        (annonceVoiture) => annonceVoiture.etat === 'accepter'
+      );
+    } else {
+      // Sinon, filtrer les voitures dont le nom contient le terme de recherche
+      this.annoncesVoituresFiltreesActives = this.listeVoitures.filter(
+        (annonceVoiture) =>
+          annonceVoiture.etat === 'accepter' &&
+          annonceVoiture.nom
+            .toLowerCase()
+            .includes(this.searchTermActive.toLowerCase())
+      );
+    }
   }
 
-  // Méthode pour filtrer les voitures en fonction de la recherche
-  filtrerVoitureInactives(): void {
-    const recherche = this.searchTermInactive.toLowerCase();
-    console.log(recherche);
-    this.annoncesVoituresFiltreesInactives = this.listeVoitures.filter(
-      (voiture) => voiture.nom.toLowerCase().includes(recherche)
-    );
-    console.log('resultat recherche: ', this.annoncesVoituresFiltreesActives);
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChangeActive(): void {
+    // Filtrer les voitures avec le nouveau terme de recherche
+    this.filterCarsActive();
+  }
+
+  // Fonction pour filtrer les voitures inactives en fonction du terme de recherche
+  filterCarsInactive(): void {
+    // Si le terme de recherche est vide, afficher toutes les voitures
+    if (!this.searchTermActive.trim()) {
+      this.annoncesVoituresFiltreesActives = this.listeVoitures.filter(
+        (annonceVoiture) => annonceVoiture.etat === 'accepter'
+      );
+    } else {
+      // Sinon, filtrer les voitures dont le nom contient le terme de recherche
+      this.annoncesVoituresFiltreesActives = this.listeVoitures.filter(
+        (annonceVoiture) =>
+          annonceVoiture.etat === 'accepter' &&
+          annonceVoiture.nom
+            .toLowerCase()
+            .includes(this.searchTermActive.toLowerCase())
+      );
+    }
+  }
+
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChangeInactive(): void {
+    // Filtrer les voitures avec le nouveau terme de recherche
+    this.filterCarsInactive();
   }
 
   // Alert message

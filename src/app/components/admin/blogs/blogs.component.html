@@ -5,13 +5,19 @@
         <div class="headerBlog">
             <button class="btnAddBlog btn" data-bs-toggle="modal" data-bs-target="#ajoutBlog">Ajouter un blog</button>
             <span class="search d-flex justify-content-center align-content-center">
-                <input type="search" class="form-control border-1 rounded-end-0" name="search" placeholder="faite une recherche..." [(ngModel)]="searchTerm">
+                <input type="search" class="form-control border-1 rounded-end-0" name="search" 
+                    placeholder="faite une recherche..." [(ngModel)]="searchTerm" (input)="onSearchChange()"
+                >
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </span>
         </div>
 
+        <div *ngIf="filteredBlogs.length === 0">
+            <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas de blog publié pour l'instant...</p>
+        </div>
+
         <div class="row mt-3 g-5">
-            <div class="col-12 col-md-12" *ngFor="let blog of Blogs">
+            <div class="col-12 col-md-12" *ngFor="let blog of filteredBlogs">
                 <div class="card p-2 shadow">
                     <div class="row">
                         <div class="col-12 col-md-4">
@@ -28,13 +34,7 @@
                                 <div class="btnCard">
                                     <button class="btn mx-4" (click)="openBlogDetailsModal(blog)" data-bs-toggle="modal"
                                         data-bs-target="#detailBlog">Voir detail</button>
-                                    <!-- <button class="btn mx-4 btn-primary" 
-                                        (click)="prepareEdit(blog)" 
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#blogModify">
-                                        Modifier
-                                    </button> -->
-                                    <!-- Button trigger modal -->
+                                    
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="prepareEdit(blog)">
                                         Modifier
                                     </button>
@@ -47,24 +47,6 @@
                 </div>
             </div>
         </div>
-
-        <nav class="pagine mt-5 mb-3 p-0 d-flex justify-content-end">
-            <ul class="pagination m-0 ">
-                <li class="page-item">
-                    <a class="page-link"><i class="fa-solid fa-angles-left"></i></a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item" aria-current="page">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#"><i class="fa-solid fa-angles-right"></i></a>
-                </li>
-            </ul>
-        </nav>
     </div>
 </div>
 
@@ -97,7 +79,7 @@
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description du blog</label>
-                    <input type="text" class="form-control" name="description" id="description" [(ngModel)]="description">
+                    <textarea type="text" class="form-control" name="description" id="description" [(ngModel)]="description"></textarea>
                 </div>
 
                 <div class="d-flex justify-content-between">
@@ -111,11 +93,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 
 
 <!-- Modal Bootstrap pour afficher les détails du blog -->
@@ -150,44 +127,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-<!-- Modal Bootstrap pour modifier le blog -->
-<!-- <div id="blogModify" class="modal fade" tabindex="-1" *ngIf="blogToEdit">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header shadow">
-                <h5 class="modal-title" id="editBlogLabel">Modifier le Blog</h5>
-                <span type="button" class="btnCloseModal" data-bs-dismiss="modal" ><i class="fa-solid fa-circle-xmark"></i></span>
-            </div>
-            <div class="modal-body">
-                <form (submit)="editBlog()">
-                    <div class="mb-3">
-                        <label for="editTitle" class="form-label">Titre</label>
-                        <input type="text" class="form-control" id="editTitle" name="titre" [(ngModel)]="blogToEdit.titre">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editImage" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="editImage" name="image" (change)="onFileChange($event)">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="editDescription" name="description"
-                            [(ngModel)]="blogToEdit.description"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer d-flex justify-content-center shadow">
-                <button type="submit" class="btn btnFermer" data-bs-dismiss="modal">Modifier</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 
 
 <!-- Modal -->

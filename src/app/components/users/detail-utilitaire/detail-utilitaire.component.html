@@ -289,6 +289,11 @@
             <h3 class="fw-bold mb-0">Avis</h3>
             <hr class="mb-3">
 
+            <div *ngIf="topComments.length === 0">
+                <p class="fw-lighter text-light fw-bold"> <span class="text-warning">Quelle chance!</span> Soyez le premier à
+                    laisser un commentaire.</p>
+            </div>
+            
             <div class="row mt-4">
                 <div class="col-12 col-md-8 p-2">
                     <div class="avis" *ngFor="let comment of topComments">

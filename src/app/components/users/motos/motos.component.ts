@@ -42,7 +42,7 @@ export class MotosComponent {
 
   // Liste des annonces mises en avant
   getAnnoncesValides() {
-    let categorie = 2;
+    let categorie = 9;
 
     this.listeAnnonceService.getAnnonceValideProp().subscribe(
       (response: any) => {

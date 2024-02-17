@@ -20,6 +20,10 @@ export class UtilitairesComponent {
   // Variable pour stocker l'annonce sélectionné
   annonceSelectionnee: any;
 
+  // Propriété pour stocker la valeur de recherche
+  searchTermActive: string = '';
+  searchTermInactive: string = '';
+
   constructor(
     public listeUtilitaireService: ListeUtilitairesService,
     private proprietaireService: ListeUsersService,
@@ -223,6 +227,56 @@ export class UtilitairesComponent {
         );
       }
     });
+  }
+
+  // Fonction pour filtrer les voitures actives en fonction du terme de recherche
+  filterCarsActive(): void {
+    // Si le terme de recherche est vide, afficher toutes les voitures
+    if (!this.searchTermActive.trim()) {
+      this.annoncesUtilitairesFiltreesActivees = this.listeUtilitaires.filter(
+        (annonceVoiture) => annonceVoiture.etat === 'accepter'
+      );
+    } else {
+      // Sinon, filtrer les voitures dont le nom contient le terme de recherche
+      this.annoncesUtilitairesFiltreesActivees = this.listeUtilitaires.filter(
+        (annonceVoiture) =>
+          annonceVoiture.etat === 'accepter' &&
+          annonceVoiture.nom
+            .toLowerCase()
+            .includes(this.searchTermActive.toLowerCase())
+      );
+    }
+  }
+
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChangeActive(): void {
+    // Filtrer les voitures avec le nouveau terme de recherche
+    this.filterCarsActive();
+  }
+
+  // Fonction pour filtrer les voitures inactives en fonction du terme de recherche
+  filterCarsInactive(): void {
+    // Si le terme de recherche est vide, afficher toutes les voitures
+    if (!this.searchTermActive.trim()) {
+      this.annoncesUtiltairesFiltreesInactives = this.listeUtilitaires.filter(
+        (annonceVoiture) => annonceVoiture.etat === 'accepter'
+      );
+    } else {
+      // Sinon, filtrer les voitures dont le nom contient le terme de recherche
+      this.annoncesUtiltairesFiltreesInactives = this.listeUtilitaires.filter(
+        (annonceVoiture) =>
+          annonceVoiture.etat === 'accepter' &&
+          annonceVoiture.nom
+            .toLowerCase()
+            .includes(this.searchTermActive.toLowerCase())
+      );
+    }
+  }
+
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChangeInactive(): void {
+    // Filtrer les voitures avec le nouveau terme de recherche
+    this.filterCarsInactive();
   }
 
   // Alert message

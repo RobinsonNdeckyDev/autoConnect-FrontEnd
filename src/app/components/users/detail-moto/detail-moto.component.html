@@ -296,7 +296,11 @@
             <h3 class="fw-bold mb-0">Avis</h3>
             <hr class="mb-3">
 
-            <div class="row mt-4 g-5">
+            <div *ngIf="topComments.length === 0">
+                <p class="fw-lighter text-light fw-bold"> <span class="text-warning">Quelle chance!</span> Soyez le premier à laisser un commentaire.</p>
+            </div>
+
+            <div class="row mt-2 g-5">
                 <div class="col-12 col-md-8 p-2">
                     <div class="avis" *ngFor="let comment of topComments">
                         <div class="headC">
@@ -321,7 +325,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-4 px-5">
-                    <div class=" comtRighr pt-5">
+                    <div class=" comtRighr">
                         <img src="http://127.0.0.1:8000/images/{{motoDetails?.image1}}" alt="" class="img-fluid mb-4">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#formComment">Poster un
                             commentaire</button>
@@ -347,7 +351,7 @@
                 <div class="col-12 col-md-4" *ngFor="let moto of listeMotos">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
-                            <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc" alt="">
+                            <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt="">
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom"> {{moto.nom}} </span>

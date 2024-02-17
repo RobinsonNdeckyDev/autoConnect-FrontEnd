@@ -18,20 +18,18 @@
                         <div class="col-12 col-md-6">
                             <div class="mb-3">
                                 <label for="moteur" class="form-label">Moteur</label>
-                                <!-- <input type="text" class="form-control" name="moteur" id="moteur" placeholder="moteur et description" [(ngModel)]="moteur"> -->
                                 <select class="form-select" id="moteur" name="moteur" aria-label="Default select example" [(ngModel)]="moteur">
                                     <option selected value="Dielsel">Diesel</option>
-                                    <option value="Moteur à essence">Moteur à essence</option>
-                                    <option value="Moteur diesel">Moteur diesel</option>
-                                    <option value="Moteur hybride">Moteur hybride</option>
-                                    <option value="Moteur électrique">Moteur électrique</option>
-                                    <option value="Moteur à hydrogène">Moteur à hydrogène</option>
+                                    <option value="Moteur à essence">Essence</option>
+                                    <option value="Moteur diesel">Diesel</option>
+                                    <option value="Moteur hybride">Hybride</option>
+                                    <option value="Moteur électrique">Electrique</option>
+                                    <option value="Moteur à hydrogène">Hydrogène</option>
                                     <option value="Electrique">Electrique</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="annee" class="form-label">Année</label>
-                                <!-- <input type="month" min="2000" max="2024" class="form-control" name="annee" id="annee" placeholder="année" [(ngModel)]="annee"> -->
                                 <label for="year">Année :</label>
                                 <select class="form-select" id="year" name="year" [(ngModel)]="annee">
                                     <option *ngFor="let year of years" [value]="year">{{ year }}</option>
@@ -50,7 +48,6 @@
                             </div>
                             <div class="mb-3">
                                 <label for="marque" class="form-label">Marque</label>
-                                <!-- <input type="text" class="form-control" name="marque" id="marque" placeholder="marque du voiture" [(ngModel)]="marque"> -->
                                 <select class="form-select" id="marque" name="marque" aria-label="Default select example" [(ngModel)]="marque">
                                     <option selected value="Ford">Ford</option>
                                     <option value="Chevrolet">Chevrolet</option>
@@ -109,19 +106,17 @@
                             <div class="mb-3">
                                 <label for="imagePrincipal" class="form-label">Image principal du véhicule</label>
                                 <input (change)="onFileChange($event)" class="form-control" type="file" id="imagePrincipal" name="imagePrincipal" accept="imagePrincipal/*" required>
-                                <!-- <input type="file" class="form-control" id="imagePrincipal" name="imagePrincipal"> -->
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="mb-3">
                                 <label for="kilometrage" class="form-label">Kilométrage</label>
-                                <!-- <input type="text" class="form-control" name="kilometrage" id="kilometrage" placeholder="Nombre de kilométre parcouru" [(ngModel)]="kilometrage"> -->
                                 <select class="form-select" id="kilometrage" name="kilometrage" aria-label="Default select example" [(ngModel)]="kilometrage">
-                                    <option selected value="neuf">neuf O km</option>
-                                    <option value="Kilométrage_tres_bas">Kilométrage très bas (0 - 10 000 km)</option>
-                                    <option value="Kilométrage_bas">Kilométrage bas (10 000 - 50 000 km)</option>
-                                    <option value="Kilométrage_moyen">Kilométrage moyen (50 000 - 100 000 km)</option>
-                                    <option value="Kilométrage_élevé">Kilométrage élevé (100 000 - 150 000 km)</option>
+                                    <option selected value="neuf">O km</option>
+                                    <option value="Kilométrage_tres_bas">-10 000 km</option>
+                                    <option value="Kilométrage_bas">-50 000 km</option>
+                                    <option value="Kilométrage_moyen">-100 000 km</option>
+                                    <option value="Kilométrage_élevé">-150 000 km</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -132,14 +127,8 @@
                                     <option value= "Electrique">Electrique</option>
                                 </select>
                             </div>
-                            <!-- <div class="mb-3">
-                                <label for="transmission" class="form-label">Transmission</label>
-                                <input type="text" class="form-control" name="transmission" id="transmission"
-                                    placeholder="Description sur la transmission du véhicule" [(ngModel)]="transmission">
-                            </div> -->
                             <div class="mb-3">
                                 <label for="nbrePlace" class="form-label">Nombre de place</label>
-                                <!-- <input type="number" class="form-control" name="carburant" id="carburant" placeholder="0" [(ngModel)]="nbrePlace"> -->
                                 <select class="form-select" id="nbrePlace" name="nbrePlace" aria-label="Default select example" [(ngModel)]="nbrePlace">
                                     <option selected value="Deux places">Deux places</option>
                                     <option value="Quatre places">Quatre places</option>
@@ -153,7 +142,6 @@
                             </div>
                             <div class="mb-3">
                                 <label for="localisation" class="form-label">Localisation</label>
-                                <!-- <input type="text" class="form-control" name="localisation" id="localisation" placeholder="Rufisque" [(ngModel)]="localisation"> -->
                                 <select class="form-select" id="localisation" name="localisation" aria-label="Default select example" [(ngModel)]="localisation">
                                     <option selected value="Dakar">Dakar</option>
                                     <option value="Diourbel">Diourbel</option>
@@ -174,13 +162,10 @@
                                 <label for="categorie_id" class="form-label">Categorie du véhicule</label>
                                 <select class="form-select" id="categorie_id" name="categorie_id" aria-label="Default select example" [(ngModel)]="categorie_id" >
                                     <option selected value= "{{categorie.id}}" *ngFor="let categorie of Categories"> {{categorie.nom}} </option>
-                                    <!-- <option value= 2>Moto</option>
-                                    <option value= 3>Utilitaire</option> -->
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="carosserie" class="form-label">Carosserie</label>
-                                <!-- <input type="text" class="form-control" name="carosserie" id="carosserie" placeholder="Carosserie du véhicule" [(ngModel)]="carosserie"> -->
                                 <select class="form-select" id="carosserie" name="carosserie" aria-label="Default select example"
                                     [(ngModel)]="carosserie">
                                     <option selected value="Berline">Berline</option>
@@ -212,27 +197,9 @@
                     <h5 class="my-3">Présntation du véhicule</h5>
                     <div class="mb-3">
                         <label for="nomVehicule" class="form-label">Nom du véhicule</label>
-                        <!-- <input type="text" class="form-control" id="nomVehicule" name="nomVehicule" placeholder="nom complet du véhicule" [(ngModel)]="nom"> -->
-                        <select class="form-select" id="nomVehicule" name="nomVehicule" aria-label="Default select example"
-                            [(ngModel)]="nom">
-                            <option selected value="Berline">Berline</option>
-                            <option value="Coupé">Coupé</option>
-                            <option value="Cabriolet">Cabriolet</option>
-                            <option value="Break">Break</option>
-                            <option value="Monospace">Monospace</option>
-                            <option value="SUV">SUV</option>
-                            <option value="Crossover">Crossover</option>
-                            <option value="Camionnette">Camionnette</option>
-                            <option value="Pickup">Pickup</option>
-                            <option value="Utilitaire_léger">Utilitaire léger</option>
-                            <option value="Utilitaire_lourd">Utilitaire lourd</option>
-                            <option value="Van">Van</option>
-                            <option value="Camion_citerne">Camion citerne</option>
-                            <option value="Bus">Bus</option>
-                            <option value="Remarque">Remorque</option>
-                            <option value="Camion_citerne">Camion citerne</option>
-                            <option value="Moto">Moto (deux roues)</option>
-                        </select>
+                        <input class="form-control" id="nomVehicule" name="nomVehicule" aria-label="Default select example"
+                            [(ngModel)]="nom"
+                        >
                     </div>
                     <div class="mb-3">
                         <label for="descriptionVehicule" class="form-label">descripton du véhicule</label>
@@ -272,12 +239,6 @@
                         </div>
                     </div>
 
-
-
-                    <!-- <div class="mb-5">
-                        <label for="photoVehicule" class="form-label">Image 1</label>
-                        <input (change)="imgSecondaires($event)" type="file" class="form-control" id="photoVehicule" name="photoVehicule[]" accept="photoVehicule/*">
-                    </div> -->
                 </div>
 
                 <hr class="my-5">

@@ -19,6 +19,11 @@
                 </div>
             </div>
 
+
+            <div *ngIf="listeMotos.length === 0">
+                <p class="fw-lighter text-light fw-bold"> <span class="text-warning">Oops!</span>Pas de moto disponible pour l'instant</p>
+            </div>
+
             <div class="row cartes m-0 g-4">
 
                 <div class="col-12 col-md-4" *ngFor="let moto of listeMotos">

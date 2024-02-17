@@ -10,8 +10,8 @@
             </div>
             <div class="search my-3 d-flex justify-content-end align-content-center">
                 <input type="text" class="form-control border-1 rounded-end-0" name="search"
-                    placeholder="faite une recherche..." [(ngModel)]="searchTermInactive"
-                    (change)="filtrerVoitureInactives()">
+                    placeholder="faite une recherche..." [(ngModel)]="searchTermInactive" (input)="onSearchChangeInactive()"
+                >
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
         </div>
@@ -97,7 +97,7 @@
        
     </div>
 
-    <!-- Liste des annonces inactives -->
+    <!-- Liste des annonces actives -->
     <div class="cars shadow py-3 px-4 rounded-4" *ngIf="!annonces">
         <p class="text-dark"><i class="fa-regular fa-hand-point-right iconhand"></i>Liste annonces actives</p>
         <div class="d-flex annoncesHead">
@@ -106,8 +106,8 @@
             </div>
             <div class="search my-3 d-flex justify-content-end align-content-center">
                 <input type="text" class="form-control border-1 rounded-end-0" name="search"
-                    placeholder="faite une recherche..." [(ngModel)]="searchTermActive"
-                    (input)="filtrerVoitureActives()">
+                    placeholder="faite une recherche..." [(ngModel)]="searchTermActive" (input)="onSearchChangeActive()"
+                >
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
         </div>

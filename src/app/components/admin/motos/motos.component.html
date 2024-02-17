@@ -10,8 +10,9 @@
                 <button class="btn btn-active" (click)="afficherAnnonces()">Voir liste des annonces Actives</button>
             </div>
             <div class="search my-3 d-flex justify-content-end align-content-center">
-                <input type="text" class="form-control border-1 rounded-end-0" name="search" placeholder="faite une recherche..."
-                    [(ngModel)]="searchTermActive" (input)="filtrerMotosInactives()">
+                <input type="text" class="form-control border-1 rounded-end-0" name="search" 
+                    placeholder="faite une recherche..." [(ngModel)]="searchTermInactive" (input)="onSearchChangeInactive()"
+                >
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
         </div>
@@ -50,8 +51,9 @@
                 <button class="btn" (click)="afficherAnnonces()">Voir liste des annonces inactives</button>
             </div>
             <div class="search my-3 d-flex justify-content-end align-content-center">
-                <input type="text" class="form-control border-1 rounded-end-0" name="search" placeholder="faite une recherche..."
-                    [(ngModel)]="searchTermActive" (input)="filtrerMotosActives()">
+                <input type="text" class="form-control border-1 rounded-end-0" name="search" 
+                    placeholder="faite une recherche..." [(ngModel)]="searchTermActive" (input)="onSearchChangeActive()"
+                >
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
         </div>

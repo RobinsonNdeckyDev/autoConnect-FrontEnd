@@ -9,7 +9,8 @@
             </div>
             <div class="search my-3 d-flex justify-content-end align-content-center">
                 <input type="search" class="form-control border-1 rounded-end-0" name="search"
-                    placeholder="faite une recherche...">
+                    placeholder="faite une recherche..." [(ngModel)]="searchTermInactive" (input)="onSearchChangeInactive()"
+                >
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
         </div>
@@ -49,7 +50,8 @@
             </div>
             <div class="search my-3 d-flex justify-content-end align-content-center">
                 <input type="search" class="form-control border-1 rounded-end-0" name="search"
-                    placeholder="faite une recherche...">
+                    placeholder="faite une recherche..." [(ngModel)]="searchTermActive" (input)="onSearchChangeActive()"
+                >
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
         </div>

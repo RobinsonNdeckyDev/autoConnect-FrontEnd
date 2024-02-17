@@ -19,7 +19,14 @@
                 </div>
             </div>
 
+
             <div class="row cartes m-0 g-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500">
+
+                <div *ngIf="listeUtilitaires.length === 0">
+                    <p class="fw-lighter fw-bold"> <span class="text-danger">Oops!</span> Pas de vehicule utilitaire
+                        disponible pour l'instant
+                    </p>
+                </div>
             
                 <div class="col-12 col-md-4" *ngFor="let utilitaire of listeUtilitaires">
                     <div class="card shadow">

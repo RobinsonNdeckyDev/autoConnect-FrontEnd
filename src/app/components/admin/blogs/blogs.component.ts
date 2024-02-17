@@ -46,7 +46,9 @@ export class BlogsComponent {
 
         // Maintenant, vous pouvez accéder à l'array categorie
         this.Blogs = response.blocs;
-        this.filterBlogs();
+
+        // Initialisation de filteredBlogs 
+        this.filteredBlogs = [...this.Blogs];
       },
       (error) => {
         console.error(
@@ -54,13 +56,6 @@ export class BlogsComponent {
           error
         );
       }
-    );
-  }
-
-  // Méthode pour filtrer les blogs en fonction du terme de recherche
-  filterBlogs(): void {
-    this.filteredBlogs = this.Blogs.filter((blog) =>
-      blog.titre.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
@@ -194,6 +189,27 @@ export class BlogsComponent {
         this.alertMessage('info', 'Annulée', 'Suppression du blog annulée');
       }
     });
+  }
+
+  // Fonction pour filtrer les blogs en fonction du terme de recherche
+  filterBlogs(): void {
+    // Si le terme de recherche est vide, afficher tous les blogs
+    if (!this.searchTerm.trim()) {
+      this.filteredBlogs = [...this.Blogs];
+    } else {
+      // Sinon, filtrer les blogs dont le titre ou la description contient le terme de recherche
+      this.filteredBlogs = this.Blogs.filter(
+        (blog) =>
+          blog.titre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          blog.description.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+  }
+
+  // Fonction appelée à chaque changement dans le champ de recherche
+  onSearchChange(): void {
+    // Filtrer les blogs avec le nouveau terme de recherche
+    this.filterBlogs();
   }
 
   viderChamps() {
