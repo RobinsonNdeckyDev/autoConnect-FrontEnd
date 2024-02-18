@@ -14,8 +14,11 @@
             </div>
         </div>
 
-
         <div class="row mb-2 mt-4">
+            <div *ngIf="invalidesAnnonces.length === 0">
+                <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces inactives pour l'instant...</p>
+            </div>
+
             <div class="col-12 col-md-3" *ngFor="let annonce of invalidesAnnonces">
                 <div class="card rounded-3 shadow">
                     <div class="card-head mx-3 mt-3">
@@ -47,8 +50,13 @@
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
         </div>
+
+        <div *ngIf="validesAnnonces.length === 0">
+            <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces valides pour l'instant...</p>
+        </div>
     
         <div class="row mb-3 mt-4 g-3" >
+
             <div class="col-12 col-md-3" *ngFor="let annonce of validesAnnonces">
                 <div class="card rounded-3">
                     <div class="card-head mx-3 mt-3">

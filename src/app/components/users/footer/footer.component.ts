@@ -18,15 +18,14 @@ export class FooterComponent {
 
   emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
 
-
   // Abonnement newsletter
   subscribeNews() {
     if (this.newsletter == '') {
-      this.alertMessage('error', 'Désolé', 'Merci de renseigner vorte email');
+      this.alertMessage('error', 'Oops', 'Merci de renseigner vorte email');
     } else if (!this.newsletter.match(this.emailPattern)) {
       this.alertMessage(
         'error',
-        'Désolé',
+        'Oops',
         'Merci de renseigner un email valide'
       );
     } else {
@@ -37,7 +36,11 @@ export class FooterComponent {
       this.newsletterService
         .addNewSubscribeNews(newSubscriberNews)
         .subscribe((response: any) => {
-          this.alertMessage('success', 'Super', 'Vous etes maintenant abonné à notre newsletter');
+          this.alertMessage(
+            'success',
+            'Abonné',
+            'Vous etes maintenant abonné à notre newsletter'
+          );
           console.log(response);
           this.viderChamps();
         });
@@ -49,12 +52,15 @@ export class FooterComponent {
     this.newsletter = '';
   }
 
-  // Alert message
+  // alert message
   alertMessage(icon: any, title: any, text: any) {
     Swal.fire({
       icon: icon,
       title: title,
       text: text,
+      timer: 1800, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 }
