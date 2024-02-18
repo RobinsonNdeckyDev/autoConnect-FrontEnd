@@ -13,20 +13,16 @@
 <section class="annonces py-3">
     <h1 class="text-center mt-3 mb-3">Les annonces les plus mises en avant</h1>
     <div class="trait m-auto"></div>
-
-    <!-- [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500"
-    [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500" -->
-
     <div class="carteAnnonces container mt-4">
         <div class="row cartes m-0 g-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500">
-            <div class="col-12 col-md-4" *ngFor="let voiture of listeVoitures">
+            <div class="col-12 col-md-4" *ngFor="let voiture of annonceVoitureFiltered">
                 <div class="card shadow">
                     <div class="cardImg mx-3">
                         <img src="http://127.0.0.1:8000/images/{{voiture?.image1}}" class="img-fluid imgPrinc w-100" alt="">
                     </div>
                     <div class="cardTitle mx-3">
                         <span class="nom">{{voiture?.nom}}</span>
-                        <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
+                        <span class="profil"><img src="http://127.0.0.1:8000/images/{{voiture.infosProprietaire?.image}}" class="img-fluid"
                                 alt=""></span>
                     </div>
                     <div class="cardTrait mb-3 mt-3"></div>
@@ -34,7 +30,6 @@
                         <div class="left">
                             <p><img src="/assets/images/iconSvg/moteur.png" class="" alt=""> {{voiture?.moteur}}</p>
                             <p><img src="/assets/images/iconSvg/calendar.png" alt=""> {{voiture?.annee}}</p>
-                            <!-- <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p> -->
                         </div>
                         <div class="Right">
                             <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{voiture?.kilometrage}} KM</p>
@@ -50,14 +45,14 @@
             </div>
         </div>
         <div class="row cartes mt-5 g-4" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="800" [attr.data-aos-delay]="500">
-            <div class="col-12 col-md-4" *ngFor="let moto of listemotos">
+            <div class="col-12 col-md-4" *ngFor="let moto of annonceMotoFiltered">
                 <div class="card shadow">
                     <div class="cardImg mx-3">
                         <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt="">
                     </div>
                     <div class="cardTitle mx-3">
                         <span class="nom">{{moto.nom}}</span>
-                        <span class="profil"><img src="../../../assets/images/profil/profil3.jpg" class="img-fluid"
+                        <span class="profil"><img src="http://127.0.0.1:8000/images/{{moto.infosProprietaire?.image}}" class="img-fluid"
                                 alt=""></span>
                     </div>
                     <div class="cardTrait mb-3 mt-3"></div>

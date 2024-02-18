@@ -9,6 +9,18 @@ a {
     align-items: center;
 }
 
+/* .text-error{
+    color: red;
+}
+
+.error-message {
+    color: red;
+}
+
+.success-message {
+    color: green;
+} */
+
 .login .loginContain .formulaire a {
     margin-bottom: 5%;
 }

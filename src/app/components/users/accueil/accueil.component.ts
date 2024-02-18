@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ListeBlogsService } from 'src/app/services/liste-blogs.service';
 import { ListeContactsService } from 'src/app/services/liste-contacts.service';
+import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { PublierAnnonceService } from 'src/app/services/publier-annonce.service';
 import Swal from 'sweetalert2';
 
@@ -18,6 +19,10 @@ export class AccueilComponent {
   listemotos: any;
   listeVoitures: any;
   listeUtilitaires: any;
+  tabProprietaires: any[] = [];
+  annonceVoitureFiltered: any[] = [];
+  annonceMotoFiltered: any[] = [];
+  annonceUtilitaireFiltered: any[] = [];
 
   // emailPattern
   emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -29,15 +34,26 @@ export class AccueilComponent {
     private contactService: ListeContactsService,
     private listeAnnonceService: PublierAnnonceService,
     private listeBlogsService: ListeBlogsService,
+    private proprietaireService: ListeUsersService,
     private route: Router
   ) {}
 
   ngOnInit(): void {
+    // proprietaires
+    this.getProprietaire();
+
     // Annonces en avant
     this.getAnnoncesEnAvant();
 
     // liste blogs
     this.getBlogs();
+  }
+
+  // Liste des proprietaires
+  getProprietaire() {
+    this.proprietaireService.getProprietaires().subscribe((response: any) => {
+      this.tabProprietaires = response.proprietaire;
+    });
   }
 
   // Ajouter un contact
@@ -98,13 +114,58 @@ export class AccueilComponent {
         console.log(response);
         // liste voitures
         this.listeVoitures = response.annoncesMisesEnAvant.voiture;
-        console.log('voitures: ', this.listeVoitures);
+        // Pour chaque annonce de voiture, trouvez l'utilisateur concernée
+        this.listeVoitures.forEach((annonce: any) => {
+          const prorietaireAnnonceVoiture = this.tabProprietaires.find(
+            (user: any) => user.id === annonce.user_id
+          );
+
+          // Associez l'utilisateur et l'annonce
+          annonce.infosProprietaire = prorietaireAnnonceVoiture;
+        });
+        // Initialisation de annonceVoitureFiltered
+        this.annonceVoitureFiltered = [...this.listeVoitures];
+        console.log('annonceVoitureFiltered: ', this.annonceVoitureFiltered);
+        // Pour chaque annonce de voiture, trouvez l'utilisateur concernée
+
         // liste motos
         this.listemotos = response.annoncesMisesEnAvant.moto;
-        console.log('liste motos: ', this.listemotos);
-        // liste motos
+        // Pour chaque annonce de moto, trouvez l'utilisateur concernée
+        this.listemotos.forEach((annonce: any) => {
+          const prorietaireAnnonceMoto = this.tabProprietaires.find(
+            (user: any) => user.id === annonce.user_id
+          );
+
+          // Associez l'utilisateur et l'annonce
+          annonce.infosProprietaire = prorietaireAnnonceMoto;
+        });
+
+        // Initialisation de annonceMotoFiltered
+        this.annonceMotoFiltered = [...this.listemotos];
+        console.log('annonceMotoFiltered: ', this.annonceMotoFiltered);
+
+        // Pour chaque annonce de moto, trouvez l'utilisateur concernée
+
+        // liste utilitaires
         this.listeUtilitaires = response.annoncesMisesEnAvant.utilitaire;
-        console.log('liste utilitaire: ', this.listeUtilitaires);
+        // Pour chaque annonce de utilitaire, trouvez l'utilisateur concernée
+        this.listeUtilitaires.forEach((annonce: any) => {
+          const prorietaireAnnonceUtilitaire = this.tabProprietaires.find(
+            (user: any) => user.id === annonce.user_id
+          );
+
+          // Associez l'utilisateur et l'annonce
+          annonce.infosProprietaire = prorietaireAnnonceUtilitaire;
+        });
+
+        // Initialisation de anonceUtilitaireFiltered
+        this.annonceUtilitaireFiltered = [...this.listeUtilitaires];
+        console.log(
+          'annonceUtilitaireFiltered: ',
+          this.annonceUtilitaireFiltered
+        );
+
+        // Pour chaque annonce de utilitaire, trouvez l'utilisateur concernée
       },
       (error) => {
         console.log(error);
@@ -140,12 +201,15 @@ export class AccueilComponent {
     this.message = '';
   }
 
-  // Alert message
+  // alert message
   alertMessage(icon: any, title: any, text: any) {
     Swal.fire({
       icon: icon,
       title: title,
       text: text,
+      timer: 1800, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 }
