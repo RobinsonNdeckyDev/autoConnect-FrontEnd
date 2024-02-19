@@ -80,7 +80,12 @@
                 <form action="" class="fromADDCategorie my-4" (ngSubmit)="addCategorie()">
                     <div class="my-4">
                         <label for="categorie" class="form-label">Nom de la catégorie</label>
-                        <input type="text" class="form-control" name="nom" id="categorie" placeholder="Catégorie" [(ngModel)]="nom">
+                        <input type="text" class="form-control" name="nom" id="categorie" placeholder="Catégorie" [(ngModel)]="categorie" (input)="validateCategorie()">
+                        <span *ngIf="categorieTouched && categorieEmpty && !validationMessages['categorie']" class="text-danger">
+                            Le prénom est requis
+                        </span>
+                        <span *ngIf="validationMessages['categorie']" class="text-danger">{{ validationMessages['categorie'] }}</span>
+                        <span *ngIf="!validationMessages['categorie'] && categorie" class="text-success">Correct</span>
                     </div>
 
                     <div class="boutonAdd mt-4 d-flex justify-content-center align-content-center">

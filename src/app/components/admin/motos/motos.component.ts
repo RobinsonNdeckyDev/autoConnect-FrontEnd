@@ -71,7 +71,7 @@ export class MotosComponent {
   // Liste des voitures
   listesAnnonces(): void {
     // Remplacez par l'ID de la catégorie POUR récupérer les annonces
-    let categorieId = 9;
+    let categorieId = 2;
     // console.log(typeof(categorieId));
     const etatActive = 'accepter';
     const etatInactive = 'refuser';

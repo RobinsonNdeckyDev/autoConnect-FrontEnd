@@ -66,13 +66,13 @@ export class VendeurSubscribeComponent {
     /^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
   // regex password
-  passwordRegex: RegExp = /^\d{7,}$/;
+  passwordRegex: RegExp = /^\d{6,}$/;
 
   // regex adresse
   adresseRegex: RegExp = /^[a-zA-Z\s]{4,}$/;
 
   // regex adresse
-  descriptionRegex: RegExp = /^[a-zA-Z\s]{15,}$/;
+  descriptionRegex: RegExp = /^[a-zA-Z\s]{10,}$/;
 
   // Incription proprietaire
   inscription() {
@@ -272,11 +272,6 @@ export class VendeurSubscribeComponent {
     if (!this.description) {
       this.validationMessages['description'] = 'La description est requise';
       this.descriptionEmpty = true;
-      return false;
-    } else if (!this.descriptionRegex.test(this.description)) {
-      this.validationMessages['description'] =
-        'La description doit contenir au moins 15 caractères et ne peut contenir que des lettres';
-      this.descriptionEmpty = false;
       return false;
     } else {
       this.validationMessages['description'] = '';

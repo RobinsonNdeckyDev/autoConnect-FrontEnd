@@ -102,7 +102,7 @@
                             <label for="description" class="form-label">Description</label>
                             <textarea name="description" id="description" class="form-control" [(ngModel)]="description" (input)="validateDescription()"></textarea>
                             <span *ngIf="descriptionTouched && descriptionEmpty && !validationMessages['description']" class="text-danger">
-                                Le prénom est requis
+                                La description est requise
                             </span>
                             <span *ngIf="validationMessages['description']" class="text-danger">{{ validationMessages['description'] }}</span>
                             <span *ngIf="!validationMessages['description'] && description" class="text-success">Correct</span>

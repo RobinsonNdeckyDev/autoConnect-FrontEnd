@@ -68,7 +68,8 @@
 }
 
 .selected{
-    color: black !important;
+    color: white !important;
+    border-bottom: 2px solid white;
 }
 
 #utilisateurs ul li a{
