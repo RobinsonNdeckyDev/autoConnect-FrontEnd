@@ -71,11 +71,11 @@ export class AnnoncesVendeursComponent {
 
   ngOnInit() {
     // annonces valides
+    this.getCategories();
     this.annoncesValides();
     this.annoncesInvalides();
     this.getInfoCurrentUser();
     this.listeProprietaire();
-    this.getCategories();
   }
 
   // methode pour les infos du user connecté
@@ -89,8 +89,8 @@ export class AnnoncesVendeursComponent {
   annoncesValides() {
     this.annoncesValidesProps.getAnnonceUserValide().subscribe(
       (response: any) => {
-        console.log(response);
-        this.validesAnnonces = Object.values(response.annonceUserValides);
+        console.log(response.annonces);
+        this.validesAnnonces = (response.annonces);
         console.log('Annonce valides: ', this.validesAnnonces);
       },
       (error) => {
@@ -103,8 +103,8 @@ export class AnnoncesVendeursComponent {
   annoncesInvalides() {
     this.annoncesValidesProps.getAnnonceUserInvalide().subscribe(
       (response: any) => {
-        console.log(response);
-        this.invalidesAnnonces = Object.values(response.annonceUserInvalides);
+        console.log(response.annonces);
+        this.invalidesAnnonces = response.annonces;
         console.log('Annonces invalides: ', this.invalidesAnnonces);
       },
       (error) => {

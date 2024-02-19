@@ -29,7 +29,11 @@ const routes: Routes = [
     component: MainAdminComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'Accueil_Admin', component: AccueilAdminComponent },
+      {
+        path: 'Accueil_Admin',
+        component: AccueilAdminComponent,
+        canActivate: [AuthGuard],
+      },
       { path: 'utilisateurs', component: UtilisateursComponent },
       {
         path: 'detailProprietaire/:id',

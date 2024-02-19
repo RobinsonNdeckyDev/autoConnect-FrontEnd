@@ -14,11 +14,23 @@ export class CategoriesComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   CategoriesListe: boolean = true;
   categories: any[] = [];
-  nom: string = '';
+  categorie: string = '';
 
   // categorie selectionnée
   categorieSelected: any;
   categorieToEdit: any;
+
+  // Messages de validation
+  validationMessages: { [key: string]: string } = {};
+
+  // Déclaration des propriétés touched
+  categorieTouched: boolean = false;
+
+  // Déclaration des propriétés Empty
+  categorieEmpty: boolean = false;
+
+  // Categorie regex
+  categorieRegex: RegExp = /^[a-z\s]{4,}$/;
 
   constructor(
     private listeCategories: ListeCategoriesService,
@@ -70,18 +82,19 @@ export class CategoriesComponent implements OnInit {
 
   // Ajout d'un blog
   addCategorie() {
-    console.log(this.nom);
+    console.log(this.categorie);
 
-    if (this.nom == '') {
-      this.alertMessage(
-        'error',
-        'Oops',
-        'Merci de renseigner le titre du blog'
-      );
-      return; // Empêche la soumission si le champ est vide
-    } else {
+    // validation de la categorie
+    this.validateCategorie();
+
+    // Enregistrement de la categorie
+    this.registerCategorie();
+  }
+
+  // Register categorie
+  registerCategorie(){
       const newCategorie = {
-        nom: this.nom,
+        nom: this.categorie,
       };
 
       this.listeCategories.addCategorie(newCategorie).subscribe(
@@ -89,7 +102,7 @@ export class CategoriesComponent implements OnInit {
           // /Insérer le nouveau blog au début de la liste des blogs
           this.categories.unshift(response);
           console.log('catégorie ajouté avec succès.');
-          this.alertMessage('success', 'Cool', 'catégorie ajouté avec succés');
+          this.alertMessage('success', 'Ajouté', 'catégorie ajouté avec succés');
           // Rafraîchir la liste des blogs après l'ajout
           this.getCategories();
           // Réinitialiser le champ après l'ajout
@@ -102,7 +115,6 @@ export class CategoriesComponent implements OnInit {
           );
         }
       );
-    }
   }
 
   // Méthode pour préparer l'édition du blog sélectionné
@@ -179,7 +191,7 @@ export class CategoriesComponent implements OnInit {
             console.log('Catégorie supprimée avec succès.');
             this.alertMessage(
               'success',
-              'Cool',
+              'Supprimée',
               'Catégorie supprimée avec succès.'
             );
 
@@ -204,9 +216,27 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  // Méthode de validation pour le champ "categorie"
+  validateCategorie() {
+    if (!this.categorie) {
+      this.validationMessages['categorie'] = "La categorie est requise";
+      this.categorieEmpty = true;
+      return false;
+    } else if (!this.categorieRegex.test(this.categorie)) {
+      this.validationMessages['categorie'] =
+        "La categorie doit contenir au moins 4 caractères et en minuscule.";
+      this.categorieEmpty = false;
+      return false;
+    } else {
+      this.validationMessages['categorie'] = '';
+      this.categorieEmpty = false;
+      return true;
+    }
+  }
+
   // Vider champs
   viderChamps() {
-    this.nom = '';
+    this.categorie = '';
   }
 
   // alert message

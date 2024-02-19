@@ -125,6 +125,7 @@ export class VoituresComponent {
   updateAnnonceStateActive(newState: string): void {
     // l'identifiant de l'annonce est stocké dans la propriété 'id'
     const annonceId = this.annonceSelectionnee.id;
+    console.log("annonceId: ", annonceId);
 
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir activer cette annonce ?',
