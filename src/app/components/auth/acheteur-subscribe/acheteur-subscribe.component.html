@@ -76,24 +76,31 @@
                                 <input type="hidden" value="acheteur" name="role" />
                             </div>
 
-                            <div class="mb-3 inputs">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" [(ngModel)]="email" (input)="validateEmail()">
-                                <span *ngIf="emailTouched && emailEmpty && !validationMessages['email']" class="text-danger">
-                                    L'email est requis
-                                </span>
-                                <span *ngIf="validationMessages['email']" class="text-danger">{{ validationMessages['email'] }}</span>
-                                <span *ngIf="!validationMessages['email'] && email" class="text-success">Correct</span>
-                            </div>
-
-                            <div class="mb-3 inputs">
-                                <label for="image" class="form-label">Photo de profil</label>
-                                <input (change)="profilAdd($event)" type="file" name="image" id="image" class="form-control" accept="image/*">
-                                <span *ngIf="photoTouched && photoEmpty && !validationMessages['photo']" class="text-danger">
-                                    La photo de profil est requise
-                                </span>
-                                <span *ngIf="validationMessages['photo']" class="text-danger">{{ validationMessages['photo'] }}</span>
-                                <span *ngIf="!validationMessages['photo'] && image" class="text-success">Correct</span>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="mb-3 inputs">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" name="email" id="email" class="form-control" [(ngModel)]="email" (input)="validateEmail()">
+                                            <span *ngIf="emailTouched && emailEmpty && !validationMessages['email']" class="text-danger">
+                                                L'email est requis
+                                            </span>
+                                            <span *ngIf="validationMessages['email']" class="text-danger">{{ validationMessages['email'] }}</span>
+                                            <span *ngIf="!validationMessages['email'] && email" class="text-success">Correct</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="mb-3 inputs">
+                                            <label for="image" class="form-label">Photo de profil</label>
+                                            <input (change)="profilAdd($event)" type="file" name="image" id="image" class="form-control" accept="image/*">
+                                            <span *ngIf="photoTouched && photoEmpty && !validationMessages['photo']" class="text-danger">
+                                                La photo de profil est requise
+                                            </span>
+                                            <span *ngIf="validationMessages['photo']" class="text-danger">{{ validationMessages['photo'] }}</span>
+                                            <span *ngIf="!validationMessages['photo'] && image" class="text-success">Correct</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

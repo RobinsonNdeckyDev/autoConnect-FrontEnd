@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <img src="http://127.0.0.1:8000/images/{{voiture.image1}}" alt="" class="img-fluid imgAnnonce">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            (click)="afficherDetailAnnonce(voiture)">Voir détail</button>
+                            (click)="afficherDetailAnnonce(voiture)" (click)="getCommentOfAnnonce(voiture.id)">Voir détail</button>
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                     <div class="card-body">
                         <img src="http://127.0.0.1:8000/images/{{voiture.image1}}" alt="" class="img-fluid imgAnnonce">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            (click)="afficherDetailAnnonce(voiture)">
+                            (click)="afficherDetailAnnonce(voiture)" (click)="getCommentOfAnnonce(voiture.id)">
                             Voir détail
                         </button>
                     </div>
@@ -309,6 +309,34 @@
                     </div>
                     <hr>
 
+                    <div *ngIf="tabCommentofAnnonce.length === 0">
+                        <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas de commentaires disponibles pour
+                            cette annonce...</p>
+                    </div>
+
+                    <div class="avis d-flex justify-content-between mb-2" *ngFor="let comment of tabCommentofAnnonce">
+                        <div class="contentLeft w-50">
+                            <div class="headC">
+                                <div class="headL">
+                                    <img src="http://127.0.0.1:8000/images/{{comment.infosProprietaire?.image}}" alt="" class="img-fluid shadow">
+                                    <span class="nomC fw-medium"> {{comment.infosProprietaire?.prenom}} </span>
+                                </div>
+                            </div>
+                            <div class="bodyC">
+                                <p class="textC m-0 fw-lighter">
+                                    {{comment.commentaire}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contentRight w-50">
+                            <span class=""><i class="fa-solid fa-square-xmark" (click)="detetedCommentaire(comment.id)"></i></span>
+                        </div>
+                    </div>
+
+                    <br>
+                    <hr>
+
+                    
                 </div>
             </div>
 

@@ -8,6 +8,38 @@
 
 }
 
+.avis .headL {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.avis .headL img {
+    margin-right: 8px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #0F42A8;
+}
+
+.contentRight {
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+}
+
+.contentRight span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentRight span i {
+    font-size: 30px;
+    color: #0F42A8;
+    cursor: pointer;
+}
+
 .imgSlide{
     height: 300px;
 }

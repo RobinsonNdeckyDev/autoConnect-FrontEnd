@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { CommentaireService } from 'src/app/services/commentaire.service';
 import { ListeCategoriesService } from 'src/app/services/liste-categories.service';
 import { ListeMotosService } from 'src/app/services/liste-motos.service';
 import { ListeUsersService } from 'src/app/services/liste-users.service';
@@ -17,6 +18,9 @@ export class MotosComponent {
   annoncesMotosFiltreesInactives: any[] = [];
 
   listeMotos: any[] = [];
+  tabCommentaires: any[] = [];
+  tabAcheteurs: any[] = [];
+  tabCommentofAnnonce: any[] = [];
   listeMotosActives: any[] = [];
   annoncesMotosFiltrees: any[] = [];
   categories: any[] = [];
@@ -33,6 +37,7 @@ export class MotosComponent {
     private proprietaireService: ListeUsersService,
     private annonceServiceEtat: PublierAnnonceService,
     private listeCategories: ListeCategoriesService,
+    private commentaireService: CommentaireService,
     private http: HttpClient
   ) {}
 
@@ -45,6 +50,12 @@ export class MotosComponent {
 
     // initialisation de la liste des proprietaires
     this.listeProprietaire();
+
+    // initialisation de la liste des proprietaires
+    this.listeAcheteurs();
+
+    // Liste des commentaires
+    this.listeCommentaires();
 
     this.getCategories();
   }
@@ -66,6 +77,54 @@ export class MotosComponent {
         );
       }
     );
+  }
+
+  // Avoir les commentaires sur une annonce
+  getCommentOfAnnonce(annonceId: number): void {
+    this.commentaireService.getCommentAnnnonceAdmin(annonceId).subscribe(
+      (response) => {
+        console.log("les commentaires sur l'annonce: ", response.commentaires);
+        this.tabCommentofAnnonce = response.commentaires;
+        console.log('tabCommentofAnnonce: ', this.tabCommentofAnnonce);
+
+        // Pour chaque commentaire, trouvez l'emetteur
+        this.tabCommentofAnnonce.forEach((commentaire: any) => {
+          const prorietaireCommentaire = this.tabAcheteurs.find(
+            (user: any) => user.id === commentaire.user_id
+          );
+
+          // Associez l'utilisateur et l'annonce
+          commentaire.infosProprietaire = prorietaireCommentaire;
+        });
+      },
+      (error) => {
+        console.error("Une erreur s'est produite:", error);
+        // this.alertMessage(
+        //   'error',
+        //   'Oops',
+        //   'Erreur lors de la suppression ce proprietaire'
+        // );
+      }
+    );
+  }
+
+  // Méthode pour récupérer la liste des acheteurs
+  listeAcheteurs() {
+    // on recupere la liste des utilisateurs
+    this.proprietaireService.getAcheteurs().subscribe((resp: any) => {
+      this.tabAcheteurs = resp.acheteur;
+      console.log('tabAcheteurs: ', this.tabAcheteurs);
+    });
+  }
+
+  // Méthode pour récupérer la liste des commentaires
+  listeCommentaires() {
+    // on recupere la liste des commentaires
+    this.commentaireService.getcommentaires().subscribe((resp: any) => {
+      console.log(resp.commentaires);
+      this.tabCommentaires = resp.commentaires;
+      console.log('tabCommentaires: ', this.tabCommentaires);
+    });
   }
 
   // Liste des voitures
@@ -256,6 +315,47 @@ export class MotosComponent {
           'info',
           'Annulée',
           "Suppression de l'annonce annulée"
+        );
+      }
+    });
+  }
+
+  // supprimer Commentaire
+  detetedCommentaire(comentaireId: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir supprimer ce commentaire ?',
+      text: 'Vous allez supprimer ce commentaire !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, supprimer',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, d"sactiver"
+        this.commentaireService
+          .deleteCommentAnnonceAdmin(comentaireId)
+          .subscribe(
+            (response) => {
+              console.log(response);
+              this.alertMessage(
+                'success',
+                'Supprimé',
+                'commentaire supprimé avec succés'
+              );
+              this.listesAnnonces();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log('La suppression du commentaire a été annulé.');
+        this.alertMessage(
+          'info',
+          'Annulé',
+          'Suppression du commentaire annulé'
         );
       }
     });

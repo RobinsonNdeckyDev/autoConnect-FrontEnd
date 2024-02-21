@@ -4,6 +4,12 @@
     <div class="row .row2 mt-4 shadow">
         <div class="col-12 ">
             <div class="tableCard py-4 border-0 ">
+
+                <div *ngIf="acheteurs.length === 0">
+                    <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'acheteurs disponibles pour
+                        l'instant...</p>
+                </div>
+
                 <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="acheteurs.length > 0">
                     <thead>
                         <tr class="text-center titleHead">

@@ -53,7 +53,7 @@ export class VoituresComponent {
       (response: any) => {
         console.log(response);
         // liste voitures
-        this.ListeAnnonces = response.annonceValides;
+        this.ListeAnnonces = response.annonces;
         console.log('voitures: ', this.ListeAnnonces);
 
         this.listeVoitures = this.ListeAnnonces.filter(

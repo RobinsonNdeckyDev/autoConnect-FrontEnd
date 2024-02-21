@@ -29,7 +29,7 @@
                     <div class="card-body">
                         <img src="http://127.0.0.1:8000/images/{{annonce?.image1}}" alt="" class="img-fluid rounded-4 imgAnnonce shadow">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalInvalide" 
-                            (click)="afficherDetailAnnonceInvalide(annonce.id)">Voir détail</button>
+                            (click)="afficherDetailAnnonceInvalide(annonce.id)" (click)="getCommentOfAnnonce(annonce.id)">Voir détail</button>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                     <div class="card-body">
                         <img src="http://127.0.0.1:8000/images/{{annonce?.image1}}" alt="" class="img-fluid imgAnnonce rounded-4 shadow">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalValide" 
-                            (click)="afficherDetailAnnonceValide(annonce.id)">
+                            (click)="afficherDetailAnnonceValide(annonce.id)" (click)="getCommentOfAnnonce(annonce.id)">
                             Voir détail
                         </button>
                     </div>
@@ -260,6 +260,32 @@
                                         <span>Liste des commentaires</span>
                                     </div>
                                     <hr>
+
+                                    <div *ngIf="tabCommentofAnnonce.length === 0">
+                                        <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas de commentaires disponibles pour
+                                            cette annonce...</p>
+                                    </div>
+                                    
+                                    <div class="avis">
+                                        <div class="contentLeft w-50 mb-2" *ngFor="let comment of tabCommentofAnnonce">
+                                            <div class="headC d-flex">
+                                                <div class="headL">
+                                                    <img src="http://127.0.0.1:8000/images/{{comment.infosProprietaire?.image}}" alt=""
+                                                        class="img-fluid shadow">
+                                                </div>
+                                                <div class="bodyC mx-3">
+                                                    <span class="nomC fw-medium"> {{comment.infosProprietaire?.prenom}} </span>
+                                                    <p class="textC m-0 fw-lighter">
+                                                        {{comment.commentaire}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <!-- <div class="contentRight w-50">
+                                            <span class=""><i class="fa-solid fa-square-xmark" (click)="detetedCommentaire(comment.id)"></i></span>
+                                        </div> -->
+                                    </div>
 
                                 </div>
                             </div>
@@ -830,6 +856,32 @@
                                         <span>Liste des commentaires</span>
                                     </div>
                                     <hr>
+
+                                    <div *ngIf="tabCommentofAnnonce.length === 0">
+                                        <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas de commentaires disponibles pour
+                                            cette annonce...</p>
+                                    </div>
+                                    
+                                    <div class="avis">
+                                        <div class="contentLeft w-50 mb-2" *ngFor="let comment of tabCommentofAnnonce">
+                                            <div class="headC d-flex">
+                                                <div class="headL">
+                                                    <img src="http://127.0.0.1:8000/images/{{comment.infosProprietaire?.image}}" alt=""
+                                                        class="img-fluid shadow">
+                                                </div>
+                                                <div class="bodyC mx-3">
+                                                    <span class="nomC fw-medium"> {{comment.infosProprietaire?.prenom}} </span>
+                                                    <p class="textC m-0 fw-lighter">
+                                                        {{comment.commentaire}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <!-- <div class="contentRight w-50">
+                                            <span class=""><i class="fa-solid fa-square-xmark" (click)="detetedCommentaire(comment.id)"></i></span>
+                                        </div> -->
+                                    </div>
                                 
                                 </div>
                             </div>

@@ -3,6 +3,10 @@
 
     <div class="row mt-4 shadow rounded-4">
         <div class="col-12 px-3 py-4">
+
+            <div *ngIf="messages.length === 0">
+                <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas de messages disponibles pour l'instant...</p>
+            </div>
            
             <div class="table-responsive">
                 <table class="table mb-3" datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="messages.length > 0">

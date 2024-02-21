@@ -15,7 +15,34 @@
                 <div class="col-12 col-md-4" *ngFor="let voiture of annonceVoitureFiltered">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
-                            <img src="http://127.0.0.1:8000/images/{{voiture?.image1}}" class="img-fluid w-100 imgPrinc" alt="">
+                            <div id="carouselExampleInterval" class="carousel slide rounded-3 shadow" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" data-bs-interval="10000">
+                                        <img src="http://127.0.0.1:8000/images/{{voiture?.image1}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                    <div class="carousel-item" data-bs-interval="2000">
+                                        <img src="http://127.0.0.1:8000/images/{{voiture?.image2}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="http://127.0.0.1:8000/images/{{voiture?.image3}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="http://127.0.0.1:8000/images/{{voiture?.image4}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom"> {{voiture.nom}} </span>
@@ -49,7 +76,35 @@
                 <div class="col-12 col-md-4" *ngFor="let moto of annonceMotoFiltered">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
-                            <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt="">
+                            <div id="carouselExampleInterval" class="carousel slide rounded-3 shadow" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" data-bs-interval="10000">
+                                        <img src="http://127.0.0.1:8000/images/{{moto?.image1}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                    <div class="carousel-item" data-bs-interval="2000">
+                                        <img src="http://127.0.0.1:8000/images/{{moto?.image2}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="http://127.0.0.1:8000/images/{{moto?.image3}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="http://127.0.0.1:8000/images/{{moto?.image4}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                            <!-- <img src="http://127.0.0.1:8000/images/{{moto.image1}}" class="img-fluid imgPrinc w-100" alt=""> -->
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom"> {{moto.nom}}</span>
@@ -83,7 +138,34 @@
                 <div class="col-12 col-md-4" *ngFor="let utilitaire of annonceUtilitaireFiltered">
                     <div class="card shadow">
                         <div class="cardImg mx-3">
-                            <img src="http://127.0.0.1:8000/images/{{utilitaire.image1}}" class="img-fluid imgPrinc w-100" alt="">
+                            <div id="carouselExampleInterval" class="carousel slide rounded-3 shadow" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" data-bs-interval="10000">
+                                        <img src="http://127.0.0.1:8000/images/{{utilitaire?.image1}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                    <div class="carousel-item" data-bs-interval="2000">
+                                        <img src="http://127.0.0.1:8000/images/{{utilitaire?.image2}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="http://127.0.0.1:8000/images/{{utilitaire?.image3}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="http://127.0.0.1:8000/images/{{utilitaire?.image4}}" class="d-block w-100 imgPrinc rounded-3"
+                                            alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="cardTitle mx-3">
                             <span class="nom"> {{utilitaire.nom}} </span>
@@ -97,7 +179,7 @@
                                 <!-- <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p> -->
                             </div>
                             <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{utilitaire.kilometrage}} KM</p>
+                                <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{utilitaire.kilometrage}}</p>
                                 <p><img src="/assets/images/iconSvg/fuel.png" alt=""> {{utilitaire.carburant}}</p>
                             </div>
                         </div>

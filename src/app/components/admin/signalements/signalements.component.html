@@ -2,10 +2,6 @@
     <h3 class="alertTitle mb-3"><a href="" routerLink="/signalements">Signalements /</a></h3>
 
     <div class="cars shadow py-3 px-4 rounded-4">
-    
-        <div *ngIf="filteredSignalements.length === 0">
-            <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces signalées pour l'instant...</p>
-        </div>
 
         <div class="search my-3 d-flex justify-content-end align-content-center">
             <div class="w-25 searchCont">
@@ -17,6 +13,11 @@
         </div>
     
         <div class="row mb-3 mt-4">
+
+            <div *ngIf="filteredSignalements.length === 0">
+                <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces signalées pour l'instant...</p>
+            </div>
+            
             <div class="col-12 col-md-3 g-3" *ngFor="let signal of filteredSignalements">
                 <div class="card rounded-3">
                     <div class="card-head mx-3 mt-3">
