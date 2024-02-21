@@ -2,8 +2,8 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map, throwError } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
+import { finalize, switchMap, tap } from 'rxjs/operators';
 import { Proprietaire } from '../models/proprietaire';
 import { Acheteur } from '../models/acheteur';
 import { JwtPayload } from 'jwt-decode';
@@ -18,6 +18,10 @@ export class AuthenticationService {
   // URL de mon API
   private apiUrl = 'http://127.0.0.1:8000/api';
   private tokenExpirationTimer: any;
+  private refreshTokenInProgress = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
+    null
+  );
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -30,7 +34,8 @@ export class AuthenticationService {
           // Stocker les informations utilisateur et le token dans le stockage local
           localStorage.setItem('currentUser', JSON.stringify(response.user));
           localStorage.setItem('token', response.access_token);
-          // this.startTokenExpirationTimer();
+          // Démarrer le minuteur de rafraîchissement du jeton
+          this.startTokenRefreshTimer();
           return response;
         }),
         catchError((error) => {
@@ -38,6 +43,96 @@ export class AuthenticationService {
         })
       );
   }
+
+  // Démarrer le minuteur pour rafraîchir le jeton avant son expiration
+  private startTokenRefreshTimer() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return; // Pas de jeton trouvé, ne rien faire
+    }
+
+    const tokenExpiration: Date | null = this.getTokenExpiration(token); // Obtenir la date d'expiration du jeton
+    const now = new Date(); // Date actuelle
+    const expiresIn = tokenExpiration
+      ? tokenExpiration.getTime() - now.getTime()
+      : 0; // Calculer le temps restant avant l'expiration
+
+    // Convertir le temps en minutes
+    const expiresInMinutes = expiresIn / 60000; // 1 minute = 60000 millisecondes
+
+    console.log(
+      `Le jeton expire dans environ ${expiresInMinutes.toFixed(2)} minutes.`
+    );
+
+    // Rafraîchir le jeton 5 minutes avant son expiration
+    const refreshTime = expiresIn - 5 * 60 * 1000;
+
+    // console.log(`Token expires in ${expiresIn / 1000} seconds`);
+
+    console.log('Token refresh timer started'); // Déclaration de console pour indiquer que le minuteur de rafraîchissement du jeton a démarré
+
+    setTimeout(() => {
+      this.refreshToken(); // Appeler la méthode de rafraîchissement du jeton
+    }, refreshTime);
+  }
+
+  // Obtenir la date d'expiration du jeton à partir du jeton JWT
+  private getTokenExpiration(token: string): Date | null {
+    const decoded = JSON.parse(atob(token.split('.')[1])); // Décoder le jeton JWT
+    if (decoded && decoded.exp) {
+      return new Date(decoded.exp * 1000); // Retourner la date d'expiration si elle est présente dans le jeton
+    }
+    return null; // Retourner null si la date d'expiration n'est pas trouvée
+  }
+
+  // Méthode pour rafraîchir le jeton
+  private refreshToken() {
+    console.log('Refreshing token...'); // Déclaration de console pour indiquer que le rafraîchissement du jeton est en cours
+    if (this.refreshTokenInProgress) {
+      // S'il y a déjà un rafraîchissement en cours, attendre qu'il soit terminé avant de réessayer
+      return this.refreshTokenSubject.pipe(
+        switchMap(() => {
+          return this.http.post<any>(`${this.apiUrl}/auth/refresh`, {}).pipe(
+            map((response) => {
+              localStorage.setItem('token', response.access_token); // Mettre à jour le jeton dans le stockage local
+              console.log('Token refreshed successfully'); // Déclaration de console pour indiquer que le rafraîchissement du jeton a réussi
+              return response;
+            }),
+            catchError((error) => {
+              this.logout(); // Déconnecter l'utilisateur en cas d'échec du rafraîchissement du jeton
+              return throwError(error);
+            }),
+            finalize(() => {
+              this.refreshTokenInProgress = false;
+              this.refreshTokenSubject.next(null);
+            })
+          );
+        })
+      );
+    } else {
+      // Marquer le rafraîchissement du jeton en cours
+      this.refreshTokenInProgress = true;
+      this.refreshTokenSubject.next(null);
+
+      return this.http.post<any>(`${this.apiUrl}/auth/refresh`, {}).pipe(
+        map((response) => {
+          localStorage.setItem('token', response.access_token); // Mettre à jour le jeton dans le stockage local
+          console.log('Token refreshed successfully'); // Déclaration de console pour indiquer que le rafraîchissement du jeton a réussi
+          return response;
+        }),
+        catchError((error) => {
+          this.logout(); // Déconnecter l'utilisateur en cas d'échec du rafraîchissement du jeton
+          return throwError(error);
+        }),
+        finalize(() => {
+          this.refreshTokenInProgress = false;
+          this.refreshTokenSubject.next(null);
+        })
+      );
+    }
+  }
+
+  
 
   // Inscription
 
@@ -115,26 +210,6 @@ export class AuthenticationService {
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
-
-  // private startTokenExpirationTimer(): void {
-  //   const token = this.getToken();
-  //   if (token) {
-  //     const tokenData = jwt_decode(token);
-  //     if (tokenData && tokenData.exp) {
-  //       const expirationTime = tokenData.exp * 1000;
-  //       const expiresIn = expirationTime - Date.now();
-  //       this.tokenExpirationTimer = setTimeout(() => {
-  //         this.logout(); // Déconnexion automatique lorsque le token expire
-  //       }, expiresIn);
-  //     } else {
-  //       console.error("Le token n'est pas valide ou n'a pas d'expiration");
-  //     }
-  //   }
-  // }
-
-  // private stopTokenExpirationTimer(): void {
-  //   clearTimeout(this.tokenExpirationTimer);
-  // }
 
   // Récupérer les informations du vendeur depuis l'API
   getvendeurDetails(id: number): Observable<any> {

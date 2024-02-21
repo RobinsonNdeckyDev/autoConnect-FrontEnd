@@ -30,6 +30,7 @@ import { DetailProprietaireComponent } from './detail-proprietaire/detail-propri
 import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { FormsModule } from '@angular/forms';
 import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
+// import DataTables from 'datatables.net';
 
 
 
@@ -63,7 +64,14 @@ import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
     DetailProprietaireComponent,
     ProfilAdminComponent,
   ],
-  imports: [CommonModule, RouterModule, AdminRoutingModule, DataTablesModule, FormsModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    AdminRoutingModule,
+    DataTablesModule,
+    FormsModule,
+    // DataTables
+  ],
   providers: [ListeUsersService],
 })
 export class AdminModule {}

@@ -26,7 +26,8 @@ export class LoginComponent {
 
   // emailregex pattern
   emailPattern =
-    /^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    // /^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
   // regex password
   passwordRegex: RegExp = /^\d{6,}$/;
 
@@ -134,7 +135,7 @@ export class LoginComponent {
       return false;
     } else if (!this.passwordRegex.test(this.password)) {
       this.validationMessages['password'] =
-        'Le mot de passe doit contenir au moins 6 caractères';
+        'Le mot de passe doit contenir au moins 6 Chiffres pas de lettres.';
       this.passwordEmpty = false;
       return false;
     } else {

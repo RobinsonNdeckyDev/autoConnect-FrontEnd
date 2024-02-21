@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { LogoutProprietaireComponent } from './logout-proprietaire/logout-proprietaire.component';
 import { PublierAnnonceComponent } from './publier-annonce/publier-annonce.component';
 import { FormsModule } from '@angular/forms';
+// import DataTables from 'datatables.net';
 // import { ModifierAnnonceComponent } from './modifier-annonce/modifier-annonce.component';
 
 
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     RouterModule,
     ProprietaireRoutingModule,
-    FormsModule
+    FormsModule,
+    // DataTables
   ]
 })
 export class ProprietaireModule { }

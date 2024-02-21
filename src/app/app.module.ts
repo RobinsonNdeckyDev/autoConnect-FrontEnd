@@ -9,6 +9,7 @@ import { AcheteurSubscribeComponent } from './components/auth/acheteur-subscribe
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+// import DataTables from 'datatables.net';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     RouterModule,
     HttpClientModule,
     FormsModule,
+    // DataTables
   ],
   providers: [
     {
