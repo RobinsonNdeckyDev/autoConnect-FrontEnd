@@ -60,9 +60,20 @@ table .titreTab th {
     color: #0F42A8 !important;
 }
 
+.table .detailIcon
+
+table .detailIcon span{
+    display: flex;
+    justify-content: center !important;
+    align-content: center !important;
+    padding: 0;
+    border: 1px solid red;
+}
+
 table .detailIcon i {
     color: #0F42A8;
     font-size: 20px;
+    margin: 0;
     cursor: pointer;
 }
 
@@ -85,4 +96,10 @@ table .detailIcon i {
 .search .searchIcon i {
     color: white;
     font-size: 18px;
+}
+
+@media only screen and (max-width: 768px) {
+    .contactContainer {
+        margin: 3% 0 !important;
+    }
 }

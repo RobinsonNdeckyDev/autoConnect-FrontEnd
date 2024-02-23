@@ -7,6 +7,7 @@ import { ListeCategoriesService } from 'src/app/services/liste-categories.servic
 import { ListeUsersService } from 'src/app/services/liste-users.service';
 import { PublierAnnonceService } from 'src/app/services/publier-annonce.service';
 import Swal from 'sweetalert2';
+import { CommentaireService } from 'src/app/services/commentaire.service';
 
 @Component({
   selector: 'app-annonces-vendeurs',
@@ -17,6 +18,9 @@ export class AnnoncesVendeursComponent {
   annonces = true;
   validesAnnonces: any[] = [];
   invalidesAnnonces: any[] = [];
+  tabAcheteurs: any[] = [];
+  tabCommentofAnnonce: any[] = [];
+  tabCommentaires: any[] = [];
   tabUsers: any[] = [];
   // Variable pour stocker l'annonce sélectionné
   annonceSelectionnee: any;
@@ -61,8 +65,10 @@ export class AnnoncesVendeursComponent {
     private route: ActivatedRoute,
     private annoncesValidesProps: PublierAnnonceService,
     private updateAnnonceService: PublierAnnonceService,
+    private acheteurService: ListeUsersService,
     private proprietaireService: ListeUsersService,
-    private listeCategories: ListeCategoriesService
+    private listeCategories: ListeCategoriesService,
+    private commentaireService: CommentaireService
   ) {}
 
   afficherAnnonces() {
@@ -71,11 +77,14 @@ export class AnnoncesVendeursComponent {
 
   ngOnInit() {
     // annonces valides
+    this.listeAcheteurs();
     this.getCategories();
     this.annoncesValides();
     this.annoncesInvalides();
     this.getInfoCurrentUser();
     this.listeProprietaire();
+    // Liste des commentaires
+    this.listeCommentaires();
   }
 
   // methode pour les infos du user connecté
@@ -85,12 +94,68 @@ export class AnnoncesVendeursComponent {
     console.log('info currentUser: ', this.currentUser);
   }
 
+  // Méthode pour récupérer la liste des acheteurs
+  listeAcheteurs() {
+    // on recupere la liste des utilisateurs
+    this.acheteurService.getAcheteurs().subscribe((resp: any) => {
+      console.log("response acheteur: ", resp);
+      this.tabAcheteurs = resp.acheteur;
+      console.log('tabAcheteurs: ', this.tabAcheteurs);
+    });
+  }
+
+  // Méthode pour récupérer la liste des commentaires
+  listeCommentaires() {
+    // on recupere la liste des commentaires
+    this.commentaireService.getcommentaires().subscribe(
+      (resp: any) => {
+      console.log(resp.commentaires);
+      this.tabCommentaires = resp.commentaires;
+      console.log('tabCommentaires: ', this.tabCommentaires);
+    },
+    (error) => {
+      console.log(error);
+    }
+    );
+  }
+
+  // Avoir les commentaires sur une annonce
+  getCommentOfAnnonce(annonceId: number): void {
+    this.commentaireService.getCommentAnnnonceProprietaire(annonceId).subscribe(
+      (response) => {
+        console.log(response);
+        console.log("les commentaires sur l'annonce: ", response.commentaires);
+        this.tabCommentofAnnonce = response.commentaires
+        console.log('tabCommentofAnnonce', this.tabCommentofAnnonce);
+        console.log("tabAcheteurs: ", this.tabAcheteurs);
+
+        // Pour chaque commentaire, trouvez l'emetteur
+        this.tabCommentofAnnonce.forEach((commentaire: any) => {
+          const prorietaireCommentaire = this.tabAcheteurs.find(
+            (user: any) => user.id === commentaire.user_id
+          );
+
+          // Associez l'utilisateur et l'annonce
+          commentaire.infosProprietaire = prorietaireCommentaire;
+        });
+      },
+      (error) => {
+        console.error("Une erreur s'est produite:", error);
+        // this.alertMessage(
+        //   'error',
+        //   'Oops',
+        //   'Erreur lors de la suppression ce proprietaire'
+        // );
+      }
+    );
+  }
+
   // Annonces valides
   annoncesValides() {
     this.annoncesValidesProps.getAnnonceUserValide().subscribe(
       (response: any) => {
         console.log(response.annonces);
-        this.validesAnnonces = (response.annonces);
+        this.validesAnnonces = response.annonces;
         console.log('Annonce valides: ', this.validesAnnonces);
       },
       (error) => {
@@ -437,5 +502,46 @@ export class AnnoncesVendeursComponent {
     this.kilometrage = '';
     this.climatisation = '';
     this.categorie_id = 0;
+  }
+
+  // supprimer Commentaire
+  detetedCommentaire(comentaireId: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir supprimer ce commentaire ?',
+      text: 'Vous allez supprimer ce commentaire !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, supprimer',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si l'utilisateur clique sur "Oui, d"sactiver"
+        this.commentaireService
+          .deleteCommentAnnonceAdmin(comentaireId)
+          .subscribe(
+            (response) => {
+              console.log(response);
+              this.alertMessage(
+                'success',
+                'Supprimé',
+                'commentaire supprimé avec succés'
+              );
+              // this.listesAnnonces();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log('La suppression du commentaire a été annulé.');
+        this.alertMessage(
+          'info',
+          'Annulé',
+          'Suppression du commentaire annulé'
+        );
+      }
+    });
   }
 }

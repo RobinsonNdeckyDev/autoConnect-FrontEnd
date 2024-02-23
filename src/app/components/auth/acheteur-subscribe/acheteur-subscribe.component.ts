@@ -72,19 +72,6 @@ export class AcheteurSubscribeComponent {
   inscriptionAcheteur() {
     this.validateformAcheteur();
     this.registerUser();
-
-    // if (this.validateformAcheteur()) {
-    //   if (this.password !== this.confirmation) {
-    //     this.alertMessage(
-    //       'error',
-    //       'Attention',
-    //       'Les mots de passe ne correspondent pas!'
-    //     );
-    //     return;
-    //   }
-
-    //   this.registerUser();
-    // }
   }
 
   validateformAcheteur() {

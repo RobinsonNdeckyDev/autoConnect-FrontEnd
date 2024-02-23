@@ -71,7 +71,7 @@ export class SignalementsComponent {
     this.annoncesValideService.getAnnonceValideProp().subscribe(
       (response: any) => {
         console.log('annoncesValides', response);
-        this.tabAnnoncesValides = response.annonceValides;
+        this.tabAnnoncesValides = response.annonces;
         console.log('TabAnnoncesValides', this.tabAnnoncesValides);
       },
       (error) => {

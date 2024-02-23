@@ -53,7 +53,7 @@ export class UtilitairesComponent {
       (response: any) => {
         console.log(response);
         // liste utilitaires
-        this.ListeAnnonces = response.annonceValides;
+        this.ListeAnnonces = response.annonces;
         console.log('utilitaires: ', this.ListeAnnonces);
 
         this.listeUtilitaires = this.ListeAnnonces.filter(

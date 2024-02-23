@@ -25,7 +25,7 @@ export class ListeCategoriesService {
     if (token) {
       headers = headers.set('Authorization', 'Bearer ' + token);
     }
-    return this.http.get<any[]>(`${this.apiUrl}/listeCategories`);
+    return this.http.get<any[]>(`${this.apiUrl}/categories`);
   }
 
   // Ajout blog
@@ -50,7 +50,7 @@ export class ListeCategoriesService {
     return this.http.patch(url, newData);
   }
 
-  // Supprimer un blog
+  // Supprimer carrément une catégorie
   deleteCategorie(categorieId: number): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('token');
@@ -59,6 +59,46 @@ export class ListeCategoriesService {
     }
     return this.http.delete<any>(
       `${this.apiUrl}/categorieDestroy${categorieId}`,
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  // Supprimer simplement une categorie
+  simpleDeleteCategorie(categorieId: number): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    return this.http.patch<any>(
+      `${this.apiUrl}/categorieSupprimer${categorieId}`,
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  // Liste des categories supprimées
+  getCategoriesSupprimees(): Observable<any[]> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    return this.http.get<any[]>(`${this.apiUrl}/listeCategorieSupprimer`);
+  }
+
+  // Restaurer une categorie
+  restaureCategorie(categorieId: number): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    return this.http.patch<any>(
+      `${this.apiUrl}/categorieRestaurer${categorieId}`,
       {
         headers: headers,
       }

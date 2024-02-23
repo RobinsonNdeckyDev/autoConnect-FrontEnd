@@ -122,3 +122,39 @@
     justify-content: center !important;
     align-items: center !important;
 }
+
+
+@media only screen and (max-width: 768px) {
+
+    .blogsContain{
+        margin: 3% 0 !important;
+        padding: 0 !important;
+    }
+
+    .cartesBlogs{
+        padding: 2% !important;
+    }
+
+    .headerBlog {
+        display: block;
+        padding: 0;
+    }
+
+    .headerBlog button{
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .cartBlog img{
+        margin-bottom: 8px;
+    }
+
+    .cartBlog .btnCard{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cartBlog .btnCard button{
+        width: 100%;
+    }
+}

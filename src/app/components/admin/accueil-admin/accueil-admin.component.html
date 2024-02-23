@@ -68,7 +68,6 @@
         <div class="card tableCard py-4 shadow border-0 px-4 table-responsive">
             <p class="mb-2 px-2 mt-1 fs-4 text fw-bold">Liste des propriétaires</p>
 
-
             <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="proprietaires">
                 <thead>
                     <tr class="titleHead">
@@ -79,6 +78,12 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <div *ngIf="proprietaires.length === 0">
+                        <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas de propriétaires disponibles pour
+                            l'instant...</p>
+                    </div>
+                    
                     <tr class="text-center" *ngFor="let proprietaire of proprietaires">
                         <td><img src="http://127.0.0.1:8000/images/{{ proprietaire.image }}" class="shadow imgProp" alt=""></td>
                         <td>{{ proprietaire.prenom }} {{ proprietaire.nom }}</td>

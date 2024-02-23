@@ -28,7 +28,8 @@
         top: 55px;
         left: 0;
         background-color: #0F42A8;
-        height: 100%;
+        /* height: 100%; */
+        border: 1px solid red;
         z-index: 1;
     }
 

@@ -22,6 +22,7 @@ import { DetailsBlogComponent } from './details-blog/details-blog.component';
 import { FormsModule } from '@angular/forms';
 import { LogoutUserComponent } from './logout-user/logout-user.component';
 import { LoginUserComponent } from './login-user/login-user.component';
+// import DataTables from 'datatables.net';
 
 
 
@@ -51,7 +52,8 @@ import { LoginUserComponent } from './login-user/login-user.component';
   imports: [
     CommonModule,
     UserRoutingModule,
-    FormsModule
+    FormsModule,
+    // DataTables
   ]
 })
 export class UserModule { }

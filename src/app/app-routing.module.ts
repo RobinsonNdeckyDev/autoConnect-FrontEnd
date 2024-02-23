@@ -4,6 +4,9 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { VendeurSubscribeComponent } from './components/auth/vendeur-subscribe/vendeur-subscribe.component';
 import { AcheteurSubscribeComponent } from './components/auth/acheteur-subscribe/acheteur-subscribe.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin-guard.guard';
+import { ProprietaireGard } from './guards/proprietaire-guard.guard';
+import { AcheteurGuard } from './guards/acheteur-guard.guard';
 
 
 const routes: Routes = [
@@ -14,18 +17,21 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./components/admin/admin.module').then((m) => m.AdminModule),
-    canActivate: [AuthGuard],
+    canActivate: [AdminGuard],
   },
   {
     path: 'proprietaire',
     loadChildren: () =>
       import('./components/proprietaire/proprietaire.module').then(
-        (m) => m.ProprietaireModule), canActivate: [AuthGuard] 
+        (m) => m.ProprietaireModule
+      ),
+    canActivate: [ProprietaireGard],
   },
   {
     path: '',
     loadChildren: () =>
       import('./components/users/user.module').then((m) => m.UserModule),
+    // canActivate: [AcheteurGuard],
   },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
 ];

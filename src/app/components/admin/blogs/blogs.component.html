@@ -16,7 +16,7 @@
             <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas de blog publié pour l'instant...</p>
         </div>
 
-        <div class="row mt-3 g-5">
+        <div class="row mt-3 g-5 cartBlog">
             <div class="col-12 col-md-12" *ngFor="let blog of filteredBlogs">
                 <div class="card p-2 shadow">
                     <div class="row">
@@ -129,20 +129,39 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal modifier un blog -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="blogToEdit">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modification du blog</h1>
+                <span type="button" class="btnCloseModal" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></span>
             </div>
             <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <form (ngSubmit)="editBlog()">
+                    <div class="mb-3">
+                        <label for="titre" class="form-label">Titre du blog</label>
+                        <input type="text" class="form-control" name="titre" id="titre" [(ngModel)]="blogToEdit.titre">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image du blog</label>
+                        <input (change)="onFileChange($event)" class="form-control" type="file" id="image" name="image"
+                            accept="image/*">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description du blog</label>
+                        <textarea type="text" class="form-control" name="description" id="description"
+                            [(ngModel)]="blogToEdit.description"></textarea>
+                    </div>
+                
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btnAddBlog">Enregistrer</button>
+                        <button type="button" class="btn btnFermer" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                
+                </form>
             </div>
         </div>
     </div>

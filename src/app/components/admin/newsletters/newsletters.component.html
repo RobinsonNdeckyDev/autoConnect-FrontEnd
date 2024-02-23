@@ -7,6 +7,11 @@
             <div class="tableCard p-2 border-0">
 
                 <div class="table-responsive">
+
+                    <div *ngIf="newsletters.length === 0">
+                        <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'abonnés disponibles pour l'instant...</p>
+                    </div>
+
                     <table class="table mb-3" datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="newsletters.length > 0">
                         <thead class="">
                             <tr class="titreTab fw-light text-start">

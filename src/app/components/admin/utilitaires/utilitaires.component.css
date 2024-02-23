@@ -15,6 +15,38 @@ h5 {
     text-decoration: none;
 }
 
+.avis .headL {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.avis .headL img {
+    margin-right: 8px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #0F42A8;
+}
+
+.contentRight {
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+}
+
+.contentRight span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentRight span i {
+    font-size: 30px;
+    color: #0F42A8;
+    cursor: pointer;
+}
+
 .btnCloseModal i {
     font-size: 25px;
     color: #0F42A8;
@@ -327,4 +359,18 @@ hr {
 
 .imagesSecondaires .imgs img {
     width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    .annoncesHead {
+        display: block !important;
+    }
+
+    .voituresContain {
+        margin: 3% 0 !important;
+    }
+
+    .cars {
+        padding: 3% !important;
+    }
 }

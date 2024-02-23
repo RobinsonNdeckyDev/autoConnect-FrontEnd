@@ -1,8 +1,9 @@
 .bannerMotos {
-    background-image: url(/assets/banrect1.png);
+    background-image: url(/assets/images/vehicules/motoBan1.png);
     background-repeat: no-repeat;
     background-size: 100%;
-    padding: 21% 0;
+    padding-top: 5%;
+    padding-bottom: 40%;
 }
 
 .imgPrinc {

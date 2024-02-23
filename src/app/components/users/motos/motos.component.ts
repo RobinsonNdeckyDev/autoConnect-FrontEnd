@@ -44,13 +44,13 @@ export class MotosComponent {
 
   // Liste des annonces mises en avant
   getAnnoncesValides() {
-    let categorie = 9;
+    let categorie = 2;
 
     this.listeAnnonceService.getAnnonceValideProp().subscribe(
       (response: any) => {
         console.log(response);
         // liste motos
-        this.ListeAnnonces = response.annonceValides;
+        this.ListeAnnonces = response.annonces;
         console.log('annonces: ', this.ListeAnnonces);
 
         this.listeMotos = this.ListeAnnonces.filter(
@@ -69,9 +69,9 @@ export class MotosComponent {
           annonce.infosProprietaire = prorietaireAnnonce;
         });
 
-        // Initialisation de filteredSignalements avec les signalements récupérés
+        // Initialisation de filteredMotos avec les Motos récupérés
         this.fiteredMotos = [...this.listeMotos];
-        console.log('filteredSignalements: ', this.fiteredMotos);
+        console.log('filteredMotos: ', this.fiteredMotos);
 
       },
       (error) => {

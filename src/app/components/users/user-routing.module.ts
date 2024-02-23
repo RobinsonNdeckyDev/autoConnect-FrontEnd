@@ -19,6 +19,7 @@ import { DetailsBlogComponent } from './details-blog/details-blog.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { AnnoncesVendeursComponent } from '../proprietaire/annonces-vendeurs/annonces-vendeurs.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { AcheteurGuard } from 'src/app/guards/acheteur-guard.guard';
 
 const routes: Routes = [
   {
@@ -27,7 +28,11 @@ const routes: Routes = [
     children:
       // canActivate: [AuthGuard],
       [
-        { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+        {
+          path: 'acheteur',
+          component: AccueilComponent,
+          // canActivate: [AcheteurGuard],
+        },
         { path: 'accueil', component: AccueilComponent },
         { path: 'about', component: AboutComponent },
         {
@@ -84,6 +89,7 @@ const routes: Routes = [
         { path: 'conditions', component: ConditionsComponent },
         { path: 'confidentialite', component: ConfidentialiteComponent },
         { path: 'login', component: LoginComponent },
+        { path: '', redirectTo: 'accueil', pathMatch: 'full' }
       ],
   },
 ];
