@@ -1,17 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
 
-import { acheteurGuardGuard } from './acheteur-guard.guard';
+import { AcheteurGuard } from './acheteur-guard.guard';
+
 
 describe('acheteurGuardGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => acheteurGuardGuard(...guardParameters));
+  let guard: AcheteurGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
+    guard = TestBed.inject(AcheteurGuard);
   });
 
   it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+    expect(guard).toBeTruthy();
   });
 });

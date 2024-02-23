@@ -84,7 +84,7 @@ export class LoginComponent {
             // });
             this.alertMessage(
               'success',
-              'Super',
+              'Connecté',
               'Connexion réussie avec succés.'
             );
             break;
@@ -92,7 +92,7 @@ export class LoginComponent {
             this.route.navigate(['/accueil']);
             this.alertMessage(
               'success',
-              'Super',
+              'Connecté',
               'Connexion réussie avec succés.'
             );
             break;
