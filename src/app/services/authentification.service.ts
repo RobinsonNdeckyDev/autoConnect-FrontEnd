@@ -2,12 +2,13 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
-import { finalize, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, catchError, interval, map, throwError } from 'rxjs';
+import { finalize, switchMap, take, tap } from 'rxjs/operators';
 import { Proprietaire } from '../models/proprietaire';
 import { Acheteur } from '../models/acheteur';
 import { JwtPayload } from 'jwt-decode';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 declare function jwt_decode<T extends JwtPayload = JwtPayload>( token: string ): T;
 
 
@@ -22,8 +23,31 @@ export class AuthenticationService {
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
     null
   );
+  private refreshCount = 0;
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  isAdmin(): boolean {
+    const userdata = localStorage.getItem('currentUser');
+    const userConnectedRole = userdata ? JSON.parse(userdata).role : null;
+    console.log('Son role est: ', userConnectedRole);
+    return userConnectedRole === 'admin';
+  }
+
+  isProprietaire() {
+    const userdata = localStorage.getItem('currentUser');
+    const userConnectedRole = userdata ? JSON.parse(userdata).role : null;
+    console.log('Son role est: ', userConnectedRole);
+    // Vérifie si le rôle est "proprietaire"
+    return userConnectedRole === 'proprietaire';
+  }
+
+  isAcheteur() {
+    const userdata = localStorage.getItem('currentUser');
+    const userConnectedRole = userdata ? JSON.parse(userdata).role : null;
+    console.log('Son role est: ', userConnectedRole);
+    return userConnectedRole === 'acheteur';
+  }
 
   // connexion
   login(email: string, password: string): Observable<any> {
@@ -44,95 +68,124 @@ export class AuthenticationService {
       );
   }
 
-  // Démarrer le minuteur pour rafraîchir le jeton avant son expiration
   private startTokenRefreshTimer() {
     const token = localStorage.getItem('token');
     if (!token) {
-      return; // Pas de jeton trouvé, ne rien faire
+      return;
     }
 
-    const tokenExpiration: Date | null = this.getTokenExpiration(token); // Obtenir la date d'expiration du jeton
-    const now = new Date(); // Date actuelle
+    const tokenExpiration: Date | null = this.getTokenExpiration(token);
+    const now = new Date();
     const expiresIn = tokenExpiration
       ? tokenExpiration.getTime() - now.getTime()
-      : 0; // Calculer le temps restant avant l'expiration
+      : 0;
 
-    // Convertir le temps en minutes
-    const expiresInMinutes = expiresIn / 60000; // 1 minute = 60000 millisecondes
+    // Convertir le temps d'expiration du jeton en heures
+    const expiresInHours = expiresIn / (1000 * 60 * 60);
 
     console.log(
-      `Le jeton expire dans environ ${expiresInMinutes.toFixed(2)} minutes.`
+      `La durée du jeton est de ${expiresInHours.toFixed(2)} heures.`
     );
 
-    // Rafraîchir le jeton 5 minutes avant son expiration
-    const refreshTime = expiresIn - 5 * 60 * 1000;
-
-    // console.log(`Token expires in ${expiresIn / 1000} seconds`);
-
-    console.log('Token refresh timer started'); // Déclaration de console pour indiquer que le minuteur de rafraîchissement du jeton a démarré
-
-    setTimeout(() => {
-      this.refreshToken(); // Appeler la méthode de rafraîchissement du jeton
-    }, refreshTime);
+    interval(3 * 60 * 1000)
+      .pipe(
+        take(3) // Rafraîchir le jeton 3 fois (15 minutes au total)
+      )
+      .subscribe(() => {
+        console.log('Rafraîchissement du jeton...');
+        this.refreshToken();
+      });
   }
 
-  // Obtenir la date d'expiration du jeton à partir du jeton JWT
   private getTokenExpiration(token: string): Date | null {
-    const decoded = JSON.parse(atob(token.split('.')[1])); // Décoder le jeton JWT
+    const decoded = JSON.parse(atob(token.split('.')[1]));
     if (decoded && decoded.exp) {
-      return new Date(decoded.exp * 1000); // Retourner la date d'expiration si elle est présente dans le jeton
+      return new Date(decoded.exp * 1000);
     }
-    return null; // Retourner null si la date d'expiration n'est pas trouvée
+    return null;
   }
 
-  // Méthode pour rafraîchir le jeton
   private refreshToken() {
-    console.log('Refreshing token...'); // Déclaration de console pour indiquer que le rafraîchissement du jeton est en cours
     if (this.refreshTokenInProgress) {
-      // S'il y a déjà un rafraîchissement en cours, attendre qu'il soit terminé avant de réessayer
-      return this.refreshTokenSubject.pipe(
-        switchMap(() => {
-          return this.http.post<any>(`${this.apiUrl}/auth/refresh`, {}).pipe(
-            map((response) => {
-              localStorage.setItem('token', response.access_token); // Mettre à jour le jeton dans le stockage local
-              console.log('Token refreshed successfully'); // Déclaration de console pour indiquer que le rafraîchissement du jeton a réussi
-              return response;
-            }),
-            catchError((error) => {
-              this.logout(); // Déconnecter l'utilisateur en cas d'échec du rafraîchissement du jeton
-              return throwError(error);
-            }),
-            finalize(() => {
-              this.refreshTokenInProgress = false;
-              this.refreshTokenSubject.next(null);
-            })
-          );
-        })
-      );
-    } else {
-      // Marquer le rafraîchissement du jeton en cours
-      this.refreshTokenInProgress = true;
-      this.refreshTokenSubject.next(null);
+      return;
+    }
 
-      return this.http.post<any>(`${this.apiUrl}/auth/refresh`, {}).pipe(
+    this.refreshTokenInProgress = true;
+    this.http
+      .post<any>(`${this.apiUrl}/auth/refresh`, {})
+      .pipe(
         map((response) => {
-          localStorage.setItem('token', response.access_token); // Mettre à jour le jeton dans le stockage local
-          console.log('Token refreshed successfully'); // Déclaration de console pour indiquer que le rafraîchissement du jeton a réussi
+          localStorage.setItem('token', response.access_token);
+          this.refreshCount++;
+          console.log(
+            `Rafraîchissement du jeton réussi (${this.refreshCount}/3)`
+          );
+          if (this.refreshCount === 3) {
+            // À la 3ème actualisation (15 minutes)
+            this.showLogoutAlert();
+          }
           return response;
         }),
         catchError((error) => {
-          this.logout(); // Déconnecter l'utilisateur en cas d'échec du rafraîchissement du jeton
+          console.error('Échec du rafraîchissement du jeton :', error);
+          this.logout();
           return throwError(error);
         }),
         finalize(() => {
           this.refreshTokenInProgress = false;
           this.refreshTokenSubject.next(null);
         })
-      );
-    }
+      )
+      .subscribe();
   }
 
-  
+  private showLogoutAlert() {
+    let responded = false; // Variable de contrôle pour savoir si l'utilisateur a répondu à l'alerte
+
+    Swal.fire({
+      title: 'Session Expirée',
+      text: 'Vous serez déconnecté dans 5 minutes. Voulez-vous continuer la navigation ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Continuer',
+      cancelButtonText: 'Déconnexion',
+      reverseButtons: true,
+    }).then((result) => {
+      responded = true; // Marquer que l'utilisateur a répondu
+      if (result.isConfirmed) {
+        // L'utilisateur a choisi de continuer la navigation
+        this.refreshCount = 0; // Réinitialiser le compteur de rafraîchissement
+        console.log('Utilisateur continue la navigation');
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // L'utilisateur a choisi de se déconnecter
+        console.log('Utilisateur déconnecté');
+        // Fermer le popup lorsque l'utilisateur se déconnecte sans confirmer
+        this.closePopup();
+        this.logoutComplet(); // Déconnecter l'utilisateur
+      }
+    });
+
+    // Déconnecter automatiquement l'utilisateur après 5 minutes s'il n'a pas répondu à l'alerte
+    setTimeout(() => {
+      if (!responded) {
+        console.log('Temps écoulé, déconnexion automatique');
+        this.logoutComplet(); // Déconnecter l'utilisateur
+      }
+    }, 3 * 60 * 1000);
+  }
+
+  logoutComplet() {
+    console.log("Déconnexion de l'utilisateur");
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
+    this.closePopup();
+    this.router.navigate(['/login']); // Redirection vers la page de connexion après la déconnexion
+  }
+
+  // Fermer le popup
+  private closePopup() {
+    Swal.close(); // Fermer le popup
+  }
 
   // Inscription
 
@@ -190,8 +243,8 @@ export class AuthenticationService {
         // Vider complètement le localStorage
         localStorage.clear();
 
-        // Redirection vers la page de connexion
-        // this.router.navigate(['/login']);
+        // Rediriger ou effectuer d'autres actions après la déconnexion
+        this.router.navigate(['/login']);
       }),
 
       catchError((error) => {

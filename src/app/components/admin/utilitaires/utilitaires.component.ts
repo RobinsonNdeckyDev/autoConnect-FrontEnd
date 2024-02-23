@@ -83,8 +83,8 @@ export class UtilitairesComponent {
   getCommentOfAnnonce(annonceId: number): void {
     this.commentaireService.getCommentAnnnonceAdmin(annonceId).subscribe(
       (response) => {
-        console.log("les commentaires sur l'annonce: ", response.commentaire);
-        this.tabCommentofAnnonce = response.commentaire;
+        console.log("les commentaires sur l'annonce: ", response.commentaires);
+        this.tabCommentofAnnonce = response.commentaires;
         console.log('tabCommentofAnnonce: ', this.tabCommentofAnnonce);
         // Pour chaque commentaire, trouvez l'emetteur
         this.tabCommentofAnnonce.forEach((commentaire: any) => {

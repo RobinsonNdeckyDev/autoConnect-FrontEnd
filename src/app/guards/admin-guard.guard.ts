@@ -5,20 +5,19 @@ import { AuthenticationService } from '../services/authentification.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(
     private authService: AuthenticationService,
     private router: Router
   ) {}
 
   canActivate(): boolean {
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.isAdmin() ) {
+      // Autoriser l'accès si l'utilisateur est un administrateur
       return true;
     } else {
-      // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
       this.router.navigate(['/login']);
       return false;
     }
   }
 }
-

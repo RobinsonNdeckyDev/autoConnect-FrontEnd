@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentification.service';
+import { NgZone } from '@angular/core';
+
 
 @Component({
   selector: 'app-login',
@@ -27,13 +29,14 @@ export class LoginComponent {
   // emailregex pattern
   emailPattern =
     // /^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
+    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   // regex password
   passwordRegex: RegExp = /^\d{6,}$/;
 
   constructor(
     private authService: AuthenticationService,
-    private route: Router
+    private route: Router,
+    private ngZone: NgZone
   ) {}
 
   // methode pour la connexion
@@ -41,9 +44,11 @@ export class LoginComponent {
     console.log(this.email);
     console.log(this.password);
 
-    this.validateFormLogin();
-
-    this.registerProprietaire();
+    // Appeler la méthode validateFormLogin
+    if (this.validateFormLogin()) {
+      // Appeler la méthode registerProprietaire seulement si la validation réussit
+      this.registerProprietaire();
+    }
   }
 
   // registerProprietaire
@@ -73,6 +78,10 @@ export class LoginComponent {
             break;
           case 'proprietaire':
             this.route.navigate(['/proprietaire']);
+            // Dans votre méthode registerProprietaire(), entourez le code de redirection avec NgZone
+            // this.ngZone.run(() => {
+
+            // });
             this.alertMessage(
               'success',
               'Super',
@@ -115,7 +124,8 @@ export class LoginComponent {
   validateEmail(): boolean {
     if (!this.email) {
       this.validationMessages['email'] = "L'email est requis";
-      this.emailEmpty = true; // Mettre à jour emailEmpty si le champ est vide
+      // Mettre à jour emailEmpty si le champ est vide
+      this.emailEmpty = true;
       return false;
     } else if (!this.emailPattern.test(this.email)) {
       this.validationMessages['email'] = 'Email invalide';

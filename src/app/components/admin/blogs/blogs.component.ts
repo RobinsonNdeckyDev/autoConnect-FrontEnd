@@ -116,24 +116,20 @@ export class BlogsComponent {
 
   // Méthode pour éditer le blog
   editBlog() {
+    console.log("blogToEdit: ", this.blogToEdit);
     // Créez une nouvelle instance de FormData pour stocker les données du formulaire
-    let formData = new FormData();
-
-    // Ajoutez les données du blog à modifier dans le FormData
-    formData.append('titre', this.blogToEdit.titre);
-    formData.append('description', this.blogToEdit.description);
-
-    // Vérifiez si une nouvelle image a été sélectionnée
-    if (this.image) {
-      formData.append('image', this.image, this.image.name); // Ajoutez la nouvelle image
+    let updateBlog = {
+      titre: this.blogToEdit.titre,
+      description: this.blogToEdit.description,
+      image: this.blogToEdit.image
     }
 
-    // Appeler la méthode de votre service pour modifier le blog
-    this.listeBlogs.modifierBlog(this.blogToEdit.id, formData).subscribe(
+    console.log("updateBlog: ", updateBlog);
+    this.listeBlogs.modifierBlog(this.blogToEdit.id, updateBlog).subscribe(
       (response) => {
         console.log(response);
         console.log('Blog modifié avec succès.');
-        this.alertMessage('success', 'Cool', 'Blog modifié avec succès.');
+        this.alertMessage('success', 'Enregistrée', 'Blog modifié avec succès.');
         // Réinitialiser les champs après la modification
         this.viderChamps();
         this.getBlogs();
@@ -148,7 +144,7 @@ export class BlogsComponent {
   }
 
   // Supprimer blog
-  supprimerBlog(blogId: number): void {
+  supprimerBlog(blogId: number): void { 
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir supprimer ce blog ?',
       text: 'Vous allez supprimer ce blog !',

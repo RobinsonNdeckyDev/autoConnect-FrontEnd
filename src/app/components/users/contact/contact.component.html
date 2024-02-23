@@ -47,22 +47,37 @@
                             <div class="mb-3">
                                 <label for="NomComplet">Nom complet</label>
                                 <input type="text" class="form-control" name="Nomcomplet" id="NomComplet"
-                                    [(ngModel)]="nomComplet">
+                                    [(ngModel)]="nomComplet" (input)="validateNomComplet()">
+                                <span *ngIf="nomCompletTouched && nomCompletEmpty && !validationMessages['nomComplet']" class="text-danger">
+                                    Le nom au complet est requis
+                                </span>
+                                <span *ngIf="validationMessages['nomComplet']" class="text-danger">{{ validationMessages['nomComplet'] }}</span>
+                                <span *ngIf="!validationMessages['nomComplet'] && nomComplet" class="text-success">Correct</span>
                             </div>
 
                             <div class="mb-3">
                                 <label for="Email">Email</label>
-                                <input type="email" class="form-control" name="Email" id="Email" [(ngModel)]="email">
+                                <input type="email" class="form-control" name="Email" id="Email" [(ngModel)]="email" (input)="validateEmail()">
+                                <span *ngIf="emailTouched && emailEmpty && !validationMessages['email']" class="text-danger">
+                                    L'email est requis
+                                </span>
+                                <span *ngIf="validationMessages['email']" class="text-danger">{{ validationMessages['email'] }}</span>
+                                <span *ngIf="!validationMessages['email'] && email" class="text-success">Correct</span>
                             </div>
 
                             <div class="mb-3">
                                 <label for="Message">Message</label>
                                 <textarea name="message" id="Message" class="form-control"
-                                    [(ngModel)]="message"></textarea>
+                                    [(ngModel)]="message" (input)="validateMessage()"></textarea>
+                                <span *ngIf="messageTouched && messageEmpty && !validationMessages['message']" class="text-danger">
+                                    Le message est requis
+                                </span>
+                                <span *ngIf="validationMessages['message']" class="text-danger">{{ validationMessages['message'] }}</span>
+                                <span *ngIf="!validationMessages['message'] && message" class="text-success">Correct</span>
                             </div>
 
                             <div class="bouton d-flex justify-content-center align-content-center">
-                                <button class="btn" type="submit">
+                                <button class="btn w-50" type="submit" [disabled]="!email || !message || !nomComplet">
                                     Envoyer
                                 </button>
                             </div>

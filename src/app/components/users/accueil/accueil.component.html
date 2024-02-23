@@ -28,12 +28,12 @@
                     <div class="cardTrait mb-3 mt-3"></div>
                     <div class="cardDetails mx-3">
                         <div class="left">
-                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt=""> {{voiture?.moteur}}</p>
-                            <p><img src="/assets/images/iconSvg/calendar.png" alt=""> {{voiture?.annee}}</p>
+                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">{{voiture?.moteur}}</p>
+                            <p><img src="/assets/images/iconSvg/calendar.png" alt="">{{voiture?.annee}}</p>
                         </div>
                         <div class="Right">
-                            <p class=""><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{voiture?.kilometrage}}</p>
-                            <p class=""><img src="/assets/images/iconSvg/fuel.png" alt=""> {{voiture?.carburant}}</p>
+                            <p class=""><img src="/assets/images/iconSvg/dashboard.png" alt="">{{voiture?.kilometrage}}</p>
+                            <p class=""><img src="/assets/images/iconSvg/fuel.png" alt="">{{voiture?.carburant}}</p>
                         </div>
                     </div>
                     <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt=""> {{voiture?.prix}} Fcfa</p>
@@ -58,13 +58,13 @@
                     <div class="cardTrait mb-3 mt-3"></div>
                     <div class="cardDetails mx-3">
                         <div class="left">
-                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt=""> {{moto.moteur}}</p>
-                            <p><img src="/assets/images/iconSvg/calendar.png" alt=""> {{moto.annee}}</p>
+                            <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">{{moto.moteur}}</p>
+                            <p><img src="/assets/images/iconSvg/calendar.png" alt="">{{moto.annee}}</p>
                             <!-- <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p> -->
                         </div>
                         <div class="Right">
-                            <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{moto.kilometrage}} KM</p>
-                            <p><img src="/assets/images/iconSvg/fuel.png" alt=""> {{moto.carburant}}</p>
+                            <p><img src="/assets/images/iconSvg/dashboard.png" alt="">{{moto.kilometrage}} KM</p>
+                            <p><img src="/assets/images/iconSvg/fuel.png" alt="">{{moto.carburant}}</p>
                         </div>
                     </div>
                     <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt=""> {{moto.prix}} Fcfa</p>
@@ -325,19 +325,34 @@
                         <form action="" class="" (ngSubmit)="addContact()">
                             <div class="mb-3">
                                 <label for="nomComplet">Nom complet</label>
-                                <input type="text" class="form-control" id="nomComplet" name="nomComplet" [(ngModel)]="nomComplet">
+                                <input type="text" class="form-control" id="nomComplet" name="nomComplet" [(ngModel)]="nomComplet" (input)="validateNomComplet()">
+                                <span *ngIf="nomCompletTouched && nomCompletEmpty && !validationMessages['nomComplet']" class="text-danger">
+                                    Le nom au complet est requis
+                                </span>
+                                <span *ngIf="validationMessages['nomComplet']" class="text-danger">{{ validationMessages['nomComplet'] }}</span>
+                                <span *ngIf="!validationMessages['nomComplet'] && nomComplet" class="text-success">Correct</span>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email">
+                                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" (input)="validateEmail()">
+                                <span *ngIf="emailTouched && emailEmpty && !validationMessages['email']" class="text-danger">
+                                    L'email est requis
+                                </span>
+                                <span *ngIf="validationMessages['email']" class="text-danger">{{ validationMessages['email'] }}</span>
+                                <span *ngIf="!validationMessages['email'] && email" class="text-success">Correct</span>
                             </div>
                             <div class="mb-3">
                                 <label for="message">Message</label>
-                                <textarea name="message" id="message" rows="5" class="form-control" [(ngModel)]="message"></textarea>
+                                <textarea name="message" id="message" rows="5" class="form-control" [(ngModel)]="message" (input)="validateMessage()"></textarea>
+                                <span *ngIf="messageTouched && messageEmpty && !validationMessages['message']" class="text-danger">
+                                    Le message est requis
+                                </span>
+                                <span *ngIf="validationMessages['message']" class="text-danger">{{ validationMessages['message'] }}</span>
+                                <span *ngIf="!validationMessages['message'] && message" class="text-success">Correct</span>
                             </div>
 
                             <div class="mt-4 d-flex justify-content-center align-content-center">
-                                <button class="btn p-2 rounded-4">
+                                <button class="btn w-50 p-2 rounded-4" [disabled]="!email || !message || !nomComplet">
                                     Envoyer
                                 </button>
                             </div>
@@ -346,7 +361,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 p-0">
-                <img src="/assets/images/contact/c1.png" class="img-fluid" alt="">
+                <img src="/assets/images/contact/c1.png" class="img-fluid h-100" alt="" >
             </div>
         </div>
     </div>

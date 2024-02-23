@@ -85,3 +85,10 @@ table .detailIcon img{
     width: 35%;
     color: white;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .categoriesContain {
+        margin: 3% 0 !important;
+    }
+}

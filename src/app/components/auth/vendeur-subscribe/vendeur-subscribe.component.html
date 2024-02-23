@@ -118,7 +118,11 @@
                         </div>
 
                         <div class="bouton mt-3">
-                            <button class="btn w-50" (click)="inscription()">S'inscrire</button>
+                            <button class="btn w-50" (click)="inscription()"
+                            [disabled]="!email || !password || !prenom || !nom || !telephone || !adresse || !confirmation || !image || !description"
+                            >
+                                S'inscrire
+                            </button>
                         </div>
 
                     </form>

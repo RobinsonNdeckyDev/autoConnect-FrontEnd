@@ -119,3 +119,17 @@ table .detailIcon i {
 table th{
     text-align: center;
 }
+
+@media only screen and (max-width: 768px) {
+    .annoncesHead {
+        display: block !important;
+    }
+
+    .vendeurContain {
+        margin: 3% 0 !important;
+    }
+
+    .tableCard {
+        padding: 2% !important;
+    }
+}
