@@ -70,7 +70,7 @@ export class VendeursComponent {
     );
   }
 
-  // stoker le proprietaire sélectionné
+  // stocker le proprietaire sélectionné
   // Detail du blog
   openProprietaireDetails(proprietaire: any): void {
     // Stocke le proprietaire sélectionné
@@ -87,8 +87,8 @@ export class VendeursComponent {
   // Supprimer proprietaire
   supprimerProprietaire(proprietaireId: number): void {
     Swal.fire({
-      title: 'Êtes-vous sûr de vouloir supprimer ce proprietaire ?',
-      text: 'Vous allez supprimer ce proprietaire !',
+      title: 'Êtes-vous sûr de vouloir supprimer cet proprietaire ?',
+      text: 'Vous allez supprimer cet proprietaire !',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#0F42A8',
@@ -109,7 +109,7 @@ export class VendeursComponent {
           },
           (error) => {
             console.error(
-              "Une erreur s'est produite lors de la suppression ce proprietaire :",
+              "Une erreur s'est produite lors de la suppression cet proprietaire :",
               error
             );
             this.alertMessage(

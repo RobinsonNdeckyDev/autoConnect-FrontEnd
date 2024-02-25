@@ -89,8 +89,8 @@ export class AcheteursComponent {
   // Supprimer acheteur
   supprimerAcheteur(acheteurId: number): void {
     Swal.fire({
-      title: 'Êtes-vous sûr de vouloir supprimer ce acheteur ?',
-      text: 'Vous allez supprimer ce acheteur !',
+      title: 'Êtes-vous sûr de vouloir supprimer cet acheteur ?',
+      text: 'Vous allez supprimer cet acheteur !',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#0F42A8',
@@ -117,7 +117,7 @@ export class AcheteursComponent {
             this.alertMessage(
               'error',
               'Oops',
-              'Erreur lors de la suppression ce acheteur'
+              'Erreur lors de la suppression cet acheteur'
             );
             // Gérer l'erreur de suppression ce acheteur
           }
