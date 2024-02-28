@@ -4,12 +4,12 @@
     <div class="cars shadow py-3 px-4 rounded-4" *ngIf="annonces">
         <p class="text-dark"><i class="fa-regular fa-hand-point-right iconhand"></i>Liste annonces Inactives</p>
         <div class="d-flex annoncesHead">
-            <div>
+            <div class="btnActive">
                 <button class="btn btn-active" (click)="afficherAnnonces()">Voir liste des annonces Actives</button>
             </div>
             <div class="search my-3 d-flex justify-content-end align-content-center">
                 <input type="search" class="form-control border-1 rounded-end-0" name="search"
-                    placeholder="faite une recherche...">
+                    placeholder="faite une recherche..." [(ngModel)]="searchTermInvalide" (input)="onSearchChangeInvalide()">
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
         </div>
@@ -19,7 +19,7 @@
                 <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces inactives pour l'instant...</p>
             </div>
 
-            <div class="col-12 col-md-3" *ngFor="let annonce of invalidesAnnonces">
+            <div class="col-12 col-md-3" *ngFor="let annonce of filteredAnnoncesInvalides">
                 <div class="card rounded-3 shadow">
                     <div class="card-head mx-3 mt-3">
                         <span class="nomCar fw-bold">{{annonce?.nom}}</span>
@@ -46,7 +46,7 @@
             </div>
             <div class="search my-3 d-flex justify-content-end align-content-center">
                 <input type="search" class="form-control border-1 rounded-end-0" name="search"
-                    placeholder="faite une recherche...">
+                    placeholder="faite une recherche..." [(ngModel)]="searchTermValide" (input)="onSearchChangeValide()">
                 <span class="searchIcon rounded-end-2"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
         </div>
@@ -57,7 +57,7 @@
     
         <div class="row mb-3 mt-4 g-3" >
 
-            <div class="col-12 col-md-3" *ngFor="let annonce of validesAnnonces">
+            <div class="col-12 col-md-3" *ngFor="let annonce of filteredAnnoncesValides">
                 <div class="card rounded-3">
                     <div class="card-head mx-3 mt-3">
                         <p class="nomCar fw-bold"> {{annonce?.nom}} </p>

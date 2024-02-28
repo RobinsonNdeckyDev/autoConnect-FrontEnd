@@ -14,6 +14,9 @@ export class BlogsComponent {
   image!: File;
   description: string = '';
 
+  // Variable pour contrôler l'affichage du message de chargement
+  isLoading: boolean = true; 
+
   // Variable pour stocker le blog sélectionné
   selectedBlog: any;
   blogToEdit: any;
@@ -35,8 +38,20 @@ export class BlogsComponent {
 
   ngOnInit(): void {
     this.getBlogs();
+    this.loadData();
     // this.prepareEdit(this.Blogs);
   }
+
+  loadData(): void {
+        // Supposons que vous chargez vos données ici
+        // Une fois les données chargées, définissez isLoading sur false
+        setTimeout(() => {
+            // Supposons que filteredBlogs est votre tableau de données
+            // une fois qu'il est chargé
+            this.filteredBlogs = [...this.Blogs];
+            this.isLoading = false;
+        }, 5000); // Simule un chargement de 5 secondes 
+    }
 
   // Liste des Blogs
   getBlogs(): void {

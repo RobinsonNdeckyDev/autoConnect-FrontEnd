@@ -54,8 +54,12 @@
 }
 
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     .Navbar .navLeft {
         width: 150px;
+    }
+
+    .rightNav span {
+        display: none;
     }
 }

@@ -10,20 +10,11 @@
 
     <div class="rightNav">
 
-
-        <!-- <div class="dropdown-center">
-            <i class="fa-solid fa-bell mx-4 " type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <ul class="dropdown-menu mt-4">
-                <li><a class="dropdown-item" href="#">Voir toutes</a></li>
-                <li><a class="dropdown-item" href="#">Récentes</a></li>
-            </ul>
-        </div> -->
-
         <!-- Example single danger button -->
         <div class="dropdown-center m-0 p-0">
             <button type="button" class="btn m-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="http://127.0.0.1:8000/images/{{userConnected?.image}}" class="" alt="">
-                {{userConnected.prenom}}
+                <span>{{userConnected.prenom}}</span>
             </button>
             <ul class="dropdown-menu mt-3">
                 <li><a class="dropdown-item" href="#" routerLink="mon_profil">Mon profil</a></li>
