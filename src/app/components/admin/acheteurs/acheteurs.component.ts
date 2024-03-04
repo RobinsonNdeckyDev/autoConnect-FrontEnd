@@ -14,6 +14,7 @@ export class AcheteursComponent {
   acheteurs: any[] = [];
   filteredAcheteurs: any[] = [];
   searchTerm: string = '';
+  isLoading: boolean = true;
 
   // Variable pour stocker le acheteur sélectionné
   selectedAcheteur: any;
@@ -62,6 +63,7 @@ export class AcheteursComponent {
         // Initialisation de vos données d'acheteurs après réception des données
         this.filteredAcheteurs = this.acheteurs;
         console.log('acheteurs filtrer', this.filteredAcheteurs);
+        this.isLoading = false;
       },
       (error) => {
         console.error(

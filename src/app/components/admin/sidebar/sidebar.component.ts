@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 // import { MdbAccordionModule } from 'mdbootstrap';
 
 @Component({
@@ -7,12 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-
-  
   homeCollapsed: boolean = true;
   dashboardCollapsed: boolean = true;
 
   constructor() {}
+
+  @Output() toggleSidebarEvent = new EventEmitter<void>();
+
+  toggleSidebar() {
+    this.toggleSidebarEvent.emit();
+  }
+
+  hideSidebar() {
+    // Appeler votre méthode pour masquer le sidebar ici
+    // Par exemple, si vous avez déjà une méthode nommée toggleSidebar() qui gère l'affichage/masquage du sidebar, vous pouvez l'appeler ici
+    this.toggleSidebar();
+  }
 
   toggleCollapse(panel: string) {
     if (panel === 'home') {

@@ -17,23 +17,30 @@
             </div>
         </div>
 
-        <div *ngIf="annoncesMotosFiltreesInactives.length === 0">
-            <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces pour l'instant...</p>
+        <div *ngIf="isLoading">
+            <!-- Attendez que les données soient chargées -->
+            <p class="fw-lighter fw-bold"> <span class="text-chargement">Chargement en cours...</span></p>
         </div>
 
-        <div class="row mb-3 mt-4">
-            <div class="col-12 col-md-3 g-3" *ngFor="let moto of annoncesMotosFiltreesInactives">
-                <div class="card rounded-3">
-                    <div class="card-head mx-3 mt-3">
-                        <p class="nomCar"> {{moto?.nom}} </p>
-                        <!-- <img src="http://127.0.0.1:8000/images/{{infoProprietaire?.image}}" class="img-fluid" alt=""> -->
-                        <p class="fw-lighter"> {{moto.prix}} Fcfa</p>
-                    </div>
+        <div *ngIf="!isLoading && annoncesMotosFiltreesInactives.length === 0">
+            <p class="fw-lighter px-2"> <span class="text-chargement">Oops!</span> Pas d'annonces pour l'instant...</p>
+        </div>
+
+        <div *ngIf="!isLoading && annoncesMotosFiltreesInactives.length > 0">
+            <div class="row mb-3 mt-4">
+                <div class="col-12 col-md-3 g-3" *ngFor="let moto of annoncesMotosFiltreesInactives">
+                    <div class="card rounded-3">
+                        <div class="card-head mx-3 mt-3">
+                            <p class="nomCar"> {{moto?.nom}} </p>
+                            <!-- <img src="http://127.0.0.1:8000/images/{{infoProprietaire?.image}}" class="img-fluid" alt=""> -->
+                            <p class="fw-lighter"> {{moto.prix}} Fcfa</p>
+                        </div>
             
-                    <div class="card-body">
-                        <img src="http://127.0.0.1:8000/images/{{moto?.image2}}" alt="" class="img-fluid imgAnnonce rounded-4">
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            (click)="afficherDetailAnnonce(moto)" (click)="getCommentOfAnnonce(moto.id)">Voir détail</button>
+                        <div class="card-body">
+                            <img src="http://127.0.0.1:8000/images/{{moto?.image2}}" alt="" class="img-fluid imgAnnonce rounded-4">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                (click)="afficherDetailAnnonce(moto)" (click)="getCommentOfAnnonce(moto.id)">Voir détail</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,7 +66,7 @@
         </div>
 
         <div *ngIf="annoncesMotosFiltreesActives.length === 0">
-            <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces pour l'instant...</p>
+            <p class="fw-lighter px-2"> <span class="text-chargement">Oops!</span> Pas d'annonces pour l'instant...</p>
         </div>
     
         <div class="row mb-3 mt-4">

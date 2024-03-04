@@ -31,6 +31,7 @@ export class MotosComponent {
   // Propriété pour stocker la valeur de recherche
   searchTermActive: string = '';
   searchTermInactive: string = '';
+  isLoading: boolean = true;
 
   constructor(
     public listeMotoService: ListeMotosService,
@@ -157,6 +158,7 @@ export class MotosComponent {
           'Annonces filtrées motos Inactives : ',
           this.annoncesMotosFiltreesActives
         );
+        this.isLoading = false;
       },
       (error) => {
         console.error(
@@ -389,18 +391,18 @@ export class MotosComponent {
   // Fonction pour filtrer les motos inactives en fonction du terme de recherche
   filterCarsInactive(): void {
     // Si le terme de recherche est vide, afficher toutes les voitures
-    if (!this.searchTermActive.trim()) {
+    if (!this.searchTermInactive.trim()) {
       this.annoncesMotosFiltreesInactives = this.listeMotos.filter(
-        (annonceVoiture) => annonceVoiture.etat === 'accepter'
+        (annonceVoiture) => annonceVoiture.etat === 'refuser'
       );
     } else {
       // Sinon, filtrer les voitures dont le nom contient le terme de recherche
       this.annoncesMotosFiltreesInactives = this.listeMotos.filter(
         (annonceVoiture) =>
-          annonceVoiture.etat === 'accepter' &&
+          annonceVoiture.etat === 'refuser' &&
           annonceVoiture.nom
             .toLowerCase()
-            .includes(this.searchTermActive.toLowerCase())
+            .includes(this.searchTermInactive.toLowerCase())
       );
     }
   }

@@ -5,16 +5,21 @@
         <div class="col-12 ">
             <div class="tableCard py-4 border-0 ">
 
-                <div *ngIf="acheteurs.length === 0">
+                <div *ngIf="isLoading">
+                    <!-- Attendez que les données soient chargées -->
+                    <p class="fw-lighter fw-bold"> <span class="text-chargement">Chargement en cours...</span></p>
+                </div>
+
+                <div *ngIf="!isLoading && acheteurs.length === 0">
                     <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'acheteurs disponibles pour
                         l'instant...</p>
                 </div>
 
-                <div class="table-responsive">
+                <div class="table-responsive" *ngIf="!isLoading && acheteurs.length > 0">
                     <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="acheteurs.length > 0">
                         <thead>
                             <tr class="text-center titleHead">
-                                <th scope="col">image</th>
+                                <th scope="col" class="">image</th>
                                 <th scope="col">prenom</th>
                                 <th scope="col">nom</th>
                                 <th scope="col">email</th>
@@ -24,13 +29,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center" *ngFor="let acheteur of acheteurs">
+                            <tr class="text-center titleHead" *ngFor="let acheteur of acheteurs">
                                 <td scope="col"><img src="http://127.0.0.1:8000/images/{{ acheteur.image }}" alt=""></td>
-                                <td scope="col">{{ acheteur.prenom }}</td>
-                                <td scope="col">{{ acheteur.nom }}</td>
-                                <td scope="col">{{ acheteur.email }}</td>
-                                <td scope="col">{{ acheteur.telephone }}</td>
-                                <td scope="col">{{ acheteur.adresse }}</td>
+                                <td scope="col">{{acheteur.prenom}}</td>
+                                <td scope="col">{{acheteur.nom}}</td>
+                                <td scope="col">{{acheteur.email}}</td>
+                                <td scope="col">{{acheteur.telephone}}</td>
+                                <td scope="col">{{acheteur.adresse}}</td>
                                 <td scope="col">
                                     <span class="mx-2"><i class="fa-solid fa-eye iconDetail" data-bs-toggle="modal"
                                             data-bs-target="#detailAcheteur" (click)="openAcheteurDetails(acheteur)"></i>

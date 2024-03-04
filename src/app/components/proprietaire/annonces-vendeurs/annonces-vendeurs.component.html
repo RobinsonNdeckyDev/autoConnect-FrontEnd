@@ -15,21 +15,30 @@
         </div>
 
         <div class="row mb-2 mt-4">
-            <div *ngIf="invalidesAnnonces.length === 0">
-                <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces inactives pour l'instant...</p>
+            <div *ngIf="isLoading">
+                <!-- Attendez que les données soient chargées -->
+                <p class="fw-lighter fw-bold"> <span class="text-chargement">Chargement en cours...</span></p>
             </div>
 
-            <div class="col-12 col-md-3" *ngFor="let annonce of filteredAnnoncesInvalides">
-                <div class="card rounded-3 shadow">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar fw-bold">{{annonce?.nom}}</span>
-                        <img src="http://127.0.0.1:8000/images/{{currentUser?.image}}" class="img-fluid imgProfil shadow" alt="">
-                    </div>
+            <div *ngIf="!isLoading && filteredAnnoncesInvalides.length === 0">
+                <p class="fw-lighter px-2"> <span class="text-chargement">Oops!</span> Pas d'annonces inactives pour l'instant...</p>
+            </div>
 
-                    <div class="card-body">
-                        <img src="http://127.0.0.1:8000/images/{{annonce?.image1}}" alt="" class="img-fluid rounded-4 imgAnnonce shadow">
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalInvalide" 
-                            (click)="afficherDetailAnnonceInvalide(annonce.id)" (click)="getCommentOfAnnonce(annonce.id)">Voir détail</button>
+            <div *ngIf="!isLoading && filteredAnnoncesInvalides.length > 0">
+                <div class="col-12 col-md-3" *ngFor="let annonce of filteredAnnoncesInvalides">
+                    <div class="card rounded-3 shadow">
+                        <div class="card-head mx-3 mt-3">
+                            <span class="nomCar fw-bold">{{annonce?.nom}}</span>
+                            <img src="http://127.0.0.1:8000/images/{{currentUser?.image}}" class="img-fluid imgProfil shadow" alt="">
+                        </div>
+                
+                        <div class="card-body">
+                            <img src="http://127.0.0.1:8000/images/{{annonce?.image1}}" alt=""
+                                class="img-fluid rounded-4 imgAnnonce shadow">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalInvalide"
+                                (click)="afficherDetailAnnonceInvalide(annonce.id)" (click)="getCommentOfAnnonce(annonce.id)">Voir
+                                détail</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,25 +60,34 @@
             </div>
         </div>
 
-        <div *ngIf="validesAnnonces.length === 0">
-            <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces valides pour l'instant...</p>
+        <div *ngIf="isLoading">
+            <!-- Attendez que les données soient chargées -->
+            <p class="fw-lighter fw-bold"> <span class="text-chargement">Chargement en cours...</span></p>
         </div>
-    
-        <div class="row mb-3 mt-4 g-3" >
 
-            <div class="col-12 col-md-3" *ngFor="let annonce of filteredAnnoncesValides">
-                <div class="card rounded-3">
-                    <div class="card-head mx-3 mt-3">
-                        <p class="nomCar fw-bold"> {{annonce?.nom}} </p>
-                        <img src="http://127.0.0.1:8000/images/{{currentUser?.image}}" class="img-fluid imgProfil shadow" alt="">
-                    </div>
+        <div *ngIf="!isLoading && filteredAnnoncesValides.length === 0">
+            <p class="fw-lighter px-2"> <span class="text-chargement">Oops!</span> Pas d'annonces valides pour l'instant...</p>
+        </div>
             
-                    <div class="card-body">
-                        <img src="http://127.0.0.1:8000/images/{{annonce?.image1}}" alt="" class="img-fluid imgAnnonce rounded-4 shadow">
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalValide" 
-                            (click)="afficherDetailAnnonceValide(annonce.id)" (click)="getCommentOfAnnonce(annonce.id)">
-                            Voir détail
-                        </button>
+        <div *ngIf="!isLoading && filteredAnnoncesValides.length > 0">
+            <div class="row mb-3 mt-4 g-3">
+            
+                <div class="col-12 col-md-3" *ngFor="let annonce of filteredAnnoncesValides">
+                    <div class="card rounded-3">
+                        <div class="card-head mx-3 mt-3">
+                            <p class="nomCar fw-bold"> {{annonce?.nom}} </p>
+                            <img src="http://127.0.0.1:8000/images/{{currentUser?.image}}" class="img-fluid imgProfil shadow"
+                                alt="">
+                        </div>
+            
+                        <div class="card-body">
+                            <img src="http://127.0.0.1:8000/images/{{annonce?.image1}}" alt=""
+                                class="img-fluid imgAnnonce rounded-4 shadow">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalValide"
+                                (click)="afficherDetailAnnonceValide(annonce.id)" (click)="getCommentOfAnnonce(annonce.id)">
+                                Voir détail
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

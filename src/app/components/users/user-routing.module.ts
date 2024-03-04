@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MainUserComponent } from './main-user/main-user.component';
-import { AccueilComponent } from './accueil/accueil.component';
 import { AboutComponent } from './about/about.component';
 import { VehiculesComponent } from './vehicules/vehicules.component';
 import { BlogsComponent } from './blogs/blogs.component';
@@ -20,6 +19,7 @@ import { LoginComponent } from '../auth/login/login.component';
 import { AnnoncesVendeursComponent } from '../proprietaire/annonces-vendeurs/annonces-vendeurs.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AcheteurGuard } from 'src/app/guards/acheteur-guard.guard';
+import { AccueilComponent } from './accueil/accueil.component';
 
 const routes: Routes = [
   {

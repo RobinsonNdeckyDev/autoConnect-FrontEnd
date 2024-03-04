@@ -191,6 +191,7 @@ export class DetailUtilitaireComponent {
             'Envoyé',
             'Commentaire effectué avec succès'
           );
+          this.getCommentaires();
         },
         (error) => {
           this.alertMessage(
@@ -208,6 +209,9 @@ export class DetailUtilitaireComponent {
       icon: icon,
       title: title,
       text: text,
+      timer: 2000, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 

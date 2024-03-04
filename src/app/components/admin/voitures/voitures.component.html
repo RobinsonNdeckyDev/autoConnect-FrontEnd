@@ -16,85 +16,36 @@
             </div>
         </div>
 
-        <div *ngIf="annoncesVoituresFiltreesInactives.length === 0">
-            <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces pour l'instant...</p>
+        <div *ngIf="isLoading">
+            <!-- Attendez que les données soient chargées -->
+            <p class="fw-lighter fw-bold"> <span class="text-chargement">Chargement en cours...</span></p>
         </div>
 
-        <div class="row mb-3 mt-4">
-            <div class="col-12 col-md-3 g-3" *ngFor="let voiture of annoncesVoituresFiltreesInactives">
-                <div class="card rounded-3">
-                    <div class="card-head mx-3 mt-3">
-                        <p class="nomCar fw-bold"> {{voiture.nom}} </p>
-                        <p class="fw-lighter"> {{voiture.prix}} Fcfa </p>
-                        <!-- <img src="http://127.0.0.1:8000/images/{{voiture.proprietaire?.image}}" class="img-fluid" alt=""> -->
-                    </div>
+        <div *ngIf="!isLoading && annoncesVoituresFiltreesInactives.length === 0">
+            <p class="fw-lighter px-2"> <span class="text-chargement">Oops!</span> Pas d'annonces pour l'instant...</p>
+        </div>
 
-                    <div class="card-body">
-                        <img src="http://127.0.0.1:8000/images/{{voiture.image1}}" alt="" class="img-fluid imgAnnonce">
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            (click)="afficherDetailAnnonce(voiture)" (click)="getCommentOfAnnonce(voiture.id)">Voir détail</button>
+        <div *ngIf="!isLoading && annoncesVoituresFiltreesInactives.length > 0">
+            <div class="row mb-3 mt-4">
+                <div class="col-12 col-md-3 g-3" *ngFor="let voiture of annoncesVoituresFiltreesInactives">
+                    <div class="card rounded-3">
+                        <div class="card-head mx-3 mt-3">
+                            <p class="nomCar fw-bold"> {{voiture.nom}} </p>
+                            <p class="fw-lighter"> {{voiture.prix}} Fcfa </p>
+                            <!-- <img src="http://127.0.0.1:8000/images/{{voiture.proprietaire?.image}}" class="img-fluid" alt=""> -->
+                        </div>
+            
+                        <div class="card-body">
+                            <img src="http://127.0.0.1:8000/images/{{voiture.image1}}" alt="" class="img-fluid imgAnnonce rounded-4">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                (click)="afficherDetailAnnonce(voiture)" (click)="getCommentOfAnnonce(voiture.id)">Voir
+                                détail</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- <div class="row mb-3">
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-        
-                    <div class="card-body">
-                        <img src="../../../../assets/images/cars/car-05-removebg-preview.png" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsVoiture">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-        
-                    <div class="card-body">
-                        <img src="../../../../assets/images/cars/car-05-removebg-preview.png" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsVoiture">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-        
-                    <div class="card-body">
-                        <img src="../../../../assets/images/cars/car-05-removebg-preview.png" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsVoiture">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card rounded-3">
-                    <div class="card-head mx-3 mt-3">
-                        <span class="nomCar">Version Accura Sport</span>
-                        <img src="../../../../assets/images/profil/profil1.jpg" class="img-fluid" alt="">
-                    </div>
-        
-                    <div class="card-body">
-                        <img src="../../../../assets/images/cars/car-05-removebg-preview.png" alt="" class="img-fluid">
-                        <button class="btn"><a routerLink="dtsVoiture">Voir détail</a></button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-
-       
     </div>
 
     <!-- Liste des annonces actives -->
@@ -112,25 +63,32 @@
             </div>
         </div>
 
-        <div *ngIf="annoncesVoituresFiltreesActives.length === 0">
-            <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces pour l'instant...</p>
+        <div *ngIf="isLoading">
+            <!-- Attendez que les données soient chargées -->
+            <p class="fw-lighter fw-bold"> <span class="text-chargement">Chargement en cours...</span></p>
         </div>
 
-        <div class="row mb-3 mt-4">
-            <div class="col-12 col-md-3 g-3" *ngFor="let voiture of annoncesVoituresFiltreesActives">
-                <div class="card rounded-3">
-                    <div class="card-head mx-3 mt-3">
-                        <p class="nomCar fw-bold"> {{voiture.nom}} </p>
-                        <!-- <img src="http://127.0.0.1:8000/images/{{infoProprietaire?.image}}" class="img-fluid" alt=""> -->
-                        <p class="fw-lighter">{{voiture?.prix}} Fcfa</p>
-                    </div>
+        <div *ngIf="!isLoading && annoncesVoituresFiltreesActives.length === 0">
+            <p class="fw-lighter px-2"> <span class="text-chargement">Oops!</span> Pas d'annonces pour l'instant...</p>
+        </div>
 
-                    <div class="card-body">
-                        <img src="http://127.0.0.1:8000/images/{{voiture.image1}}" alt="" class="img-fluid imgAnnonce">
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            (click)="afficherDetailAnnonce(voiture)" (click)="getCommentOfAnnonce(voiture.id)">
-                            Voir détail
-                        </button>
+        <div *ngIf="!isLoading && annoncesVoituresFiltreesActives.length > 0">
+            <div class="row mb-3 mt-4">
+                <div class="col-12 col-md-3 g-3" *ngFor="let voiture of annoncesVoituresFiltreesActives">
+                    <div class="card rounded-3">
+                        <div class="card-head mx-3 mt-3">
+                            <p class="nomCar fw-bold"> {{voiture.nom}} </p>
+                            <!-- <img src="http://127.0.0.1:8000/images/{{infoProprietaire?.image}}" class="img-fluid" alt=""> -->
+                            <p class="fw-lighter">{{voiture?.prix}} Fcfa</p>
+                        </div>
+            
+                        <div class="card-body">
+                            <img src="http://127.0.0.1:8000/images/{{voiture.image1}}" alt="" class="img-fluid imgAnnonce rounded-4">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                (click)="afficherDetailAnnonce(voiture)" (click)="getCommentOfAnnonce(voiture.id)">
+                                Voir détail
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

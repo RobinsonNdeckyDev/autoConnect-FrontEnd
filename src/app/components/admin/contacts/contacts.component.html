@@ -4,11 +4,16 @@
     <div class="row mt-4 shadow rounded-4">
         <div class="col-12 px-3 py-4">
 
-            <div *ngIf="messages.length === 0">
-                <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas de messages disponibles pour l'instant...</p>
+            <div *ngIf="isLoading">
+                <!-- Attendez que les données soient chargées -->
+                <p class="fw-lighter fw-bold"> <span class="text-chargement">Chargement en cours...</span></p>
+            </div>
+
+            <div *ngIf="!isLoading && messages.length === 0">
+                <p class="fw-lighter px-2"> <span class="text-chargement">Oops!</span> Pas de messages disponibles pour l'instant...</p>
             </div>
            
-            <div class="table-responsive">
+            <div class="table-responsive" *ngIf="!isLoading && messages.length > 0">
                 <table class="table mb-3" datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="messages.length > 0">
                     <thead class="">
                         <tr class="titreTab fw-light">

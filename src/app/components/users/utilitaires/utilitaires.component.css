@@ -1,8 +1,14 @@
 .bannerUtilitaires {
-    background-image: url(/assets/banrect1.png);
+    background-image: url(/assets/images/vehicules/banUtilitaire.png);
     background-repeat: no-repeat;
     background-size: 100%;
-    padding: 21% 0;
+    padding: 24% 0;
+}
+
+.text-chargement {
+    color: #0F42A8;
+    margin-top: 20px;
+    margin-left: 25px;
 }
 
 .utilitaires .utilitairesContainer h2 {

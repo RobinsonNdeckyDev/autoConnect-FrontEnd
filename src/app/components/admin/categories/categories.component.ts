@@ -17,6 +17,7 @@ export class CategoriesComponent implements OnInit {
   listeCategories: any[] = [];
   categoriesSupprimees: any[] = [];
   categorie: string = '';
+  isLoading: boolean = true;
 
   // categorie selectionnée
   categorieSelected: any;
@@ -41,7 +42,6 @@ export class CategoriesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.getCategories();
     this.listeCategoriesSupprimees();
 
@@ -50,7 +50,7 @@ export class CategoriesComponent implements OnInit {
       searching: true,
       lengthChange: false,
       paging: true,
-      pageLength: 5,
+      pageLength: 3,
       pagingType: 'simple_numbers',
       info: false,
       language: {
@@ -64,7 +64,6 @@ export class CategoriesComponent implements OnInit {
         },
       },
     };
-
   }
 
   // Liste Categories
@@ -76,7 +75,8 @@ export class CategoriesComponent implements OnInit {
         // Maintenant, vous pouvez accéder à l'array categorie
         this.listeCategories = Object.values(response.categories);
         console.log('Liste categories: ', this.listeCategories);
-        console.log(typeof(this.listeCategories));
+        console.log(typeof this.listeCategories);
+        this.isLoading = false;
       },
       (error) => {
         console.error(
@@ -92,7 +92,7 @@ export class CategoriesComponent implements OnInit {
     this.listeCategoriesService.getCategoriesSupprimees().subscribe(
       (response: any) => {
         // Affiche le tableau des categories dans la console
-        console.log("getCategoriesSupprimees: ", response);
+        console.log('getCategoriesSupprimees: ', response);
 
         // Maintenant, vous pouvez accéder à l'array categorie
         this.categoriesSupprimees = Object.values(response.categories);
@@ -128,8 +128,8 @@ export class CategoriesComponent implements OnInit {
       (response) => {
         // /Insérer le nouveau blog au début de la liste des blogs
         // this.categories.unshift(response);
-        console.log('catégorie ajouté avec succès.');
-        this.alertMessage('success', 'Ajouté', 'catégorie ajouté avec succés');
+        console.log('catégorie ajoutée avec succès.');
+        this.alertMessage('success', 'Ajoutée', 'catégorie ajoutée avec succés');
         // Rafraîchir la liste des blogs après l'ajout
         this.getCategories();
         // Réinitialiser le champ après l'ajout
@@ -172,7 +172,7 @@ export class CategoriesComponent implements OnInit {
               console.log('Categorie modifiée avec succès.');
               this.alertMessage(
                 'success',
-                'Cool',
+                'Modifiée',
                 'Categorie modifiée avec succès.'
               );
               // Réinitialiser les champs après la modification
@@ -257,26 +257,28 @@ export class CategoriesComponent implements OnInit {
       if (result.isConfirmed) {
         // Si l'utilisateur clique sur "Oui, supprimer"
         // Appeler la méthode de votre service pour supprimer une categorie
-        this.listeCategoriesService.simpleDeleteCategorie(categorieId).subscribe(
-          (response) => {
-            console.log(response);
-            console.log('Catégorie supprimée de la liste avec succès.');
-            this.alertMessage(
-              'success',
-              'Supprimée',
-              'Catégorie supprimée de la liste avec succès.'
-            );
+        this.listeCategoriesService
+          .simpleDeleteCategorie(categorieId)
+          .subscribe(
+            (response) => {
+              console.log(response);
+              console.log('Catégorie supprimée de la liste avec succès.');
+              this.alertMessage(
+                'success',
+                'Supprimée',
+                'Catégorie supprimée de la liste avec succès.'
+              );
 
-            this.getCategories();
-            this.listeCategoriesSupprimees();
-          },
-          (error) => {
-            console.error(
-              "Une erreur s'est produite lors de la suppression de la catégorie: ",
-              error
-            );
-          }
-        );
+              this.getCategories();
+              this.listeCategoriesSupprimees();
+            },
+            (error) => {
+              console.error(
+                "Une erreur s'est produite lors de la suppression de la catégorie: ",
+                error
+              );
+            }
+          );
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
         console.log('La suppression de la catégorie a été annulée.');
@@ -313,7 +315,7 @@ export class CategoriesComponent implements OnInit {
               'Catégorie restaurée de la liste avec succès.'
             );
 
-            // this.getCategories();
+            this.getCategories();
             this.listeCategoriesSupprimees();
           },
           (error) => {
@@ -325,11 +327,11 @@ export class CategoriesComponent implements OnInit {
         );
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
-        console.log('La restauration du catégorie a été annulée.');
+        console.log('La restauration de la catégorie a été annulée.');
         this.alertMessage(
           'info',
           'Annulée',
-          'restauration du catégorie annulée'
+          'restauration de la catégorie annulée'
         );
       }
     });

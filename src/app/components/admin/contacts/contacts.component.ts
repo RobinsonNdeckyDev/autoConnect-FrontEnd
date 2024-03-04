@@ -14,6 +14,7 @@ export class ContactsComponent {
   messages: any[] = [];
   selectedMessage: any; // Pour stocker le message sélectionné
   isModalOpen: boolean = false; // Variable pour contrôler l'ouverture du modal
+  isLoading: boolean = true;
 
   constructor(
     private listeContacts: ListeContactsService,
@@ -53,6 +54,7 @@ export class ContactsComponent {
 
         // Maintenant, vous pouvez accéder à l'array categorie
         this.messages = response.messages;
+        this.isLoading = false;
       },
       (error) => {
         console.error(

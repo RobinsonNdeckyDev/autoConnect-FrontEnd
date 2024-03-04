@@ -3,6 +3,12 @@
     text-decoration: none;
 }
 
+.text-chargement {
+    color: #0F42A8;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
 .search .searchCont{
     display: flex;
     justify-content: center;

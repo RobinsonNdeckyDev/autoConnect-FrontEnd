@@ -24,6 +24,8 @@ export class AnnoncesVendeursComponent {
   tabUsers: any[] = [];
   filteredAnnoncesValides: any[] = [];
   filteredAnnoncesInvalides: any[] = [];
+  isLoading: boolean = true;
+
   // Variable pour stocker l'annonce sélectionné
   annonceSelectionnee: any;
   // variable pour stocker les infos du proprietaire
@@ -165,6 +167,7 @@ export class AnnoncesVendeursComponent {
         console.log('Annonce valides: ', this.validesAnnonces);
         // Initialisation de annoncesValides
         this.filteredAnnoncesValides = [...this.validesAnnonces];
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
@@ -179,15 +182,8 @@ export class AnnoncesVendeursComponent {
       this.filteredAnnoncesValides = [...this.validesAnnonces];
     } else {
       // Sinon, filtrer les annonces dont le nom contient le terme de recherche
-      this.filteredAnnoncesValides = this.validesAnnonces.filter(
-        (annonce) =>
-          annonce.nom
-            .toLowerCase()
-            .includes(this.searchTermValide.toLowerCase())
-        //   ||
-        // annonce.description
-        //   .toLowerCase()
-        //   .includes(this.searchTermInvalide.toLowerCase())
+      this.filteredAnnoncesValides = this.validesAnnonces.filter((annonce) =>
+        annonce.nom.toLowerCase().includes(this.searchTermValide.toLowerCase())
       );
     }
   }
@@ -207,6 +203,7 @@ export class AnnoncesVendeursComponent {
         console.log('Annonces invalides: ', this.invalidesAnnonces);
         // Initialisation de filteredAnnoncesInvalides
         this.filteredAnnoncesInvalides = [...this.invalidesAnnonces];
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
@@ -355,19 +352,6 @@ export class AnnoncesVendeursComponent {
       confirmButtonText: 'Oui, désactiver',
     }).then((result) => {
       if (result.isConfirmed) {
-        // Si l'utilisateur clique sur "Oui, d"sactiver"
-        // this.annonceServiceEtat
-        //   .updateAnnonceState(annonceId, newState)
-        //   .subscribe(() => {
-        //     // Mettre à jour l'état de l'annonce après avoir reçu la réponse du serveur
-        //     this.annonceSelectionnee.etat = newState;
-        //     this.alertMessage(
-        //       'success',
-        //       'Super',
-        //       'Annonce désactivée avec succés'
-        //     );
-        //     this.listesAnnonces();
-        //   });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
         console.log("La désactivation de l'annonce a été annulée.");
@@ -392,21 +376,6 @@ export class AnnoncesVendeursComponent {
       confirmButtonText: 'Oui, supprimer',
     }).then((result) => {
       if (result.isConfirmed) {
-        // Si l'utilisateur clique sur "Oui, d"sactiver"
-        // this.listeVoitureService.deleteAnnonce(annonceId).subscribe(
-        //   (response) => {
-        //     console.log(response);
-        //     this.alertMessage(
-        //       'success',
-        //       'Super',
-        //       'Annonce supprimée avec succés'
-        //     );
-        //     this.listesAnnonces();
-        //   },
-        //   (error) => {
-        //     console.log(error);
-        //   }
-        // );
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
         console.log("La suppression de l'annonce a été annulée.");

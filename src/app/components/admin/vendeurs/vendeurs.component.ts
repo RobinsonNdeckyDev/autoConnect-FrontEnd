@@ -15,6 +15,7 @@ export class VendeursComponent {
   proprietaires: any[] = [];
   proprietairesFiltres: any[] = [];
   recherche: string = '';
+  isLoading: boolean = true;
 
   // Variable pour stocker le proprietaire sélectionné
   selectedProprietaire: any;
@@ -60,6 +61,8 @@ export class VendeursComponent {
         // Initialisation de vos données d'acheteurs après réception des données
         this.proprietairesFiltres = this.proprietaires;
         console.log('proprietaires filtrer', this.proprietairesFiltres);
+        // Mettre isLoading à false une fois les données chargées
+        this.isLoading = false;
       },
       (error) => {
         console.error(

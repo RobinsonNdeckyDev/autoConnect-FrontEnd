@@ -8,6 +8,7 @@ import { DetailAnnoncePropComponent } from './detail-annonce-prop/detail-annonce
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { PublierAnnonceComponent } from './publier-annonce/publier-annonce.component';
 import { ProprietaireGard } from 'src/app/guards/proprietaire-guard.guard';
+import { HttpClientModule } from '@angular/common/http';
 // import { ModifierAnnonceComponent } from './modifier-annonce/modifier-annonce.component';
 
 
@@ -53,7 +54,8 @@ const routes: Routes = [
   declarations: [],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
+    CommonModule,
+    HttpClientModule,
   ],
   exports: [RouterModule]
 })

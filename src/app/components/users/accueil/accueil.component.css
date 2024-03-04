@@ -1,20 +1,16 @@
-* {
-    box-sizing: border-box;
-}
-
 .imgPrinc {
     height: 180px;
 }
 
 
 .bannerAccueil {
-    /* padding: 0; */
+    padding: 0;
     position: relative;
     background-image: url(/assets/banrect1.png);
     background-repeat: no-repeat;
     background-size: 100%;
     padding: 14% 0;
-    border: 1px ;
+    border: 1px;
 }
 
 .containBanner {
@@ -169,7 +165,7 @@
     width: 150px;
 }
 
-.contBody{
+.contBody {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -358,39 +354,42 @@
     font-weight: 700;
 }
 
+/* and (min-width: 168px) */
 
-@media only screen and (min-width: 168px) and (max-width: 767px) {
-    .containBanner{
+
+@media only screen and (max-width: 767px) {
+    .containBanner {
         display: block;
         padding-left: 25px;
     }
 
-    .containBanner button,.bannerP{
+    .containBanner button,
+    .bannerP {
         display: none;
     }
 
-    .containBanner h1{
+    .containBanner h1 {
         font-size: 16px;
     }
 
-    .annonces h1{
+    .annonces h1 {
         font-size: 18px;
     }
 
-    .containContact .formContent button{
+    .containContact .formContent button {
         width: 40%;
     }
 
-    .temoignages .content h1{
+    .temoignages .content h1 {
         font-size: 16px;
     }
 
-    .bannerAnnonce .pBanner{
+    .bannerAnnonce .pBanner {
         font-size: 16px;
         text-align: center;
     }
 
-    .bannerAnnonce .btnAnnonce{
+    .bannerAnnonce .btnAnnonce {
         display: flex;
         justify-content: center;
     }

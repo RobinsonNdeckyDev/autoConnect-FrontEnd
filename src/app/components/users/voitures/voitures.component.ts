@@ -21,6 +21,7 @@ export class VoituresComponent {
   // Propriété pour stocker la valeur de recherche
   searchTerm: string = '';
   listeVoituresSearch: any;
+  isLoading: boolean = true;
 
   constructor(
     private listeVoitureService: ListeVoituresService,
@@ -32,6 +33,7 @@ export class VoituresComponent {
   ngOnInit(): void {
     this.getProprietaire();
     this.getAnnoncesValides();
+    
   }
 
   // Méthode pour récupérer la liste des propriétaires
@@ -75,6 +77,8 @@ export class VoituresComponent {
         // Initialisation de filteredVoitures avec les signalements récupérés
         this.filteredVoitures = [...this.listeVoitures];
         console.log('filteredVoitures: ', this.filteredVoitures);
+        // Mettre isLoading à false une fois les données chargées
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);

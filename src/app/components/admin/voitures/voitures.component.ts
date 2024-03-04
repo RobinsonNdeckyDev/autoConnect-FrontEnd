@@ -20,6 +20,7 @@ export class VoituresComponent {
   listeVoituresActives: any[] = [];
   annoncesVoituresFiltreesActives: any[] = [];
   annoncesVoituresFiltreesInactives: any[] = [];
+  isLoading: boolean = true;
 
   // Variable pour stocker les proprietaires
   tabProprietaires: any[] = [];
@@ -139,6 +140,7 @@ export class VoituresComponent {
           'Annonces filtrées Inactives : ',
           this.annoncesVoituresFiltreesInactives
         );
+        this.isLoading = false;
       },
       (error) => {
         console.error(
@@ -351,18 +353,18 @@ export class VoituresComponent {
   // Fonction pour filtrer les voitures inactives en fonction du terme de recherche
   filterCarsInactive(): void {
     // Si le terme de recherche est vide, afficher toutes les voitures
-    if (!this.searchTermActive.trim()) {
-      this.annoncesVoituresFiltreesActives = this.listeVoitures.filter(
-        (annonceVoiture) => annonceVoiture.etat === 'accepter'
+    if (!this.searchTermInactive.trim()) {
+      this.annoncesVoituresFiltreesInactives = this.listeVoitures.filter(
+        (annonceVoiture) => annonceVoiture.etat === 'refuser'
       );
     } else {
       // Sinon, filtrer les voitures dont le nom contient le terme de recherche
-      this.annoncesVoituresFiltreesActives = this.listeVoitures.filter(
+      this.annoncesVoituresFiltreesInactives = this.listeVoitures.filter(
         (annonceVoiture) =>
-          annonceVoiture.etat === 'accepter' &&
+          annonceVoiture.etat === 'refuser' &&
           annonceVoiture.nom
             .toLowerCase()
-            .includes(this.searchTermActive.toLowerCase())
+            .includes(this.searchTermInactive.toLowerCase())
       );
     }
   }
@@ -398,27 +400,29 @@ export class VoituresComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         // Si l'utilisateur clique sur "Oui, d"sactiver"
-        this.commentaireService.deleteCommentAnnonceAdmin(comentaireId).subscribe(
-          (response) => {
-            console.log(response);
-            this.alertMessage(
-              'success',
-              'Supprimé',
-              'commentaire supprimé avec succés'
-            );
-            this.listesAnnonces();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        this.commentaireService
+          .deleteCommentAnnonceAdmin(comentaireId)
+          .subscribe(
+            (response) => {
+              console.log(response);
+              this.alertMessage(
+                'success',
+                'Supprimé',
+                'commentaire supprimé avec succés'
+              );
+              this.listesAnnonces();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Si l'utilisateur clique sur "Annuler"
-        console.log("La suppression du commentaire a été annulé.");
+        console.log('La suppression du commentaire a été annulé.');
         this.alertMessage(
           'info',
           'Annulé',
-          "Suppression du commentaire annulé"
+          'Suppression du commentaire annulé'
         );
       }
     });

@@ -41,7 +41,6 @@ export class DetailVoitureComponent {
   ) {}
 
   ngOnInit(): void {
-
     // Récupérer l'ID de l'annonce depuis les paramètres de l'URL
     this.route.params.subscribe((params) => {
       this.annonceId = params['id'];
@@ -61,7 +60,6 @@ export class DetailVoitureComponent {
       // Annonce en avant
       this.getAnnoncesEnAvant();
     });
-
   }
 
   // identifiant voiture
@@ -266,6 +264,9 @@ export class DetailVoitureComponent {
       icon: icon,
       title: title,
       text: text,
+      timer: 2000, // Durée en millisecondes avant la disparition
+      timerProgressBar: true, // Barre de progression de la temporisation
+      showConfirmButton: false, // Cacher le bouton de confirmation
     });
   }
 
