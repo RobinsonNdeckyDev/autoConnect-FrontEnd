@@ -27,6 +27,7 @@ export class UtilitairesComponent {
   // Propriété pour stocker la valeur de recherche
   searchTermActive: string = '';
   searchTermInactive: string = '';
+  isLoading: boolean = true;
 
   constructor(
     public listeUtilitaireService: ListeUtilitairesService,
@@ -134,6 +135,7 @@ export class UtilitairesComponent {
           'Annonces utilitaires filtrées inactives : ',
           this.annoncesUtiltairesFiltreesInactives
         );
+        this.isLoading = false;
       },
       (error) => {
         console.error(
@@ -356,18 +358,18 @@ export class UtilitairesComponent {
   // Fonction pour filtrer les voitures inactives en fonction du terme de recherche
   filterCarsInactive(): void {
     // Si le terme de recherche est vide, afficher toutes les voitures
-    if (!this.searchTermActive.trim()) {
+    if (!this.searchTermInactive.trim()) {
       this.annoncesUtiltairesFiltreesInactives = this.listeUtilitaires.filter(
-        (annonceVoiture) => annonceVoiture.etat === 'accepter'
+        (annonceVoiture) => annonceVoiture.etat === 'refuser'
       );
     } else {
       // Sinon, filtrer les voitures dont le nom contient le terme de recherche
       this.annoncesUtiltairesFiltreesInactives = this.listeUtilitaires.filter(
         (annonceVoiture) =>
-          annonceVoiture.etat === 'accepter' &&
+          annonceVoiture.etat === 'refuser' &&
           annonceVoiture.nom
             .toLowerCase()
-            .includes(this.searchTermActive.toLowerCase())
+            .includes(this.searchTermInactive.toLowerCase())
       );
     }
   }

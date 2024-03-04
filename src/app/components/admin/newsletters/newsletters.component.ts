@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 export class NewslettersComponent {
   dtOptions: DataTables.Settings = {};
   newsletters: any[] = [];
+  isLoading: boolean = true;
 
   constructor(private listeNews: ListeNewslettersService) {}
 
@@ -46,6 +47,7 @@ export class NewslettersComponent {
         // Maintenant, vous pouvez accéder à l'array categorie
         this.newsletters = response.newsLetters;
         console.log(this.newsletters);
+        this.isLoading = false;
       },
       (error) => {
         console.error(

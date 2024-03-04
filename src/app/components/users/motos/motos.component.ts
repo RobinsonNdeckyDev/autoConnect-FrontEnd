@@ -17,6 +17,7 @@ export class MotosComponent {
   proprietaireInfo: any;
   searchTerm: string = '';
   fiteredMotos: any[] = [];
+  isLoading: boolean = true;
 
   constructor(
     private listeMotoService: ListeMotosService,
@@ -72,7 +73,8 @@ export class MotosComponent {
         // Initialisation de filteredMotos avec les Motos récupérés
         this.fiteredMotos = [...this.listeMotos];
         console.log('filteredMotos: ', this.fiteredMotos);
-
+        // Mettre isLoading à false une fois les données chargées
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
@@ -96,9 +98,7 @@ export class MotosComponent {
     } else {
       // Sinon, filtrer les blogs dont le titre ou la description contient le terme de recherche
       this.fiteredMotos = this.listeMotos.filter((moto: any) =>
-        moto.nom
-          .toLowerCase()
-          .includes(this.searchTerm.toLowerCase()) 
+        moto.nom.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
   }
@@ -108,5 +108,4 @@ export class MotosComponent {
     // Filtrer les blogs avec le nouveau terme de recherche
     this.filterMotos();
   }
-
 }

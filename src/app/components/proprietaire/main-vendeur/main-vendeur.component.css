@@ -3,7 +3,7 @@
 }
 
 .sidebar {
-    height: 91.8vh;
+    /* height: 91.8vh; */
     background-color: #0F42A8;
     /* overflow-y: scroll; */
 }
@@ -27,7 +27,7 @@
         position: absolute;
         top: 60px;
         left: 0;
-        background-color: rgb(247, 16, 16);
+        background-color: #0F42A8;
         height: 100%;
         z-index: 1;
     }

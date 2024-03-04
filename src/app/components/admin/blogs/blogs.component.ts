@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListeBlogsService } from 'src/app/services/liste-blogs.service';
 import Swal from 'sweetalert2';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-blogs',
@@ -10,9 +11,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./blogs.component.css'],
 })
 export class BlogsComponent {
+  modalAddOpen: boolean = true;
   titre: string = '';
   image!: File;
+  imageChange!: File;
   description: string = '';
+
+  // Variable pour contrôler l'affichage du message de chargement
+  isLoading: boolean = true;
 
   // Variable pour stocker le blog sélectionné
   selectedBlog: any;
@@ -35,7 +41,19 @@ export class BlogsComponent {
 
   ngOnInit(): void {
     this.getBlogs();
+    this.loadData();
     // this.prepareEdit(this.Blogs);
+  }
+
+  loadData(): void {
+    // Supposons que vous chargez vos données ici
+    // Une fois les données chargées, définissez isLoading sur false
+    setTimeout(() => {
+      // Supposons que filteredBlogs est votre tableau de données
+      // une fois qu'il est chargé
+      this.filteredBlogs = [...this.Blogs];
+      this.isLoading = false;
+    }, 5000); // Simule un chargement de 5 secondes
   }
 
   // Liste des Blogs
@@ -46,9 +64,11 @@ export class BlogsComponent {
 
         // Maintenant, vous pouvez accéder à l'array categorie
         this.Blogs = response.blocs;
+        console.log("Blogs: ", this.Blogs);
 
-        // Initialisation de filteredBlogs 
+        // Initialisation de filteredBlogs
         this.filteredBlogs = [...this.Blogs];
+        this.isLoading = false;
       },
       (error) => {
         console.error(
@@ -91,6 +111,8 @@ export class BlogsComponent {
           this.getBlogs();
           // Réinitialiser le champ après l'ajout
           this.viderChamps();
+          // Après avoir ajouté le blog avec succès, fermez le modal
+          this.modalAddOpen = false;
         },
         (error) => {
           this.alertMessage('error', 'Oops', "Erreur lors de l'ajout du blog");
@@ -116,20 +138,24 @@ export class BlogsComponent {
 
   // Méthode pour éditer le blog
   editBlog() {
-    console.log("blogToEdit: ", this.blogToEdit);
+    console.log('blogToEdit: ', this.blogToEdit);
     // Créez une nouvelle instance de FormData pour stocker les données du formulaire
     let updateBlog = {
       titre: this.blogToEdit.titre,
       description: this.blogToEdit.description,
       image: this.blogToEdit.image
-    }
+    };
 
-    console.log("updateBlog: ", updateBlog);
+    console.log('Blog mis à jour: ', updateBlog);
     this.listeBlogs.modifierBlog(this.blogToEdit.id, updateBlog).subscribe(
       (response) => {
         console.log(response);
         console.log('Blog modifié avec succès.');
-        this.alertMessage('success', 'Enregistrée', 'Blog modifié avec succès.');
+        this.alertMessage(
+          'success',
+          'Enregistrée',
+          'Blog modifié avec succès.'
+        );
         // Réinitialiser les champs après la modification
         this.viderChamps();
         this.getBlogs();
@@ -144,7 +170,7 @@ export class BlogsComponent {
   }
 
   // Supprimer blog
-  supprimerBlog(blogId: number): void { 
+  supprimerBlog(blogId: number): void {
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir supprimer ce blog ?',
       text: 'Vous allez supprimer ce blog !',
@@ -226,9 +252,15 @@ export class BlogsComponent {
     });
   }
 
-  onFileChange(event: any) {
+  onFileAdd(event: any) {
     // this.files = event.target.files[0];
     console.warn(event.target.files[0]);
     this.image = event.target.files[0] as File;
+  }
+
+  onFileChange(event: any) {
+    // this.files = event.target.files[0];
+    console.warn(event.target.files[0]);
+    this.imageChange = event.target.files[0] as File;
   }
 }

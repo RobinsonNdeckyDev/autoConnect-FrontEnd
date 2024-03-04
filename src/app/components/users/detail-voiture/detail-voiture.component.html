@@ -56,7 +56,7 @@
                         <img src="http://127.0.0.1:8000/images/{{voitureDetails?.image4}}" class="img-fluid" alt="">
                     </div>
                     <div class="p-2 alert mx-3">
-                        <span class="date"> {{voitureDetails?.updated_at | date: 'dd/MM/yyyy HH:mm:ss' }} </span>
+                        <span class="date"> Publiée le {{voitureDetails?.updated_at | date: 'dd/MM/yyyy HH:mm:ss' }} </span>
                         <button class="btn fw-bold" data-bs-toggle="modal" data-bs-target="#formSignal">Signaler l'annonce</button>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
     <hr>
     
     <div class="contentDetail container">
-        <div class="caracteristiques row mb-3">
+        <div class="caracteristiques row g-3 mb-3">
             <div class="infosV col-12 col-md-2">
                 <div class="card rounded-3">
                     <span class="libelle">Nom:</span>
@@ -133,7 +133,7 @@
                 </div>
             </div>
         </div>
-        <div class="caracteristiques row d-flex justify-content-center">
+        <div class="caracteristiques row g-3 d-flex justify-content-center">
             <div class="infosV col-12 col-md-2 ">
                 <div class="card rounded-3">
                     <span class="libelle">Carosserie:</span>
@@ -210,7 +210,7 @@
                 <div class="col-12 col-md-4 px-5">
                     <div class=" comtRighr pt-5">
                         <img src="http://127.0.0.1:8000/images/{{voitureDetails?.image1}}" alt="" class="img-fluid mb-4">
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#formComment">Poster un commentaire</button>
+                        <button class="btn btnComment" data-bs-toggle="modal" data-bs-target="#formComment">Poster un commentaire</button>
                     </div>
                 </div>
             </div>
@@ -243,12 +243,12 @@
                         <div class="cardTrait mb-3 mt-2"></div>
                         <div class="cardDetails mx-3">
                             <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt=""> {{voiture?.moteur}} </p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt=""> {{voiture?.annee}} </p>
+                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">{{voiture?.moteur}}</p>
+                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">{{voiture?.annee}} </p>
                             </div>
                             <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{voiture?.kilometrage}} </p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt=""> {{voiture?.carburant}} </p>
+                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">{{voiture?.kilometrage}}</p>
+                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">{{voiture?.carburant}} </p>
                             </div>
                         </div>
                         <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt=""> {{voiture?.prix}} Fcfa</p>
@@ -312,7 +312,7 @@
                         <textarea name="raisonSignal" id="raisonSignal" name="raisonSignal" class="form-control" [(ngModel)]="raisonSignal"></textarea>
                     </div>
                     <div class="btnsForm d-flex justify-content-center align-content-center">
-                        <button class="btn mx-3 btnSignal" (click)="addSignal(voitureDetails.id)">Signaler</button>
+                        <button class="btn mx-3 btnSignal" (click)="addSignal(voitureDetails.id)" data-bs-dismiss="modal">Signaler</button>
                         <button class="btn mx-3 btnOff" data-bs-dismiss="modal">Annuler</button>
                     </div>
                 </form>
@@ -342,7 +342,7 @@
                     </div>
 
                     <div class="btnsForm d-flex justify-content-center align-content-center">
-                        <button class="btn mx-3 btnSignal" (click)="addComment(voitureDetails.id)">Commenter</button>
+                        <button class="btn mx-3 btnSignal" (click)="addComment(voitureDetails.id)" data-bs-dismiss="modal">Commenter</button>
                         <button class="btn mx-3 btnOff" data-bs-dismiss="modal">Annuler</button>
                     </div>
                 </form>

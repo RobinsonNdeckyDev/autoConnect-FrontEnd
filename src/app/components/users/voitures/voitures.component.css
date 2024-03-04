@@ -5,6 +5,12 @@
     padding: 21% 0;
 }
 
+.text-chargement{
+    color: #0F42A8;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
 .imgPrinc{
     height: 180px;
 }

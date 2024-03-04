@@ -16,6 +16,7 @@ export class AdminGuard implements CanActivate {
       // Autoriser l'accès si l'utilisateur est un administrateur
       return true;
     } else {
+      // Si l'utilisateur n'a pas le role admin l'envoyer sur la page login
       this.router.navigate(['/login']);
       return false;
     }

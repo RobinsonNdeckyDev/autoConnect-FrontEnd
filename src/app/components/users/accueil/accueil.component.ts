@@ -275,16 +275,16 @@ export class AccueilComponent {
   validateMessage() {
     if (!this.message) {
       this.validationMessages['message'] = 'Le message est requis';
-      this.nomCompletEmpty = true;
+      this.messageEmpty = true;
       return false;
     } else if (!this.regexPattern.test(this.message)) {
       this.validationMessages['message'] =
-        'Le nom ne peut etre composé que de lettres en miniscule ou majuscule.';
-      this.nomCompletEmpty = false;
+        'Le message ne peut etre composé que de lettres en miniscule ou majuscule.';
+      this.messageEmpty = false;
       return false;
     } else {
       this.validationMessages['message'] = '';
-      this.nomCompletEmpty = false;
+      this.messageEmpty = false;
       return true;
     }
   }
@@ -308,6 +308,3 @@ export class AccueilComponent {
     });
   }
 }
-
-
-

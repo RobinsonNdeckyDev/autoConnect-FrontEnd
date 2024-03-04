@@ -1,3 +1,12 @@
+/* .progress-bar {
+    transition: width 0.3s ease;
+} */
+
+.progress-bar {
+    width: 100%;
+}
+
+
 .publishAnnonceContain h2{
     color: #0F42A8;
     font-weight: 700;
@@ -41,6 +50,11 @@
 
 .btnPublier{
     background-color: #0F42A8 !important;
+    color: white;
+}
+
+.btnDark {
+    background-color: black !important;
     color: white;
 }
 

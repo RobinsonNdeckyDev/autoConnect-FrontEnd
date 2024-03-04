@@ -20,6 +20,7 @@ export class UtilitairesComponent {
   utilitaireSelected: any;
   searchTerm: string = '';
   fiteredUtilitaires: any[] = [];
+  isLoading: boolean = true;
 
   constructor(
     private listeUtilitaireService: ListeUtilitairesService,
@@ -30,7 +31,7 @@ export class UtilitairesComponent {
 
   ngOnInit(): void {
     this.getProprietaire();
-    
+
     this.getAnnoncesValides();
   }
 
@@ -75,6 +76,8 @@ export class UtilitairesComponent {
         // Initialisation de filteredUtilitaires avec les Utilitaires récupérés
         this.fiteredUtilitaires = [...this.listeUtilitaires];
         console.log('fiteredUtilitaires: ', this.fiteredUtilitaires);
+        // Mettre isLoading à false une fois les données chargées
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);

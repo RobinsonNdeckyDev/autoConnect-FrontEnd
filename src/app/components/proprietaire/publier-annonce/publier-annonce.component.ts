@@ -46,6 +46,39 @@ export class PublierAnnonceComponent {
   image3!: File;
   image4!: File;
 
+  // Messages de validation
+  validationMessages: { [key: string]: string } = {};
+
+  // Déclaration des propriétés touched
+  nomTouched: boolean = false;
+  descriptionTouched: boolean = false;
+  prixTouched: boolean = false;
+
+  // Déclaration des propriétés Empty
+  nomEmpty: boolean = false;
+  descriptionEmpty: boolean = false;
+  prixEmpty: boolean = false;
+
+  regexNom: RegExp = /^[a-zA-Z]+$/;
+  regexText: RegExp = /^[a-zA-Z0-9]+$/;
+  regexPrix: RegExp = /^[0-9]{8,}$/;
+
+  // emailregex pattern
+  emailPattern =
+    // /^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+  // Regex nom
+  // regexNom: RegExp = ^[a-zA-Z0-9]+$;
+  // regex password
+  passwordRegex: RegExp = /^\d{6,}$/;
+
+  // Définissez la variable de progression dans votre composant
+  progression: number = 0;
+
+  currentStep = 1;
+  totalSteps = 3;
+
   //Liste des années de 2000 à 2024
   years: number[] = Array.from({ length: 25 }, (_, index) => 2000 + index);
 
@@ -73,6 +106,8 @@ export class PublierAnnonceComponent {
     this.registerAnnonce();
 
     this.viderChamps();
+
+    this.resetToStep1();
   }
 
   // Validation des champs
@@ -163,6 +198,62 @@ export class PublierAnnonceComponent {
     }
   }
 
+  // Validation email
+  validateNom(): boolean {
+    if (!this.nom) {
+      this.validationMessages['nom'] = 'Le nom est requis';
+      // Mettre à jour nomEmpty si le champ est vide
+      this.nomEmpty = true;
+      return false;
+    } else if (!this.regexNom.test(this.nom)) {
+      this.validationMessages['nom'] =
+        'Le nom ne peut etre constitué de lettreS';
+      this.nomEmpty = false;
+      return false;
+    } else {
+      this.validationMessages['nom'] = '';
+      this.nomEmpty = false;
+      return true;
+    }
+  }
+
+  validateDescription(): boolean {
+    if (!this.description) {
+      this.validationMessages['description'] = 'La description est requise';
+      // Mettre à jour descriptionEmpty si le champ est vide
+      this.descriptionEmpty = true;
+      return false;
+    } else if (!this.regexText.test(this.description)) {
+      this.validationMessages['description'] =
+        'La description ne peut etre constitué de lettres et de chiffres';
+      this.descriptionEmpty = false;
+      return false;
+    } else {
+      this.validationMessages['description'] = '';
+      this.descriptionEmpty = false;
+      return true;
+    }
+  }
+
+  // Validation email
+  validatePrix(): boolean {
+    if (!this.nom) {
+      this.validationMessages['nom'] = 'Le prix est requis';
+      // Mettre à jour nomEmpty si le champ est vide
+      this.prixEmpty = true;
+      return false;
+    } else if (!this.regexNom.test(this.nom)) {
+      this.validationMessages['nom'] =
+        'Le prix ne peut etre constitué de chiffres';
+      this.prixEmpty = false;
+      return false;
+    } else {
+      this.validationMessages['nom'] = '';
+      this.prixEmpty = false;
+      return true;
+    }
+  }
+
   // registerAnnonce
   registerAnnonce() {
     let nouvelleAnnonce = {
@@ -236,9 +327,12 @@ export class PublierAnnonceComponent {
       icon: icon,
       title: title,
       text: text,
-      timer: 1800, // Durée en millisecondes avant la disparition
-      timerProgressBar: true, // Barre de progression de la temporisation
-      showConfirmButton: false, // Cacher le bouton de confirmation
+      // Durée en millisecondes avant la disparition
+      timer: 1800,
+      // Barre de progression de la temporisation
+      timerProgressBar: true,
+      // Cacher le bouton de confirmation
+      showConfirmButton: false,
     });
   }
 
@@ -270,6 +364,55 @@ export class PublierAnnonceComponent {
   img4(event: any) {
     this.image4 = event.target.files[0] as File;
     console.warn(event.target.files[0]);
+  }
+
+  // Fonction pour réinitialiser l'étape à 1
+  resetToStep1() {
+    this.currentStep = 1;
+  }
+
+  // Fonction pour réinitialiser l'étape à 1
+  annulerPublicationAnnonce() {
+
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir annuler la publication de votre véhicule ?',
+      text: 'Vous allez annuler la publication de votre véhicule !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0F42A8',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Oui, annuler',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.viderChamps();
+        this.currentStep = 1;
+        this.alertMessage('success', 'Annulée', 'Publication annulée avec succès');
+        this.updateProgression();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Si l'utilisateur clique sur "Annuler"
+        console.log('La publication a été annulée.');
+        this.alertMessage('info', 'Annulée', 'Publication annulée');
+      }
+    });
+  }
+
+  // Fonction pour mettre à jour la progression
+  updateProgression() {
+    this.progression = (this.currentStep - 1) * (100 / (this.totalSteps - 1));
+  }
+
+  nextStep() {
+    if (this.currentStep < this.totalSteps) {
+      this.currentStep++;
+      this.updateProgression(); // Mettre à jour la progression
+    }
+  }
+
+  prevStep() {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+      this.updateProgression(); // Mettre à jour la progression
+    }
   }
 }
 

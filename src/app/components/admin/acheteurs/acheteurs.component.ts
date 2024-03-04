@@ -14,6 +14,7 @@ export class AcheteursComponent {
   acheteurs: any[] = [];
   filteredAcheteurs: any[] = [];
   searchTerm: string = '';
+  isLoading: boolean = true;
 
   // Variable pour stocker le acheteur sélectionné
   selectedAcheteur: any;
@@ -62,6 +63,7 @@ export class AcheteursComponent {
         // Initialisation de vos données d'acheteurs après réception des données
         this.filteredAcheteurs = this.acheteurs;
         console.log('acheteurs filtrer', this.filteredAcheteurs);
+        this.isLoading = false;
       },
       (error) => {
         console.error(
@@ -89,8 +91,8 @@ export class AcheteursComponent {
   // Supprimer acheteur
   supprimerAcheteur(acheteurId: number): void {
     Swal.fire({
-      title: 'Êtes-vous sûr de vouloir supprimer ce acheteur ?',
-      text: 'Vous allez supprimer ce acheteur !',
+      title: 'Êtes-vous sûr de vouloir supprimer cet acheteur ?',
+      text: 'Vous allez supprimer cet acheteur !',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#0F42A8',
@@ -117,7 +119,7 @@ export class AcheteursComponent {
             this.alertMessage(
               'error',
               'Oops',
-              'Erreur lors de la suppression ce acheteur'
+              'Erreur lors de la suppression cet acheteur'
             );
             // Gérer l'erreur de suppression ce acheteur
           }

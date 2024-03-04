@@ -66,3 +66,14 @@ hr {
     background-color: #0F42A8;
     color: white;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .profilContain{
+        margin: 3% 0 !important;
+    }
+
+    .containAdmin{
+        margin-top: 3% !important;
+    }
+}

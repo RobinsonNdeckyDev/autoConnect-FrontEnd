@@ -59,7 +59,7 @@ export class AuthenticationService {
           localStorage.setItem('currentUser', JSON.stringify(response.user));
           localStorage.setItem('token', response.access_token);
           // Démarrer le minuteur de rafraîchissement du jeton
-          this.startTokenRefreshTimer();
+          // this.startTokenRefreshTimer();
           return response;
         }),
         catchError((error) => {

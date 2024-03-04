@@ -3,6 +3,12 @@
     color: #0F42A8;                                                              
 }
 
+.text-chargement {
+    color: #0F42A8;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
 .btnCloseModal i {
     font-size: 25px;
     color: #0F42A8;

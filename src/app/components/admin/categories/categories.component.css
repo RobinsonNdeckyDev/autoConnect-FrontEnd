@@ -60,6 +60,12 @@ h5 {
     text-align: center;
 }
 
+.text-chargement {
+    color: #0F42A8;
+    margin-top: 20px;
+    /* margin-left: 25px; */
+}
+
 .table .tbody tr {
     align-items: center;
 }
@@ -68,7 +74,7 @@ table .titreTab th {
     color: #0F42A8 !important;
 }
 
-table .detailIcon i {
+.detailIcon span i{
     color: #0F42A8;
     font-size: 20px;
     cursor: pointer;

@@ -12,43 +12,44 @@
             </div>
         </div>
     
-        <div class="row mb-3 mt-4">
+        <div class=" mb-3 mt-4">
 
-            <div *ngIf="filteredSignalements.length === 0">
-                <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'annonces signalées pour l'instant...</p>
+            <div *ngIf="isLoading">
+                <!-- Attendez que les données soient chargées -->
+                <p class="fw-lighter fw-bold"> <span class="text-chargement">Chargement en cours...</span></p>
             </div>
-            
-            <div class="col-12 col-md-3 g-3" *ngFor="let signal of filteredSignalements">
-                <div class="card rounded-3">
-                    <div class="card-head mx-3 mt-3">
-                        <p class="nomCar fw-bold"> {{signal.infoAnnonceSignal?.nom}} </p>
-                        <p class="fw-lighter"> {{signal.infoAnnonceSignal?.prix}} Fcfa </p>
-                        <!-- <img src="http://127.0.0.1:8000/images/{{signal.infoUserSignal?.image}}" class="img-fluid" alt=""> -->
-                    </div>
-    
-                    <div class="card-body">
-                        <img src="http://127.0.0.1:8000/images/{{signal.infoAnnonceSignal?.image1}}" alt="" class="img-fluid imgAnnonce rounded-4 shadow">
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#detailSignalement" (click)="afficherDetailAnnonce(signal)">
-                            Voir détail
-                        </button>
 
+            <div *ngIf="!isLoading && filteredSignalements.length === 0">
+                <p class="fw-lighter px-2"> <span class="text-chargement">Oops!</span> Pas d'annonces signalées pour l'instant...</p>
+            </div>
+
+            <div class="row" *ngIf="!isLoading && filteredSignalements.length > 0">
+                <div class="col-12 col-md-3 g-3" *ngFor="let signal of filteredSignalements">
+                    <div class="card rounded-3">
+                        <div class="card-head mx-3 mt-3">
+                            <p class="nomCar fw-bold"> {{signal.infoAnnonceSignal?.nom}} </p>
+                            <p class="fw-lighter"> {{signal.infoAnnonceSignal?.prix}} Fcfa </p>
+                            <!-- <img src="http://127.0.0.1:8000/images/{{signal.infoUserSignal?.image}}" class="img-fluid" alt=""> -->
+                        </div>
+                
+                        <div class="card-body">
+                            <img src="http://127.0.0.1:8000/images/{{signal.infoAnnonceSignal?.image1}}" alt=""
+                                class="img-fluid imgAnnonce rounded-4 shadow">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#detailSignalement"
+                                (click)="afficherDetailAnnonce(signal)">
+                                Voir détail
+                            </button>
+                
+                        </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     
     </div>
 
 </div>
-
-
-
-
-
-
-
-
-
 
 
 <!-- Modal detail Signalement -->
@@ -96,7 +97,7 @@
             </div>
             <div class="modal-footer shadow">
                 <div class="btnsFooter w-100">
-                    <button type="button" class="btn btnDelete" (click)="deleteSignalement(annonceSelected?.id)">Supprimer</button>
+                    <button type="button" class="btn btnDelete" data-bs-dismiss="modal" (click)="deleteSignalement(annonceSelected?.id)">Supprimer</button>
                     <button type="button" class="btn btnClose" data-bs-dismiss="modal">Fermer</button>
                 </div>
             </div>

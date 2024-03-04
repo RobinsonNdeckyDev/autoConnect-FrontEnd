@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
-import { AccueilComponent } from './accueil/accueil.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainUserComponent } from './main-user/main-user.component';
@@ -22,13 +21,14 @@ import { DetailsBlogComponent } from './details-blog/details-blog.component';
 import { FormsModule } from '@angular/forms';
 import { LogoutUserComponent } from './logout-user/logout-user.component';
 import { LoginUserComponent } from './login-user/login-user.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AccueilComponent } from './accueil/accueil.component';
 // import DataTables from 'datatables.net';
 
 
 
 @NgModule({
   declarations: [
-    AccueilComponent,
     NavbarComponent,
     FooterComponent,
     MainUserComponent,
@@ -48,11 +48,13 @@ import { LoginUserComponent } from './login-user/login-user.component';
     DetailsBlogComponent,
     LogoutUserComponent,
     LoginUserComponent,
+    AccueilComponent,
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
     FormsModule,
+    HttpClientModule
     // DataTables
   ]
 })

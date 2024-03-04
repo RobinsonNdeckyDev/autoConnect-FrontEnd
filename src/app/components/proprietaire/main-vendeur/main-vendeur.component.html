@@ -5,7 +5,7 @@
 
     <div class="row m-0 p-0">
         <div class="sidebar d-md-block col-md-2 m-0 p-0" *ngIf="isSidebarVisible">
-            <app-sidebar-vendeur></app-sidebar-vendeur>
+            <app-sidebar-vendeur class="h-100"></app-sidebar-vendeur>
         </div>
 
         <div class=" m-0 contenu border" [ngClass]="{'col-md-10': isSidebarVisible, 'col-md-12': !isSidebarVisible}"> 

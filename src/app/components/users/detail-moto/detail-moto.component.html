@@ -56,8 +56,8 @@
                         <img src="http://127.0.0.1:8000/images/{{motoDetails?.image4}}" class="img-fluid" alt="">
                     </div>
                     <div class="p-2 alert mx-3">
-                        <span class="date"> {{motoDetails?.updated_at | date: 'dd/MM/yyyy HH:mm:ss' }} </span>
-                        <button class="btn fw-bold" data-bs-toggle="modal" data-bs-target="#annonceSignal">Signaler
+                        <span class="date"> Publiée le {{motoDetails?.updated_at | date: 'dd/MM/yyyy HH:mm:ss' }} </span>
+                        <button class="btn fw-bold" data-bs-toggle="modal" data-bs-target="#formSignal" >Signaler
                             l'annonce</button>
                     </div>
                 </div>
@@ -95,6 +95,10 @@
         </div>
     </div>
 
+    <div class="alerte d-flex justify-content-center align-content-center my-5">
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#prudence">Attention: Soyez prudent</button>
+    </div>
+
     <hr class="ligneCrts">
     <div class="middleDetail mb-3 d-flex justify-content-center">
         <h4>Caractéristiques du véhicule</h4>
@@ -102,7 +106,7 @@
     <hr class="ligneCrts">
     
     <div class="contentDetail container">
-        <div class="caracteristiques row mb-3">
+        <div class="caracteristiques row g-3 mb-3">
             <div class="infosV col-12 col-md-2">
                 <div class="card rounded-3">
                     <span class="libelle">Nom:</span>
@@ -140,7 +144,7 @@
                 </div>
             </div>
         </div>
-        <div class="caracteristiques row d-flex justify-content-center">
+        <div class="caracteristiques row g-3 d-flex justify-content-center">
             <div class="infosV col-12 col-md-2 ">
                 <div class="card rounded-3">
                     <span class="libelle">Carosserie:</span>
@@ -180,117 +184,6 @@
         </div>
     </div>
 
-    <!-- <div class="textInfos mt-4 container">
-        <div class="prst mb-4">
-            <h3 class="fw-bold mb-3 titreInfo">Présentation du véhicule</h3>
-            <p class="presentation">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eum illo laboriosam tenetur
-                asperiores
-                laudantium
-                aliquam voluptas labore. Similique laborum eos earum laboriosam eveniet chggh. Illum eveniet ipsum ex
-                incidunt tenetur
-                possimus assumenda animi aperiam voluptas excepturi, et atque aut harum nemo mollitia. Culpa harum
-                laboriosam quod
-                error
-                veniam quo dolor nam inventore magnam quae. Sequi provident, officia incidunt voluptatibus at aliquid!
-                Nam
-                accusantium
-                architecto recusandae nisi ad asperiores veritatis ullam tenetur expedita corrupti saepe laboriosam sed
-                velit
-                soluta,
-                nostrum non, qui illum! Iste iusto ducimus non totam voluptatem. Culpa, magni libero. Eaque laudantium
-                est eligendi
-                explicabo fugit voluptatum porro laboriosam.
-            </p>
-        </div>
-
-        <div class="caracteristique">
-            <h3 class="fw-bold mb-4 titreInfo">Caractéristiques du véhicule</h3>
-
-            <div class="d-flex align-items-start mb-5 ctsVehicule">
-                <div class="nav flex-column nav-pills me-3 w-25" id="v-pills-tab" role="tablist"
-                    aria-orientation="vertical">
-                    <button class="nav-link active mb-3 shadow text-start" id="v-pills-home-tab" data-bs-toggle="pill"
-                        data-bs-target="#moteur" type="button" role="tab" aria-controls="moteur"
-                        aria-selected="true"><img src="/assets/images/iconCtsCar/Motor.png" alt="">Moteur</button>
-                    <button class="nav-link shadow mb-3 text-start" id="v-pills-profile-tab" data-bs-toggle="pill"
-                        data-bs-target="#kilometrage" type="button" role="tab" aria-controls="kilometrage"
-                        aria-selected="false"><img src="/assets/images/iconCtsCar/Dash.png" alt="">Kilométrage</button>
-                    <button class="nav-link shadow mb-3 text-start" id="v-pills-disabled-tab" data-bs-toggle="pill"
-                        data-bs-target="#transmission" type="button" role="tab" aria-controls="transmission"
-                        aria-selected="false"><img src="/assets/images/iconCtsCar/Transm.png"
-                            alt="">Transmission</button>
-                    <button class="nav-link shadow mb-3 text-start" id="v-pills-messages-tab" data-bs-toggle="pill"
-                        data-bs-target="#annee" type="button" role="tab" aria-controls="annee"
-                        aria-selected="false"><img src="/assets/images/iconCtsCar/Calend.png" alt="">Année</button>
-                    <button class="nav-link shadow mb-3 text-start" id="v-pills-settings-tab" data-bs-toggle="pill"
-                        data-bs-target="#climatisation" type="button" role="tab" aria-controls="climatisation"
-                        aria-selected="false"><img src="/assets/images/iconCtsCar/Clim.png"
-                            alt="">Climatisation</button>
-                    <button class="nav-link shadow mb-3 text-start" id="v-pills-settings-tab" data-bs-toggle="pill"
-                        data-bs-target="#carburant" type="button" role="tab" aria-controls="carburant"
-                        aria-selected="false"><img src="/assets/images/iconCtsCar/Fuel.png" alt="">Carburant</button>
-                    <button class="nav-link shadow mb-3 text-start" id="v-pills-settings-tab" data-bs-toggle="pill"
-                        data-bs-target="#carosserie" type="button" role="tab" aria-controls="carosserie"
-                        aria-selected="false"><img src="/assets/images/iconCtsCar/Carosse.png"
-                            alt="">Carosserie</button>
-                </div>
-                <div class="card p-4 mx-4 shadow w-75">
-                    <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="moteur" role="tabpanel" aria-labelledby="moteur-tab"
-                            tabindex="0">
-                            <p class="textCont">
-                                <span class="fw-bold">Moteur</span> <br>
-                                {{motoDetails?.moteur}}
-                            </p>
-                        </div>
-                        <div class="tab-pane fade" id="kilometrage" role="tabpanel" aria-labelledby="kilometrage-tab"
-                            tabindex="0">
-                            <p class="textCont">
-                                <span class="fw-bold">Kilométrage</span> <br>
-                                {{motoDetails?.kilometrage}}
-                            </p>
-                        </div>
-                        <div class="tab-pane fade" id="transmission" role="tabpanel" aria-labelledby="transmission-tab"
-                            tabindex="0">
-                            <p class="textCont">
-                                <span class="fw-bold">Transmission</span> <br>
-                                {{motoDetails?.transmission}}
-                            </p>
-                        </div>
-                        <div class="tab-pane fade" id="annee" role="tabpanel" aria-labelledby="annee-tab" tabindex="0">
-                            <p class="textCont">
-                                <span class="fw-bold">Annee</span> <br>
-                                {{motoDetails?.annee}}
-                            </p>
-                        </div>
-                        <div class="tab-pane fade" id="climatisation" role="tabpanel"
-                            aria-labelledby="climatisation-tab" tabindex="0">
-                            <p class="textCont">
-                                <span class="fw-bold">Climatisation</span> <br>
-                                {{motoDetails?.climatisation}}
-                            </p>
-                        </div>
-                        <div class="tab-pane fade" id="carburant" role="tabpanel" aria-labelledby="carburant-tab"
-                            tabindex="0">
-                            <p class="textCont">
-                                <span class="fw-bold">Carburant</span> <br>
-                                {{motoDetails?.carburant}}
-                            </p>
-                        </div>
-                        <div class="tab-pane fade" id="carosserie" role="tabpanel" aria-labelledby="carosserie-tab"
-                            tabindex="0">
-                            <p class="textCont">
-                                <span class="fw-bold">Carosserie</span> <br>
-                                {{motoDetails?.carosserie}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     <div class="comments py-4 mt-4 mb-4 container-fluid">
         <div class="commentsContain container">
             <h3 class="fw-bold mb-0">Avis</h3>
@@ -327,16 +220,12 @@
                 <div class="col-12 col-md-4 px-5">
                     <div class=" comtRighr">
                         <img src="http://127.0.0.1:8000/images/{{motoDetails?.image1}}" alt="" class="img-fluid mb-4">
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#formComment">Poster un
+                        <button class="btn btnComment" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#formComment">Poster un
                             commentaire</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="alerte d-flex justify-content-center align-content-center my-5">
-        <button class="btn" data-bs-toggle="modal" data-bs-target="#prudence">Attention: Soyez prudent</button>
     </div>
 
     <div class="carsContainer container">
@@ -361,16 +250,16 @@
                         <div class="cardTrait mb-3 mt-2"></div>
                         <div class="cardDetails mx-3">
                             <div class="left">
-                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt=""> {{moto.moteur}}</p>
-                                <p><img src="/assets/images/iconSvg/calendar.png" alt=""> {{moto.annee}}</p>
+                                <p><img src="/assets/images/iconSvg/moteur.png" class="" alt="">{{moto.moteur}}</p>
+                                <p><img src="/assets/images/iconSvg/calendar.png" alt="">{{moto.annee}}</p>
                                 <!-- <p><img src="/assets/images/iconSvg/Transmission.png" alt="">Transmission</p> -->
                             </div>
                             <div class="Right">
-                                <p><img src="/assets/images/iconSvg/dashboard.png" alt=""> {{moto.kilometrage}} KM</p>
-                                <p><img src="/assets/images/iconSvg/fuel.png" alt=""> {{moto.carburant}}</p>
+                                <p><img src="/assets/images/iconSvg/dashboard.png" alt="">{{moto.kilometrage}}</p>
+                                <p><img src="/assets/images/iconSvg/fuel.png" alt="">{{moto.carburant}}</p>
                             </div>
                         </div>
-                        <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt=""> {{moto.prix}} Fcfa</p>
+                        <p class="text-center"><img src="/assets/images/iconSvg/money.png" alt="">{{moto.prix}} Fcfa</p>
                         <div class="cardTrait"></div>
                         <div class="cardButton mx-3 my-3">
                             <button class="btn text-light" (click)="redirectToDetails(moto.id)">Consulter l'annonce</button>
@@ -430,7 +319,7 @@
                             [(ngModel)]="raisonSignal"></textarea>
                     </div>
                     <div class="btnsForm d-flex justify-content-center align-content-center">
-                        <button class="btn mx-3 btnSignal" (click)="addSignal(motoDetails.id)">Signaler</button>
+                        <button class="btn mx-3 btnSignal" (click)="addSignal(motoDetails.id)" data-bs-dismiss="modal">Signaler</button>
                         <button class="btn mx-3 btnOff" data-bs-dismiss="modal">Annuler</button>
                     </div>
                 </form>
@@ -460,7 +349,7 @@
                     </div>
 
                     <div class="btnsForm d-flex justify-content-center align-content-center">
-                        <button class="btn mx-3 btnSignal" (click)="addComment(motoDetails.id)">Commenter</button>
+                        <button class="btn mx-3 btnSignal" (click)="addComment(motoDetails.id)" data-bs-dismiss="modal">Commenter</button>
                         <button class="btn mx-3 btnOff" data-bs-dismiss="modal">Annuler</button>
                     </div>
                 </form>
